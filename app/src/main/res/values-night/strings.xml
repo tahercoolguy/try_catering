@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_with_your_email_and_password_or_nsocial_media_details_to_continue">Login with your email and password or \nsocial media details to continue.</string>
+    <string name="google">Google</string>
+    <string name="apple">Apple</string>
+    <string name="min_notice">Min. Notice</string>
+    <string name="chicken_tikka_simmered_in_a_siken_tomato_and_fenugreek_gravy">Chicken tikka simmered in a siken tomato and fenugreek gravy</string>
+    <string name="any_special_request">Any Special Request</string>
+    <string name="taal_resturant">Taal Resturant</string>
+    <string name="savour_the_flavoures_all_weekend_long_with_taal">Savour the flavoures all weekend long with Taal</string>
+    <string name="_24_hours">24 Hours</string>
+    <string name="min_order">Min. Order</string>
+    <string name="thank_you">Thank You!</string>
+    <string name="we_have_received_your_norder">We have received your \nOrder</string>
+    <string name="location">Location</string>
+    <string name="date">Date</string>
+    <string name="varification">Varification</string>
+    <string name="resent">Resent</string>
+    <string name="butter_chicken">Butter Chicken</string>
+    <string name="for_2_persons">For 2 Persons</string>
+    <string name="catering">Catering</string>
+    <string name="order_no_124545">Order NO : 124545</string>
+    <string name="status_on_the_way">Status : On the way</string>
+    <string name="taal_restaurent">Taal Restaurent</string>
+    <string name="mishref">Mishref</string>
+    <string name="maidan_hawalli">Maidan Hawalli</string>
+    <string name="Jabriya">Jabriya</string>
+    <string name="rumaithiya">Rumaithiya</string>
+    <string name="salmiya">Salmiya</string>
+    <string name="al_asimah">Al Asimah</string>
+    <string name="farwaniyah">Farwaniyah</string>
+    <string name="kabeer">Mubarak Al-Kabeer</string>
+    <string name="ahmadi">Al-Ahmadi</string>
+    <string name="Jahra">Jahra</string>
+    <string name="other_service">Other Service</string>
+</resources>

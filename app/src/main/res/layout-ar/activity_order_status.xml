@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    >
+
+<!--    &lt;!&ndash; TODO: Update blank fragment layout &ndash;&gt;-->
+
+<!--    <com.transferwise.sequencelayout.SequenceStep-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="@dimen/_40sdp"-->
+<!--        tools:ignore="MissingClass">-->
+<!--        <com.transferwise.sequencelayout.SequenceStep-->
+<!--            android:id="@+id/step1"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:titleTextAppearance="@style/TextAppearance.AppCompat.Title"-->
+<!--            app:title="At the Store"/>-->
+<!--        <com.transferwise.sequencelayout.SequenceStep-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+
+<!--            app:titleTextAppearance="@style/TextAppearance.AppCompat.Title"-->
+<!--            app:title="Being Wrapped Up"/>-->
+<!--        <com.transferwise.sequencelayout.SequenceStep-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:active="true"-->
+<!--            app:title="On The Way"-->
+<!--            app:titleTextAppearance="@style/TextAppearance.AppCompat.Title"/>-->
+<!--        <com.transferwise.sequencelayout.SequenceStep-->
+<!--            android:id="@+id/step3"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:titleTextAppearance="@style/TextAppearance.AppCompat.Title"-->
+<!--            app:title="Delivered"/>-->
+
+<!--    </com.transferwise.sequencelayout.SequenceStep>-->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_10sdp"
+        android:fontFamily="@font/en"
+        android:maxLines="2"
+        android:text="Order Summary:"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:textStyle="bold"
+        android:textColor="@color/menu_name_color"
+        android:textSize="18sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_10sdp"
+        android:layout_margin="@dimen/_10sdp"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:layout_margin="@dimen/_10sdp"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/orderNameTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/en"
+                    android:maxLines="2"
+                    android:text="Order Id"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_toRightOf="@id/orderNameTextView"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/en"
+                    android:gravity="end"
+                    android:maxLines="2"
+                    android:text="10393"
+                    android:textColor="@color/menu_name_color"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/transectionType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:fontFamily="@font/en"
+                    android:gravity="left"
+                    android:text="Transaction Type"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_toRightOf="@id/transectionType"
+                    android:fontFamily="@font/en"
+                    android:gravity="end"
+                    android:text="KNET"
+                    android:textColor="@color/menu_name_color"
+                    android:textSize="17sp" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/transectionId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="17sp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:fontFamily="@font/en"
+                    android:gravity="left"
+                    android:text="Transaction Id"
+                    android:textColor="@android:color/darker_gray"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:layout_toRightOf="@id/transectionId"
+                    android:fontFamily="@font/en"
+                    android:gravity="end"
+                    android:text="2034523562033"
+                    android:textColor="@color/menu_name_color"
+                    android:textSize="17sp" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/paymentStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:fontFamily="@font/en"
+                    android:gravity="left"
+                    android:text="Payment status"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="17sp" />
+                <TextView
+                    android:fontFamily="@font/en"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/paymentStatus"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:textSize="17sp"
+                    android:textColor="@color/menu_name_color"
+                    android:gravity="end"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:text="Successful"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:fontFamily="@font/en"
+                    android:id="@+id/dateTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:text="Total"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="17sp"
+                    android:layout_centerInParent="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/dateTextView"
+                    android:gravity="end"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:fontFamily="@font/en"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:textSize="17sp"
+                    android:text="6.500 KWD"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:visibility="gone"
+                android:fontFamily="@font/en"
+                android:layout_width="wrap_content"
+                android:id="@+id/statusTextView"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Confirmed"
+                android:textColor="#87B668"
+                android:textSize="15sp" />
+
+            <TextView
+                android:visibility="gone"
+                android:fontFamily="@font/en"
+                android:id="@+id/priceTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="120KD"
+                android:gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

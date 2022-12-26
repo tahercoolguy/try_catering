@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_150sdp"
+    android:background="@android:color/transparent"
+   >
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_info"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_150sdp"
+            android:text="A deposit of 100% will be collected on cash orders"
+            android:textSize="@dimen/_15sdp"
+            android:layout_margin="@dimen/_10sdp"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            />
+
+</RelativeLayout>

@@ -1,0 +1,379 @@
+<resources>
+    <string name="app_name"> كيترنق</string>
+<!--    <string name="app_name">تقديم الطعام</string>-->
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="date">تاريخ</string>
+    <string name="next">التالي</string>
+    <string name="cart">عربة التسوق</string>
+    <string name="total_amount">المبلغ الإجمالي</string>
+    <string name="select_pickup_branch">حدد فرع بيك اب</string>
+    <string name="salmiya_branch_10">السالمية - فرع 10</string>
+    <string name="knet">كي نت</string>
+    <string name="pay_now">ادفع الآن</string>
+    <string name="catering_service">خدمات الطعام</string>
+    <string name="set_up_time">وقت الإعداد</string>
+    <string name="premium_indian_cfood_buffet">بوفيه هندي مميز</string>
+    <string name="for_15_persons">تكفي 15 شخص</string>
+    <string name="chicken_tikka_simmered_in_a_siken_tomato_and_fenugreek_gravy">دجاج تكا مطهو في سيكن طماطم ومرق حلبة</string>
+    <string name="_10_persons_with_option_to_add_count">10 أشخاص مع خيار إضافة عدد</string>
+    <string name="food_details_here">تفاصيل الطعام هنا</string>
+    <string name="service_and_presentaion">الخدمة والتقديم</string>
+    <string name="_2_chefs_disposable_plates_tissue_boxes_and_water_bottel">2 طباخ ، صحون للاستعمال مرة واحدة ، علب مناديل وعبوة مياه</string>
+    <string name="service_requests">طلبات الخدمة</string>
+    <string name="food_requests">طلبات الطعام</string>
+    <string name="food_item_1">البند الغذائي 1</string>
+    <string name="request_female_service">طلب خدمة نسائية</string>
+    <string name="any_special_request">أي طلب خاص</string>
+    <string name="welcome">أهلا بك!</string>
+    <string name="google">غوغل</string>
+
+
+    <string name="today">اليوم</string>
+    <string name="yesterday">امس</string>
+
+    <string name="offers">العروض </string>
+
+    <string name="loading">تحميل ...</string>
+    <string name="register">تاكيد </string>
+    <string name="skip_btn">تخطى </string>
+
+    <string name="arabic">عربى</string>
+    <string name="skip">تخطى</string>
+    <string name="english">English</string>
+
+    <string name="go_returant">الذهاب للمطعم </string>
+    <string name="error_in_payment">حدثت مشكلة أثناء الدفع حاول مجددا </string>
+    <string name="cash_payment">نقدا</string>
+    <string name="keyNeyPaymet">كي نت  </string>
+    <string name="cash_and_knet">نقدا ، كي من</string>
+    <string name="payment_method">إختر طريقة الدفع </string>
+    <string name="_delivery_place">مكان التسليم</string>
+    <string name="data">البيانات</string>
+    <string name="activate_gps">لابد من تفعيل نظام تحديد الاماكن </string>
+    <string name="current_place">الموقع الحالي </string>
+    <string name="from_map">من الخريطة</string>
+    <!--error Messages-->
+    <string name="location_">الموقع </string>
+    <string name="error_response">يوجد  مشكلة فى الربط   </string>
+    <string name="internet_error">No Internet Connection!</string>
+    <string name="server_error">Server error</string>
+    <string name="new_plcae">ادخال  عنوان جديد </string>
+    <string name="old_place">اختيار عنوان سابق </string>
+    <string name="country_text">الدولة </string>
+    <string name="Home_text">الرئيسية </string>
+    <string name="login_text">دخول </string>
+    <string name="my_order_text">طلباتى </string>
+    <string name="special_offers_text">العروض المميزة </string>
+    <string name="contact_us_text">تواصل معنا </string>
+    <string name="email_text">البريد الالكترونى</string>
+    <string name="res_name">اسم المطعم</string>
+    <string name="password_text">الرقم السرى </string>
+    <string name="forget_password"> نسيت الرقم السرى ؟ لا مشكلة </string>
+    <string name="donot_have_accout"> ليس لدى حساب ؟  </string>
+    <string name="sign_up"> اضافة حساب </string>
+    <string name="login_titile_text">تسجيل الدخول </string>
+    <string name="register_titile_text">التسجيل  </string>
+    <string name="regiser_data_one">ادخل بيانات التسجيل هنا </string>
+    <string name="regiser_data_two">  (  جميع البيانات المطلوبة الزامية   ) </string>
+    <string name="first_name_text">الاسم الاول </string>
+    <string name="last_name_text">الاسم الاخير </string>
+    <string name="phone_text">الهاتف </string>
+    <string name="confirm_password">تاكيد الرقم السرى </string>
+    <string name="all_text">الكل</string>
+    <string name="filter_text">بحث</string>
+    <string name="catering_text">كيترنق</string>
+    <string name="delivery_text">التوصيل</string>
+    <string name="booking">الحجز</string>
+    <string name="order_food_online">طلب الاطعمه من خلال الانترنت فى  </string>
+    <string name="date_to_deliver"> تاريخ التسليم </string>
+    <string name="time_to_deliver">وقت التسليم </string>
+    <string name="find_food">ابحث فى الاطعمة </string>
+    <string name="continue_text">استمرار </string>
+    <string name="select_deliver_date">ميعاد التسليم </string>
+    <string name="required_field">بيانات مطلوبة </string>
+    <string name="password_error">الرقم السرى غير متطابق </string>
+    <string name="select_region">اختر المنطقة </string>
+    <string name="select_city">اختر المدينه </string>
+    <string name="select_country">اختر الدوله </string>
+    <string name="book_dinning">حجز طاولة طعام</string>
+    <string name="number_of_tables">عدد الطاولات </string>
+    <string name="number_of_seats">عدد المقاعد </string>
+    <string name="booking_date">تاريخ الحجز </string>
+    <string name="booking_time">وقت الحجز </string>
+    <string name="enter_verification_code">ادخل كود التفعيل المرسل  </string>
+    <string name="verify">التحقق</string>
+    <string name="profile">الملف الشخصى </string>
+    <string name="code">الكود المرسل </string>
+    <string name="send_code">ارسل الكود </string>
+    <string name="menu">القائمة</string>
+    <string name="about_text">عن المطعم </string>
+    <string name="review_text">التقييم </string>
+    <string name="order_befor">لابد من ارسال الطلب قبل  %1$s ساعة من غلق المطعم </string>
+    <string name="max_addtions">الحد الاقصي للاضافات من قسم %1$s هو  %2$s</string>
+    <string name="serve_text">يكفى  </string>
+    <string name="future_date">لابد من اختيار تاريخ مستقبلي لتسليم الطلب </string>
+    <string name="setup_time">وقت التجهيز   </string>
+    <string name="max_time"> اقصى وقت    </string>
+    <string name="ok">موافق</string>
+    <string name="ok1">حسنا</string>
+    <string name="reset_done">تم ارسال رسالة للرقم الخاص بك </string>
+    <string name="pay_by">الدفع عن طريق  الكاش و الكى نت</string>
+    <string name="minimum_order_amount"> أقل تكلفه للطلب </string>
+    <string name="working_hours_text"> ساعات العمل ( اليوم ) </string>
+    <string name="delivery_time">وقت التسليم  ( دقيقه ) </string>
+    <string name="delivery_fee">تكلفة التوصيل </string>
+    <string name="payment">طرق الدفع </string>
+    <string name="cuisines">العمل </string>
+    <string name="count">العدد : </string>
+    <string name="confirmed">تم التوصيل</string>
+    <string name="cancelled">تم الالغاء</string>
+    <string name="waiting">انتظار</string>
+    <string name="time_out">خارج نطاق ساعات العمل </string>
+    <string name="per_person_cover">  شخص مع امكانية الاضافة </string>
+    <string name="opened_text">مفتوح</string>
+    <string name="closed_text">مغلق</string>
+    <string name="closed_text2">مغلق في ميعاد التسليم</string>
+    <string name="food">المكونات : </string>
+    <string name="next_text">التالى </string>
+    <string name="check_out_text">ارسال الطلب </string>
+    <string name="women_support_text">اضافة  الخدمة النسائية مع الطلب </string>
+    <string name="other_request"> طلبات اخرى  </string>
+    <string name="add_to_cart">اضف الى العربة</string>
+    <string name="free_extra_text">الاضافات المجانية </string>
+    <string name="paid_extra_text">الاضافات المدفوعه </string>
+    <string name="cart_text">سله المشتريات  </string>
+    <string name="meal_details_text">تفاصيل الوجبه  </string>
+    <string name="reset_password">تغير الرقم السرى </string>
+    <string name="cart_empty">سله المشتريات فارغه </string>
+    <string name="cart_price">السعر الاجمالى </string>
+    <string name="order_sent_successfully">تم ارسال طلبك بنجاح </string>
+    <string name="women_support">   الخدمة النسائية     </string>
+    <string name="send_order">ارسال الطلب </string>
+    <string name="validation_code">الكود  </string>
+    <string name="enter_sms_code">ادخل الكود المرسل عبر السائل النصية للتاكيد </string>
+    <string name="resend_code">ارسال الكود </string>
+    <string name="enter_name">ادخل الاسم </string>
+    <string name="enter_address">ادخل العنوان </string>
+    <string name="enter_mobile">ادخل ؤقم الجوال </string>
+    <string name="enter_validation_code">ادخل كود التفعيل </string>
+    <string name="error_activiation_code">الكود الذى ادخلته غير صحيح </string>
+    <string name="name">الإسم</string>
+    <string name="email">الإيميل</string>
+    <string name="mobile">رقم الجوال</string>
+    <string name="address">العنوان</string>
+    <string name="send_oder_request">ارسال طلب </string>
+    <string name="read_more">اقراء المزيد </string>
+    <string name="rate_text">قيم المطعم</string>
+    <string name="comment">التعليق </string>
+    <string name="submit">ارسال </string>
+    <string name="comments_inquires">التعليقات  / استفسارات </string>
+    <string name="contact_us">تواصل معنا </string>
+    <string name="try_again">حاول مرة اخرى  يوجد مشكلة </string>
+    <string name="connection_error">يوجد مشكلة بالاتصال</string>
+    <string name="order_sent">تم ارسال طلب الحجز وسيتم  التواصل معكم </string>
+    <string name="order_not_sent">لم يتم ارسال الطلب </string>
+    <string name="send_order_message_1">سوف يتم خصم واحد دينار للحجز </string>
+    <string name="table_area">مكان الطاوله : </string>
+    <string name="inside">بالداخل</string>
+    <string name="out_side">بالخارج</string>
+    <string name="smoking_area">مكان للتدخين </string>
+    <string name="send_order_message_2">سيتم التواصل من خلال المطعم لتاكيد الحجز </string>
+    <string name="apply">تنفيذ</string>
+    <string name="reset">الافتراضى </string>
+    <string name="required_time">وقت التحضير </string>
+    <string name="minute_text">دقيقة </string>
+    <string name="rate">تقيم</string>
+    <string name="review">مراجعة</string>
+    <string name="city">محافظة</string>
+    <string name="regions">منطقه</string>
+    <string name="build_type">نوع السكن</string>
+    <string name="block">قطعة</string>
+    <string name="street">الشارع</string>
+    <string name="gada">جاده ( اختياري ) </string>
+    <string name="biuld">البناية</string>
+    <string name="building_floor">الطابق  </string>
+    <string name="floor_number">رقم الشقه</string>
+    <string name="more_info">ارشادات اضافية</string>
+    <string name="new_to_catering">جديد علي كاترينج</string>
+
+
+    <string name="sign">الدخول</string>
+    <string name="join_us">الإشتراك</string>
+
+    <string name="register_text">بالنقر فوق الزر تسجيل ، فإنك توافق على</string>
+
+    <string name="TermsOfUse">تعليمات الإستخدام</string>
+    <string name="Privacy">وسياسة الخصوصية لدينا</string>
+
+    <string name="table_booking">حجز الطاولات</string>
+    <string name="delivery_info">معلومات التوصيل </string>
+    <string name="stationsBuffets">ستيشن و بوفيهات</string>
+    <string name="minNotice">ادني وقت للطلب</string>
+    <string name="minOrder">ادني حد للطلب</string>
+    <string name="delivery">التوصيل</string>
+    <string name="byArea">حسب المنطقة </string>
+    <string name="VendorPolicy">سياسة البائع</string>
+    <string name="serviceAndPresentations"> الخدمة : </string>
+
+    <string name="options">الخيارات</string>
+    <string name="required">(إجباري)</string>
+    <string name="optional">(إختياري)</string>
+
+    <string name="change">تغير</string>
+
+    <string name="My_Detalis">خاصتي</string>
+    <string name="Orders">طلباتي</string>
+    <string name="saved_address">العناوين المسجلة</string>
+    <string name="Help">المساعدة والدعم </string>
+    <string name="ChangeLanguage">تغير اللغة</string>
+    <string name="FAQS">تواصل معنا </string>
+    <string name="Logout">تسجيل الخروج</string>
+    <string name="Notifications">التنبيهات</string>
+    <string name="MinNotice">أقل وقت </string>
+    <string name="When_are_you_booking">متى تريد الحجز ؟</string>
+    <string name="minCharge">أقل تكلفه</string>
+    <string name="At_what_time">في أى وقت ؟</string>
+    <string name="Where_to_set">أى الأماكن تحب ؟</string>
+    <string name="indoor">بالداخل</string>
+    <string name="outDoor">بالخارج</string>
+    <string name="What_smoking_preference">بخصوص التدخين ما هو المفضل لك ؟ </string>
+    <string name="smoking">تدخين</string>
+    <string name="NO_SMOKING">عدم التدخين</string>
+    <string name="How_many_coming">عدد المدعوين ؟</string>
+
+
+    <string name="NEXT_Payment">التالي : دفع قيمة الحجز </string>
+    <string name="selected_guests">لقد اخترت  %1$d زائر</string>
+    <string name="All_areas">جميع المناطق</string>
+    <string name="Type_area_here">إكتب المنطقة هنا ....</string>
+    <string name="yes">موافق</string>
+    <string name="no">لاحقا</string>
+    <string name="cart_dilog">لابد ان تحتوي العرية علي منتجات توصيل فقط أو كاترينج فقط وليس الإثنان معا في نفس الطلب</string>
+    <string name="register_first">لابد من التسجيل أولا   التسجيل الأن ؟</string>
+    <string name="favorite">المفضلة</string>
+    <string name="choose"> إختر   %1$d  </string>
+    <string name="special_request_hint">اكتب طلباتك الاخري هنا  .....</string>
+
+    <string name="serves">تكفي</string>
+
+    <string name="subtotal">المجموع الجزئى</string>
+    <string name="delivery_charge">رسوم التوصيل</string>
+    <string name="total">الإجمالي</string>
+
+    <string name="place_order">إرسل طلبي </string>
+
+    <string name="checkout">الدفع</string>
+    <string name="your_addresses">عناوينك</string>
+    <string name="dont_have_address">ليس لديك أى عنوان سابق  </string>
+    <string name="add_new_address">إضافة عنوان جديد</string>
+    <string name="your_order">بيانات الطلب </string>
+    <string name="how_to_pay">كيف تريد انجاز عملية الدفع ؟</string>
+
+    <string name="have_code">هل لديك كوبون خصم ؟</string>
+    <string name="enter_code">أدخل الكوبون هنا .....</string>
+
+    <string name="Add_address">أضف عنوانك</string>
+    <string name="Pin_location">اختار موقعك علي الخريطة </string>
+    <string name="Select_location">اختر موقعك علي الخريطة لدقه وسرعة التوصيل </string>
+    <string name="Address_details">تفاصيل العنوان</string>
+    <string name="SAVE_ADDRESS">إضافة العوان </string>
+    <string name="Create_address">إنشاء عنوان جديد </string>
+
+
+    <string name="my_orders">طلباتي </string>
+    <string name="total_reservation">إجمالي الحجز </string>
+    <string name="Time">وقت التسليم ؟ </string>
+    <string name="Date">تاريخ التسليم ؟</string>
+    <string name="where"> أين ؟</string>
+    <string name="select_date">اختر تاريخ الحجز </string>
+    <string name="select_time">اختر وقت الحجز  </string>
+    <string name="Today">اليوم</string>
+    <string name="promo_discount">خصم الكوبون </string>
+    <string name="invalid_promo">كود غير صالح </string>
+    <string name="as_area">حسب المنطقة</string>
+    <string name="star_no">إختر عدد النجوم </string>
+    <string name="reviews">التقيمات</string>
+    <string name="used_promo">كود خصم مستخدم من قبل </string>
+    <string name="no_deliver">يوجد مطعم لا يدعم التوصيل للعنوان المختار </string>
+    <string name="hour">ساعة</string>
+    <string name="hours">ساعات</string>
+    <string name="requirements">المتطلبات</string>
+
+    <string name="viewed">أوردر جديــــد</string>
+    <string name="working">جاري التحضير</string>
+    <string name="delivering">تم التحضير وجاري توصيله</string>
+    <string name="finished"> تم التوصيل واغلاق الاودر</string>
+    <string name="payment_success" >تمت عملية الدفع بنجاح</string>
+    <string name="this_restaurnats">المطاعم التالية</string>
+    <string name="not_avilable_for_catering">عمليات الكاترينج لليوم المحدد لهذه المطاعم قد اسنفذت رجاء اختيار يوم اخر </string>
+    <string name="welcomeee" translatable="false">أهلا بك!</string>
+    <string name="details_to_continue" translatable="false">قم بتسجيل الدخول باستخدام بريدك الإلكتروني وكلمة المرور \ n أو تفاصيل الوسائط الاجتماعية للمتابعة.</string>
+    <string name="join_uss" translatable="false">احتاج الى حساب ?<font fgcolor='#F4401A'>انضم إلينا</font></string>
+    <string name="login_with_your_email_and_password_or_nsocial_media_details_to_continue">قم بتسجيل الدخول باستخدام بريدك الإلكتروني وكلمة المرور \ n أو تفاصيل الوسائط الاجتماعية للمتابعة.</string>
+    <string name="apple">فيسبوك</string>
+    <string name="my_order">طلبي</string>
+    <string name="min_notice">دقيقة. يلاحظ</string>
+    <string name="_24_hours">24 ساعة</string>
+    <string name="min_order">لي. ترتيب</string>
+    <string name="taal_resturant">مطعم لغة</string>
+    <string name="savour_the_flavoures_all_weekend_long_with_taal">تذوق النكهات طوال عطلة نهاية الأسبوع مع تال</string>
+    <string name="thank_you">شكرا!</string>
+    <string name="we_have_received_your_norder">لقد تلقينا \ n طلبك</string>
+    <string name="location">موقع</string>
+    <string name="varification">التنويع</string>
+    <string name="resent">مستاء</string>
+    <string name="butter_chicken">دجاج بالزبدة</string>
+    <string name="for_2_persons">تكفي 2 شخص</string>
+    <string name="catering">تقديم الطعام</string>
+    <string name="order_no_124545">رقم الطلب: 124545</string>
+    <string name="status_on_the_way">الحالة: على الطريق</string>
+    <string name="taal_restaurent">مطعم لغة</string>
+    <string name="all">الجميع</string>
+
+    <string name="hawalli">حولي</string>
+    <string name="bayan">سيدة</string>
+    <string name="mishref">مشرف</string>
+    <string name="maidan_hawalli">ميدان حولي</string>
+    <string name="Jabriya">قسري</string>
+    <string name="rumaithiya">الرميثية</string>
+    <string name="salmiya">السالمية</string>
+    <string name="al_asimah">العاصمة</string>
+    <string name="farwaniyah">الفروانية</string>
+    <string name="kabeer">مبارك الكبير</string>
+    <string name="ahmadi">الأحمدي</string>
+    <string name="Jahra">الجهراء</string>
+    <string name="delivery_service">خدمة التوصيل</string>
+    <string name="other_service">خدمة أخرى</string>
+
+<!--    NO Internet-->
+    <string name="no_network_title">خطأ في الإنترنت!</string>
+    <string name="network_content">يرجى التحقق من اتصال الشبكة وحاول مرة أخرى</string>
+    <string name="no_internet">لا انترنت.</string>
+
+    <string name="valid_email_address">مطلوب عنوان بريد إلكتروني صالح.</string>
+    <string name="valid_password">كلمة المرور المطلوبة.</string>
+    <string name="valid_name">الاسم المطلوب.</string>
+    <string name="valid_phone">مطلوب رقم هاتف صالح.</string>
+    <string name="edit_profile">تعديل الملف الشخصي</string>
+    <string name="term_and_condition">الأحكام والشروط</string>
+    <string name="change_language">تغيير اللغة</string>
+    <string name="saved_addresses">العناوين المحفوظة</string>
+    <string name="note">ملحوظة :</string>
+    <string name="and_our">و لنا</string>
+    <string name="term_of_use">شروط الاستخدام</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="forgot_password">هل نسيت كلمة السر</string>
+    <string name="enter_your_email_for_the_verification_proccess_we_will_send_link_to_your_email">أدخل بريدك الإلكتروني لعملية التحقق ، وسنرسل رابطًا إلى بريدك الإلكتروني.
+</string>
+    <string name="Times">زمن</string>
+    <string name="date_time">التاريخ و الوقت</string>
+    <string name="summary">ملخص</string>
+    <string name="Totalamount">المبلغ الإجمالي</string>
+    <string name="Discount">تخفيض</string>
+    <string name="ServiceCharges">رسوم الخدمات</string>
+    <string name="grandTotal">المبلغ الإجمالي</string>
+
+</resources>

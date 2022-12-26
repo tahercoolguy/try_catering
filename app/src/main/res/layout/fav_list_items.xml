@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/swipe_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/_15sdp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="150dp"
+            android:layout_height="155dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            >
+
+
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/img_catering" />
+
+
+            <!--<com.infovas.diwan.customItem.RoundedImageView-->
+            <!--android:id="@+id/diwanImageView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:background="@drawable/placholder"-->
+            <!--android:scaleType="fitXY" />-->
+
+            <!--<ImageView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+
+            <!--android:background="@drawable/diwan_image_border"-->
+            <!--android:scaleType="fitXY" />-->
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="horizontal">
+
+
+
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:fontFamily="@font/en"
+                    android:textStyle="bold"
+                    android:id="@+id/resNameTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:maxLines="2"
+                    android:textColor="@color/black"
+                    android:text="fdsf fs "
+                    android:textSize="@dimen/_18sdp" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <RatingBar
+                        android:id="@+id/ratingBar"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:progressTint="@color/open_colse_color"
+                        android:progressBackgroundTint="@color/open_colse_color"
+                        android:secondaryProgressTint="@color/open_colse_color"
+                        android:numStars="5"
+                        android:stepSize="2.0"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+                        android:rating="10" />
+
+
+                    <TextView
+                        android:fontFamily="@font/en"
+                        android:id="@+id/rateTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="5dp"
+                        android:gravity="left"
+                        android:maxLines="1"
+                        android:lines="1"
+
+                        android:textColor="#CFCFCF"
+                        android:text=" "
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:fontFamily="@font/en"
+                    android:id="@+id/tagesTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:text=" asdasdasd"
+                    android:textColor="#A7A7A7"
+                    android:textSize="15sp" />
+
+
+                <TextView
+                    android:fontFamily="@font/en"
+                    android:id="@+id/requiredTimeTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="left"
+                    android:maxLines="1"
+                    android:lines="1"
+                    android:text=" asdadad"
+                    android:textColor="#B7B7B7"
+                    android:textSize="15sp" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

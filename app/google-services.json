@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1084319931835",
+    "project_id": "trycatering-android-af481",
+    "storage_bucket": "trycatering-android-af481.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084319931835:android:b9d1d36b156b8e4a5a789e",
+        "android_client_info": {
+          "package_name": "com.infovass.catering"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084319931835-j104kv35c9do4ed958a68k8akq8qbl2e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAExwu77nMN5yTSWQTG5vuFXfjwPM77VJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1084319931835-j104kv35c9do4ed958a68k8akq8qbl2e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
