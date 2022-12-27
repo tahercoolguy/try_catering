@@ -4,291 +4,417 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Item_ {
-    private Integer id;
-    private String itemCode;
-    private String categoryId;
-    private String subcategoryId;
-    private String organisation;
-    private String itemName;
-    private String itemDisplayName;
-    private String itemShortDescription;
-    private String itemLongDescription;
-    private String itemCostPerServe;
-    private String itemMarkupPerServe;
-    private String itemServingCapacity;
-    private String setupTimeInMinute;
-    private String maxTime;
-    private String requirements;
-    private Object serviceAndPresentation;
-    private Object foodDetails;
-    private String currencyId;
-    private String itemLogo;
-    private String itemStatus;
-    private String arabicItemCode;
-    private String arabicItemName;
-    private String arabicItemDisplayName;
-    private String arabicItemShortDescription;
-    private String arabicItemLongDescription;
-    private String arabicItemCostPerServe;
-    private String arabicItemMarkupPerServe;
-    private String arabicItemServingCapacity;
-    private String arabicSetupTimeInMinute;
-    private String arabicMaxTime;
-    private String arabicRequirements;
-    private Object arabicServiceAndPresentation;
-    private Object arabicFoodDetails;
-    private String status;
-    private Object deletedAt;
-    private String createdAt;
-    private String updatedAt;
-    private Boolean addonItem;
-    private Boolean isFavorite;
-    private List<Image> images = new ArrayList<Image>();
-    private String itemLogoPath;
-    public Integer getId() {
+    public String id;
+    public String item_code;
+    public String category_id;
+    public String subcategory_id;
+    public String organisation;
+    public String item_name;
+    public String item_display_name;
+    public String item_short_description;
+    public String item_long_description;
+    public String item_cost_per_serve;
+    public String item_markup_per_serve;
+    public String item_serving_capacity;
+    public String setup_time_in_minute;
+    public String max_time;
+    public String requirements;
+    public Object service_and_presentation;
+    public Object food_details;
+    public String currency_id;
+    public String item_logo;
+    public String item_status;
+    public String arabic_item_code;
+    public String arabic_item_name;
+    public String arabic_item_display_name;
+    public String arabic_item_short_description;
+    public String arabic_item_long_description;
+    public String arabic_item_cost_per_serve;
+    public String arabic_item_markup_per_serve;
+    public String arabic_item_serving_capacity;
+    public String arabic_setup_time_in_minute;
+    public String arabic_max_time;
+    public String arabic_requirements;
+    public Object arabic_service_and_presentation;
+    public Object arabic_food_details;
+    public String status;
+    public Object deleted_at;
+    public String created_at;
+    public String updated_at;
+    public boolean addon_item;
+    public boolean is_favorite;
+    public ArrayList<Image> images;
+    public String item_logo_path;
+
+    public Item_(String id, String item_code, String category_id, String subcategory_id, String organisation, String item_name, String item_display_name, String item_short_description, String item_long_description, String item_cost_per_serve, String item_markup_per_serve, String item_serving_capacity, String setup_time_in_minute, String max_time, String requirements, Object service_and_presentation, Object food_details, String currency_id, String item_logo, String item_status, String arabic_item_code, String arabic_item_name, String arabic_item_display_name, String arabic_item_short_description, String arabic_item_long_description, String arabic_item_cost_per_serve, String arabic_item_markup_per_serve, String arabic_item_serving_capacity, String arabic_setup_time_in_minute, String arabic_max_time, String arabic_requirements, Object arabic_service_and_presentation, Object arabic_food_details, String status, Object deleted_at, String created_at, String updated_at, boolean addon_item, boolean is_favorite, ArrayList<Image> images, String item_logo_path) {
+        this.id = id;
+        this.item_code = item_code;
+        this.category_id = category_id;
+        this.subcategory_id = subcategory_id;
+        this.organisation = organisation;
+        this.item_name = item_name;
+        this.item_display_name = item_display_name;
+        this.item_short_description = item_short_description;
+        this.item_long_description = item_long_description;
+        this.item_cost_per_serve = item_cost_per_serve;
+        this.item_markup_per_serve = item_markup_per_serve;
+        this.item_serving_capacity = item_serving_capacity;
+        this.setup_time_in_minute = setup_time_in_minute;
+        this.max_time = max_time;
+        this.requirements = requirements;
+        this.service_and_presentation = service_and_presentation;
+        this.food_details = food_details;
+        this.currency_id = currency_id;
+        this.item_logo = item_logo;
+        this.item_status = item_status;
+        this.arabic_item_code = arabic_item_code;
+        this.arabic_item_name = arabic_item_name;
+        this.arabic_item_display_name = arabic_item_display_name;
+        this.arabic_item_short_description = arabic_item_short_description;
+        this.arabic_item_long_description = arabic_item_long_description;
+        this.arabic_item_cost_per_serve = arabic_item_cost_per_serve;
+        this.arabic_item_markup_per_serve = arabic_item_markup_per_serve;
+        this.arabic_item_serving_capacity = arabic_item_serving_capacity;
+        this.arabic_setup_time_in_minute = arabic_setup_time_in_minute;
+        this.arabic_max_time = arabic_max_time;
+        this.arabic_requirements = arabic_requirements;
+        this.arabic_service_and_presentation = arabic_service_and_presentation;
+        this.arabic_food_details = arabic_food_details;
+        this.status = status;
+        this.deleted_at = deleted_at;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.addon_item = addon_item;
+        this.is_favorite = is_favorite;
+        this.images = images;
+        this.item_logo_path = item_logo_path;
+    }
+
+    public String getId() {
         return id;
     }
-    public void setId(Integer id) {
+
+    public void setId(String id) {
         this.id = id;
     }
-    public String getItemCode() {
-        return itemCode;
+
+    public String getItem_code() {
+        return item_code;
     }
-    public void setItemCode(String itemCode) {
-        this.itemCode = itemCode;
+
+    public void setItem_code(String item_code) {
+        this.item_code = item_code;
     }
-    public String getCategoryId() {
-        return categoryId;
+
+    public String getCategory_id() {
+        return category_id;
     }
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+
+    public void setCategory_id(String category_id) {
+        this.category_id = category_id;
     }
-    public String getSubcategoryId() {
-        return subcategoryId;
+
+    public String getSubcategory_id() {
+        return subcategory_id;
     }
-    public void setSubcategoryId(String subcategoryId) {
-        this.subcategoryId = subcategoryId;
+
+    public void setSubcategory_id(String subcategory_id) {
+        this.subcategory_id = subcategory_id;
     }
+
     public String getOrganisation() {
         return organisation;
     }
+
     public void setOrganisation(String organisation) {
         this.organisation = organisation;
     }
-    public String getItemName() {
-        return itemName;
+
+    public String getItem_name() {
+        return item_name;
     }
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+
+    public void setItem_name(String item_name) {
+        this.item_name = item_name;
     }
-    public String getItemDisplayName() {
-        return itemDisplayName;
+
+    public String getItem_display_name() {
+        return item_display_name;
     }
-    public void setItemDisplayName(String itemDisplayName) {
-        this.itemDisplayName = itemDisplayName;
+
+    public void setItem_display_name(String item_display_name) {
+        this.item_display_name = item_display_name;
     }
-    public String getItemShortDescription() {
-        return itemShortDescription;
+
+    public String getItem_short_description() {
+        return item_short_description;
     }
-    public void setItemShortDescription(String itemShortDescription) {
-        this.itemShortDescription = itemShortDescription;
+
+    public void setItem_short_description(String item_short_description) {
+        this.item_short_description = item_short_description;
     }
-    public String getItemLongDescription() {
-        return itemLongDescription;
+
+    public String getItem_long_description() {
+        return item_long_description;
     }
-    public void setItemLongDescription(String itemLongDescription) {
-        this.itemLongDescription = itemLongDescription;
+
+    public void setItem_long_description(String item_long_description) {
+        this.item_long_description = item_long_description;
     }
-    public String getItemCostPerServe() {
-        return itemCostPerServe;
+
+    public String getItem_cost_per_serve() {
+        return item_cost_per_serve;
     }
-    public void setItemCostPerServe(String itemCostPerServe) {
-        this.itemCostPerServe = itemCostPerServe;
+
+    public void setItem_cost_per_serve(String item_cost_per_serve) {
+        this.item_cost_per_serve = item_cost_per_serve;
     }
-    public String getItemMarkupPerServe() {
-        return itemMarkupPerServe;
+
+    public String getItem_markup_per_serve() {
+        return item_markup_per_serve;
     }
-    public void setItemMarkupPerServe(String itemMarkupPerServe) {
-        this.itemMarkupPerServe = itemMarkupPerServe;
+
+    public void setItem_markup_per_serve(String item_markup_per_serve) {
+        this.item_markup_per_serve = item_markup_per_serve;
     }
-    public String getItemServingCapacity() {
-        return itemServingCapacity;
+
+    public String getItem_serving_capacity() {
+        return item_serving_capacity;
     }
-    public void setItemServingCapacity(String itemServingCapacity) {
-        this.itemServingCapacity = itemServingCapacity;
+
+    public void setItem_serving_capacity(String item_serving_capacity) {
+        this.item_serving_capacity = item_serving_capacity;
     }
-    public String getSetupTimeInMinute() {
-        return setupTimeInMinute;
+
+    public String getSetup_time_in_minute() {
+        return setup_time_in_minute;
     }
-    public void setSetupTimeInMinute(String setupTimeInMinute) {
-        this.setupTimeInMinute = setupTimeInMinute;
+
+    public void setSetup_time_in_minute(String setup_time_in_minute) {
+        this.setup_time_in_minute = setup_time_in_minute;
     }
-    public String getMaxTime() {
-        return maxTime;
+
+    public String getMax_time() {
+        return max_time;
     }
-    public void setMaxTime(String maxTime) {
-        this.maxTime = maxTime;
+
+    public void setMax_time(String max_time) {
+        this.max_time = max_time;
     }
+
     public String getRequirements() {
         return requirements;
     }
+
     public void setRequirements(String requirements) {
         this.requirements = requirements;
     }
-    public Object getServiceAndPresentation() {
-        return serviceAndPresentation;
+
+    public Object getService_and_presentation() {
+        return service_and_presentation;
     }
-    public void setServiceAndPresentation(Object serviceAndPresentation) {
-        this.serviceAndPresentation = serviceAndPresentation;
+
+    public void setService_and_presentation(Object service_and_presentation) {
+        this.service_and_presentation = service_and_presentation;
     }
-    public Object getFoodDetails() {
-        return foodDetails;
+
+    public Object getFood_details() {
+        return food_details;
     }
-    public void setFoodDetails(Object foodDetails) {
-        this.foodDetails = foodDetails;
+
+    public void setFood_details(Object food_details) {
+        this.food_details = food_details;
     }
-    public String getCurrencyId() {
-        return currencyId;
+
+    public String getCurrency_id() {
+        return currency_id;
     }
-    public void setCurrencyId(String currencyId) {
-        this.currencyId = currencyId;
+
+    public void setCurrency_id(String currency_id) {
+        this.currency_id = currency_id;
     }
-    public String getItemLogo() {
-        return itemLogo;
+
+    public String getItem_logo() {
+        return item_logo;
     }
-    public void setItemLogo(String itemLogo) {
-        this.itemLogo = itemLogo;
+
+    public void setItem_logo(String item_logo) {
+        this.item_logo = item_logo;
     }
-    public String getItemStatus() {
-        return itemStatus;
+
+    public String getItem_status() {
+        return item_status;
     }
-    public void setItemStatus(String itemStatus) {
-        this.itemStatus = itemStatus;
+
+    public void setItem_status(String item_status) {
+        this.item_status = item_status;
     }
-    public String getArabicItemCode() {
-        return arabicItemCode;
+
+    public String getArabic_item_code() {
+        return arabic_item_code;
     }
-    public void setArabicItemCode(String arabicItemCode) {
-        this.arabicItemCode = arabicItemCode;
+
+    public void setArabic_item_code(String arabic_item_code) {
+        this.arabic_item_code = arabic_item_code;
     }
-    public String getArabicItemName() {
-        return arabicItemName;
+
+    public String getArabic_item_name() {
+        return arabic_item_name;
     }
-    public void setArabicItemName(String arabicItemName) {
-        this.arabicItemName = arabicItemName;
+
+    public void setArabic_item_name(String arabic_item_name) {
+        this.arabic_item_name = arabic_item_name;
     }
-    public String getArabicItemDisplayName() {
-        return arabicItemDisplayName;
+
+    public String getArabic_item_display_name() {
+        return arabic_item_display_name;
     }
-    public void setArabicItemDisplayName(String arabicItemDisplayName) {
-        this.arabicItemDisplayName = arabicItemDisplayName;
+
+    public void setArabic_item_display_name(String arabic_item_display_name) {
+        this.arabic_item_display_name = arabic_item_display_name;
     }
-    public String getArabicItemShortDescription() {
-        return arabicItemShortDescription;
+
+    public String getArabic_item_short_description() {
+        return arabic_item_short_description;
     }
-    public void setArabicItemShortDescription(String arabicItemShortDescription) {
-        this.arabicItemShortDescription = arabicItemShortDescription;
+
+    public void setArabic_item_short_description(String arabic_item_short_description) {
+        this.arabic_item_short_description = arabic_item_short_description;
     }
-    public String getArabicItemLongDescription() {
-        return arabicItemLongDescription;
+
+    public String getArabic_item_long_description() {
+        return arabic_item_long_description;
     }
-    public void setArabicItemLongDescription(String arabicItemLongDescription) {
-        this.arabicItemLongDescription = arabicItemLongDescription;
+
+    public void setArabic_item_long_description(String arabic_item_long_description) {
+        this.arabic_item_long_description = arabic_item_long_description;
     }
-    public String getArabicItemCostPerServe() {
-        return arabicItemCostPerServe;
+
+    public String getArabic_item_cost_per_serve() {
+        return arabic_item_cost_per_serve;
     }
-    public void setArabicItemCostPerServe(String arabicItemCostPerServe) {
-        this.arabicItemCostPerServe = arabicItemCostPerServe;
+
+    public void setArabic_item_cost_per_serve(String arabic_item_cost_per_serve) {
+        this.arabic_item_cost_per_serve = arabic_item_cost_per_serve;
     }
-    public String getArabicItemMarkupPerServe() {
-        return arabicItemMarkupPerServe;
+
+    public String getArabic_item_markup_per_serve() {
+        return arabic_item_markup_per_serve;
     }
-    public void setArabicItemMarkupPerServe(String arabicItemMarkupPerServe) {
-        this.arabicItemMarkupPerServe = arabicItemMarkupPerServe;
+
+    public void setArabic_item_markup_per_serve(String arabic_item_markup_per_serve) {
+        this.arabic_item_markup_per_serve = arabic_item_markup_per_serve;
     }
-    public String getArabicItemServingCapacity() {
-        return arabicItemServingCapacity;
+
+    public String getArabic_item_serving_capacity() {
+        return arabic_item_serving_capacity;
     }
-    public void setArabicItemServingCapacity(String arabicItemServingCapacity) {
-        this.arabicItemServingCapacity = arabicItemServingCapacity;
+
+    public void setArabic_item_serving_capacity(String arabic_item_serving_capacity) {
+        this.arabic_item_serving_capacity = arabic_item_serving_capacity;
     }
-    public String getArabicSetupTimeInMinute() {
-        return arabicSetupTimeInMinute;
+
+    public String getArabic_setup_time_in_minute() {
+        return arabic_setup_time_in_minute;
     }
-    public void setArabicSetupTimeInMinute(String arabicSetupTimeInMinute) {
-        this.arabicSetupTimeInMinute = arabicSetupTimeInMinute;
+
+    public void setArabic_setup_time_in_minute(String arabic_setup_time_in_minute) {
+        this.arabic_setup_time_in_minute = arabic_setup_time_in_minute;
     }
-    public String getArabicMaxTime() {
-        return arabicMaxTime;
+
+    public String getArabic_max_time() {
+        return arabic_max_time;
     }
-    public void setArabicMaxTime(String arabicMaxTime) {
-        this.arabicMaxTime = arabicMaxTime;
+
+    public void setArabic_max_time(String arabic_max_time) {
+        this.arabic_max_time = arabic_max_time;
     }
-    public String getArabicRequirements() {
-        return arabicRequirements;
+
+    public String getArabic_requirements() {
+        return arabic_requirements;
     }
-    public void setArabicRequirements(String arabicRequirements) {
-        this.arabicRequirements = arabicRequirements;
+
+    public void setArabic_requirements(String arabic_requirements) {
+        this.arabic_requirements = arabic_requirements;
     }
-    public Object getArabicServiceAndPresentation() {
-        return arabicServiceAndPresentation;
+
+    public Object getArabic_service_and_presentation() {
+        return arabic_service_and_presentation;
     }
-    public void setArabicServiceAndPresentation(Object arabicServiceAndPresentation) {
-        this.arabicServiceAndPresentation = arabicServiceAndPresentation;
+
+    public void setArabic_service_and_presentation(Object arabic_service_and_presentation) {
+        this.arabic_service_and_presentation = arabic_service_and_presentation;
     }
-    public Object getArabicFoodDetails() {
-        return arabicFoodDetails;
+
+    public Object getArabic_food_details() {
+        return arabic_food_details;
     }
-    public void setArabicFoodDetails(Object arabicFoodDetails) {
-        this.arabicFoodDetails = arabicFoodDetails;
+
+    public void setArabic_food_details(Object arabic_food_details) {
+        this.arabic_food_details = arabic_food_details;
     }
+
     public String getStatus() {
         return status;
     }
+
     public void setStatus(String status) {
         this.status = status;
     }
-    public Object getDeletedAt() {
-        return deletedAt;
+
+    public Object getDeleted_at() {
+        return deleted_at;
     }
-    public void setDeletedAt(Object deletedAt) {
-        this.deletedAt = deletedAt;
+
+    public void setDeleted_at(Object deleted_at) {
+        this.deleted_at = deleted_at;
     }
-    public String getCreatedAt() {
-        return createdAt;
+
+    public String getCreated_at() {
+        return created_at;
     }
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
-    public String getUpdatedAt() {
-        return updatedAt;
+
+    public String getUpdated_at() {
+        return updated_at;
     }
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
     }
-    public Boolean getAddonItem() {
-        return addonItem;
+
+    public boolean isAddon_item() {
+        return addon_item;
     }
-    public void setAddonItem(Boolean addonItem) {
-        this.addonItem = addonItem;
+
+    public void setAddon_item(boolean addon_item) {
+        this.addon_item = addon_item;
     }
-    public Boolean getIsFavorite() {
-        return isFavorite;
+
+    public boolean isIs_favorite() {
+        return is_favorite;
     }
-    public void setIsFavorite(Boolean isFavorite) {
-        this.isFavorite = isFavorite;
+
+    public void setIs_favorite(boolean is_favorite) {
+        this.is_favorite = is_favorite;
     }
-    public List<Image> getImages() {
+
+    public ArrayList<Image> getImages() {
         return images;
     }
-    public void setImages(List<Image> images) {
+
+    public void setImages(ArrayList<Image> images) {
         this.images = images;
     }
-    public String getItemLogoPath() {
-        return itemLogoPath;
+
+    public String getItem_logo_path() {
+        return item_logo_path;
     }
-    public void setItemLogoPath(String itemLogoPath) {
-        this.itemLogoPath = itemLogoPath;
+
+    public void setItem_logo_path(String item_logo_path) {
+        this.item_logo_path = item_logo_path;
     }
 }

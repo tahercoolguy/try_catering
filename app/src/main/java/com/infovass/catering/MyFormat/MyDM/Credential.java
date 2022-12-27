@@ -1,186 +1,267 @@
 package com.infovass.catering.MyFormat.MyDM;
 
 public class Credential {
-    private String id;
-    private String catererId;
-    private String name;
-    private String email;
-    private Object emailVerifiedAt;
-    private String firstName;
-    private String lastName;
-    private String username;
-    private String address;
-    private String lat;
-    private String lng;
-    private String cityId;
-    private String areaId;
-    private String phone;
-    private String isAdmin;
-    private String status;
-    private String currentLanguage;
-    private Object referCode;
-    private Object accessToken;
-    private Object deviceToken;
-    private Object deviceType;
-    private Object deletedAt;
-    private String createdAt;
-    private String updatedAt;
-    private Object socialId;
-    private Object socialAccountType;
+    public String id;
+    public String caterer_id;
+    public String name;
+    public String email;
+    public Object email_verified_at;
+    public String first_name;
+    public String last_name;
+    public String username;
+    public String address;
+    public String lat;
+    public String lng;
+    public String city_id;
+    public String area_id;
+    public String phone;
+    public String is_admin;
+    public String status;
+    public String current_language;
+    public Object refer_code;
+    public Object accessToken;
+    public Object device_token;
+    public Object device_type;
+    public Object deleted_at;
+    public String created_at;
+    public String updated_at;
+    public Object social_id;
+    public Object social_account_type;
+
+    public Credential(String id, String caterer_id, String name, String email, Object email_verified_at, String first_name, String last_name, String username, String address, String lat, String lng, String city_id, String area_id, String phone, String is_admin, String status, String current_language, Object refer_code, Object accessToken, Object device_token, Object device_type, Object deleted_at, String created_at, String updated_at, Object social_id, Object social_account_type) {
+        this.id = id;
+        this.caterer_id = caterer_id;
+        this.name = name;
+        this.email = email;
+        this.email_verified_at = email_verified_at;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.username = username;
+        this.address = address;
+        this.lat = lat;
+        this.lng = lng;
+        this.city_id = city_id;
+        this.area_id = area_id;
+        this.phone = phone;
+        this.is_admin = is_admin;
+        this.status = status;
+        this.current_language = current_language;
+        this.refer_code = refer_code;
+        this.accessToken = accessToken;
+        this.device_token = device_token;
+        this.device_type = device_type;
+        this.deleted_at = deleted_at;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.social_id = social_id;
+        this.social_account_type = social_account_type;
+    }
+
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
-    public String getCatererId() {
-        return catererId;
+
+    public String getCaterer_id() {
+        return caterer_id;
     }
-    public void setCatererId(String catererId) {
-        this.catererId = catererId;
+
+    public void setCaterer_id(String caterer_id) {
+        this.caterer_id = caterer_id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getEmail() {
         return email;
     }
+
     public void setEmail(String email) {
         this.email = email;
     }
-    public Object getEmailVerifiedAt() {
-        return emailVerifiedAt;
+
+    public Object getEmail_verified_at() {
+        return email_verified_at;
     }
-    public void setEmailVerifiedAt(Object emailVerifiedAt) {
-        this.emailVerifiedAt = emailVerifiedAt;
+
+    public void setEmail_verified_at(Object email_verified_at) {
+        this.email_verified_at = email_verified_at;
     }
-    public String getFirstName() {
-        return firstName;
+
+    public String getFirst_name() {
+        return first_name;
     }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
     }
-    public String getLastName() {
-        return lastName;
+
+    public String getLast_name() {
+        return last_name;
     }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
     }
+
     public String getUsername() {
         return username;
     }
+
     public void setUsername(String username) {
         this.username = username;
     }
+
     public String getAddress() {
         return address;
     }
+
     public void setAddress(String address) {
         this.address = address;
     }
+
     public String getLat() {
         return lat;
     }
+
     public void setLat(String lat) {
         this.lat = lat;
     }
+
     public String getLng() {
         return lng;
     }
+
     public void setLng(String lng) {
         this.lng = lng;
     }
-    public String getCityId() {
-        return cityId;
+
+    public String getCity_id() {
+        return city_id;
     }
-    public void setCityId(String cityId) {
-        this.cityId = cityId;
+
+    public void setCity_id(String city_id) {
+        this.city_id = city_id;
     }
-    public String getAreaId() {
-        return areaId;
+
+    public String getArea_id() {
+        return area_id;
     }
-    public void setAreaId(String areaId) {
-        this.areaId = areaId;
+
+    public void setArea_id(String area_id) {
+        this.area_id = area_id;
     }
+
     public String getPhone() {
         return phone;
     }
+
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    public String getIsAdmin() {
-        return isAdmin;
+
+    public String getIs_admin() {
+        return is_admin;
     }
-    public void setIsAdmin(String isAdmin) {
-        this.isAdmin = isAdmin;
+
+    public void setIs_admin(String is_admin) {
+        this.is_admin = is_admin;
     }
+
     public String getStatus() {
         return status;
     }
+
     public void setStatus(String status) {
         this.status = status;
     }
-    public String getCurrentLanguage() {
-        return currentLanguage;
+
+    public String getCurrent_language() {
+        return current_language;
     }
-    public void setCurrentLanguage(String currentLanguage) {
-        this.currentLanguage = currentLanguage;
+
+    public void setCurrent_language(String current_language) {
+        this.current_language = current_language;
     }
-    public Object getReferCode() {
-        return referCode;
+
+    public Object getRefer_code() {
+        return refer_code;
     }
-    public void setReferCode(Object referCode) {
-        this.referCode = referCode;
+
+    public void setRefer_code(Object refer_code) {
+        this.refer_code = refer_code;
     }
+
     public Object getAccessToken() {
         return accessToken;
     }
+
     public void setAccessToken(Object accessToken) {
         this.accessToken = accessToken;
     }
-    public Object getDeviceToken() {
-        return deviceToken;
+
+    public Object getDevice_token() {
+        return device_token;
     }
-    public void setDeviceToken(Object deviceToken) {
-        this.deviceToken = deviceToken;
+
+    public void setDevice_token(Object device_token) {
+        this.device_token = device_token;
     }
-    public Object getDeviceType() {
-        return deviceType;
+
+    public Object getDevice_type() {
+        return device_type;
     }
-    public void setDeviceType(Object deviceType) {
-        this.deviceType = deviceType;
+
+    public void setDevice_type(Object device_type) {
+        this.device_type = device_type;
     }
-    public Object getDeletedAt() {
-        return deletedAt;
+
+    public Object getDeleted_at() {
+        return deleted_at;
     }
-    public void setDeletedAt(Object deletedAt) {
-        this.deletedAt = deletedAt;
+
+    public void setDeleted_at(Object deleted_at) {
+        this.deleted_at = deleted_at;
     }
-    public String getCreatedAt() {
-        return createdAt;
+
+    public String getCreated_at() {
+        return created_at;
     }
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
-    public String getUpdatedAt() {
-        return updatedAt;
+
+    public String getUpdated_at() {
+        return updated_at;
     }
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
     }
-    public Object getSocialId() {
-        return socialId;
+
+    public Object getSocial_id() {
+        return social_id;
     }
-    public void setSocialId(Object socialId) {
-        this.socialId = socialId;
+
+    public void setSocial_id(Object social_id) {
+        this.social_id = social_id;
     }
-    public Object getSocialAccountType() {
-        return socialAccountType;
+
+    public Object getSocial_account_type() {
+        return social_account_type;
     }
-    public void setSocialAccountType(Object socialAccountType) {
-        this.socialAccountType = socialAccountType;
+
+    public void setSocial_account_type(Object social_account_type) {
+        this.social_account_type = social_account_type;
     }
 }

@@ -33,8 +33,8 @@ public class DetailNewAdapter extends RecyclerView.Adapter<DetailNewAdapter.View
     DetailNewAdapter.OnItemClickListener onItemClickListener;
     String lastValue = "";
     List<String> list = new ArrayList<>();
-    List<Mode> modes = new ArrayList<>();
-    public DetailNewAdapter(List<Mode> modes , Context context) {
+    ArrayList<Mode> modes = new ArrayList<>();
+    public DetailNewAdapter(ArrayList<Mode> modes , Context context) {
         this.context = context;
         this.modes = modes;
     }
@@ -54,7 +54,7 @@ public class DetailNewAdapter extends RecyclerView.Adapter<DetailNewAdapter.View
 
         if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar"))
         {
-            holder.custom_tab_textView.setText(modes.get(position).getArabicTitle());
+            holder.custom_tab_textView.setText(modes.get(position).getArabic_title());
         }
 
         if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en"))
@@ -74,7 +74,7 @@ public class DetailNewAdapter extends RecyclerView.Adapter<DetailNewAdapter.View
 
         try {
 //            Picasso.get().load(""+modes.get(position).getImagePath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.img_logo);
-            Picasso.get().load(""+modes.get(position).getImagePath()).into(holder.img_logo);
+            Picasso.get().load(""+modes.get(position).getImage_path()).into(holder.img_logo);
         }
         catch (Exception ex)
         { }

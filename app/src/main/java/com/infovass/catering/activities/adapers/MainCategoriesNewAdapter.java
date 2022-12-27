@@ -17,13 +17,14 @@ import com.infovass.catering.activities.home.model.RestourentModeResponse;
 import com.infovass.catering.activities.network.Constants;
 import com.infovass.catering.activities.network.SharedPreferencesUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainCategoriesNewAdapter extends RecyclerView.Adapter<MainCategoriesNewAdapter.CustomViewHolder> {
 
     public Context context;
-    public static List<Item> datalist;
-    List<Item> datalist_filter;
+    public static ArrayList<Item> datalist;
+    ArrayList<Item> datalist_filter;
     Boolean f=false;
 
     public interface OnItemClickListener {
@@ -37,7 +38,7 @@ public class MainCategoriesNewAdapter extends RecyclerView.Adapter<MainCategorie
 
     public OnItemClickListener listener;
 
-    public MainCategoriesNewAdapter(Context context, List<Item> arrayList) {
+    public MainCategoriesNewAdapter(Context context, ArrayList<Item> arrayList) {
         this.context = context;
         datalist = arrayList;
         datalist_filter = arrayList;
@@ -64,10 +65,10 @@ public class MainCategoriesNewAdapter extends RecyclerView.Adapter<MainCategorie
 
         Item item = datalist_filter.get(i);
         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-            holder.txt_title.setText(item.getCategoryNameAr());
+            holder.txt_title.setText(item.getCategory_name_ar());
         }
         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
-            holder.txt_title.setText(item.getCategoryName());
+            holder.txt_title.setText(item.getCategory_name());
         }
 
 //        holder.bind(i, new ActivityModal(), listener);

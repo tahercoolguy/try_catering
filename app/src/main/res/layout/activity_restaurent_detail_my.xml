@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".activities.home.view.RestaurentDetailNew"
+    tools:context=".activities.home.view.Restaurent_Detail_MyActivity"
     android:orientation="vertical">
 
     <LinearLayout
@@ -95,7 +95,6 @@
                     android:layout_marginRight="@dimen/_15sdp"
                     android:fontFamily="@font/en"
                     android:gravity="center_vertical"
-                     android:shadowColor="@color/black"
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -108,7 +107,6 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_25sdp"
-                    android:shadowRadius="5"
                     android:fontFamily="@font/en"
                     android:gravity="center_vertical"
                     android:textColor="@color/colorWhite"

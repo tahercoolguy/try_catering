@@ -1,46 +1,67 @@
 package com.infovass.catering.MyFormat.MyDM;
 
 public class CoverImage {
-    private String id;
-    private String catererId;
-    private String image;
-    private String createdAt;
-    private String updatedAt;
-    private String coverImagePath;
+    public String id;
+    public String caterer_id;
+    public String image;
+    public String created_at;
+    public String updated_at;
+    public String cover_image_path;
+
+    public CoverImage(String id, String caterer_id, String image, String created_at, String updated_at, String cover_image_path) {
+        this.id = id;
+        this.caterer_id = caterer_id;
+        this.image = image;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+        this.cover_image_path = cover_image_path;
+    }
+
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
-    public String getCatererId() {
-        return catererId;
+
+    public String getCaterer_id() {
+        return caterer_id;
     }
-    public void setCatererId(String catererId) {
-        this.catererId = catererId;
+
+    public void setCaterer_id(String caterer_id) {
+        this.caterer_id = caterer_id;
     }
+
     public String getImage() {
         return image;
     }
+
     public void setImage(String image) {
         this.image = image;
     }
-    public String getCreatedAt() {
-        return createdAt;
+
+    public String getCreated_at() {
+        return created_at;
     }
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
-    public String getUpdatedAt() {
-        return updatedAt;
+
+    public String getUpdated_at() {
+        return updated_at;
     }
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
     }
-    public String getCoverImagePath() {
-        return coverImagePath;
+
+    public String getCover_image_path() {
+        return cover_image_path;
     }
-    public void setCoverImagePath(String coverImagePath) {
-        this.coverImagePath = coverImagePath;
+
+    public void setCover_image_path(String cover_image_path) {
+        this.cover_image_path = cover_image_path;
     }
 }

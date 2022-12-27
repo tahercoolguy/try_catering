@@ -30,11 +30,13 @@ import com.infovass.catering.activities.adapers.DetailAdapter;
 import com.infovass.catering.activities.adapers.DetailNewAdapter;
 import com.infovass.catering.activities.adapers.MainCategoriesNewAdapter;
 import com.infovass.catering.activities.dialog.BottomSheetInfoFragment;
+import com.infovass.catering.activities.home.adapter.RestourentDetailsIBN;
 import com.infovass.catering.activities.home.adapter.RestourentDetailsImageBanner;
 import com.infovass.catering.activities.home.model.AddtoFebRestourentResponse;
 import com.infovass.catering.activities.home.model.RestourentAddToFevResponse;
 import com.infovass.catering.activities.home.model.RestourentDetailResponse;
 import com.infovass.catering.activities.home.model.RestourentModeResponse;
+import com.infovass.catering.activities.home.presenter.RestourentDetailImpl;
 import com.infovass.catering.activities.home.presenter.RestourentDetailPresenter;
 import com.infovass.catering.activities.login.view.LoginActivity;
 import com.infovass.catering.activities.network.Constants;
@@ -60,7 +62,7 @@ import retrofit.mime.TypedByteArray;
 import retrofit.mime.TypedInput;
 import retrofit.mime.TypedString;
 
-public class RestaurentDetailNew extends AppCompatActivity {
+public class RestaurentDetailNew extends AppCompatActivity implements RestourentDetailView {
     boolean addToFev = false;
     private AppController appController;
     private Dialog progress;
@@ -118,11 +120,9 @@ public class RestaurentDetailNew extends AppCompatActivity {
 
     MainCategoriesNewAdapter menusAdapter;
     int restaurententID;
-    List<RestourentDetailResponse.Mode> modes = new ArrayList<>();
-
-    List<RestourentModeResponse.Item> items = new ArrayList<>();
-
-    RestourentDetailsImageBanner mViewPagerAdapter;
+ 
+ 
+    RestourentDetailsIBN mViewPagerAdapter;
     String modeType = "";
 
     @Override
@@ -130,6 +130,7 @@ public class RestaurentDetailNew extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurent_detail_new);
         ButterKnife.bind(this);
+        restourentDetailPresenter = new RestourentDetailImpl(this);
 //        restaurententID = Integer.parseInt(getIntent().getStringExtra("restaurententID"));
         appController = (AppController) this.getApplicationContext();
         connectionDetector = new ConnectionDetector(getApplicationContext());
@@ -147,6 +148,8 @@ public class RestaurentDetailNew extends AppCompatActivity {
         } catch (Exception t) {
         }
     }
+
+    int modefirstItem = 1;
 
     @OnClick({R.id.backButton, R.id.addToFavButton, R.id.img_info})
     public void onViewClicked(View view) {
@@ -181,13 +184,42 @@ public class RestaurentDetailNew extends AppCompatActivity {
                         startActivity(i1);
                     }
                 } catch (Exception g) {
+                    g.printStackTrace();
                 }
                 break;
         }
     }
-    List<Mode> modeArrayList = new ArrayList<>();
-    List<Item> itemArrayList = new ArrayList<>();
 
+    public void addToFev() {
+        if (connectionDetector.isConnectingToInternet()) {
+
+            appController.paServices.AddToFevCatererApi("", "", new Callback<Root>() {
+                @Override
+                public void success(Root root, Response response) {
+
+//                    if(root.getStatus().equalsIgnoreCase("true") {
+//
+//                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                    error.printStackTrace();
+                }
+            });
+
+        } else {
+            Toast.makeText(RestaurentDetailNew.this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+
+    ArrayList<Mode> modeArrayList = new ArrayList<>();
+    ArrayList<Item> itemArrayList = new ArrayList<>();
+    List<RestourentDetailResponse.Mode> modes = new ArrayList<>();
+    List<RestourentModeResponse.Item> items = new ArrayList<>();
     public void productDetailAPI() {
         if (connectionDetector.isConnectingToInternet()) {
 
@@ -196,7 +228,7 @@ public class RestaurentDetailNew extends AppCompatActivity {
             String id = String.valueOf(restaurententID);
             JSONObject jsonObj = new JSONObject();
             try {
-                jsonObj.put("mode_type", "1");
+                jsonObj.put("mode_type", modefirstItem);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -205,16 +237,86 @@ public class RestaurentDetailNew extends AppCompatActivity {
             //   String Checker = gson.toJson(jsonObject);
             TypedInput in = null;
             try {
-                    in = new TypedByteArray("application/json", po.getBytes("UTF-8"));
+                in = new TypedByteArray("application/json", po.getBytes("UTF-8"));
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
 
-            appController.paServices.ProductDetailAPI(id,in, new Callback<Root>() {
+            appController.paServices.ProductDetailAPI(id, in, new Callback<Root>() {
                 @Override
                 public void success(Root root, Response response) {
                     if (root.getStatus().equalsIgnoreCase("true")) {
 
+
+                        ////////////////////////////////////////////////////////////////////////////
+                        modes.clear();
+                        modeArrayList.clear();
+                        modeType=root.getData().getModes().get(0).getName();
+                        if (modeType.equalsIgnoreCase("Delivery")) {
+                            // lnr_deleveryServices.setVisibility(View.VISIBLE);
+                            //  lnr_cateringServices.setVisibility(View.GONE);
+                            menuTextView.setText("Delivery info");
+                            modeType = "Delivery";
+                        }
+                        if (modeType.equalsIgnoreCase("Table Booking")) {
+                            //  lnr_deleveryServices.setVisibility(View.VISIBLE);
+                            //  lnr_cateringServices.setVisibility(View.GONE);
+                            menuTextView.setText("Table Booking info");
+                            modeType = "Table Booking";
+                        }
+                        if (modeType.equalsIgnoreCase("Catering")) {
+                            //  lnr_deleveryServices.setVisibility(View.GONE);
+                            //  lnr_cateringServices.setVisibility(View.VISIBLE);
+                            menuTextView.setText("Catering info");
+                            modeType = "Catering";
+                        }
+                        //////////////////////////////////////////////////////////////////////////////////
+                        try {
+                            if (root.getData().getIs_favorite().equalsIgnoreCase("true")) {
+                                addToFavButton.setBackgroundResource(R.drawable.ic_heart_red);
+                                addToFev = true;
+
+                            } else {
+                                addToFavButton.setBackgroundResource(R.drawable.ic_heart);
+                                addToFev = false;
+                            }
+                        } catch (Exception g) {
+                        }
+
+
+                        /////////////////////////////////////////////////////////////////////////////////
+
+                        if (SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+                            resturantNameTextView.setText(root.getData().getArabic_name());
+                            resturantdetail.setText(root.getData().getArabic_detail());
+                            tv_minNots.setText(root.getData().getTime_show());
+                            tv_minOrder.setText(root.getData().getMin_order());
+                            tv_setuUpTime.setText(root.getData().getSetup_time_in_minute() + " Mins");
+//                tv_requirements.setText(restourentDetailResponse.getData().getRequirements());
+                            tv_requirements.setText(String.valueOf(root.getData().getRequirements()));
+                        }
+
+                        if (SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+                            resturantNameTextView.setText(root.getData().getName());
+                            resturantdetail.setText(root.getData().getDetail());
+                            tv_minNots.setText(root.getData().getTime_show());
+                            tv_minOrder.setText(root.getData().getMin_order());
+                            tv_setuUpTime.setText(root.getData().getSetup_time_in_minute() + " Mins");
+                            tv_requirements.setText(String.valueOf(root.getData().getRequirements()));
+                        }
+                        try {
+                            SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.INFO, "" + root.getData().getCash_order_policy());
+                        } catch (Exception h) {
+                        }
+                        restourentRatingBar.setRating(Float.parseFloat("" + root.getData().getRating()));
+                        if (Objects.equals(root.getData().getDelivery_charge(), "0")) {
+                            tv_deleveryCharges.setText("Free");
+                        } else {
+                            tv_deleveryCharges.setText("" + root.getData().getDelivery_charge());
+                        }
+
+
+                        /////////////////////////////////////////////////////////////////////////////////
 
 
                         modeArrayList = root.getData().getModes();
@@ -231,27 +333,36 @@ public class RestaurentDetailNew extends AppCompatActivity {
                             public void onItemClick(int position, TextView custom_tab_textView, LinearLayout detail_item_linearLayout) {
                                 SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.MODE_ID, "" + modeArrayList.get(position).getId());
                                 if (modeArrayList.get(position).getName().equalsIgnoreCase("Delivery")) {
-                                    // lnr_deleveryServices.setVisibility(View.VISIBLE);
-                                    //  lnr_cateringServices.setVisibility(View.GONE);
+
                                     menuTextView.setText("Delivery info");
                                     modeType = "Delivery";
                                 }
                                 if (modeArrayList.get(position).getName().equalsIgnoreCase("Table Booking")) {
-                                    //  lnr_deleveryServices.setVisibility(View.VISIBLE);
-                                    //  lnr_cateringServices.setVisibility(View.GONE);
+
                                     menuTextView.setText("Table Booking info");
                                     modeType = "Table Booking";
                                 }
                                 if (modeArrayList.get(position).getName().equalsIgnoreCase("Catering")) {
-                                    //  lnr_deleveryServices.setVisibility(View.GONE);
-                                    //  lnr_cateringServices.setVisibility(View.VISIBLE);
                                     menuTextView.setText("Catering info");
                                     modeType = "Catering";
                                 }
                                 detailAdapter.notifyDataSetChanged();
-                                restourentDetailPresenter.getRestourentDetailApi(SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, ""), "" + modes.get(position).getId());
+                                try {
+                                    restourentDetailPresenter.getRestourentDetailApi(SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, ""), "" + modeArrayList.get(position).getId());
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
+
+                        ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+                        //for image banner
+                        // Initializing the ViewPagerAdapter
+                        mViewPagerAdapter = new RestourentDetailsIBN(RestaurentDetailNew.this, root.getData().getImages());
+
+                        // Adding the Adapter to the ViewPager
+                        restourentimage.setAdapter(mViewPagerAdapter);
 
                         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -263,7 +374,7 @@ public class RestaurentDetailNew extends AppCompatActivity {
                             @Override
                             public void onItemClick(int position, int verPos, Integer id) {
                                 try {
-                                    Log.i("Yhan", "===" + items.get(verPos));
+//                                    Log.i("Yhan", "===" + items.get(verPos));
                                     SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.ITEM_ID, "" + id);
                                     if (modeType.equalsIgnoreCase("Delivery")) {
                                         Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
@@ -279,6 +390,7 @@ public class RestaurentDetailNew extends AppCompatActivity {
                                     }
 
                                 } catch (Exception j) {
+                                    j.printStackTrace();
                                 }
                             }
 
@@ -303,5 +415,151 @@ public class RestaurentDetailNew extends AppCompatActivity {
         } else {
             Toast.makeText(RestaurentDetailNew.this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void onSuccessGetRestourentDetailAPi(RestourentDetailResponse restourentDetailResponse) {
+        try {
+
+            try {
+                if (restourentDetailResponse.getData().getIsFavorite()) {
+                    addToFavButton.setBackgroundResource(R.drawable.ic_heart_red);
+                    addToFev = true;
+
+                } else {
+                    addToFavButton.setBackgroundResource(R.drawable.ic_heart);
+                    addToFev = false;
+                }
+            } catch (Exception g) {
+            }
+
+            if (SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+                resturantNameTextView.setText(restourentDetailResponse.getData().getArabicName());
+                resturantdetail.setText(restourentDetailResponse.getData().getArabicDetail());
+                tv_minNots.setText(restourentDetailResponse.getData().getTimeShow());
+                tv_minOrder.setText(restourentDetailResponse.getData().getMinOrder());
+                tv_setuUpTime.setText(restourentDetailResponse.getData().getSetupTimeInMinute() + " Mins");
+//                tv_requirements.setText(restourentDetailResponse.getData().getRequirements());
+                tv_requirements.setText(restourentDetailResponse.getData().getRequirements());
+            }
+
+            if (SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+                resturantNameTextView.setText(restourentDetailResponse.getData().getName());
+                resturantdetail.setText(restourentDetailResponse.getData().getDetail());
+                tv_minNots.setText(restourentDetailResponse.getData().getTimeShow());
+                tv_minOrder.setText(restourentDetailResponse.getData().getMinOrder());
+                tv_setuUpTime.setText(restourentDetailResponse.getData().getSetupTimeInMinute() + " Mins");
+                tv_requirements.setText(restourentDetailResponse.getData().getRequirements());
+            }
+            try {
+                SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.INFO, "" + restourentDetailResponse.getData().getCashOrderPolicy());
+            } catch (Exception h) {
+            }
+            restourentRatingBar.setRating(Float.parseFloat("" + restourentDetailResponse.getData().getRating()));
+            if (Objects.equals(restourentDetailResponse.getData().getDeliveryCharge(), "0")) {
+                tv_deleveryCharges.setText("Free");
+            } else {
+                tv_deleveryCharges.setText("" + restourentDetailResponse.getData().getDeliveryCharge());
+            }
+            //for image banner
+            // Initializing the ViewPagerAdapter
+//            mViewPagerAdapter = new RestourentDetailsImageBanner(RestaurentDetailNew.this, restourentDetailResponse.getData().getImages());
+//
+//            // Adding the Adapter to the ViewPager
+//            restourentimage.setAdapter(mViewPagerAdapter);
+//            try {
+//                Picasso.get().load("" + restourentDetailResponse.getData().getCoverImagePath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(restourentimage);
+//            } catch (Exception ex) {
+//            }
+            try {
+                modeArrayList.clear();
+                try {
+                    modefirstItem = restourentDetailResponse.getData().getModes().get(0).getId();
+                    modeType = restourentDetailResponse.getData().getModes().get(0).getName();
+                    SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.MODE_ID, "" + modefirstItem);
+                } catch (Exception g) {
+                }
+                modes.addAll(restourentDetailResponse.getData().getModes());
+                detailAdapter.notifyDataSetChanged();
+
+                try {
+                    if(!modes.isEmpty()) {
+                        if (modes.get(0).getName().equalsIgnoreCase("Delivery")) {
+                            //  lnr_deleveryServices.setVisibility(View.VISIBLE);
+                            //  lnr_cateringServices.setVisibility(View.GONE);
+                            menuTextView.setText("Delivery info");
+                        }
+                        if (modes.get(0).getName().equalsIgnoreCase("Table Booking")) {
+                            //   lnr_deleveryServices.setVisibility(View.VISIBLE);
+                            //   lnr_cateringServices.setVisibility(View.GONE);
+                            menuTextView.setText("Table Booking info");
+                        }
+                        if (modes.get(0).getName().equalsIgnoreCase("Catering")) {
+                            //   lnr_deleveryServices.setVisibility(View.GONE);
+                            //   lnr_cateringServices.setVisibility(View.VISIBLE);
+                            menuTextView.setText("Catering info");
+                        }
+                    }
+                } catch (Exception j) {
+                    Log.i(j.toString(),"checker");
+                }
+
+            } catch (Exception h) {
+                Log.i(h.toString(),"checker");
+
+            }
+            try {
+                restourentDetailPresenter.getRestourentDetailApi(SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, ""), "1"); //+ modefirstItem);
+            } catch (Exception f) {
+                Log.i(f.toString(),"checker");
+
+            }
+        } catch (Exception g) {
+            Log.i(g.toString(),"checker");
+
+            Log.i("UIUOOIOI", g.getMessage());
+        }
+    }
+
+    @Override
+    public void onSuccessGetRestourentModeAPi(RestourentModeResponse restourentModeResponse) {
+
+    }
+
+    @Override
+    public void onSuccessAddToFevRestourentAPi(RestourentAddToFevResponse restourentAddToFevResponse) {
+        try {
+            if (restourentAddToFevResponse.getStatus()) {
+//                Toast.makeText(RestaurentDetailNew.this, restourentAddToFevResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            } else {
+//                Toast.makeText(RestaurentDetailNew.this, restourentAddToFevResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception h) {
+        }
+    }
+
+    @Override
+    public void onSuccessAddToFevRestourentModeAPi(AddtoFebRestourentResponse addtoFebRestourentResponse) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void onFail(String msg) {
+
+    }
+
+    @Override
+    public void onNoInternet() {
+
     }
 }

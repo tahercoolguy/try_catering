@@ -33,9 +33,9 @@ class ResturentMenuNewAdapter extends RecyclerView.Adapter<ResturentMenuNewAdapt
     int verPos = 0;
     ResturentMenuNewAdapter.OnItemClickListener onItemClickListener;
     String lastValue = "";
-    List<Item_> items = new ArrayList<>();
+    ArrayList<Item_> items = new ArrayList<>();
 
-    public ResturentMenuNewAdapter(Context context, List<Item_> items, int verPos) {
+    public ResturentMenuNewAdapter(Context context, ArrayList<Item_> items, int verPos) {
         this.context = context;
         this.items = items;
         this.verPos = verPos;
@@ -53,17 +53,17 @@ class ResturentMenuNewAdapter extends RecyclerView.Adapter<ResturentMenuNewAdapt
     public void onBindViewHolder(@NonNull ResturentMenuNewAdapter.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
         try {
             if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-                holder.mealNameTextView.setText("" + items.get(position).getArabicItemName());
-                holder.mealTagTextView.setText(Html.fromHtml("" + items.get(position).getArabicItemShortDescription()));
-                holder.tv_persions.setText("For " + items.get(position).getItemServingCapacity() + " Persons");
-                holder.priceTextView.setText("" + items.get(position).getItemCostPerServe() + " KWD");
+                holder.mealNameTextView.setText("" + items.get(position).getArabic_item_name());
+                holder.mealTagTextView.setText(Html.fromHtml("" + items.get(position).getArabic_item_short_description()));
+                holder.tv_persions.setText("For " + items.get(position).getItem_serving_capacity() + " Persons");
+                holder.priceTextView.setText("" + items.get(position).getItem_cost_per_serve() + " KWD");
             }
 
             if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
-                holder.mealNameTextView.setText("" + items.get(position).getItemName());
-                holder.mealTagTextView.setText(Html.fromHtml("" + items.get(position).getItemShortDescription()));
-                holder.tv_persions.setText("For " + items.get(position).getItemServingCapacity() + " Persons");
-                holder.priceTextView.setText("" + items.get(position).getItemCostPerServe() + " KWD");
+                holder.mealNameTextView.setText("" + items.get(position).getItem_name());
+                holder.mealTagTextView.setText(Html.fromHtml("" + items.get(position).getItem_short_description()));
+                holder.tv_persions.setText("For " + items.get(position).getItem_serving_capacity() + " Persons");
+                holder.priceTextView.setText("" + items.get(position).getItem_cost_per_serve() + " KWD");
             }
 
         } catch (Exception f) {
@@ -72,10 +72,10 @@ class ResturentMenuNewAdapter extends RecyclerView.Adapter<ResturentMenuNewAdapt
         try {
             Item_ item = items.get(position);
             if (item != null && item.getImages() != null && item.getImages().size()!=0) {
-                Picasso.get().load(item.getImages().get(0).getItemLogoPath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.menu_image);
+                Picasso.get().load(item.getImages().get(0).getItem_logo_path()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.menu_image);
             } else {
-                if (item != null && item.getItemLogoPath() != null)
-                    Picasso.get().load(item.getItemLogoPath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.menu_image);
+                if (item != null && item.getItem_logo_path() != null)
+                    Picasso.get().load(item.getItem_logo_path()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.menu_image);
  //                  Picasso.get().load(items.get(0).getItemLogoPath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.menu_image);
 
             }
@@ -85,7 +85,7 @@ class ResturentMenuNewAdapter extends RecyclerView.Adapter<ResturentMenuNewAdapt
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onItemClickListener.onItemClick(position, verPos, items.get(position).getId());
+                onItemClickListener.onItemClick(position, verPos, Integer.valueOf(items.get(position).getId()));
             }
         });
     }

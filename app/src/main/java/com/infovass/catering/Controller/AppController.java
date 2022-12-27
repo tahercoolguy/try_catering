@@ -11,8 +11,8 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.infovass.catering.Services.PAServices;
-import com.infovass.catering.Utils.MyUrlConnectionClient;
+import com.infovass.catering.MyFormat.Services.PAServices;
+ import com.infovass.catering.Utils.MyUrlConnectionClient;
 
 import java.util.Locale;
 

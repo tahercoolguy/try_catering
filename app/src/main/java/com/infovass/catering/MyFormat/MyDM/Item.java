@@ -4,25 +4,37 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Item {
-    private String categoryName;
-    private String categoryNameAr;
-    private List<Item_> items = new ArrayList<Item_>();
-    public String getCategoryName() {
-        return categoryName;
+    public String category_name;
+    public String category_name_ar;
+    public ArrayList<Item_> items;
+
+    public Item(String category_name, String category_name_ar, ArrayList<Item_> items) {
+        this.category_name = category_name;
+        this.category_name_ar = category_name_ar;
+        this.items = items;
     }
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+
+    public String getCategory_name() {
+        return category_name;
     }
-    public String getCategoryNameAr() {
-        return categoryNameAr;
+
+    public void setCategory_name(String category_name) {
+        this.category_name = category_name;
     }
-    public void setCategoryNameAr(String categoryNameAr) {
-        this.categoryNameAr = categoryNameAr;
+
+    public String getCategory_name_ar() {
+        return category_name_ar;
     }
-    public List<Item_> getItems() {
+
+    public void setCategory_name_ar(String category_name_ar) {
+        this.category_name_ar = category_name_ar;
+    }
+
+    public ArrayList<Item_> getItems() {
         return items;
     }
-    public void setItems(List<Item_> items) {
+
+    public void setItems(ArrayList<Item_> items) {
         this.items = items;
     }
 }

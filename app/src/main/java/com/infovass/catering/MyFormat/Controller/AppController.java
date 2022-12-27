@@ -18,6 +18,7 @@ import com.infovass.catering.MyFormat.Utils.MyUrlConnectionClient;
 import java.util.Locale;
 
 import retrofit.RestAdapter;
+import retrofit.converter.GsonConverter;
 
 
 //import com.google.firebase.auth.AuthResult;
@@ -63,7 +64,7 @@ public class AppController extends Application {
         restAdapter = new RestAdapter.Builder().
                 setEndpoint(SHOPCH11_SERVER)
                 .setClient(new MyUrlConnectionClient())
-
+                .setConverter(new GsonConverter(deserializerGson))
                 .build();
         paServices= restAdapter.create(PAServices.class);
         mInstance = this;

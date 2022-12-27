@@ -123,7 +123,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
             public void onItemClick(int position) {
                 SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
                 int restaurententID=restourentLIst.get(position).getId();
-                Intent intent = new Intent(getContext(), RestourentDetailActivity.class).putExtra("restaurententID",restaurententID);
+                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID",restaurententID);
                 startActivity(intent);
             }
         });
