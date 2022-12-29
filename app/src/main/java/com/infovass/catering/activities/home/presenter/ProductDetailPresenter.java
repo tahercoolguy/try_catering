@@ -4,9 +4,9 @@ import com.google.gson.JsonArray;
 
 public interface ProductDetailPresenter {
     void addToFevItemApi(String token, String item_id);
-
-        void getProductDetailApi(String token, String item_id , String mode_type);
-   // void getProductDetailApi(String item_id);
+//
+//        void getProductDetailApi(String token, String item_id , String mode_type);
+    void getProductDetailApi(String item_id);
 
     void productAddToCartApi(String token, String item_id, String quantity,String remove_old, String special_request, String mode_id, JsonArray jsonArray, JsonArray meals, String value);
 

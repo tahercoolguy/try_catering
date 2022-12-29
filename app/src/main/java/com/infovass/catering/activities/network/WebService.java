@@ -117,11 +117,11 @@ public interface WebService {
 
    // @GET("api/item-details/{item}")
 
-    @HTTP(method = "get", path = "api/item-details/{item}", hasBody = true)
+    @HTTP(method = "get", path = "api/item-details/{item}")
     Observable<ProductDetailResponse> productDetailApi(
-            @Path("item") String item,
-            @Body String body
+            @Path("item") String item
             );
+    //            @Body String body
 
     @FormUrlEncoded
     //@GET("api/set-default-address")

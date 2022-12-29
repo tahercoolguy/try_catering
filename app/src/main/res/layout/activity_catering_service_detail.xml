@@ -588,6 +588,33 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp" />
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/not_availableRL"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:backgroundTint="@color/gray_color"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/button_shap_new">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/not_availableTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
+                android:text="Not Available"
+                android:fontFamily="@font/en"
+                android:textAllCaps="false"
+                android:textColor="@color/menu_name_color"
+                android:textSize="16sp" />
+
+
+        </RelativeLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

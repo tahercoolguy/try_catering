@@ -12,6 +12,7 @@ import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.infovass.catering.R;
@@ -71,6 +72,16 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
     @BindView(R.id.edt_note)
     AppCompatEditText edt_note;
 
+    @BindView(R.id.not_availableTxt)
+    AppCompatTextView not_availableTxt;
+
+    @BindView(R.id.not_availableRL)
+    RelativeLayout not_availableRL;
+
+    @BindView(R.id.rel_findFood)
+    RelativeLayout rel_findFood;
+    String status;
+
     @Override
     protected Context getActivityContext() {
         return this;
@@ -85,9 +96,24 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
         } catch (Exception t) {
         }
         ButterKnife.bind(this);
+
         progressHUD = ProgressHUD.create(getActivityContext(), getString(R.string.loading), false, null, null);
         productDetailPresenter = new ProductDetailImpl(this);
-        productDetailPresenter.getProductDetailApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""));
+//        productDetailPresenter.getProductDetailApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""));
+        productDetailPresenter.getProductDetailApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""));
+
+
+        Intent mIntent = getIntent();
+        status = mIntent.getStringExtra("status");
+
+
+        if (status.equalsIgnoreCase("not_available")) {
+            not_availableRL.setVisibility(View.VISIBLE);
+            rel_findFood.setVisibility(View.GONE);
+         } else {
+            not_availableRL.setVisibility(View.GONE);
+            rel_findFood.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -177,6 +203,8 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
     public void onSuccessGetProductDetailAPi(ProductDetailResponse productDetailResponse) {
         try {
             if (productDetailResponse.getStatus()) {
+
+
                 try {
                     Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).into(img_productImage);
 

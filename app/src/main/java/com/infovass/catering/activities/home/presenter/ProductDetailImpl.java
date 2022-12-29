@@ -85,15 +85,67 @@ public class ProductDetailImpl implements ProductDetailPresenter {
         }
     }
 
+//    @Override
+//    public void getProductDetailApi(String token , String item_id, String mode_type) {
+//        try
+//        {
+//            views.showLoading();
+//            WebService webService = ServiceGenerator.createService(WebService.class);
+//            JSONObject object = new JSONObject();
+//            object.putOpt("mode_type", mode_type);
+//            Observable<ProductDetailResponse> observable = webService.productDetailApi(item_id); //, object.toString());
+//            observable.subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe(new Observer<ProductDetailResponse>() {
+//                        @Override
+//                        public void onSubscribe(Disposable d) {
+//                            views.hideLoading();
+//                        }
+//
+//                        @Override
+//                        public void onNext(ProductDetailResponse productDetailResponse) {
+//                            try
+//                            {
+//                                views.hideLoading();
+//                                if(productDetailResponse.getStatus())
+//                                    views.onSuccessGetProductDetailAPi(productDetailResponse);
+//                                else
+//                                    views.onSuccessGetProductDetailAPi(productDetailResponse);
+//                            }catch (Exception e){}
+//                        }
+//
+//                        @Override
+//                        public void onError(Throwable e) {
+//                            views.hideLoading();
+//                            Log.i("ERROR" , ""+e.getMessage());
+//                            if (e instanceof SocketTimeoutException) {//ClassNotFoundException
+//                                views.onFail(Constants.StatusMessage.TIMEOUT);
+//                            } else if (e instanceof ConnectException || e instanceof UnknownHostException) {
+//                                views.onNoInternet();
+//                            } else {
+//                                views.onFail("" + e.toString());
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onComplete() {
+//                            views.hideLoading();
+//                        }
+//                    });
+//        }catch (Exception j){
+//            views.hideLoading();
+//            Log.i("RTRTRTRT",j.getMessage());}
+//    }
+
     @Override
-    public void getProductDetailApi(String token , String item_id, String mode_type) {
+    public void getProductDetailApi(String item_id) {
         try
         {
             views.showLoading();
             WebService webService = ServiceGenerator.createService(WebService.class);
             JSONObject object = new JSONObject();
-            object.putOpt("mode_type", mode_type);
-            Observable<ProductDetailResponse> observable = webService.productDetailApi(item_id , object.toString());
+//            object.putOpt("mode_type", mode_type);
+            Observable<ProductDetailResponse> observable = webService.productDetailApi(item_id); //, object.toString());
             observable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<ProductDetailResponse>() {

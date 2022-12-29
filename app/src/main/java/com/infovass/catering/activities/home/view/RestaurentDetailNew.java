@@ -377,15 +377,18 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 //                                    Log.i("Yhan", "===" + items.get(verPos));
                                     SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.ITEM_ID, "" + id);
                                     if (modeType.equalsIgnoreCase("Delivery")) {
-                                        Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
+                                                .putExtra("status",root.getData().getStatus());
                                         startActivity(intent);
                                     }
                                     if (modeType.equalsIgnoreCase("Table Booking")) {
-                                        Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
+                                                .putExtra("status",root.getData().getStatus());
                                         startActivity(intent);
                                     }
                                     if (modeType.equalsIgnoreCase("Catering")) {
-                                        Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
+                                                .putExtra("status",root.getData().getStatus());
                                         startActivity(intent);
                                     }
 

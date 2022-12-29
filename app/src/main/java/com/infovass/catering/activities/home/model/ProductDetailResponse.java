@@ -922,7 +922,7 @@ public class ProductDetailResponse {
         private String timeShow;
         @SerializedName("delivery_charge")
         @Expose
-        private Integer deliveryCharge;
+        private Double deliveryCharge;
         @SerializedName("min_order")
         @Expose
         private String minOrder;
@@ -1081,11 +1081,11 @@ public class ProductDetailResponse {
             this.timeShow = timeShow;
         }
 
-        public Integer getDeliveryCharge() {
+        public Double getDeliveryCharge() {
             return deliveryCharge;
         }
 
-        public void setDeliveryCharge(Integer deliveryCharge) {
+        public void setDeliveryCharge(Double deliveryCharge) {
             this.deliveryCharge = deliveryCharge;
         }
 

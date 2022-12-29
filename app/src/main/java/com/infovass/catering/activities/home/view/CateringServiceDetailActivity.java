@@ -108,6 +108,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
     @BindView(R.id.rv_Items)
     RecyclerView rv_Items;
     int id;
+    String status;
 
     JsonArray jsonArray = new JsonArray();
     JsonArray jsonArray1 = new JsonArray();
@@ -115,6 +116,12 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
     private HashMap<String, Integer> addOnCartItems = new HashMap<>();
     private HashMap<String, Integer> mealCartItems = new HashMap<>();
     private static final DecimalFormat df = new DecimalFormat("0.00");
+    @BindView(R.id.not_availableTxt)
+    AppCompatTextView not_availableTxt;
+
+    @BindView(R.id.not_availableRL)
+    RelativeLayout not_availableRL;
+
 
     @Override
     protected Context getActivityContext() {
@@ -131,6 +138,19 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
         } catch (Exception t) {
         }
         ButterKnife.bind(this);
+
+
+        Intent mIntent = getIntent();
+        status = mIntent.getStringExtra("status");
+
+        if (status.equalsIgnoreCase("not_available")) {
+            not_availableRL.setVisibility(View.VISIBLE);
+            rel_findFood.setVisibility(View.GONE);
+        } else {
+            not_availableRL.setVisibility(View.GONE);
+            rel_findFood.setVisibility(View.VISIBLE);
+        }
+
         //for adapter
         addOnFoodItemsAdapters = new AddMainOnFoodItemAdapters(getActivityContext(), addons);
         rv_foodItems.setHasFixedSize(true);
@@ -287,8 +307,9 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
         progressHUD = ProgressHUD.create(getActivityContext(), getString(R.string.loading), false, null, null);
         productDetailPresenter = new ProductDetailImpl(this);
-        productDetailPresenter.getProductDetailApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""),
-                SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""));
+        productDetailPresenter.getProductDetailApi(//SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""),
+                SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""));
+//                , SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""));
         //  productDetailPresenter.getProductDetailApi("36");
     }
 
