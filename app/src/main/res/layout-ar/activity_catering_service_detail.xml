@@ -509,6 +509,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
+                    android:visibility="gone"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="@string/any_special_request"
@@ -518,6 +519,7 @@
                 <CheckBox
                     android:id="@+id/ch_femailServices"
                     android:layout_width="wrap_content"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/en"
                     android:text="@string/request_female_service" />
@@ -527,6 +529,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/tv_background"
+                    android:layout_marginTop="30dp"
                     android:textColor="@android:color/black"
                     android:maxLines="10"
                     android:nestedScrollingEnabled="true"
