@@ -376,6 +376,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                                 try {
 //                                    Log.i("Yhan", "===" + items.get(verPos));
                                     SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.ITEM_ID, "" + id);
+                                    SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.MODE_ID, "" + modeArrayList.get(position).getId());
                                     if (modeType.equalsIgnoreCase("Delivery")) {
                                         Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
                                                 .putExtra("status",root.getData().getStatus());
