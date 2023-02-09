@@ -265,7 +265,7 @@ public class Restaurent_Detail_MyActivity extends AppCompatActivity {
                             @Override
                             public void onItemClick(int position, int verPos, Integer id) {
                                 try {
-                                    Log.i("Yhan", "===" + itemArrayList.get(verPos));
+//                                    Log.i("Yhan", "===" + itemArrayList.get(verPos));
                                     SharedPreferencesUtils.getInstance(Restaurent_Detail_MyActivity.this).setValue(Constants.ITEM_ID, "" + id);
                                     if (modeType.equalsIgnoreCase("Delivery")) {
                                         Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class);

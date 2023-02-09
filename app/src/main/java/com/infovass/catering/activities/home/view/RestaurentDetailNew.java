@@ -320,6 +320,33 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
 
                         modeArrayList = root.getData().getModes();
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4","q","q",""));
 
                         detailAdapter = new DetailNewAdapter(modeArrayList, getApplicationContext());
                         LinearLayoutManager HorizontalLayout = new LinearLayoutManager(

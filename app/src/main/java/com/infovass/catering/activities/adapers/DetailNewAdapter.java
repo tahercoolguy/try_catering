@@ -34,7 +34,8 @@ public class DetailNewAdapter extends RecyclerView.Adapter<DetailNewAdapter.View
     String lastValue = "";
     List<String> list = new ArrayList<>();
     ArrayList<Mode> modes = new ArrayList<>();
-    public DetailNewAdapter(ArrayList<Mode> modes , Context context) {
+
+    public DetailNewAdapter(ArrayList<Mode> modes, Context context) {
         this.context = context;
         this.modes = modes;
     }
@@ -51,38 +52,43 @@ public class DetailNewAdapter extends RecyclerView.Adapter<DetailNewAdapter.View
     @Override
     public void onBindViewHolder(@NonNull DetailNewAdapter.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
 
+        if (modes.get(position).getName().equalsIgnoreCase("All") || modes.get(position).getName().equalsIgnoreCase("catering")
+                || modes.get(position).getName().equalsIgnoreCase("Delivery")) {
 
-        if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar"))
-        {
-            holder.custom_tab_textView.setText(modes.get(position).getArabic_title());
-        }
+            if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+                holder.custom_tab_textView.setText(modes.get(position).getArabic_title());
+            }
 
-        if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en"))
-        {
-            holder.custom_tab_textView.setText(modes.get(position).getName());
-        }
+            if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+                holder.custom_tab_textView.setText(modes.get(position).getName());
+            }
 
-        if(row_index==position){
-            holder.detail_item_linearLayout.setBackgroundResource(R.drawable.slide_background);
-            holder.custom_tab_textView.setTextColor(Color.parseColor("#ffffff"));
-        }
-        else
-        {
-            holder.detail_item_linearLayout.setBackgroundResource(R.drawable.detail_unselected_bacground_item);
-            holder.custom_tab_textView.setTextColor(Color.parseColor("#000000"));
-        }
+            if (row_index == position) {
+                holder.detail_item_linearLayout.setBackgroundResource(R.drawable.slide_background);
+                holder.custom_tab_textView.setTextColor(Color.parseColor("#ffffff"));
+            } else {
+                holder.detail_item_linearLayout.setBackgroundResource(R.drawable.detail_unselected_bacground_item);
+                holder.custom_tab_textView.setTextColor(Color.parseColor("#000000"));
+            }
 
-        try {
+            try {
 //            Picasso.get().load(""+modes.get(position).getImagePath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.img_logo);
-            Picasso.get().load(""+modes.get(position).getImage_path()).into(holder.img_logo);
+                Picasso.get().load("" + modes.get(position).getImage_path()).into(holder.img_logo);
+            } catch (Exception ex) {
+            }
+
+        }else{
+            holder.custom_tab_textView.setVisibility(View.GONE);
+            holder.detail_item_linearLayout.setVisibility(View.GONE);
+            holder.img_logo.setVisibility(View.GONE);
+
         }
-        catch (Exception ex)
-        { }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 row_index = position;
-                onItemClickListener.onItemClick(position ,holder.custom_tab_textView,holder.detail_item_linearLayout );
+                onItemClickListener.onItemClick(position, holder.custom_tab_textView, holder.detail_item_linearLayout);
             }
         });
     }
@@ -114,6 +120,6 @@ public class DetailNewAdapter extends RecyclerView.Adapter<DetailNewAdapter.View
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position , TextView custom_tab_textView , LinearLayout detail_item_linearLayout);
+        void onItemClick(int position, TextView custom_tab_textView, LinearLayout detail_item_linearLayout);
     }
 }
