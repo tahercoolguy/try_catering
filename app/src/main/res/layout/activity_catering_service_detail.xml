@@ -609,7 +609,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
-                android:text="Not Available"
+                android:text="Add To Cart"
                 android:fontFamily="@font/en"
                 android:textAllCaps="false"
                 android:textColor="@color/menu_name_color"

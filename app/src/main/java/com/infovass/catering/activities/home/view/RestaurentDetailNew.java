@@ -68,6 +68,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     private Dialog progress;
     private ConnectionDetector connectionDetector;
     RestourentDetailPresenter restourentDetailPresenter;
+    String restaurant_Status;
     @BindView(R.id.detail_recyclerView)
     RecyclerView detail_recyclerView;
 
@@ -136,7 +137,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
         connectionDetector = new ConnectionDetector(getApplicationContext());
         Intent mIntent = getIntent();
         restaurententID = mIntent.getIntExtra("restaurententID", 0);
-
+        restaurant_Status=mIntent.getStringExtra("restaurant_Status");
         try {
             productDetailAPI();
         } catch (Exception e) {
@@ -406,17 +407,17 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                                     SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.MODE_ID, "" + modeArrayList.get(position).getId());
                                     if (modeType.equalsIgnoreCase("Delivery")) {
                                         Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
-                                                .putExtra("status",root.getData().getStatus());
+                                                .putExtra("status",restaurant_Status);
                                         startActivity(intent);
                                     }
                                     if (modeType.equalsIgnoreCase("Table Booking")) {
                                         Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
-                                                .putExtra("status",root.getData().getStatus());
+                                                .putExtra("status",restaurant_Status);
                                         startActivity(intent);
                                     }
                                     if (modeType.equalsIgnoreCase("Catering")) {
                                         Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
-                                                .putExtra("status",root.getData().getStatus());
+                                                .putExtra("status",restaurant_Status);
                                         startActivity(intent);
                                     }
 

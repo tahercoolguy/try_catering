@@ -107,7 +107,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
         status = mIntent.getStringExtra("status");
 
 
-        if (status.equalsIgnoreCase("not_available")) {
+        if (status.equalsIgnoreCase("0")) {
             not_availableRL.setVisibility(View.VISIBLE);
             rel_findFood.setVisibility(View.GONE);
          } else {

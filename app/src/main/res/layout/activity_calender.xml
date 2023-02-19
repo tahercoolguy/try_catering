@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"
+            android:visibility="gone"
             android:layout_marginRight="@dimen/_10sdp"
             android:background="@drawable/skip_back"
             android:paddingLeft="@dimen/_8sdp"

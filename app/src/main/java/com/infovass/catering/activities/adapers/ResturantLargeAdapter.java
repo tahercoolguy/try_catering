@@ -107,7 +107,8 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
             holder.resNotesTextView.setText(""+restourentLIst.get(position).getDetail());
         }
 
-        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(position));
+        int Restaurant_Status=restourentLIst.get(position).getRestaurantStatus();
+        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(position,Restaurant_Status));
     }
 
     public void setOnItemClickListener(ResturantLargeAdapter.OnItemClickListener onItemClickListener) {
@@ -146,7 +147,7 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position);
+        void onItemClick(int position,int Restaurant_Status);
     }
 }
 

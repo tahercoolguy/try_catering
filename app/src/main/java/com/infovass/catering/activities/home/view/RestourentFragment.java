@@ -120,10 +120,12 @@ public class RestourentFragment extends Fragment implements RestourentView {
         resturantListView.setAdapter(resturantLargeAdapter);
         resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position) {
+            public void onItemClick(int position,int Restaurant_Status) {
                 SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
                 int restaurententID=restourentLIst.get(position).getId();
-                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID",restaurententID);
+                String restaurant_Status= String.valueOf(Restaurant_Status);
+                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID",restaurententID)
+                        .putExtra("restaurant_Status",restaurant_Status);
                 startActivity(intent);
             }
         });

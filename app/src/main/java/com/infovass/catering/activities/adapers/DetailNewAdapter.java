@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.siyamed.shapeimageview.CircularImageView;
@@ -81,6 +82,7 @@ public class DetailNewAdapter extends RecyclerView.Adapter<DetailNewAdapter.View
             holder.custom_tab_textView.setVisibility(View.GONE);
             holder.detail_item_linearLayout.setVisibility(View.GONE);
             holder.img_logo.setVisibility(View.GONE);
+            holder.cardView.setVisibility(View.GONE);
 
         }
 
@@ -108,7 +110,8 @@ public class DetailNewAdapter extends RecyclerView.Adapter<DetailNewAdapter.View
         @BindView(R.id.custom_tab_textView)
         TextView custom_tab_textView;
         @BindView(R.id.detail_item_linearLayout)
-        LinearLayout detail_item_linearLayout;
+        LinearLayout detail_item_linearLayout; @BindView(R.id.cardView)
+        CardView cardView;
 
         @BindView(R.id.img_logo)
         CircularImageView img_logo;
