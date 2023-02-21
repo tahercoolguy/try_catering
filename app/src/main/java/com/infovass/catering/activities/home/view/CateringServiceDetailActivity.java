@@ -143,7 +143,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
         Intent mIntent = getIntent();
         status = mIntent.getStringExtra("status");
 
-        if (status.equalsIgnoreCase("0")) {
+        if (status.equalsIgnoreCase("1")) {
             not_availableRL.setVisibility(View.VISIBLE);
             rel_findFood.setVisibility(View.GONE);
         } else {
