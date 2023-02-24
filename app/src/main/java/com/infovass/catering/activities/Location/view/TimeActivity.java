@@ -1,9 +1,11 @@
 package com.infovass.catering.activities.Location.view;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -34,26 +36,95 @@ public class TimeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_time);
         ButterKnife.bind(this);
         tv_cityName.setText(SharedPreferencesUtils.getInstance(getApplicationContext()).getValue(Constants.KEY_AREA_NAME, ""));
-        tv_date.setText(SharedPreferencesUtils.getInstance(getApplicationContext()).getValue(Constants.KEY_DATE , ""));
+        tv_date.setText(SharedPreferencesUtils.getInstance(getApplicationContext()).getValue(Constants.KEY_DATE, ""));
+        timePicker.is24HourView();
     }
 
-    @OnClick({R.id.rel_findFood , R.id.tv_skip})
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    @OnClick({R.id.rel_findFood, R.id.tv_skip})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
             case R.id.tv_skip:
                 try {
-                    SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME , ""+timePicker.getHour()+":"+timePicker.getMinute()+"");
-                    Intent intent = new Intent(TimeActivity.this  , MainActivity.class);
+
+                    int hour, minute;
+                    String am_pm;
+                    if (Build.VERSION.SDK_INT >= 23) {
+                        hour = timePicker.getHour();
+                        minute = timePicker.getMinute();
+                    } else {
+                        hour = timePicker.getCurrentHour();
+                        minute = timePicker.getCurrentMinute();
+                    }
+                    if (hour > 12) {
+                        am_pm = "PM";
+                        hour = hour - 12;
+                    } else {
+                        am_pm = "AM";
+                    }
+
+                    String time;
+
+
+                    if (hour <= 9) {
+                        time = "0" + hour + ":" + minute + " " + am_pm;
+                        if (minute <= 9)
+                            time = "0"+hour + ":" + "0" + minute + " " + am_pm;
+
+
+                    } else {
+                        time = hour + ":" + "0" + minute + " " + am_pm;
+
+                    }
+
+                    SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + time);
+
+                    SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + time);
+                    Intent intent = new Intent(TimeActivity.this, MainActivity.class);
                     startActivity(intent);
-                }catch (Exception g) {}
+                } catch (Exception g) {
+                }
                 break;
             case R.id.rel_findFood:
                 try {
-                    SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME , ""+timePicker.getHour()+":"+timePicker.getMinute()+"");
-                    Intent intent = new Intent(TimeActivity.this  , MainActivity.class);
-                    startActivity(intent);
-                }catch (Exception g) {}
+                    {
+                        int hour, minute;
+                        String am_pm;
+                        if (Build.VERSION.SDK_INT >= 23) {
+                            hour = timePicker.getHour();
+                            minute = timePicker.getMinute();
+                        } else {
+                            hour = timePicker.getCurrentHour();
+                            minute = timePicker.getCurrentMinute();
+                        }
+                        if (hour > 12) {
+                            am_pm = "PM";
+                            hour = hour - 12;
+                        } else {
+                            am_pm = "AM";
+                        }
+
+                        String time;
+
+
+                        if (hour <= 9) {
+                            time = "0" + hour + ":" + minute + " " + am_pm;
+                            if (minute <= 9)
+                                time = "0"+hour + ":" + "0" + minute + " " + am_pm;
+
+
+                        } else {
+                            time = hour + ":" + "0" + minute + " " + am_pm;
+
+                        }
+
+                        SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + time);
+                        Intent intent = new Intent(TimeActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                } catch (Exception g) {
+                }
                 break;
 
         }

@@ -274,8 +274,8 @@
 
     <string name="my_orders">My orders</string>
     <string name="total_reservation">Total Reservation </string>
-    <string name="Time">Time?</string>
-    <string name="Date">Date?</string>
+    <string name="Time">Time</string>
+    <string name="Date">Date</string>
     <string name="where">Location</string>
     <string name="select_date">Select Reservation Date </string>
     <string name="select_time">Select Reservation Time </string>
@@ -355,7 +355,7 @@
 
     <string name="MAPS_API_KEY">AIzaSyDk_8w619G2LteJdDgBARkj0sNR4jMFhPc</string>
     <string name="edit_profile">Edit Profile</string>
-    <string name="term_and_condition">Term and Condition</string>
+    <string name="term_and_condition">Terms and Condition</string>
     <string name="change_language">Change Language</string>
     <string name="saved_addresses">Saved Addresses</string>
     <string name="note">Note :</string>

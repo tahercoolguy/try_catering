@@ -121,8 +121,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
     MainCategoriesNewAdapter menusAdapter;
     int restaurententID;
- 
- 
+
+
     RestourentDetailsIBN mViewPagerAdapter;
     String modeType = "";
 
@@ -137,7 +137,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
         connectionDetector = new ConnectionDetector(getApplicationContext());
         Intent mIntent = getIntent();
         restaurententID = mIntent.getIntExtra("restaurententID", 0);
-        restaurant_Status=mIntent.getStringExtra("restaurant_Status");
+        restaurant_Status = mIntent.getStringExtra("restaurant_Status");
         try {
             productDetailAPI();
         } catch (Exception e) {
@@ -171,15 +171,15 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
             case R.id.addToFavButton:
                 try {
                     if (SharedPreferencesUtils.getInstance(this).getValue(Constants.KEY_LOGGED_IN, false)) {
+
                         if (addToFev) {
-                            addToFavButton.setBackgroundResource(R.drawable.ic_heart);
                             addToFev = false;
-                            restourentDetailPresenter.addToFevCatererApi(SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, ""));
                         } else {
-                            addToFavButton.setBackgroundResource(R.drawable.ic_heart_red);
                             addToFev = true;
-                            restourentDetailPresenter.addToFevCatererApi(SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, ""));
                         }
+
+                        setAddToFev();
+
                     } else {
                         Intent i1 = new Intent(this, LoginActivity.class);
                         startActivity(i1);
@@ -188,6 +188,17 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                     g.printStackTrace();
                 }
                 break;
+        }
+    }
+
+
+    public void setAddToFev() {
+        if (addToFev) {
+            addToFavButton.setBackgroundResource(R.drawable.ic_heart_red);
+            restourentDetailPresenter.addToFevCatererApi(SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, ""));
+        } else {
+            addToFavButton.setBackgroundResource(R.drawable.ic_heart);
+            restourentDetailPresenter.addToFevCatererApi(SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, ""));
         }
     }
 
@@ -221,6 +232,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     ArrayList<Item> itemArrayList = new ArrayList<>();
     List<RestourentDetailResponse.Mode> modes = new ArrayList<>();
     List<RestourentModeResponse.Item> items = new ArrayList<>();
+
     public void productDetailAPI() {
         if (connectionDetector.isConnectingToInternet()) {
 
@@ -252,7 +264,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                         ////////////////////////////////////////////////////////////////////////////
                         modes.clear();
                         modeArrayList.clear();
-                        modeType=root.getData().getModes().get(0).getName();
+                        modeType = root.getData().getModes().get(0).getName();
                         if (modeType.equalsIgnoreCase("Delivery")) {
                             // lnr_deleveryServices.setVisibility(View.VISIBLE);
                             //  lnr_cateringServices.setVisibility(View.GONE);
@@ -321,33 +333,33 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
 
                         modeArrayList = root.getData().getModes();
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
-                        modeArrayList.add(new Mode("4","q","q",""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
+                        modeArrayList.add(new Mode("4", "q", "q", ""));
 
                         detailAdapter = new DetailNewAdapter(modeArrayList, getApplicationContext());
                         LinearLayoutManager HorizontalLayout = new LinearLayoutManager(
@@ -407,17 +419,17 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                                     SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.MODE_ID, "" + modeArrayList.get(position).getId());
                                     if (modeType.equalsIgnoreCase("Delivery")) {
                                         Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
-                                                .putExtra("status",restaurant_Status);
+                                                .putExtra("status", restaurant_Status);
                                         startActivity(intent);
                                     }
                                     if (modeType.equalsIgnoreCase("Table Booking")) {
                                         Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
-                                                .putExtra("status",restaurant_Status);
+                                                .putExtra("status", restaurant_Status);
                                         startActivity(intent);
                                     }
                                     if (modeType.equalsIgnoreCase("Catering")) {
                                         Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
-                                                .putExtra("status",restaurant_Status);
+                                                .putExtra("status", restaurant_Status);
                                         startActivity(intent);
                                     }
 
@@ -515,7 +527,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                 detailAdapter.notifyDataSetChanged();
 
                 try {
-                    if(!modes.isEmpty()) {
+                    if (!modes.isEmpty()) {
                         if (modes.get(0).getName().equalsIgnoreCase("Delivery")) {
                             //  lnr_deleveryServices.setVisibility(View.VISIBLE);
                             //  lnr_cateringServices.setVisibility(View.GONE);
@@ -533,21 +545,21 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                         }
                     }
                 } catch (Exception j) {
-                    Log.i(j.toString(),"checker");
+                    Log.i(j.toString(), "checker");
                 }
 
             } catch (Exception h) {
-                Log.i(h.toString(),"checker");
+                Log.i(h.toString(), "checker");
 
             }
             try {
                 restourentDetailPresenter.getRestourentDetailApi(SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, ""), "1"); //+ modefirstItem);
             } catch (Exception f) {
-                Log.i(f.toString(),"checker");
+                Log.i(f.toString(), "checker");
 
             }
         } catch (Exception g) {
-            Log.i(g.toString(),"checker");
+            Log.i(g.toString(), "checker");
 
             Log.i("UIUOOIOI", g.getMessage());
         }

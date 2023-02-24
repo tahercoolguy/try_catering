@@ -285,8 +285,8 @@
 
     <string name="my_orders">طلباتي </string>
     <string name="total_reservation">إجمالي الحجز </string>
-    <string name="Time">وقت التسليم ؟ </string>
-    <string name="Date">تاريخ التسليم ؟</string>
+    <string name="Time">وقت التسليم  </string>
+    <string name="Date">تاريخ التسليم </string>
     <string name="where"> أين ؟</string>
     <string name="select_date">اختر تاريخ الحجز </string>
     <string name="select_time">اختر وقت الحجز  </string>
@@ -358,7 +358,7 @@
     <string name="valid_name">الاسم المطلوب.</string>
     <string name="valid_phone">مطلوب رقم هاتف صالح.</string>
     <string name="edit_profile">تعديل الملف الشخصي</string>
-    <string name="term_and_condition">الأحكام والشروط</string>
+    <string name="term_and_condition">أحكام وشروط</string>
     <string name="change_language">تغيير اللغة</string>
     <string name="saved_addresses">العناوين المحفوظة</string>
     <string name="note">ملحوظة :</string>
