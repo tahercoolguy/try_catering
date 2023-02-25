@@ -74,12 +74,9 @@ public class TimeActivity extends AppCompatActivity {
 
 
                     } else {
-                        time = hour + ":" + "0" + minute + " " + am_pm;
+                        time = hour + ":"+ minute + " " + am_pm;
 
                     }
-
-                    SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + time);
-
                     SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + time);
                     Intent intent = new Intent(TimeActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -113,9 +110,8 @@ public class TimeActivity extends AppCompatActivity {
                             if (minute <= 9)
                                 time = "0"+hour + ":" + "0" + minute + " " + am_pm;
 
-
                         } else {
-                            time = hour + ":" + "0" + minute + " " + am_pm;
+                            time = hour + ":" + minute + " " + am_pm;
 
                         }
 
