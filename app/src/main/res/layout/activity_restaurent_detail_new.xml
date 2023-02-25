@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
-    tools:context=".activities.home.view.RestaurentDetailNew"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".activities.home.view.RestaurentDetailNew">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,9 +22,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/btn_next"
-                >
-
+                android:background="@drawable/btn_next">
 
 
                 <ImageView
@@ -35,16 +33,13 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/myoffer_placeholder"
-                    />
-
+                    android:src="@drawable/myoffer_placeholder" />
 
 
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/restourentimage"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
+                    android:layout_height="match_parent" />
 
                 <!--                <androidx.appcompat.widget.AppCompatImageView-->
                 <!--                    android:id="@+id/restourentimage"-->
@@ -92,12 +87,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/_10sdp"
+
                     android:layout_marginRight="@dimen/_15sdp"
-                    android:fontFamily="@font/en"
                     android:gravity="center_vertical"
-                     android:shadowColor="@color/black"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="20sp"
+                    android:shadowColor="@color/black"
+                    android:shadowRadius="5"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_18sdp"
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -108,11 +104,14 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_25sdp"
-                    android:shadowRadius="5"
-                    android:fontFamily="@font/en"
                     android:gravity="center_vertical"
+                    android:shadowColor="@color/black"
+                    android:shadowRadius="5"
+                    android:singleLine="true"
                     android:textColor="@color/colorWhite"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/_12sdp"
+
+                    android:textStyle="bold" />
 
                 <RatingBar
                     android:id="@+id/restourentRatingBar"
@@ -607,11 +606,11 @@
             </LinearLayout>
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_20sdp"
                 android:alpha="7"
-                android:background="@drawable/back_trans" />
+                android:background="@drawable/back_trans"
+                android:visibility="gone" />
 
 
         </FrameLayout>

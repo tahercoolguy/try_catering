@@ -43,7 +43,7 @@
                     android:id="@+id/img_productImage"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="fitXY"
+                    android:scaleType="centerCrop"
                     app:srcCompat="@drawable/gradient" />
 
                 <LinearLayout
@@ -200,6 +200,7 @@
                             android:id="@+id/tv_minNots"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:singleLine="true"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/en"
                             android:textColor="@color/bottom_selected_color"
@@ -236,6 +237,7 @@
                             android:id="@+id/tv_minOrder"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:singleLine="true"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/en"
                             android:textColor="@color/bottom_selected_color"
@@ -270,6 +272,7 @@
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_deleveryCharges"
+                            android:singleLine="true"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
