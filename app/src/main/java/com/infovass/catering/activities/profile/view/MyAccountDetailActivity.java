@@ -63,6 +63,8 @@ public class MyAccountDetailActivity extends BaseActivity implements ProfileView
                  SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.ClassName, "address");
                  Intent intent = new Intent(MyAccountDetailActivity.this , AddressActivity.class);
                  startActivity(intent);
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
                 } catch (Exception g) {
                 }
                 break;
@@ -107,6 +109,17 @@ public class MyAccountDetailActivity extends BaseActivity implements ProfileView
     @Override
     public void onNoInternet() {
 
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
+    }
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        super.onBackPressed();
     }
 
 }

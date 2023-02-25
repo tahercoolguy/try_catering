@@ -42,6 +42,16 @@ public class ThankuActivity extends AppCompatActivity {
 //            Intent intent = new Intent(ThankuActivity.this  , MainActivity.class);
 //            startActivity(intent);
             ThankuActivity.this.finish();
+            overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+
         }catch (Exception g) {}
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
+    }
+
+
 }

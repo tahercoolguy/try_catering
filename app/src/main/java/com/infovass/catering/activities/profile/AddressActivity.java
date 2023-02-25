@@ -63,6 +63,8 @@ public class AddressActivity extends BaseActivity implements AddressViews {
                 try {
                     Intent intent = new Intent(AddressActivity.this, AddAddressActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
                 } catch (Exception g) {
                 }
                 break;
@@ -106,6 +108,8 @@ public class AddressActivity extends BaseActivity implements AddressViews {
                     Intent intent = new Intent(AddressActivity.this, CartActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
                     finish();
                 }
                 //addressPresenter.setDefaultAddressApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, "") , ""+list.get(position).getId());
@@ -159,6 +163,8 @@ public class AddressActivity extends BaseActivity implements AddressViews {
             if (defaultAddressResponse.getStatus()) {
                 Intent intent = new Intent(AddressActivity.this, CartActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
                 finish();
             } else {
                 Toast.makeText(this, "" + defaultAddressResponse.getMessage(), Toast.LENGTH_SHORT).show();
@@ -181,5 +187,17 @@ public class AddressActivity extends BaseActivity implements AddressViews {
     @Override
     public void onSuccessAddAddressAPi(AddAddressResponse addressResponse) {
 
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
+    }
+
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        super.onBackPressed();
     }
 }

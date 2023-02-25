@@ -310,6 +310,8 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
             {
                 Intent intent = new Intent(AddAddressActivity.this , AddressActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
                 finish();
 
             }else
@@ -328,5 +330,16 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
 //        LatLng sydney = new LatLng(Latitude, Longitude);
 //        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
+    }
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        super.onBackPressed();
     }
 }

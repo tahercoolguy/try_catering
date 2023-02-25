@@ -1,9 +1,12 @@
 package com.infovass.catering.activities.adapers;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -62,7 +65,17 @@ public class MainCategoriesNewAdapter extends RecyclerView.Adapter<MainCategorie
     @Override
     public void onBindViewHolder(final CustomViewHolder holder, final int i) {
         holder.setIsRecyclable(false);
+        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
+                // on the below line we are finishing
+                // our current activity.
+                holder.itemView.startAnimation(animation);
+
+            }
+        }, 100);
         Item item = datalist_filter.get(i);
         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
             holder.txt_title.setText(item.getCategory_name_ar());

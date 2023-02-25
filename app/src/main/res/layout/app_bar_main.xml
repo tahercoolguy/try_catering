@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/splash_bg"
     >
 
     <com.google.android.material.appbar.AppBarLayout
@@ -46,6 +45,7 @@
     <LinearLayout
         android:id="@+id/bottomLayout"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="@dimen/_50sdp"
         android:orientation="horizontal">
 
@@ -54,6 +54,7 @@
             android:background="@drawable/time_back"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingTop="10dp"
             app:itemIconTint="@drawable/bottom_navigation_colors"
             app:itemTextColor="@drawable/bottom_navigation_colors"
             app:menu="@menu/bottom_navigation_menu" />

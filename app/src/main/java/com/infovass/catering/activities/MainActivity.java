@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.material.navigation.NavigationBarView;
 import com.infovass.catering.R;
 import com.infovass.catering.activities.fav.FavFragment;
 import com.infovass.catering.activities.home.view.RestourentFragment;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
 //        navigationView.setNavigationItemSelectedListener(this);
 
-        bottomNavigationView.setLabelVisibilityMode(LabelVisibilityMode.LABEL_VISIBILITY_LABELED);
+        bottomNavigationView.setLabelVisibilityMode(NavigationBarView.LABEL_VISIBILITY_AUTO);
         bottomNavigationView.setOnNavigationItemSelectedListener(MainActivity.this);
 
         callRestourentFragment("RestourentFragment");
@@ -64,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.myOrderLayout:
                 Intent intent = new Intent(MainActivity.this, OrderListActivity.class);
                 startActivity(intent);
+
                 break;
 
             case R.id.lnr_changLanguage:
@@ -97,33 +100,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
     }
 
-    private void startFragment(Fragment fragment) {
-        String backStateName = fragment.getClass().getName();
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment oldFragment = fragmentManager.findFragmentByTag(backStateName);
-        if (oldFragment != null) {
-            fragmentManager.beginTransaction().remove(oldFragment).commit();
-        }
-
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        if (fragment.isAdded()) {
-            Fragment currentFragment = fragmentManager.findFragmentByTag(backStateName);
-            if (currentFragment != null) {
-                fragmentTransaction.detach(currentFragment);
-                fragmentTransaction.attach(currentFragment);
-//                fragmentTransaction.addToBackStack(backStateName).commit();
-            } else {
-                fragmentTransaction.replace(R.id.container, fragment);
-//                fragmentTransaction.addToBackStack(backStateName).commit();
-            }
-        } else {
-            //  fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.fade_out, android.R.anim.slide_in_left, android.R.anim.fade_out);
-            fragmentTransaction.add(R.id.container, fragment);
-            fragmentTransaction.addToBackStack(backStateName).commit();
-        }
+    public void startFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.container, fragment, fragment.getClass().getName());
+//        if (addToStack) {
+//            fragmentTransaction.addToBackStack(fragment.getClass().getName());
+//        }
+        fragmentTransaction.commitAllowingStateLoss();
     }
 
+//    private void startFragment(Fragment fragment) {
+//        String backStateName = fragment.getClass().getName();
+//
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        Fragment oldFragment = fragmentManager.findFragmentByTag(backStateName);
+//        if (oldFragment != null) {
+//            fragmentManager.beginTransaction().remove(oldFragment).commit();
+//        }
+//
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        if (fragment.isAdded()) {
+//            Fragment currentFragment = fragmentManager.findFragmentByTag(backStateName);
+//            if (currentFragment != null) {
+//                fragmentTransaction.detach(currentFragment);
+//                fragmentTransaction.attach(currentFragment);
+////                fragmentTransaction.addToBackStack(backStateName).commit();
+//            } else {
+//                fragmentTransaction.replace(R.id.container, fragment);
+////                fragmentTransaction.addToBackStack(backStateName).commit();
+//            }
+//        } else {
+//            //  fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.fade_out, android.R.anim.slide_in_left, android.R.anim.fade_out);
+//            fragmentTransaction.add(R.id.container, fragment);
+//            fragmentTransaction.addToBackStack(backStateName).commit();
+//        }
+//    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
@@ -138,6 +151,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (bottomNavigationView.getSelectedItemId() == R.id.homeMenu) {
+            finish();
+        } else {
+            bottomNavigationView.setSelectedItemId(R.id.homeMenu);
+        }
+
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
     }
 
 

@@ -3,9 +3,12 @@ package com.infovass.catering.activities.adapers;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -44,6 +47,17 @@ public class RestourentcategoriesAdapter extends RecyclerView.Adapter<Restourent
 
     @Override
     public void onBindViewHolder(@NonNull RestourentcategoriesAdapter.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
+        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                // on the below line we are finishing
+                // our current activity.
+                holder.itemView.startAnimation(animation);
+
+            }
+        }, 100);
         holder.custom_tab_textView.setText(list.get(position));
 
         if(row_index==position){

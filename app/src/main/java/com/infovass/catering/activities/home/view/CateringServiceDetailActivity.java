@@ -562,6 +562,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                 Toast.makeText(getActivityContext(), productAddToCartResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(CateringServiceDetailActivity.this, CartActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 //  }
             } else {
                 Toast.makeText(getActivityContext(), productAddToCartResponse.getMessage(), Toast.LENGTH_SHORT).show();
@@ -594,6 +595,17 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
     @Override
     public void onNoInternet() {
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
+    }
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        super.onBackPressed();
     }
 
 }

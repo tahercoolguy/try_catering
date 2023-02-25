@@ -1,5 +1,6 @@
 package com.infovass.catering.activities.profile;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -42,6 +43,7 @@ public class ProfileFragment extends Fragment {
     RelativeLayout logOut;
     @BindView(R.id.logIn)
     RelativeLayout logIn;
+    Activity activity;
 
 
     public ProfileFragment() {
@@ -63,6 +65,7 @@ public class ProfileFragment extends Fragment {
                 try {
                     Intent intent = new Intent(getActivity(), PrivacyPolicyActivity.class);
                     startActivity(intent);
+                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 } catch (Exception g) {
                 }
                 break;
@@ -71,6 +74,7 @@ public class ProfileFragment extends Fragment {
                 try {
                     Intent intent = new Intent(getActivity(), ChangeLanguageActivity.class);
                     startActivity(intent);
+                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 } catch (Exception g) {
                 }
                 break;
@@ -79,6 +83,7 @@ public class ProfileFragment extends Fragment {
                 try {
                     Intent intent = new Intent(getActivity(), MyAccountDetailActivity.class);
                     startActivity(intent);
+                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 } catch (Exception g) {
                 }
                 break;
@@ -87,6 +92,7 @@ public class ProfileFragment extends Fragment {
                 try {
                     Intent intent = new Intent(getActivity(), OrderListActivity.class);
                     startActivity(intent);
+                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 } catch (Exception g) {
                 }
                 break;
@@ -95,6 +101,7 @@ public class ProfileFragment extends Fragment {
                 try {
                     Intent intent = new Intent(getActivity(), TermConditionActivity.class);
                     startActivity(intent);
+                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 } catch (Exception g) {
                 }
                 break;
@@ -111,6 +118,7 @@ public class ProfileFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
+                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 } catch (Exception g) {
                 }
                 break;
@@ -119,6 +127,7 @@ public class ProfileFragment extends Fragment {
                 try {
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
                     startActivity(intent);
+                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 } catch (Exception g) {
                 }
                 break;
@@ -141,10 +150,10 @@ public class ProfileFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
-
+        activity = getActivity();
         tv_userName.setText(SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.UserName, ""));
 
-        if((SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_LOGGED_IN, false))){
+        if ((SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_LOGGED_IN, false))) {
             logOut.setVisibility(View.VISIBLE);
             logIn.setVisibility(View.GONE);
         } else {

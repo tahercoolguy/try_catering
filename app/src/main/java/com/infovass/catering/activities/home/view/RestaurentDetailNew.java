@@ -421,16 +421,19 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                                         Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
                                                 .putExtra("status", restaurant_Status);
                                         startActivity(intent);
+                                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                                     }
                                     if (modeType.equalsIgnoreCase("Table Booking")) {
                                         Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
                                                 .putExtra("status", restaurant_Status);
                                         startActivity(intent);
+                                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                                     }
                                     if (modeType.equalsIgnoreCase("Catering")) {
                                         Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
                                                 .putExtra("status", restaurant_Status);
                                         startActivity(intent);
+                                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                                     }
 
                                 } catch (Exception j) {
@@ -605,5 +608,17 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     @Override
     public void onNoInternet() {
 
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
+    }
+
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        super.onBackPressed();
     }
 }

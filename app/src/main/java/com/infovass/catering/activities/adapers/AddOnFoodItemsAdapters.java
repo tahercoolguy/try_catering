@@ -2,10 +2,13 @@ package com.infovass.catering.activities.adapers;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -46,6 +49,17 @@ public class AddOnFoodItemsAdapters extends RecyclerView.Adapter<AddOnFoodItemsA
 
     @Override
     public void onBindViewHolder(@NonNull AddOnFoodItemsAdapters.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
+        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                // on the below line we are finishing
+                // our current activity.
+                holder.itemView.startAnimation(animation);
+
+            }
+        }, 100);
         try
         {
             if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {

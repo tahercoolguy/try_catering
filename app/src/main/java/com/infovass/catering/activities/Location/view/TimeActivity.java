@@ -80,6 +80,9 @@ public class TimeActivity extends AppCompatActivity {
                     SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + time);
                     Intent intent = new Intent(TimeActivity.this, MainActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+                    finish();
                 } catch (Exception g) {
                 }
                 break;
@@ -118,6 +121,9 @@ public class TimeActivity extends AppCompatActivity {
                         SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + time);
                         Intent intent = new Intent(TimeActivity.this, MainActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+                        finish();
                     }
                 } catch (Exception g) {
                 }
@@ -125,4 +131,15 @@ public class TimeActivity extends AppCompatActivity {
 
         }
     }
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+        super.onBackPressed();
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+    }
+
 }

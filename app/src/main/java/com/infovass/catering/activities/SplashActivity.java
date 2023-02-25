@@ -57,6 +57,8 @@ public class SplashActivity extends AppCompatActivity {
                 } finally {
                     Intent intent = new Intent(SplashActivity.this, LocationActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
                     finish();
                 }
             }
@@ -72,5 +74,14 @@ public class SplashActivity extends AppCompatActivity {
         conf.locale = new Locale(language_code.toLowerCase());
         res.updateConfiguration(conf, dm);
     }
+    @Override
+    public void finish() {
+        super.finish();
+     }
 
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        super.onBackPressed();
+    }
 }

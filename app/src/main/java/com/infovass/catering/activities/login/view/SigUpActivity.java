@@ -72,12 +72,16 @@ public class SigUpActivity extends BaseActivity implements LoginViews {
 
             case R.id.tv_privacyPolicy:
                 Intent intentt = new Intent(SigUpActivity.this , PrivacyPolicyActivity.class);
-                startActivity(intentt);
+                startActivity(intentt);        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+
                 break;
 
             case R.id.tv_termAndCondition:
             Intent intent = new Intent(SigUpActivity.this , TermConditionActivity.class);
             startActivity(intent);
+                overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
                 break;
 
             case R.id.signUpButton:
@@ -183,6 +187,8 @@ public class SigUpActivity extends BaseActivity implements LoginViews {
                 Toast.makeText(SigUpActivity.this, signUPResponse.getMessage(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SigUpActivity.this , LoginActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
                 finish();
             }
             else
@@ -214,5 +220,17 @@ public class SigUpActivity extends BaseActivity implements LoginViews {
     @Override
     public void onNoInternet() {
 
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
+    }
+
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        super.onBackPressed();
     }
 }

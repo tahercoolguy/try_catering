@@ -2,9 +2,12 @@ package com.infovass.catering.activities.adapers;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -43,6 +46,17 @@ public class AddOnCartAdapters extends RecyclerView.Adapter<AddOnCartAdapters.Vi
 
     @Override
     public void onBindViewHolder(@NonNull AddOnCartAdapters.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
+        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                // on the below line we are finishing
+                // our current activity.
+                holder.itemView.startAnimation(animation);
+
+            }
+        }, 100);
         try
         {
             holder.mealNameTextView.setText(addonItems.get(position).getItem().getTitle());

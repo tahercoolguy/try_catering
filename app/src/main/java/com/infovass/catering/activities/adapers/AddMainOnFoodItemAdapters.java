@@ -1,9 +1,12 @@
 package com.infovass.catering.activities.adapers;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,6 +55,18 @@ public class AddMainOnFoodItemAdapters extends RecyclerView.Adapter<AddMainOnFoo
 
     @Override
     public void onBindViewHolder(@NonNull AddMainOnFoodItemAdapters.CustomViewHolder holder, int position) {
+        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                // on the below line we are finishing
+                // our current activity.
+                holder.itemView.startAnimation(animation);
+
+            }
+        }, 100);
+
         ProductDetailResponse.Item item = datalist_filter.get(position);
         if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar"))
         {

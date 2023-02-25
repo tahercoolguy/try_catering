@@ -316,5 +316,14 @@ public class Restaurent_Detail_MyActivity extends AppCompatActivity {
             Toast.makeText(Restaurent_Detail_MyActivity.this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
         }
     }
-
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
+    }
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        super.onBackPressed();
+    }
 }

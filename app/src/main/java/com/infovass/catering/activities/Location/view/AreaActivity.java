@@ -98,6 +98,9 @@ public class AreaActivity extends BaseActivity implements LocationViews {
                 try {
                     Intent intent = new Intent(AreaActivity.this  , MainActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+                    finish();
                 }catch (Exception g) {}
                 break;
 
@@ -106,6 +109,9 @@ public class AreaActivity extends BaseActivity implements LocationViews {
                     if(selectAreaStatus) {
                         Intent intent = new Intent(AreaActivity.this, CalenderActivity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+                        finish();
                     }else {
                         Toast.makeText(AreaActivity.this, "Please Select City First.", Toast.LENGTH_SHORT).show();
                     }
@@ -160,5 +166,15 @@ public class AreaActivity extends BaseActivity implements LocationViews {
     @Override
     public void onNoInternet() {
 
+    }
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+        super.onBackPressed();
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
     }
 }

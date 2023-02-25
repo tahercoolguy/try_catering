@@ -2,9 +2,12 @@ package com.infovass.catering.activities.adapers;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -48,7 +51,17 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.Viewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull FavAdapter.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
+        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
 
+                // on the below line we are finishing
+                // our current activity.
+                holder.itemView.startAnimation(animation);
+
+            }
+        }, 100);
         try {
             Picasso.get().load(""+list.get(position).getCaterer().getCoverImagePath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.image_product);
         }

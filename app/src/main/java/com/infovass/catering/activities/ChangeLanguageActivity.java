@@ -53,7 +53,7 @@ public class ChangeLanguageActivity extends AppCompatActivity {
     }
 
 
-    @OnClick({R.id.btn_lang_arabic , R.id.btn_lang_english , R.id.backButton})
+    @OnClick({R.id.btn_lang_arabic, R.id.btn_lang_english, R.id.backButton})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
@@ -66,26 +66,44 @@ public class ChangeLanguageActivity extends AppCompatActivity {
 
             case R.id.btn_lang_arabic:
                 try {
-                SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.Language, "ar");
-                Intent intent = new Intent(ChangeLanguageActivity.this,SplashActivity.class);
-                setLanguageResource("ar");
-                new AppSettings().setAppLanguage(this, "ar");
-                startActivity(intent);
-                finish();
-                }catch (Exception g) {}
+                    SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.Language, "ar");
+                    Intent intent = new Intent(ChangeLanguageActivity.this, SplashActivity.class);
+                    setLanguageResource("ar");
+                    new AppSettings().setAppLanguage(this, "ar");
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+                    finish();
+                } catch (Exception g) {
+                }
                 break;
 
             case R.id.btn_lang_english:
                 try {
                     SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.Language, "en");
-                    Intent intent = new Intent(ChangeLanguageActivity.this,SplashActivity.class);
+                    Intent intent = new Intent(ChangeLanguageActivity.this, SplashActivity.class);
                     setLanguageResource("en");
                     new AppSettings().setAppLanguage(this, "en");
                     startActivity(intent);
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
                     finish();
-                }catch (Exception g) {}
+                } catch (Exception g) {
+                }
                 break;
 
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
+    }
+
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        super.onBackPressed();
     }
 }

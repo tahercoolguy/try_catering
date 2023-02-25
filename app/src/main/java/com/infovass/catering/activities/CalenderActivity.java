@@ -67,6 +67,9 @@ public class CalenderActivity extends AppCompatActivity {
                     }
                     Intent intent = new Intent(CalenderActivity.this  , MainActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+                    finish();
                 }catch (Exception g) {}
                 break;
             case R.id.rel_findFood:
@@ -87,9 +90,23 @@ public class CalenderActivity extends AppCompatActivity {
                     }
                     Intent intent = new Intent(CalenderActivity.this  , TimeActivity.class);
                     startActivity(intent);
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+                    finish();
                 }catch (Exception g) {}
                 break;
 
         }
     }
+    @Override
+    public void onBackPressed() {
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+        super.onBackPressed();
+    }
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+    }
+
 }

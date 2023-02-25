@@ -28,6 +28,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/locationLL"
                     android:gravity="center"
                     android:padding="@dimen/_3sdp">
 
@@ -70,6 +71,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/dateLL"
                     android:gravity="center"
                     android:padding="@dimen/_3sdp">
 
@@ -111,6 +113,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/timeLL"
                     android:gravity="center"
                     android:padding="@dimen/_3sdp">
 
