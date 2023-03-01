@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
@@ -104,7 +105,7 @@ public class AreaAdapter extends RecyclerView.Adapter<AreaAdapter.Viewholder> {
         @BindView(R.id.tv_city)
         AppCompatTextView tv_city;
         @BindView(R.id.lnr_card)
-        RelativeLayout lnr_card;
+        LinearLayout lnr_card;
         @BindView(R.id.img_circle)
         AppCompatImageView img_circle;
 

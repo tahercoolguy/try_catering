@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:id="@+id/lnr_card"
      android:layout_marginLeft="@dimen/_10sdp"
@@ -26,9 +26,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
+        android:singleLine="true"
+        android:layout_gravity="center"
          android:layout_alignParentLeft="true"
         android:layout_centerInParent="true"
         android:layout_marginRight="@dimen/_30sdp"
+
         android:fontFamily="@font/en"
         android:paddingLeft="@dimen/_5sdp"
         android:paddingTop="@dimen/_8sdp"
@@ -36,4 +39,4 @@
         android:textColor="@color/black"
         android:textSize="@dimen/_13sdp" />
 
-</RelativeLayout>
+</LinearLayout>

@@ -70,12 +70,10 @@ public class ResturantSearchAdapter extends RecyclerView.Adapter<ResturantSearch
         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
             Log.i("UUUIUIU", "UIUIUIU");
             holder.tittleTxt.setText("" + restourentLIst.get(position).getArabicName());
-         }
-
-        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
-            Log.i("UUUIUIU", "" + restourentLIst.get(position).getName());
+        } else {
             holder.tittleTxt.setText("" + restourentLIst.get(position).getName());
-         }
+        }
+
 
         int Restaurant_Status = restourentLIst.get(position).getRestaurantStatus();
         holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(position, Restaurant_Status));

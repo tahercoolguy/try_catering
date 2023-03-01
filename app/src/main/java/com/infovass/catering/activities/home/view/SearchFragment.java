@@ -128,7 +128,7 @@ public class SearchFragment extends Fragment implements RestourentView {
                 LinearLayoutManager.HORIZONTAL,
                 false);
         detail_recyclerView.setLayoutManager(HorizontalLayout);
-        detail_recyclerView.setAdapter(restourentcategoriesAdapter);
+//        detail_recyclerView.setAdapter(restourentcategoriesAdapter);
         restourentcategoriesAdapter.setOnItemClickListener(new RestourentcategoriesAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position, TextView custom_tab_textView, LinearLayout detail_item_linearLayout) {
