@@ -14,10 +14,12 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-
         android:roundIcon="@mipmap/ic_launcher_round"
-         android:theme="@style/Theme.Catering"
+        android:theme="@style/Theme.Catering"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activities.order.OrderDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".activities.home.view.Restaurent_Detail_MyActivity"
             android:exported="false" />
@@ -110,8 +112,8 @@
         </activity>
         <activity
             android:name=".activities.MainActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".activities.profile.AddressActivity"
             android:exported="true" />
