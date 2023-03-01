@@ -19,6 +19,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import com.infovass.catering.R;
 import com.infovass.catering.activities.fav.FavFragment;
 import com.infovass.catering.activities.home.view.RestourentFragment;
+import com.infovass.catering.activities.home.view.SearchFragment;
 import com.infovass.catering.activities.order.OrderListActivity;
 import com.infovass.catering.activities.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -100,6 +101,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void callSearchFragment(String value) {
+        SearchFragment fragment = SearchFragment.newInstance();
+        startFragment(fragment);
+//        Common.CONTAINER_FRAGMENT = "RestourentFragment";
+//        toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
+    }
+
     public void startFragment(Fragment fragment) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.container, fragment, fragment.getClass().getName());
@@ -145,6 +154,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             callRestourentFragment("RestourentFragment");
         } else if (id == R.id.favMenu) {
             callFavFragment("FavFragment");
+        }else if (id == R.id.searchMenu) {
+            callSearchFragment("SearchFragment") ;
         } else if (id == R.id.profileMenu) {
             callProfileFragment("ProfileFragment");
         }

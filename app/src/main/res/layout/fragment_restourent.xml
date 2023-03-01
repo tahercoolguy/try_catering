@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     android:background="@color/background_color"
     android:orientation="vertical">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,6 +17,7 @@
 
         <FrameLayout
             android:layout_width="match_parent"
+            android:id="@+id/framelayout"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_10sdp">
 
@@ -429,4 +434,8 @@
 
 
     </LinearLayout>
+
+
+ <include layout="@layout/search_bar"></include>
+</RelativeLayout>
 </LinearLayout>

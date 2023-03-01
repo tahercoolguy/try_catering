@@ -85,7 +85,7 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
         {}
 
         try {
-//            Picasso.get().load(""+restourentLIst.get(position).getModes().get(1).getImagePath()).into(holder.img_table);
+            Picasso.get().load(""+restourentLIst.get(position).getModes().get(1).getImagePath()).into(holder.img_table);
         }
         catch (Exception ex)
         {}
@@ -96,7 +96,7 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
                 holder.img_catering.setBackgroundResource(R.drawable.busyicon);
             }
             else {
-//                Picasso.get().load(""+restourentLIst.get(position).getModes().get(2).getImagePath()).into(holder.img_catering);
+                Picasso.get().load(""+restourentLIst.get(position).getModes().get(2).getImagePath()).into(holder.img_catering);
             }
            // Picasso.get().load(""+restourentLIst.get(position).getModes().get(2).getImagePath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.img_catering);
         }

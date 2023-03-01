@@ -375,5 +375,8 @@
     <string name="Discount">تخفيض</string>
     <string name="ServiceCharges">رسوم الخدمات</string>
     <string name="grandTotal">المبلغ الإجمالي</string>
+    <string name="search">يبحث...</string>
+    <string name="not_found">غير معثور عليه...</string>
+
 
 </resources>

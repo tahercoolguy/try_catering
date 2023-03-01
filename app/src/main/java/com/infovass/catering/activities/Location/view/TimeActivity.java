@@ -70,11 +70,11 @@ public class TimeActivity extends AppCompatActivity {
                     if (hour <= 9) {
                         time = "0" + hour + ":" + minute + " " + am_pm;
                         if (minute <= 9)
-                            time = "0"+hour + ":" + "0" + minute + " " + am_pm;
+                            time = "0" + hour + ":" + "0" + minute + " " + am_pm;
 
 
                     } else {
-                        time = hour + ":"+ minute + " " + am_pm;
+                        time = hour + ":" + minute + " " + am_pm;
 
                     }
                     SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + time);
@@ -105,16 +105,21 @@ public class TimeActivity extends AppCompatActivity {
                             am_pm = "AM";
                         }
 
-                        String time;
+                        String time = null;
 
+
+                        if (hour > 9 && minute <= 9) {
+                            time = hour + ":" + "0" + minute + " " + am_pm;
+                        }
+                        if (hour <=12 && minute > 9) {
+                            time = hour + ":" + minute + " " + am_pm;
+
+                        }
 
                         if (hour <= 9) {
                             time = "0" + hour + ":" + minute + " " + am_pm;
                             if (minute <= 9)
-                                time = "0"+hour + ":" + "0" + minute + " " + am_pm;
-
-                        } else {
-                            time = hour + ":" + minute + " " + am_pm;
+                                time = "0" + hour + ":" + "0" + minute + " " + am_pm;
 
                         }
 
@@ -131,11 +136,13 @@ public class TimeActivity extends AppCompatActivity {
 
         }
     }
+
     @Override
     public void onBackPressed() {
         overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
         super.onBackPressed();
     }
+
     @Override
     public void finish() {
         super.finish();

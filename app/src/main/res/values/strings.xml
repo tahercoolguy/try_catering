@@ -371,4 +371,6 @@
     <string name="Discount">Discount</string>
     <string name="ServiceCharges">Service Charges</string>
     <string name="grandTotal">Grand Total</string>
+    <string name="search">Search...</string>
+    <string name="not_found">not found...</string>
 </resources>
