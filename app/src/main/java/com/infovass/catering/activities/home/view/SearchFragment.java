@@ -136,6 +136,7 @@ public class SearchFragment extends Fragment implements RestourentView {
                 if (position == 0) {
                     restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
                     SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.mode_id, position);
+
                 }
                 if (position == 1) {
                     restourentPresenter.getRestourentlistApi("1", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
