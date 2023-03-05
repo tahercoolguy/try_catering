@@ -86,8 +86,13 @@ public class FavFragment extends Fragment implements FavViews {
                 } else {
 //                lnr_noProduct.setVisibility(View.GONE);
 //                lnr_main.setVisibility(View.VISIBLE);
-                    list.addAll(favListResponse.getData());
-                    favAdapter.notifyDataSetChanged();
+                    try{
+                        list.addAll(favListResponse.getData());
+                        favAdapter.notifyDataSetChanged();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                 }
             }else
             {

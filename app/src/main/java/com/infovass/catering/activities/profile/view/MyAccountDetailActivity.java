@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import androidx.appcompat.widget.AppCompatEditText;
@@ -25,7 +26,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MyAccountDetailActivity extends BaseActivity implements ProfileViews{
+public class MyAccountDetailActivity extends BaseActivity implements ProfileViews {
 
     private ProgressHUD progressHUD;
     ProfilePresenter presenter;
@@ -37,6 +38,8 @@ public class MyAccountDetailActivity extends BaseActivity implements ProfileView
     AppCompatEditText userEmail;
     @BindView(R.id.rel_address)
     RelativeLayout rel_address;
+    @BindView(R.id.backImg)
+    ImageView backImg;
 
 
     @Override
@@ -55,14 +58,20 @@ public class MyAccountDetailActivity extends BaseActivity implements ProfileView
         presenter.GetUserProfileApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.UserID, ""));
     }
 
+
+    @OnClick(R.id.backImg)
+    public void clickBack(){
+        finish();
+    }
+
     @OnClick({R.id.rel_address})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.rel_address:
                 try {
-                 SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.ClassName, "address");
-                 Intent intent = new Intent(MyAccountDetailActivity.this , AddressActivity.class);
-                 startActivity(intent);
+                    SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.ClassName, "address");
+                    Intent intent = new Intent(MyAccountDetailActivity.this, AddressActivity.class);
+                    startActivity(intent);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
                 } catch (Exception g) {
@@ -75,12 +84,12 @@ public class MyAccountDetailActivity extends BaseActivity implements ProfileView
     @Override
     public void onSuccessGetProfileAPi(ProfileResponse profileResponse) {
         try {
-            Log.i("RESPONSEEEE" , ""+profileResponse.getResult().get(0).getName());
-            userNameEditText.setText(""+profileResponse.getResult().get(0).getName());
-            userPhoneNo.setText(""+profileResponse.getResult().get(0).getPhone());
-            userEmail.setText(""+profileResponse.getResult().get(0).getEmail());
-        }catch (Exception h){
-            Log.i("ERROOR" , h.getMessage());
+            Log.i("RESPONSEEEE", "" + profileResponse.getResult().get(0).getName());
+            userNameEditText.setText("" + profileResponse.getResult().get(0).getName());
+            userPhoneNo.setText("" + profileResponse.getResult().get(0).getPhone());
+            userEmail.setText("" + profileResponse.getResult().get(0).getEmail());
+        } catch (Exception h) {
+            Log.i("ERROOR", h.getMessage());
         }
 
     }
@@ -116,6 +125,7 @@ public class MyAccountDetailActivity extends BaseActivity implements ProfileView
         super.finish();
         overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
     }
+
     @Override
     public void onBackPressed() {
         overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
