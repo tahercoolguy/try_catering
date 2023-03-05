@@ -10,8 +10,37 @@
     >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_20sdp"
-        android:background="@drawable/top_background"/>
+        android:layout_height="70dp"
+        android:background="@drawable/top_background"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:id="@+id/backImg"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/_10sdp"
+            android:src="@drawable/ic_back"></ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:singleLine="true"
+            android:text="@string/my_account_details"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_l_medium"></TextView>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/_10sdp"
+            android:src="@drawable/ic_back"
+            android:visibility="invisible"></ImageView>
+    </LinearLayout>
 
 
     <androidx.cardview.widget.CardView

@@ -377,6 +377,16 @@
     <string name="grandTotal">المبلغ الإجمالي</string>
     <string name="search">يبحث...</string>
     <string name="not_found">غير معثور عليه...</string>
+    <string name="being_wrapped_up"> يتم الالتفاف </string>
+    <string name="at_the_store"> في المتجر </string>
+    <string name="on_the_way"> على الطري </string>
+    <string name="delivered"> تم التسليم </string>
+    <string name="order_summary"> ملخص الطلب: </string>
+    <string name="order_id"> معرف الطلب </string>
+    <string name="transaction_type"> نوع المعاملة </string>
+    <string name="transaction_id"> معرف المعاملة </string>
+    <string name="payment_status"> حالة الدفع </string>
+    <string name="my_account_details"> تفاصيل حسابي </string>
 
 
 </resources>
