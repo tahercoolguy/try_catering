@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -30,10 +31,11 @@ public class RestourentcategoriesAdapter extends RecyclerView.Adapter<Restourent
     RestourentcategoriesAdapter.OnItemClickListener onItemClickListener;
     String lastValue = "";
     List<String> list = new ArrayList<>();
-    public RestourentcategoriesAdapter(List<String> list , Context context) {
+
+    public RestourentcategoriesAdapter(List<String> list, Context context) {
         this.context = context;
         this.list = list;
-        row_index=0;
+        row_index = 0;
     }
 
     @NonNull
@@ -59,13 +61,20 @@ public class RestourentcategoriesAdapter extends RecyclerView.Adapter<Restourent
             }
         }, 100);
         holder.custom_tab_textView.setText(list.get(position));
+        if (position == 0) {
+            holder.iconImg.setImageResource(R.drawable.ic_table);
+        }
+        if (position == 1) {
+            holder.iconImg.setImageResource(R.drawable.ic_catering);
+        }
+        if (position == 2) {
+            holder.iconImg.setImageResource(R.drawable.ic_delvry);
+        }
 
-        if(row_index==position){
+        if (row_index == position) {
             holder.detail_item_linearLayout.setBackgroundResource(R.drawable.slide_background);
             holder.custom_tab_textView.setTextColor(Color.parseColor("#ffffff"));
-        }
-        else
-        {
+        } else {
             holder.detail_item_linearLayout.setBackgroundResource(R.drawable.detail_unselected_bacground_item);
             holder.custom_tab_textView.setTextColor(Color.parseColor("#000000"));
         }
@@ -73,7 +82,7 @@ public class RestourentcategoriesAdapter extends RecyclerView.Adapter<Restourent
             @Override
             public void onClick(View view) {
                 row_index = position;
-                onItemClickListener.onItemClick(position ,holder.custom_tab_textView,holder.detail_item_linearLayout );
+                onItemClickListener.onItemClick(position, holder.custom_tab_textView, holder.detail_item_linearLayout);
             }
         });
     }
@@ -92,6 +101,8 @@ public class RestourentcategoriesAdapter extends RecyclerView.Adapter<Restourent
     public class Viewholder extends RecyclerView.ViewHolder {
         @BindView(R.id.custom_tab_textView)
         TextView custom_tab_textView;
+        @BindView(R.id.iconImg)
+        ImageView iconImg;
         @BindView(R.id.detail_item_linearLayout)
         LinearLayout detail_item_linearLayout;
 
@@ -102,6 +113,6 @@ public class RestourentcategoriesAdapter extends RecyclerView.Adapter<Restourent
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position , TextView custom_tab_textView , LinearLayout detail_item_linearLayout);
+        void onItemClick(int position, TextView custom_tab_textView, LinearLayout detail_item_linearLayout);
     }
 }
