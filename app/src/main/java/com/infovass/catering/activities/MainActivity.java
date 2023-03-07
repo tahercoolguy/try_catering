@@ -1,6 +1,7 @@
 package com.infovass.catering.activities;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
@@ -171,8 +172,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             bottomNavigationView.setSelectedItemId(R.id.homeMenu);
         }
-
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
     @Override
     public void finish() {
         super.finish();

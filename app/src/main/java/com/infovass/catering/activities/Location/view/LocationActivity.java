@@ -58,6 +58,8 @@ public class LocationActivity extends BaseActivity implements LocationViews {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
 
+    String newlocation;
+
     public void LocationActivity(){}
 
     @Override
@@ -95,7 +97,17 @@ public class LocationActivity extends BaseActivity implements LocationViews {
                 selectAreaStatus= true;
             }
         });
+        UpdateLocation();
     }
+
+    public  void UpdateLocation(){
+        Intent intent= getIntent();
+        if(intent!=null){
+            newlocation=intent.getStringExtra("newlocation");
+        }
+    }
+
+
 
     private void setLanguageResource(String language_code) {
         Resources res = getResources();
@@ -123,6 +135,7 @@ public class LocationActivity extends BaseActivity implements LocationViews {
                 try {
                     if(selectAreaStatus) {
                         Intent intent = new Intent(LocationActivity.this, AreaActivity.class);
+                        intent.putExtra("newlocation",newlocation);
                         startActivity(intent);
                         overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 

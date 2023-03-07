@@ -53,7 +53,10 @@ public class AreaActivity extends BaseActivity implements LocationViews {
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
 
+    String newlocation;
+
     @Override
+
     protected Context getActivityContext() {
         return this;
     }
@@ -65,57 +68,77 @@ public class AreaActivity extends BaseActivity implements LocationViews {
         ButterKnife.bind(this);
         progressHUD = ProgressHUD.create(this, getString(R.string.loading), false, null, null);
         locationPresenter = new LocationImpl(this);
-        locationPresenter.getArealistApi(SharedPreferencesUtils.getInstance(getApplicationContext()).getValue(Constants.KEY_CITY_ID , ""));
+        locationPresenter.getArealistApi(SharedPreferencesUtils.getInstance(getApplicationContext()).getValue(Constants.KEY_CITY_ID, ""));
         // preparing list data
         //       prepareListData();
 //        listAdapter = new ExpandableListAdapter(LocationActivity.this, listDataHeader, listDataChild);
 //        // setting list adapter
 //        exp_listView.setAdapter(listAdapter);
 
-        areaAdapter = new AreaAdapter(getApplicationContext() , list);
+        areaAdapter = new AreaAdapter(getApplicationContext(), list);
         rec_city.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         rec_city.setAdapter(areaAdapter);
         areaAdapter.setOnItemClickListener(new AreaAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_AREA_NAME, ""+list.get(position).getName());
-                SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_AREA_ID, ""+list.get(position).getId());
-                for(int i = 0 ;i<list.size() ;i++)
-                {
+                SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_AREA_NAME, "" + list.get(position).getName());
+                SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_AREA_ID, "" + list.get(position).getId());
+                for (int i = 0; i < list.size(); i++) {
                     list.get(i).setSelected(false);
                 }
                 list.get(position).setSelected(!list.get(position).isSelected());
                 areaAdapter.notifyDataSetChanged();
-                selectAreaStatus= true;
+                selectAreaStatus = true;
             }
         });
+
+        UpdateLocation();
     }
 
-    @OnClick({R.id.rel_findFood , R.id.tv_skip})
+    public void UpdateLocation() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            newlocation = intent.getStringExtra("newlocation");
+        }
+    }
+
+    @OnClick({R.id.rel_findFood, R.id.tv_skip})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_skip:
                 try {
-                    Intent intent = new Intent(AreaActivity.this  , MainActivity.class);
+                    Intent intent = new Intent(AreaActivity.this, MainActivity.class);
                     startActivity(intent);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
                     finish();
-                }catch (Exception g) {}
+                } catch (Exception g) {
+                }
                 break;
 
             case R.id.rel_findFood:
                 try {
-                    if(selectAreaStatus) {
-                        Intent intent = new Intent(AreaActivity.this, CalenderActivity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                    if (selectAreaStatus) {
 
-                        finish();
-                    }else {
+                        if(newlocation!=null){
+                            Intent intent = new Intent();
+                            intent.putExtra("newlocation", newlocation);
+                            setResult(RESULT_OK, intent);
+                            finish();
+                        }else{
+                            Intent intent = new Intent(AreaActivity.this, CalenderActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+                            finish();
+                        }
+
+
+                    } else {
                         Toast.makeText(AreaActivity.this, "Please Select City First.", Toast.LENGTH_SHORT).show();
                     }
-                }catch (Exception g) {}
+                } catch (Exception g) {
+                }
                 break;
 
         }
@@ -129,33 +152,34 @@ public class AreaActivity extends BaseActivity implements LocationViews {
     public void onSuccessGetAreaListAPi(AreaList areaList) {
         try {
             list.clear();
-            if (areaList.getResult().size()==0) {
+            if (areaList.getResult().size() == 0) {
 //                lnr_noProduct.setVisibility(View.VISIBLE);
 //                lnr_main.setVisibility(View.GONE);
-            }
-            else
-            {
+            } else {
 //                lnr_noProduct.setVisibility(View.GONE);
 //                lnr_main.setVisibility(View.VISIBLE);
                 list.addAll(areaList.getResult());
                 areaAdapter.notifyDataSetChanged();
             }
 
-        }catch (Exception ignore){}
+        } catch (Exception ignore) {
+        }
     }
 
     @Override
     public void showLoading() {
         try {
             progressHUD.show();
-        }catch (Exception f){}
+        } catch (Exception f) {
+        }
     }
 
     @Override
     public void hideLoading() {
         try {
             progressHUD.dismiss();
-        }catch (Exception f){}
+        } catch (Exception f) {
+        }
     }
 
     @Override
@@ -167,11 +191,13 @@ public class AreaActivity extends BaseActivity implements LocationViews {
     public void onNoInternet() {
 
     }
+
     @Override
     public void onBackPressed() {
         overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
         super.onBackPressed();
     }
+
     @Override
     public void finish() {
         super.finish();

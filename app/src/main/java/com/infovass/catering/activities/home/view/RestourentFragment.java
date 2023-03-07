@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -41,6 +42,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class RestourentFragment extends Fragment implements RestourentView {
+    private final static int LOCATION_REQUEST_CODE = 1;
+    private final static int DATE_REQUEST_CODE = 2;
+    private final static int TIME_REQUEST_CODE = 3;
 
     List<RestourentListResponse.Datum> restourentLIst = new ArrayList<>();
     private ProgressHUD progressHUD;
@@ -96,7 +100,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_restourent, container, false);
         ButterKnife.bind(this, view);
-        activity=getActivity();
+        activity = getActivity();
         searchLL.setVisibility(View.GONE);
         framelayout.setVisibility(View.VISIBLE);
         progressHUD = ProgressHUD.create(getContext(), getString(R.string.loading), false, null, null);
@@ -157,33 +161,44 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
                         .putExtra("restaurant_Status", restaurant_Status);
                 startActivity(intent);
-               activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
             }
         });
         closeKeyboard();
         return view;
     }
+
     public void closeKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
     }
+
     @OnClick(R.id.locationLL)
     public void ClickLocationLL() {
-        startActivity(new Intent(getActivity(), LocationActivity.class));
+
+        Intent intent = new Intent(getActivity(), LocationActivity.class);
+        intent.putExtra("newlocation", "newlocation");
+        startActivityForResult(intent, LOCATION_REQUEST_CODE);
         activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
     }
 
     @OnClick(R.id.dateLL)
     public void ClickDateLL() {
-        startActivity(new Intent(getActivity(), CalenderActivity.class));
+
+        Intent intent = new Intent(getActivity(), CalenderActivity.class);
+        intent.putExtra("newdate", "newdate");
+        startActivityForResult(intent, DATE_REQUEST_CODE);
         activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
     }
 
     @OnClick(R.id.timeLL)
     public void ClickTimeLL() {
-        startActivity(new Intent(getActivity(), TimeActivity.class));
+
+        Intent intent = new Intent(getActivity(), TimeActivity.class);
+        intent.putExtra("newtime", "newtime");
+        startActivityForResult(intent, TIME_REQUEST_CODE);
         activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
     }
 
@@ -210,6 +225,39 @@ public class RestourentFragment extends Fragment implements RestourentView {
             resturantLargeAdapter.notifyDataSetChanged();
 
         }
+    }
+
+    String newtime, newdate, newlocation;
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        if (requestCode == LOCATION_REQUEST_CODE) {
+            if (data != null) {
+                String newlocation = data.getStringExtra("newlocation");
+                tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
+                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+
+
+            }
+        }
+        if (requestCode == DATE_REQUEST_CODE) {
+            if (data != null) {
+                String newdate = data.getStringExtra("newdate");
+                tv_date.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+            }
+        }
+        if (requestCode == TIME_REQUEST_CODE) {
+            if (data != null) {
+                String newtime = data.getStringExtra("newtime");
+                String newtimes = data.getStringExtra("newtime");
+                tv_time.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_TIME, ""));
+                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

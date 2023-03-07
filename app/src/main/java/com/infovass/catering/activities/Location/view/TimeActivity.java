@@ -4,6 +4,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,6 +29,8 @@ public class TimeActivity extends AppCompatActivity {
     AppCompatTextView tv_date;
     @BindView(R.id.timePicker)
     TimePicker timePicker;
+    String newtime;
+    Context context;
 
 
     @Override
@@ -35,13 +38,22 @@ public class TimeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_time);
         ButterKnife.bind(this);
+        context=getApplicationContext();
         tv_cityName.setText(SharedPreferencesUtils.getInstance(getApplicationContext()).getValue(Constants.KEY_AREA_NAME, ""));
         tv_date.setText(SharedPreferencesUtils.getInstance(getApplicationContext()).getValue(Constants.KEY_DATE, ""));
         timePicker.is24HourView();
+        UpdateTime();
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    @OnClick({R.id.rel_findFood, R.id.tv_skip})
+
+    public  void UpdateTime(){
+        Intent intent= getIntent();
+        if(intent!=null){
+            newtime=intent.getStringExtra("newtime");
+        }
+    }
+     @RequiresApi(api = Build.VERSION_CODES.N)
+     @OnClick({R.id.rel_findFood, R.id.tv_skip})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
@@ -123,12 +135,24 @@ public class TimeActivity extends AppCompatActivity {
 
                         }
 
-                        SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + time);
-                        Intent intent = new Intent(TimeActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                        if(newtime!=null){
+                            SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + time);
 
-                        finish();
+                            Intent intent = new Intent();
+                            intent.putExtra("newtime", time);
+                            setResult(RESULT_OK, intent);
+
+                             finish();
+                        }else{
+                            SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + time);
+                            Intent intent = new Intent(TimeActivity.this, MainActivity.class);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+                            finish();
+                        }
+
+
                     }
                 } catch (Exception g) {
                 }
