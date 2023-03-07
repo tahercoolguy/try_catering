@@ -1,5 +1,7 @@
 package com.infovass.catering.activities.home.view;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -177,8 +179,8 @@ public class RestourentFragment extends Fragment implements RestourentView {
     public void ClickLocationLL() {
 
         Intent intent = new Intent(getActivity(), LocationActivity.class);
-        intent.putExtra("newlocation", "newlocation");
-        startActivityForResult(intent, LOCATION_REQUEST_CODE);
+        intent.putExtra("newlocationArea", "newlocationArea");
+        startActivityForResult(intent,RESULT_OK);
         activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
     }
@@ -234,9 +236,13 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
         if (requestCode == LOCATION_REQUEST_CODE) {
             if (data != null) {
-                String newlocation = data.getStringExtra("newlocation");
-                tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
-                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
+                  newlocation = data.getStringExtra("newlocationArea");
+                if(newlocation!=null){
+                    tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
+                    tv_city.setText(newlocation);
+                    restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+                }
+
 
 
             }
@@ -253,7 +259,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 String newtime = data.getStringExtra("newtime");
                 String newtimes = data.getStringExtra("newtime");
                 tv_time.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_TIME, ""));
-                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_TIME, ""));
+                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
             }
         }

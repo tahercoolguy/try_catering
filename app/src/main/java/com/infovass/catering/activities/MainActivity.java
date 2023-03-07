@@ -155,8 +155,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             callRestourentFragment("RestourentFragment");
         } else if (id == R.id.favMenu) {
             callFavFragment("FavFragment");
-        }else if (id == R.id.searchMenu) {
-            callSearchFragment("SearchFragment") ;
+        } else if (id == R.id.searchMenu) {
+            callSearchFragment("SearchFragment");
         } else if (id == R.id.profileMenu) {
             callProfileFragment("ProfileFragment");
         }
@@ -177,12 +177,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        if(data!=null){
-            callRestourentFragment("callRestourentFragment");
+        if (data != null) {
+
+            String newlocationArea = data.getStringExtra("newlocationArea");
+            String newtime = data.getStringExtra("newtime");
+
+            if (newlocationArea != null) {
+                callRestourentFragment("callRestourentFragment");
+            }
+            if (newtime != null) {
+                callRestourentFragment("callRestourentFragment");
+            }
+
         }
         super.onActivityResult(requestCode, resultCode, data);
 
-     }
+    }
 
     @Override
     public void finish() {

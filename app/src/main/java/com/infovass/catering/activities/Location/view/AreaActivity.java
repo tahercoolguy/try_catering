@@ -91,14 +91,14 @@ public class AreaActivity extends BaseActivity implements LocationViews {
                 selectAreaStatus = true;
             }
         });
-
         UpdateLocation();
-    }
+
+     }
 
     public void UpdateLocation() {
         Intent intent = getIntent();
         if (intent != null) {
-            newlocation = intent.getStringExtra("newlocation");
+            newlocation = intent.getStringExtra("newlocationArea");
         }
     }
 
@@ -122,8 +122,10 @@ public class AreaActivity extends BaseActivity implements LocationViews {
 
                         if(newlocation!=null){
                             Intent intent = new Intent();
-                            intent.putExtra("newlocation", newlocation);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+                            intent.putExtra("newlocationArea", newlocation);
                             setResult(RESULT_OK, intent);
+
                             finish();
                         }else{
                             Intent intent = new Intent(AreaActivity.this, CalenderActivity.class);
@@ -165,6 +167,7 @@ public class AreaActivity extends BaseActivity implements LocationViews {
         } catch (Exception ignore) {
         }
     }
+
 
     @Override
     public void showLoading() {
