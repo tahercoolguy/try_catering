@@ -236,7 +236,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
             if (data != null) {
                 String newlocation = data.getStringExtra("newlocation");
                 tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
-                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
 
 
             }
@@ -253,7 +253,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 String newtime = data.getStringExtra("newtime");
                 String newtimes = data.getStringExtra("newtime");
                 tv_time.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_TIME, ""));
-                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_TIME, ""));
 
             }
         }

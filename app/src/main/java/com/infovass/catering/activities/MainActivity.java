@@ -174,10 +174,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(data!=null){
+            callRestourentFragment("callRestourentFragment");
+        }
         super.onActivityResult(requestCode, resultCode, data);
-    }
+
+     }
 
     @Override
     public void finish() {
