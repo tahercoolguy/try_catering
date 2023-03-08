@@ -90,8 +90,8 @@
 
                     android:layout_marginRight="@dimen/_15sdp"
                     android:gravity="center_vertical"
-                    android:shadowColor="@color/black"
-                    android:shadowRadius="5"
+
+                     android:shadowRadius="5"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_18sdp"
                     android:textStyle="bold" />
@@ -105,13 +105,12 @@
                     android:layout_marginRight="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_25sdp"
                     android:gravity="center_vertical"
-                    android:shadowColor="@color/black"
-                    android:shadowRadius="5"
+                     android:shadowRadius="5"
                     android:singleLine="true"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/_12sdp"
 
-                    android:textStyle="bold" />
+                     />
 
                 <RatingBar
                     android:id="@+id/restourentRatingBar"

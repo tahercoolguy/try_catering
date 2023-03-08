@@ -139,6 +139,8 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
         }
         ButterKnife.bind(this);
 
+        tv_requirements.setSelected(true);
+
 
         Intent mIntent = getIntent();
         status = mIntent.getStringExtra("status");
@@ -531,6 +533,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
             }
         } catch (Exception g) {
         }
+
     }
 
     @Override

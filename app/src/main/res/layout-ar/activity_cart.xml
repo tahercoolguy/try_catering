@@ -312,15 +312,14 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Totalamount"
+                     android:text="@string/Totalamount"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
 
@@ -341,10 +340,9 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/Discount"
+                        android:text="@string/Discount"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
 
@@ -366,10 +364,9 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/ServiceCharges"
+                     android:text="@string/ServiceCharges"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
 
@@ -391,10 +388,9 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/grandTotal"
+                     android:text="@string/grandTotal"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp" />
 
@@ -477,7 +473,7 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="@dimen/_1sdp"
                         android:maxLines="1"
-                        android:text="نقدي"
+                        android:text="نقداً"
                         android:textSize="@dimen/_12sdp" />
                 </LinearLayout>
             </RadioGroup>

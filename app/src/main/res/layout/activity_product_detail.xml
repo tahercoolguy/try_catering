@@ -202,6 +202,7 @@
                             android:singleLine="true"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
+                            android:ellipsize="marquee"
                             android:fontFamily="@font/en"
                             android:textColor="@color/bottom_selected_color"
                             android:textSize="@dimen/_10sdp"
@@ -240,6 +241,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/en"
+                            android:ellipsize="marquee"
                             android:textColor="@color/bottom_selected_color"
                             android:textSize="@dimen/_10sdp"
                             android:textStyle="bold" />
@@ -274,6 +276,7 @@
                             android:id="@+id/tv_deleveryCharges"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:ellipsize="marquee"
                             android:layout_gravity="center_horizontal"
                             android:textColor="@color/bottom_selected_color"
                             android:textSize="@dimen/_10sdp"

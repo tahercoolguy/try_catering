@@ -81,7 +81,16 @@ public class AreaActivity extends BaseActivity implements LocationViews {
         areaAdapter.setOnItemClickListener(new AreaAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_AREA_NAME, "" + list.get(position).getName());
+
+                if(SharedPreferencesUtils.getInstance(AreaActivity.this).getValue(Constants.Language, "").equalsIgnoreCase("ar"))
+                {
+                    SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_AREA_NAME, "" + list.get(position).getArabicName());
+
+                }else{
+                    SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_AREA_NAME, "" + list.get(position).getName());
+
+                }
+
                 SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_AREA_ID, "" + list.get(position).getId());
                 for (int i = 0; i < list.size(); i++) {
                     list.get(i).setSelected(false);

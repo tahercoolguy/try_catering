@@ -251,6 +251,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:fontFamily="@font/en"
                                 android:singleLine="true"
+                                android:ellipsize="marquee"
                                 android:textColor="@color/bottom_selected_color"
                                 android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold" />

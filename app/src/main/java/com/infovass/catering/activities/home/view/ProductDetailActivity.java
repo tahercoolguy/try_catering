@@ -97,6 +97,8 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
         }
         ButterKnife.bind(this);
 
+        tv_minNots.setSelected(true);tv_minOrder.setSelected(true);tv_deleveryCharges.setSelected(true);
+
         progressHUD = ProgressHUD.create(getActivityContext(), getString(R.string.loading), false, null, null);
         productDetailPresenter = new ProductDetailImpl(this);
 //        productDetailPresenter.getProductDetailApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""));

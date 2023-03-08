@@ -23,15 +23,20 @@
             android:layout_height="match_parent"
             android:alpha="3"
             android:scaleType="centerInside"
-            app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:siRadius="15dp"
-            />
+            app:siRadius="15dp" />
 
+        <View
+            android:id="@+id/overlay_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.15"
+            android:background="@color/black" />
         <LinearLayout
             android:id="@+id/lnr_sideLayout"
             android:layout_width="wrap_content"
@@ -114,8 +119,7 @@
                 android:padding="3dp"
                 android:singleLine="true"
                 android:text="hfugfsfgfg"
-                android:shadowColor="@color/black"
-                android:shadowRadius="5"
+                 android:shadowRadius="5"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18sdp"
                 android:textStyle="bold" />
@@ -127,11 +131,9 @@
                 android:padding="3dp"
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
-                android:textStyle="bold"
-                android:layout_marginBottom="@dimen/_10sdp"
+                 android:layout_marginBottom="@dimen/_10sdp"
                 android:singleLine="true"
-                android:shadowColor="@color/black"
-                android:shadowRadius="5"
+                 android:shadowRadius="5"
                 android:text="fhsgfhfgf"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"

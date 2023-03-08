@@ -103,6 +103,10 @@ public class RestourentFragment extends Fragment implements RestourentView {
         view = inflater.inflate(R.layout.fragment_restourent, container, false);
         ButterKnife.bind(this, view);
         activity = getActivity();
+
+        tv_city.setSelected(true);
+        tv_date.setSelected(true);
+        tv_time.setSelected(true);
         searchLL.setVisibility(View.GONE);
         framelayout.setVisibility(View.VISIBLE);
         progressHUD = ProgressHUD.create(getContext(), getString(R.string.loading), false, null, null);
