@@ -74,21 +74,30 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-
+        int Restaurant_Status = restourentLIst.get(position).getRestaurantStatus();
         try {
 
-            if (restourentLIst.get(position).getModes().get(position).getName().equalsIgnoreCase("Delivery")) {
+            String resModeid= String.valueOf(restourentLIst.get(position).getModes().get(0).getId());
+            String resStatus= String.valueOf(restourentLIst.get(position).getRestaurantStatus());
+
+            if (resModeid.equalsIgnoreCase("2")) {
                 holder.img_delevery.setImageResource(R.drawable.ic_deleivery);
+            }else{
+
             }
-            if (restourentLIst.get(position).getModes().get(position).getName().equalsIgnoreCase("Catering")) {
+            if (resModeid.equalsIgnoreCase("1")) {
                 holder.img_catering.setImageResource(R.drawable.ic_catering);
+            }else {
+
             }
-            if (restourentLIst.get(position).getRestaurantStatus() == 1) {
+            if (resStatus.equalsIgnoreCase("1")) {
                 holder.img_table.setImageResource(R.drawable.busyicon);
+            }else{
+
             }
 
-            if(restourentLIst.get(position).getModes().get(position).getName().equalsIgnoreCase("Delivery")
-            && restourentLIst.get(position).getModes().get(position).getName().equalsIgnoreCase("Catering")){
+            if (resModeid.equalsIgnoreCase("2")
+                    && resModeid.equalsIgnoreCase("1")) {
                 holder.img_delevery.setImageResource(R.drawable.ic_deleivery);
                 holder.img_catering.setImageResource(R.drawable.ic_catering);
             }
@@ -134,7 +143,7 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
             holder.resNotesTextView.setText("" + restourentLIst.get(position).getDetail());
         }
 
-        int Restaurant_Status = restourentLIst.get(position).getRestaurantStatus();
+
         holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(position, Restaurant_Status));
     }
 
