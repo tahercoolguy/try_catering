@@ -37,7 +37,7 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
     String lastValue = "";
     List<RestourentListResponse.Datum> restourentLIst = new ArrayList<>();
 
-    public ResturantLargeAdapter(Context context , List<RestourentListResponse.Datum> restourentLIst) {
+    public ResturantLargeAdapter(Context context, List<RestourentListResponse.Datum> restourentLIst) {
         this.context = context;
         this.restourentLIst = restourentLIst;
     }
@@ -66,65 +66,76 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
         }, 100);
 
         try {
-            if(restourentLIst.get(position).getCoverImages()!=null && restourentLIst.get(position).getCoverImages().size()>0)
+            if (restourentLIst.get(position).getCoverImages() != null && restourentLIst.get(position).getCoverImages().size() > 0)
                 Picasso.get().load(restourentLIst.get(position).getCoverImages().get(0).getCoverImagePath())
                         .placeholder(R.drawable.logo_rec).into(holder.resturantImageView);
             else
                 Picasso.get().load(restourentLIst.get(position).getCoverImagePath()).into(holder.resturantImageView);
-        }
-        catch (Exception ex)
-        {
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
 
         try {
 
-            Picasso.get().load(restourentLIst.get(position).getModes().get(0).getImagePath()).into(holder.img_delevery);
-        }
-        catch (Exception ex)
-        {}
-
-        try {
-            Picasso.get().load(""+restourentLIst.get(position).getModes().get(1).getImagePath()).into(holder.img_table);
-        }
-        catch (Exception ex)
-        {}
-
-        try {
-            if (Objects.equals(restourentLIst.get(position).getRestaurantStatus(), "1")){
-               // Picasso.get().load(""+restourentLIst.get(position).getModes().get(2).getImagePath()).error(R.drawable.add).placeholder(R.drawable.ic_loader).into(holder.img_catering);
-                holder.img_catering.setBackgroundResource(R.drawable.busyicon);
+            if (restourentLIst.get(position).getModes().get(position).getName().equalsIgnoreCase("Delivery")) {
+                holder.img_delevery.setImageResource(R.drawable.ic_deleivery);
             }
-            else {
-                Picasso.get().load(""+restourentLIst.get(position).getModes().get(2).getImagePath()).into(holder.img_catering);
+            if (restourentLIst.get(position).getModes().get(position).getName().equalsIgnoreCase("Catering")) {
+                holder.img_catering.setImageResource(R.drawable.ic_catering);
             }
-           // Picasso.get().load(""+restourentLIst.get(position).getModes().get(2).getImagePath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.img_catering);
+            if (restourentLIst.get(position).getRestaurantStatus() == 1) {
+                holder.img_table.setImageResource(R.drawable.busyicon);
+            }
+
+            if(restourentLIst.get(position).getModes().get(position).getName().equalsIgnoreCase("Delivery")
+            && restourentLIst.get(position).getModes().get(position).getName().equalsIgnoreCase("Catering")){
+                holder.img_delevery.setImageResource(R.drawable.ic_deleivery);
+                holder.img_catering.setImageResource(R.drawable.ic_catering);
+            }
+
+//            Picasso.get().load(restourentLIst.get(position).getModes().get(0).getImagePath()).into(holder.img_delevery);
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-        catch (Exception ex)
-        {}
+
+//        try {
+//            Picasso.get().load(""+restourentLIst.get(position).getModes().get(1).getImagePath()).into(holder.img_table);
+//        }
+//        catch (Exception ex)
+//        {}
+//
+//        try {
+//            if (Objects.equals(restourentLIst.get(position).getRestaurantStatus(), "1")){
+//               // Picasso.get().load(""+restourentLIst.get(position).getModes().get(2).getImagePath()).error(R.drawable.add).placeholder(R.drawable.ic_loader).into(holder.img_catering);
+//                holder.img_catering.setBackgroundResource(R.drawable.busyicon);
+//            }
+//            else {
+//                Picasso.get().load(""+restourentLIst.get(position).getModes().get(2).getImagePath()).into(holder.img_catering);
+//            }
+//           // Picasso.get().load(""+restourentLIst.get(position).getModes().get(2).getImagePath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.img_catering);
+//        }
+//        catch (Exception ex)
+//        {}
 
         try {
-            holder.simpleRatingBar.setRating(Float.parseFloat(""+restourentLIst.get(position).getRating()));
-        }
-        catch (Exception ex)
-        {}
-
-        if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar"))
-        {
-            Log.i("UUUIUIU" , "UIUIUIU");
-            holder.resNameTextView.setText(""+restourentLIst.get(position).getArabicName());
-            holder.resNotesTextView.setText(""+restourentLIst.get(position).getArabicDetail());
+            holder.simpleRatingBar.setRating(Float.parseFloat("" + restourentLIst.get(position).getRating()));
+        } catch (Exception ex) {
         }
 
-        if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en"))
-        {
-            Log.i("UUUIUIU" , ""+restourentLIst.get(position).getName());
-            holder.resNameTextView.setText(""+restourentLIst.get(position).getName());
-            holder.resNotesTextView.setText(""+restourentLIst.get(position).getDetail());
+        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+            Log.i("UUUIUIU", "UIUIUIU");
+            holder.resNameTextView.setText("" + restourentLIst.get(position).getArabicName());
+            holder.resNotesTextView.setText("" + restourentLIst.get(position).getArabicDetail());
         }
 
-        int Restaurant_Status=restourentLIst.get(position).getRestaurantStatus();
-        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(position,Restaurant_Status));
+        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+            Log.i("UUUIUIU", "" + restourentLIst.get(position).getName());
+            holder.resNameTextView.setText("" + restourentLIst.get(position).getName());
+            holder.resNotesTextView.setText("" + restourentLIst.get(position).getDetail());
+        }
+
+        int Restaurant_Status = restourentLIst.get(position).getRestaurantStatus();
+        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(position, Restaurant_Status));
     }
 
     public void setOnItemClickListener(ResturantLargeAdapter.OnItemClickListener onItemClickListener) {
@@ -163,7 +174,7 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position,int Restaurant_Status);
+        void onItemClick(int position, int Restaurant_Status);
     }
 }
 

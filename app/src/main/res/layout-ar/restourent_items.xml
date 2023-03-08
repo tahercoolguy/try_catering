@@ -46,7 +46,11 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/_13sdp"
             android:layout_marginTop="@dimen/_13sdp">
-
+            <com.github.siyamed.shapeimageview.CircularImageView
+                android:id="@+id/img_catering"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                />
             <com.github.siyamed.shapeimageview.CircularImageView
                 android:id="@+id/img_delevery"
                 android:layout_width="@dimen/_30sdp"
@@ -59,11 +63,7 @@
                 android:layout_height="@dimen/_30sdp"
                 android:layout_marginBottom="@dimen/_5sdp"
                 />
-            <com.github.siyamed.shapeimageview.CircularImageView
-                android:id="@+id/img_catering"
-                android:layout_width="@dimen/_30sdp"
-                android:layout_height="@dimen/_30sdp"
-                />
+
         </LinearLayout>
 
 
