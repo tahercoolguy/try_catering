@@ -65,24 +65,22 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
             }
         }, 100);
 
+
+        RestourentListResponse.Datum resRDAta = restourentLIst.get(position);
+
         try {
-            if (restourentLIst.get(position).getCoverImages() != null && restourentLIst.get(position).getCoverImages().size() > 0)
-                Picasso.get().load(restourentLIst.get(position).getCoverImages().get(0).getCoverImagePath())
+            if (resRDAta.getCoverImages() != null && resRDAta.getCoverImages().size() > 0)
+                Picasso.get().load(resRDAta.getCoverImages().get(0).getCoverImagePath())
                         .placeholder(R.drawable.logo_rec).into(holder.resturantImageView);
             else
-                Picasso.get().load(restourentLIst.get(position).getCoverImagePath()).into(holder.resturantImageView);
+                Picasso.get().load(resRDAta.getCoverImagePath()).into(holder.resturantImageView);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        int Restaurant_Status = restourentLIst.get(position).getRestaurantStatus();
-        String resModeid= String.valueOf(restourentLIst.get(position).getModes().get(0).getId());
-        String resStatus= String.valueOf(restourentLIst.get(position).getRestaurantStatus());
+        int Restaurant_Status = resRDAta.getRestaurantStatus();
+        String resModeid = String.valueOf(resRDAta.getModes().get(0).getId());
+        String resStatus = String.valueOf(resRDAta.getRestaurantStatus());
         try {
-
-
-
-
-
 
 
 //
@@ -139,18 +137,41 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
 //                    e.printStackTrace();
 //                }
 
-
+//            for (int i = 0; i < restourentLIst.size(); i++) {
+//                restourentLIst.get(i).getModes().get(0).getId().equals(1);
+//                if (restourentLIst.get(i).getModes().get(0).getId().equals(1)) {
+//                    holder.img_catering.setImageResource(R.drawable.ic_catering);
+//                }
+//                if (restourentLIst.get(i).getModes().get(0).getId().equals(2)) {
+//                    holder.img_delevery.setImageResource(R.drawable.ic_deleivery);
+//                }
+//                if (restourentLIst.get(i).getRestaurantStatus().equals(1)) {
+//                    holder.img_table.setImageResource(R.drawable.busyicon);
+//                }
+//            }
 
 
             if (resModeid.equalsIgnoreCase("2")) {
+                holder.img_delevery.setVisibility(View.VISIBLE);
                 holder.img_delevery.setImageResource(R.drawable.ic_deleivery);
+
+            } else {
+                holder.img_delevery.setVisibility(View.INVISIBLE);
             }
             if (resModeid.equalsIgnoreCase("1")) {
                 holder.img_catering.setImageResource(R.drawable.ic_catering);
+                holder.img_catering.setVisibility(View.VISIBLE);
+
+            } else {
+                holder.img_catering.setVisibility(View.INVISIBLE);
             }
             if (resStatus.equalsIgnoreCase("1")) {
                 holder.img_table.setImageResource(R.drawable.busyicon);
+                holder.img_table.setVisibility(View.VISIBLE);
+            } else {
+                holder.img_table.setVisibility(View.INVISIBLE);
             }
+
 
 //            if (resModeid.equalsIgnoreCase("2")
 //                    && resModeid.equalsIgnoreCase("1")) {
