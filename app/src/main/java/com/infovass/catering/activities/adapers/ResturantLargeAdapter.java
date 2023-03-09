@@ -75,32 +75,88 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
             ex.printStackTrace();
         }
         int Restaurant_Status = restourentLIst.get(position).getRestaurantStatus();
+        String resModeid= String.valueOf(restourentLIst.get(position).getModes().get(0).getId());
+        String resStatus= String.valueOf(restourentLIst.get(position).getRestaurantStatus());
         try {
 
-            String resModeid= String.valueOf(restourentLIst.get(position).getModes().get(0).getId());
-            String resStatus= String.valueOf(restourentLIst.get(position).getRestaurantStatus());
+
+
+
+
+
+
+//
+//                 try{
+//                     for (RestourentListResponse.Datum daliveryModeCheck : restourentLIst)
+//                     {
+//
+//                         for (int i = 0; i < daliveryModeCheck.getModes().size(); i++) {
+//                             if (daliveryModeCheck.getModes().get(i).getId()==2){
+//                                 holder.img_delevery.setImageResource(R.drawable.ic_deleivery);
+//                             }
+//
+//                         }
+//
+//
+//                     }
+//                 } catch (Exception e) {
+//                     e.printStackTrace();
+//                 }
+//
+//
+//                try{
+//                    for (RestourentListResponse.Datum cateringModeCheck : restourentLIst)
+//                    {
+//
+//                        for (int i = 0; i < cateringModeCheck.getModes().size(); i++) {
+//                            if (cateringModeCheck.getModes().get(i).getId()==1){
+//                                holder.img_catering.setImageResource(R.drawable.ic_catering);
+//                            }
+//
+//                        }
+//
+//
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+//                try{
+//                    for (RestourentListResponse.Datum bothModeCheck : restourentLIst)
+//                    {
+//
+//                        for (int i = 0; i < bothModeCheck.getModes().size(); i++) {
+//                            if (bothModeCheck.getModes().get(i).getId()==1 && bothModeCheck.getModes().get(i).getId()==2){
+//                                holder.img_catering.setImageResource(R.drawable.ic_catering);
+//                                holder.img_delevery.setImageResource(R.drawable.ic_deleivery);
+//                            }
+//
+//                        }
+//
+//
+//                    }
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+
+
+
 
             if (resModeid.equalsIgnoreCase("2")) {
                 holder.img_delevery.setImageResource(R.drawable.ic_deleivery);
-            }else{
-
             }
             if (resModeid.equalsIgnoreCase("1")) {
                 holder.img_catering.setImageResource(R.drawable.ic_catering);
-            }else {
-
             }
             if (resStatus.equalsIgnoreCase("1")) {
                 holder.img_table.setImageResource(R.drawable.busyicon);
-            }else{
-
             }
 
-            if (resModeid.equalsIgnoreCase("2")
-                    && resModeid.equalsIgnoreCase("1")) {
-                holder.img_delevery.setImageResource(R.drawable.ic_deleivery);
-                holder.img_catering.setImageResource(R.drawable.ic_catering);
-            }
+//            if (resModeid.equalsIgnoreCase("2")
+//                    && resModeid.equalsIgnoreCase("1")) {
+//                holder.img_delevery.setImageResource(R.drawable.ic_deleivery);
+//                holder.img_catering.setImageResource(R.drawable.ic_catering);
+//            }
 
 //            Picasso.get().load(restourentLIst.get(position).getModes().get(0).getImagePath()).into(holder.img_delevery);
         } catch (Exception ex) {
