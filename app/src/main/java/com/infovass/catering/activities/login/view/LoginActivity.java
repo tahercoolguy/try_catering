@@ -150,8 +150,13 @@ public class LoginActivity extends BaseActivity implements LoginViews {
         try {
             if (loginResponse.getStatus()) {
                 SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.TOKEN, "" + loginResponse.getToken());
-                SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.UserName, "" + loginResponse.getData().getName());
+                 SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.UserName, "" + loginResponse.getData().getName());
                 SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.UserID, "" + loginResponse.getData().getId());
+                SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.name, "" + loginResponse.getData().getName());
+                SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.surname, "" + loginResponse.getData().getLastName());
+                SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.phone, "" + loginResponse.getData().getPhone());
+                SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.email, "" + loginResponse.getData().getEmail());
+
                 SharedPreferencesUtils.getInstance(this).setValue(Constants.KEY_LOGGED_IN, true);
                 Intent intent =  new Intent(LoginActivity.this , LocationActivity.class);
                 startActivity(intent);

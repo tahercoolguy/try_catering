@@ -50,6 +50,11 @@ public @interface Constants {
     String address = "address";
     String addressID = "addressID";
 
+    String phone = "phone";
+    String email = "email";
+    String name = "name";
+    String surname = "surname";
+
     @interface StatusMessage {
         String TIMEOUT = "timeout";
         String INVALID_USER = "401";

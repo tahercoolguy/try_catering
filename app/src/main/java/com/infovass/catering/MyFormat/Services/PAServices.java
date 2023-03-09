@@ -5,12 +5,15 @@ package com.infovass.catering.MyFormat.Services;
 
 
 import com.infovass.catering.DM.PrivacyPolicyRoot;
+import com.infovass.catering.DM.ProfileDM.ProfileData;
+import com.infovass.catering.DM.ProfileDM.ProfileRoot;
 import com.infovass.catering.MyFormat.MyDM.Root;
 import com.infovass.catering.activities.home.model.RestourentModeResponse;
 
 ;import retrofit.Callback;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Header;
 import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.Path;
@@ -32,6 +35,10 @@ public interface PAServices {
     @Headers("Cache-Control: no-cache;Content-Type: application/json;")
     @GET("/privacy-policy")
     void PrivacyPolicyAPI(Callback<PrivacyPolicyRoot> privacyPolicyRootCallback);
+
+    @Headers("Cache-Control: no-cache;Content-Type: application/json;")
+    @GET("/profile")
+    void ProfileAPI(@Header("Authorization") String token, Callback<ProfileRoot> profileRootCallback);
 
 //    @Headers("Cache-Control: no-cache;Content-Type: application/json;")
 //    @POST("caterer-details/{id}")
