@@ -10,32 +10,51 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
+import com.infovass.catering.DM.GuestNotificationRoot;
+import com.infovass.catering.DM.ProfileDM.ProfileRoot;
+import com.infovass.catering.MyFormat.Controller.AppController;
+import com.infovass.catering.MyFormat.Utils.ConnectionDetector;
 import com.infovass.catering.R;
 import com.infovass.catering.activities.fav.FavFragment;
 import com.infovass.catering.activities.home.view.RestourentFragment;
 import com.infovass.catering.activities.home.view.SearchFragment;
+import com.infovass.catering.activities.network.Constants;
+import com.infovass.catering.activities.network.SharedPreferencesUtils;
 import com.infovass.catering.activities.order.OrderListActivity;
 import com.infovass.catering.activities.profile.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomnavigation.LabelVisibilityMode;
 import com.google.android.material.navigation.NavigationView;
+import com.infovass.catering.activities.profile.presenter.ProfileImpl;
+import com.infovass.catering.activities.profile.view.MyAccountDetailActivity;
+import com.infovass.catering.activities.utill.ProgressHUD;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.MultipartTypedOutput;
+import retrofit.mime.TypedString;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
 
     androidx.appcompat.widget.Toolbar toolbar;
     @BindView(R.id.bottom_navigation)
     BottomNavigationView bottomNavigationView;
+    private AppController appController;
+    private Dialog progress;
+    private ConnectionDetector connectionDetector;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -58,6 +77,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomNavigationView.setOnNavigationItemSelectedListener(MainActivity.this);
 
         callRestourentFragment("RestourentFragment");
+
+
+        appController = (AppController) this.getApplicationContext();
+        connectionDetector = new ConnectionDetector(getApplicationContext());
+
+        notificationGuestAPI();
+
     }
 
     @OnClick({R.id.myOrderLayout, R.id.lnr_changLanguage})
@@ -192,6 +218,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         super.onActivityResult(requestCode, resultCode, data);
 
+    }
+
+
+    public void notificationGuestAPI() {
+        if (connectionDetector.isConnectingToInternet()) {
+            MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
+            String token = SharedPreferencesUtils.getInstance(MainActivity.this).getValue(Constants.TOKEN, "" );
+
+            multipartTypedOutput.addPart("device_token", new TypedString(token));
+            multipartTypedOutput.addPart("device_type", new TypedString("android"));
+
+            appController.paServices.GuestNotification(multipartTypedOutput, new Callback<GuestNotificationRoot>() {
+                @Override
+                public void success(GuestNotificationRoot guestNotificationRoot, Response response) {
+
+                    if (guestNotificationRoot.isStatus()) {
+                        try {
+
+
+                        } catch (Exception j) {
+                            j.printStackTrace();
+                        }
+                    }
+
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                    error.printStackTrace();
+                }
+            });
+
+        } else {
+            Toast.makeText(MainActivity.this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+
+        }
     }
 
     @Override
