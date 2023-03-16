@@ -388,5 +388,7 @@
     <string name="payment_status"> حالة الدفع </string>
     <string name="my_account_details"> تفاصيل حسابي </string>
 
-
+    <string name="update_available">التحديث متاح</string>
+    <string name="update">تحديث</string>
+    <string name="cancellll">يلغي</string>
 </resources>

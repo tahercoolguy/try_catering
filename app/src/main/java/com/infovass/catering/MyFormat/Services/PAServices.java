@@ -4,6 +4,8 @@ package com.infovass.catering.MyFormat.Services;
 //import io.opencensus.stats.Stats;
 
 
+import com.infovass.catering.DM.AppVersionRootDM;
+import com.infovass.catering.DM.FavoriteCatererListDM.FavoriteCatererRoot;
 import com.infovass.catering.DM.GuestNotificationRoot;
 import com.infovass.catering.DM.PrivacyPolicyRoot;
 import com.infovass.catering.DM.ProfileDM.ProfileData;
@@ -42,10 +44,20 @@ public interface PAServices {
     @GET("/profile")
     void ProfileAPI(@Header("Authorization") String token, Callback<ProfileRoot> profileRootCallback);
 
-
     @Headers("Cache-Control: no-cache;Content-Type: application/json;")
     @POST("/save-guest-device")
     void GuestNotification(@Body MultipartTypedOutput multipartTypedOutput, Callback<GuestNotificationRoot> guestNotificationRootCallback);
+
+    @Headers("Cache-Control: no-cache;Content-Type: application/json;")
+    @GET("/app-version")
+    void App_Version(Callback<AppVersionRootDM> appVersionRootDMCallback);
+
+
+    @Headers("Cache-Control: no-cache;Content-Type: application/json;")
+    @POST("/favourite-caterer-list")
+    void Favourite_Caterer_List(@Header("Authorization") String token, Callback<FavoriteCatererRoot> favoriteCatererRootCallback);
+
+
 
 //    @Headers("Cache-Control: no-cache;Content-Type: application/json;")
 //    @POST("caterer-details/{id}")
@@ -53,4 +65,4 @@ public interface PAServices {
 //            @Path("id") String id,
 //            @Body TypedInput body
 //    );
- }
+}

@@ -10,8 +10,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -19,6 +23,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationBarView;
+import com.infovass.catering.BuildConfig;
+import com.infovass.catering.DM.AppVersionRootDM;
 import com.infovass.catering.DM.GuestNotificationRoot;
 import com.infovass.catering.DM.ProfileDM.ProfileRoot;
 import com.infovass.catering.MyFormat.Controller.AppController;
@@ -37,6 +43,9 @@ import com.google.android.material.navigation.NavigationView;
 import com.infovass.catering.activities.profile.presenter.ProfileImpl;
 import com.infovass.catering.activities.profile.view.MyAccountDetailActivity;
 import com.infovass.catering.activities.utill.ProgressHUD;
+
+
+import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

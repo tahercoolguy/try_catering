@@ -4,10 +4,15 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -16,6 +21,10 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.infovass.catering.BuildConfig;
+import com.infovass.catering.DM.AppVersionRootDM;
+import com.infovass.catering.DM.GuestNotificationRoot;
+import com.infovass.catering.MyFormat.Controller.AppController;
+import com.infovass.catering.MyFormat.Utils.ConnectionDetector;
 import com.infovass.catering.R;
 import com.infovass.catering.activities.Location.model.AreaList;
 import com.infovass.catering.activities.Location.model.CityList;
@@ -30,6 +39,7 @@ import com.infovass.catering.activities.network.SharedPreferencesUtils;
 import com.infovass.catering.activities.utill.AppSettings;
 import com.infovass.catering.activities.utill.ProgressHUD;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +48,11 @@ import java.util.Locale;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.MultipartTypedOutput;
+import retrofit.mime.TypedString;
 
 public class LocationActivity extends BaseActivity implements LocationViews {
 
@@ -59,6 +74,9 @@ public class LocationActivity extends BaseActivity implements LocationViews {
     HashMap<String, List<String>> listDataChild;
 
     String newlocation;
+    private AppController appController;
+    private Dialog progress;
+    private ConnectionDetector connectionDetector;
 
     public void LocationActivity() {
     }
@@ -73,6 +91,8 @@ public class LocationActivity extends BaseActivity implements LocationViews {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location);
         ButterKnife.bind(this);
+        appController = (AppController) this.getApplicationContext();
+        connectionDetector = new ConnectionDetector(getApplicationContext());
         progressHUD = ProgressHUD.create(this, getString(R.string.loading), false, null, null);
         locationPresenter = new LocationImpl(this);
         locationPresenter.getCityListApi();
@@ -98,6 +118,8 @@ public class LocationActivity extends BaseActivity implements LocationViews {
             }
         });
         UpdateLocation();
+        appVersionAPI();
+        notificationGuestAPI();
     }
 
     public void UpdateLocation() {
@@ -384,6 +406,158 @@ public class LocationActivity extends BaseActivity implements LocationViews {
 
     }
 
+
+
+    String sCurrentVersion,sLatestVersion;
+
+    public void appVersionAPI() {
+        if (connectionDetector.isConnectingToInternet()) {
+
+            appController.paServices.App_Version(new Callback<AppVersionRootDM>() {
+                @Override
+                public void success(AppVersionRootDM appVersionRootDM, Response response) {
+
+                    if (appVersionRootDM.isStatus()) {
+                        try {
+
+                            sLatestVersion=appVersionRootDM.getResult().get(0).getVersion();
+
+                            if(sLatestVersion!=null){
+                                 {
+                                     sCurrentVersion=String.valueOf(BuildConfig.VERSION_CODE);
+                                    // Version convert to float
+                                    int cVersion= Integer.parseInt(sCurrentVersion);
+                                    int lVersion= Integer.parseInt(sLatestVersion);
+
+                                    // Check condition(latest version is
+                                    // greater than the current version)
+                                    if(lVersion > cVersion)
+                                    {
+                                        // Create update AlertDialog
+                                        updateAlertDialog();
+                                    }
+                                }
+                            }
+
+                        } catch (Exception j) {
+                            j.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                    error.printStackTrace();
+                }
+            });
+
+        } else {
+            Toast.makeText(LocationActivity.this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+
+
+//    private class GetLatestVersion extends AsyncTask<String,Void,String> {
+//
+//        @Override
+//        protected String doInBackground(String... strings) {
+//            sLatestVersion= Jsoup
+//                    .connect("https://play.google.com/store/apps/details?id=com.infovass.catering"
+////                        .connect("https://play.google.com//store/apps/details?id="
+////                                +getPackageName())
+//                    ).timeout(30000).toString();
+//
+//            return sLatestVersion;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(String s) {
+//            // Get current version
+//            sCurrentVersion= String.valueOf(BuildConfig.VERSION_CODE);
+//            // Set current version on Text view
+////            tvCurrentVersion.setText(sCurrentVersion);
+//            // Set latest version on TextView
+////            tvLatestVersion.setText(sLatestVersion);
+//
+//
+//        }
+//    }
+
+    private void updateAlertDialog() {
+        // Initialize AlertDialog
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        // Set title
+        builder.setTitle(getResources().getString(R.string.app_name));
+        // set message
+        builder.setMessage(getString(R.string.update_available));
+        // Set non cancelable
+        builder.setCancelable(false);
+
+        // On update
+        builder.setPositiveButton(getString(R.string.update), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                // Open play store
+                startActivity(new Intent(Intent .ACTION_VIEW,
+                        Uri.parse("https://play.google.com/store/apps/details?id=com.infovass.catering")));
+//                        Uri.parse("market://details?id"+getPackageName())));
+                // Dismiss alert dialog
+                dialogInterface.dismiss();
+            }
+        });
+
+//        // on cancel
+//        builder.setNegativeButton(getString(R.string.cancellll), new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialogInterface, int i) {
+//                // cancel alert dialog
+//                dialogInterface.cancel();
+//            }
+//        });
+
+        // show alert dialog
+        builder.show();
+    }
+
+    public void notificationGuestAPI() {
+        if (connectionDetector.isConnectingToInternet()) {
+            MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
+            String token = SharedPreferencesUtils.getInstance(LocationActivity.this).getValue(Constants.TOKEN, "" );
+
+            multipartTypedOutput.addPart("device_token", new TypedString(token));
+            multipartTypedOutput.addPart("device_type", new TypedString("android"));
+
+            appController.paServices.GuestNotification(multipartTypedOutput, new Callback<GuestNotificationRoot>() {
+                @Override
+                public void success(GuestNotificationRoot guestNotificationRoot, Response response) {
+
+                    if (guestNotificationRoot.isStatus()) {
+                        try {
+
+
+                        } catch (Exception j) {
+                            j.printStackTrace();
+                        }
+                    }
+
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                    error.printStackTrace();
+                }
+            });
+
+        } else {
+            Toast.makeText(LocationActivity.this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+
+        }
+    }
     @Override
     public void onBackPressed() {
         overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
