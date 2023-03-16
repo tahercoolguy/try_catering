@@ -420,7 +420,7 @@ public class LocationActivity extends BaseActivity implements LocationViews {
                     if (appVersionRootDM.isStatus()) {
                         try {
 
-                            sLatestVersion=appVersionRootDM.getResult().get(0).getVersion();
+                            sLatestVersion=appVersionRootDM.getResult().get(0).getAndroid_version();
 
                             if(sLatestVersion!=null){
                                  {
