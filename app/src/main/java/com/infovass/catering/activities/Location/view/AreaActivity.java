@@ -181,7 +181,7 @@ public class AreaActivity extends BaseActivity implements LocationViews {
     @Override
     public void showLoading() {
         try {
-            progressHUD.show();
+             //progressHUD.show();
         } catch (Exception f) {
         }
     }

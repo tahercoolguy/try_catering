@@ -273,7 +273,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
     @Override
     public void showLoading() {
         try {
-            progressHUD.show();
+//            progressHUD.show();
         } catch (Exception f) {
         }
     }
@@ -281,7 +281,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
     @Override
     public void hideLoading() {
         try {
-            progressHUD.dismiss();
+//            progressHUD.dismiss();
         } catch (Exception f) {
         }
     }

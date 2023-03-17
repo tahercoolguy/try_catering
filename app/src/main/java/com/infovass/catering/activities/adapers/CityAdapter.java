@@ -49,17 +49,7 @@ public class CityAdapter extends RecyclerView.Adapter<CityAdapter.Viewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull CityAdapter.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
-        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                // on the below line we are finishing
-                // our current activity.
-                holder.itemView.startAnimation(animation);
-
-            }
-        }, 100);
+        
 
         if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar"))
         {

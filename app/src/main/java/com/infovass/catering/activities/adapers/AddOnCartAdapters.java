@@ -46,17 +46,7 @@ public class AddOnCartAdapters extends RecyclerView.Adapter<AddOnCartAdapters.Vi
 
     @Override
     public void onBindViewHolder(@NonNull AddOnCartAdapters.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
-        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                // on the below line we are finishing
-                // our current activity.
-                holder.itemView.startAnimation(animation);
-
-            }
-        }, 100);
+        
         try
         {
             holder.mealNameTextView.setText(addonItems.get(position).getItem().getTitle());

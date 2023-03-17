@@ -49,17 +49,7 @@ public class AddOnFoodItemsAdapters extends RecyclerView.Adapter<AddOnFoodItemsA
 
     @Override
     public void onBindViewHolder(@NonNull AddOnFoodItemsAdapters.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
-        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                // on the below line we are finishing
-                // our current activity.
-                holder.itemView.startAnimation(animation);
-
-            }
-        }, 100);
+        
         try
         {
             if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {

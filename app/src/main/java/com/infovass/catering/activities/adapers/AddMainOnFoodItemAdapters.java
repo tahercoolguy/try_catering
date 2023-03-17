@@ -55,17 +55,7 @@ public class AddMainOnFoodItemAdapters extends RecyclerView.Adapter<AddMainOnFoo
 
     @Override
     public void onBindViewHolder(@NonNull AddMainOnFoodItemAdapters.CustomViewHolder holder, int position) {
-        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                // on the below line we are finishing
-                // our current activity.
-                holder.itemView.startAnimation(animation);
-
-            }
-        }, 100);
+        
 
         ProductDetailResponse.Item item = datalist_filter.get(position);
         if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar"))

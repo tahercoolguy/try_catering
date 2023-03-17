@@ -56,17 +56,7 @@ public class AdapterCartItemList extends RecyclerView.Adapter<AdapterCartItemLis
 
     @Override
     public void onBindViewHolder(@NonNull AdapterCartItemList.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
-        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                // on the below line we are finishing
-                // our current activity.
-                holder.itemView.startAnimation(animation);
-
-            }
-        }, 100);
+        
 
         try {
             if(items.get(position).getAddonIteam().size()==0)

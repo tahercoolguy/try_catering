@@ -51,17 +51,7 @@ public class FavAdapter extends RecyclerView.Adapter<FavAdapter.Viewholder> {
 
     @Override
     public void onBindViewHolder(@NonNull FavAdapter.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
-        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                // on the below line we are finishing
-                // our current activity.
-                holder.itemView.startAnimation(animation);
-
-            }
-        }, 100);
+        
         try {
             Picasso.get().load(""+list.get(position).getCaterer().getCoverImagePath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.image_product);
         }

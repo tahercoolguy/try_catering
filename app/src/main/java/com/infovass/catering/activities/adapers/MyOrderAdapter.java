@@ -51,17 +51,7 @@ public class MyOrderAdapter extends RecyclerView.Adapter<MyOrderAdapter.Viewhold
 
     @Override
     public void onBindViewHolder(@NonNull MyOrderAdapter.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
-        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                // on the below line we are finishing
-                // our current activity.
-                holder.itemView.startAnimation(animation);
-
-            }
-        }, 100);
+        
 
         holder.titleTxt.setText(list.get(position).getTittle());
         holder.imgRIV.setImageResource(list.get(position).getImg());

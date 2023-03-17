@@ -47,17 +47,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Viewholder> 
 
     @Override
     public void onBindViewHolder(@NonNull OrderAdapter.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
-        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                // on the below line we are finishing
-                // our current activity.
-                holder.itemView.startAnimation(animation);
-
-            }
-        }, 100);
+        
 
         holder.orderNameTextView.setText("Order NO : "+list.get(position).getInvoiceId());
         holder.dateTextView.setText(""+list.get(position).getCreatedAt());

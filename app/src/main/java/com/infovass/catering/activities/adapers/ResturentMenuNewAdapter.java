@@ -54,17 +54,7 @@ class ResturentMenuNewAdapter extends RecyclerView.Adapter<ResturentMenuNewAdapt
 
     @Override
     public void onBindViewHolder(@NonNull ResturentMenuNewAdapter.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
-        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                // on the below line we are finishing
-                // our current activity.
-                holder.itemView.startAnimation(animation);
-
-            }
-        }, 100);
+        
 
         try {
             if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {

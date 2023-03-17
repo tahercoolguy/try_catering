@@ -47,17 +47,7 @@ public class AreaListAdapter extends RecyclerView.Adapter<AreaListAdapter.Viewho
 
     @Override
     public void onBindViewHolder(@NonNull AreaListAdapter.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
-        Animation animation = AnimationUtils.loadAnimation(context, android.R.anim.slide_in_left);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                // on the below line we are finishing
-                // our current activity.
-                holder.itemView.startAnimation(animation);
-
-            }
-        }, 100);
+        
 
         if (lastValue.length() > 0) {
             if (lastValue.equalsIgnoreCase(String.valueOf(list.get(position).getName()))) {
