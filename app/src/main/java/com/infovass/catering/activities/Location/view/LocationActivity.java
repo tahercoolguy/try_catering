@@ -1,5 +1,6 @@
 package com.infovass.catering.activities.Location.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,6 +21,9 @@ import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.infovass.catering.BuildConfig;
 import com.infovass.catering.DM.AppVersionRootDM;
 import com.infovass.catering.DM.GuestNotificationRoot;
@@ -119,7 +123,7 @@ public class LocationActivity extends BaseActivity implements LocationViews {
         });
         UpdateLocation();
         appVersionAPI();
-        notificationGuestAPI();
+        fireBaseNotification();
     }
 
     public void UpdateLocation() {
@@ -522,10 +526,31 @@ public class LocationActivity extends BaseActivity implements LocationViews {
         builder.show();
     }
 
-    public void notificationGuestAPI() {
+    public void fireBaseNotification(){
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+//                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        notificationGuestAPI(token);
+                        // Log and toast
+                        String msg =  token;
+//                        Log.d(TAG, msg);
+//                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void notificationGuestAPI(String token ) {
         if (connectionDetector.isConnectingToInternet()) {
             MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
-            String token = SharedPreferencesUtils.getInstance(LocationActivity.this).getValue(Constants.TOKEN, "" );
+//            String token = SharedPreferencesUtils.getInstance(LocationActivity.this).getValue(Constants.TOKEN, "" );
 
             multipartTypedOutput.addPart("device_token", new TypedString(token));
             multipartTypedOutput.addPart("device_type", new TypedString("android"));

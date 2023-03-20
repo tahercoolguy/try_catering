@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1084319931835",
-    "project_id": "trycatering-android-af481",
-    "storage_bucket": "trycatering-android-af481.appspot.com"
+    "project_number": "1057683156288",
+    "project_id": "try-catering",
+    "storage_bucket": "try-catering.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1084319931835:android:b9d1d36b156b8e4a5a789e",
+        "mobilesdk_app_id": "1:1057683156288:android:d7ee0d30073eb65f08dea5",
         "android_client_info": {
           "package_name": "com.infovass.catering"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1084319931835-j104kv35c9do4ed958a68k8akq8qbl2e.apps.googleusercontent.com",
+          "client_id": "1057683156288-uu5ls3h390epuohejir7f2og389deg1l.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAExwu77nMN5yTSWQTG5vuFXfjwPM77VJM"
+          "current_key": "AIzaSyA9dxNzXO1d5E4hu_QCRU5ahnhXmd5J9wQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1084319931835-j104kv35c9do4ed958a68k8akq8qbl2e.apps.googleusercontent.com",
+              "client_id": "1057683156288-uu5ls3h390epuohejir7f2og389deg1l.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -22,7 +22,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.infovass.catering.BuildConfig;
 import com.infovass.catering.DM.AppVersionRootDM;
 import com.infovass.catering.DM.GuestNotificationRoot;
@@ -91,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         appController = (AppController) this.getApplicationContext();
         connectionDetector = new ConnectionDetector(getApplicationContext());
 
-        notificationGuestAPI();
+        fireBaseNotification();
 
     }
 
@@ -229,11 +232,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
+    public void fireBaseNotification(){
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+//                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
 
-    public void notificationGuestAPI() {
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        notificationGuestAPI(token);
+                        // Log and toast
+                        String msg =  token;
+//                        Log.d(TAG, msg);
+//                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+    public void notificationGuestAPI(String token) {
         if (connectionDetector.isConnectingToInternet()) {
             MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
-            String token = SharedPreferencesUtils.getInstance(MainActivity.this).getValue(Constants.TOKEN, "" );
+//            String token = SharedPreferencesUtils.getInstance(MainActivity.this).getValue(Constants.TOKEN, "" );
 
             multipartTypedOutput.addPart("device_token", new TypedString(token));
             multipartTypedOutput.addPart("device_type", new TypedString("android"));
