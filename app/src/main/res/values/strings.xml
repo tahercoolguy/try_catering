@@ -386,4 +386,23 @@
     <string name="update_available">Update Available</string>
     <string name="update">Update</string>
     <string name="cancellll">Cancel</string>
+    <string name="apartment">Apartment</string>
+    <string name="house">House</string>
+    <string name="office">Office</string>
+    <string name="area">Area</string>
+    <string name="governate">Governate</string>
+    <string name="enter_block">Enter block</string>
+    <string name="enter_street">Enter street</string>
+    <string name="enter_avenue">Enter avenue</string>
+    <string name="enter_floor">Enter floor</string>
+    <string name="floor">Floor</string>
+    <string name="building">Building</string>
+    <string name="enter_house">Enter house</string>
+     <string name="enter_office">Enter office</string>
+    <string name="select_area">Select Area</string>
+    <string name="avenue">Avenue (Optional)</string>
+    <string name="enter_building">Enter building</string>
+
+
+
 </resources>

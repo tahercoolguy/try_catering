@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name"> كيترنق</string>
-<!--    <string name="app_name">تقديم الطعام</string>-->
+    <!--    <string name="app_name">تقديم الطعام</string>-->
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -306,7 +306,7 @@
     <string name="working">جاري التحضير</string>
     <string name="delivering">تم التحضير وجاري توصيله</string>
     <string name="finished"> تم التوصيل واغلاق الاودر</string>
-    <string name="payment_success" >تمت عملية الدفع بنجاح</string>
+    <string name="payment_success">تمت عملية الدفع بنجاح</string>
     <string name="this_restaurnats">المطاعم التالية</string>
     <string name="not_avilable_for_catering">عمليات الكاترينج لليوم المحدد لهذه المطاعم قد اسنفذت رجاء اختيار يوم اخر </string>
     <string name="welcomeee" translatable="false">أهلا بك!</string>
@@ -348,7 +348,7 @@
     <string name="delivery_service">خدمة التوصيل</string>
     <string name="other_service">خدمة أخرى</string>
 
-<!--    NO Internet-->
+    <!--    NO Internet-->
     <string name="no_network_title">خطأ في الإنترنت!</string>
     <string name="network_content">يرجى التحقق من اتصال الشبكة وحاول مرة أخرى</string>
     <string name="no_internet">لا انترنت.</string>
@@ -391,4 +391,20 @@
     <string name="update_available">التحديث متاح</string>
     <string name="update">تحديث</string>
     <string name="cancellll">يلغي</string>
+    <string name="area">Area</string>
+    <string name="governate">Governate</string>
+    <string name="enter_block">Enter block</string>
+    <string name="enter_street">Enter street</string>
+    <string name="enter_avenue">Enter avenue</string>
+    <string name="enter_floor">Enter floor</string>
+    <string name="house">House</string>
+    <string name="office">Office</string>
+
+    <string name="floor">أرضية</string>
+    <string name="building">مبنى</string>
+    <string name="enter_house">أدخل المنزل</string>
+    <string name="enter_office">أدخل المكتب</string>
+    <string name="select_area">حدد المنطقة</string>
+    <string name="avenue">الجادة (اختياري)</string>
+    <string name="enter_building">أدخل المبنى</string>
 </resources>
