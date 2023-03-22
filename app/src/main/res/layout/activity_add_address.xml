@@ -1,24 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
     android:orientation="vertical"
-    tools:context=".activities.profile.view.AddAddressActivity">
+    android:background="@color/background_color"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
+    <RelativeLayout
+        android:id="@+id/lnr_top"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/top_background"
+        android:orientation="vertical">
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="top"
+            android:layout_centerInParent="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:background="@drawable/ic_back" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Add Address"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/_16sdp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:background="@drawable/skip_back"
+            android:paddingLeft="@dimen/_8sdp"
+            android:paddingRight="@dimen/_8sdp"
+            android:text="@string/skip"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/_11sdp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/lnr_bottom"
-
-        android:background="@color/background_color">
+        android:layout_below="@+id/lnr_top">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <TextView
@@ -30,8 +71,7 @@
                 android:fontFamily="@font/en"
                 android:text="@string/Add_address"
                 android:textColor="@color/black"
-                android:textSize="32sp"
-                android:visibility="gone" />
+                android:textSize="32sp" />
 
 
             <TextView
@@ -43,8 +83,7 @@
                 android:fontFamily="@font/en"
                 android:text="@string/Pin_location"
                 android:textColor="@color/black"
-                android:textSize="20sp"
-                android:visibility="gone" />
+                android:textSize="20sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -55,516 +94,29 @@
                 android:fontFamily="@font/en"
                 android:text="@string/Select_location"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:visibility="gone" />
+                android:textSize="14sp" />
 
             <!--            <fragment-->
             <!--                android:id="@+id/map_fragment"-->
             <!--                android:name="com.google.android.gms.maps.MapFragment"-->
             <!--                android:layout_width="match_parent"-->
             <!--                android:layout_height="@dimen/_250sdp" />-->
-            <!--            <fragment-->
-            <!--                android:id="@+id/map_fragment"-->
-            <!--                android:name="com.google.android.gms.maps.SupportMapFragment"-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="@dimen/_250sdp" />-->
-
-            <RelativeLayout
+            <fragment
+                android:id="@+id/map_fragment"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <fragment
-                    android:id="@+id/map_fragment"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_300sdp"></fragment>
-
-                <RelativeLayout
-                    android:id="@+id/lnr_top"
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    android:background="@drawable/top_background"
-                    android:orientation="vertical">
-
-                    <ImageButton
-                        android:id="@+id/backButton"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_alignParentLeft="true"
-                        android:layout_centerInParent="true"
-                        android:layout_gravity="top"
-                        android:layout_marginLeft="@dimen/_15sdp"
-                        android:background="@drawable/ic_back" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:text="Add Address"
-                        android:textColor="@android:color/white"
-                        android:textSize="@dimen/_16sdp"
-                        android:textStyle="bold" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_skip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerInParent="true"
-                        android:layout_marginRight="@dimen/_10sdp"
-                        android:background="@drawable/skip_back"
-                        android:paddingLeft="@dimen/_8sdp"
-                        android:paddingRight="@dimen/_8sdp"
-                        android:text="@string/skip"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="@dimen/_11sdp"
-                        android:textStyle="bold"
-                        android:visibility="gone" />
-                </RelativeLayout>
-
-
-            </RelativeLayout>
-
+                android:layout_height="@dimen/_250sdp" />
 
             <TextView
-                android:id="@+id/currentAddressTxt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="18dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="18dp"
                 android:fontFamily="@font/en"
-                android:lines="2"
-                android:text=""
-                android:textColor="@color/black" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                 android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/apartmentTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/location_page_bg"
-                    android:gravity="center"
-
-
-                    android:singleLine="true"
-                    android:text="@string/apartment"
-                    android:textColor="@color/white"></TextView>
-
-                <TextView
-                    android:id="@+id/houseTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/location_page_unselect"
-                    android:gravity="center"
-
-
-
-                    android:singleLine="true"
-                    android:text="@string/house"
-                    android:textColor="@color/black"></TextView>
-
-                <TextView
-                    android:id="@+id/officeTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="45dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/location_page_unselect"
-                    android:gravity="center"
-
-
-                    android:singleLine="true"
-                    android:text="@string/office"
-                    android:textColor="@color/black"></TextView>
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                 android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/governate"
-
-                    android:textColor="@color/black"></TextView>
-
-                <RelativeLayout
-                    android:id="@+id/city_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/location_page_unselect"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_city"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="10dp"
-                        android:singleLine="true"
-                        android:text="Select City" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:gravity="center">
-
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="10dp"
-                            android:src="@drawable/arrow_bt" />
-                    </LinearLayout>
-
-
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:text="@string/area"
-
-                    android:textColor="@color/black"></TextView>
-
-                <RelativeLayout
-                    android:id="@+id/region_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/location_page_unselect"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_area"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="10dp"
-                        android:singleLine="true"
-                        android:text="@string/select_area" />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="center"
-                        android:gravity="center">
-
-
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:layout_centerVertical="true"
-                            android:layout_gravity="center"
-                            android:layout_marginRight="10dp"
-                            android:src="@drawable/arrow_bt" />
-                    </LinearLayout>
-
-
-                </RelativeLayout>
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/block"
-
-
-                    android:textColor="@color/black"></TextView>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/location_page_unselect"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/blockET"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="10dp"
-                        android:background="@color/white"
-                        android:hint="@string/enter_block"
-                        android:singleLine="true"
-                        android:textSize="14sp" />
-
-
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/street"
-
-
-                    android:textColor="@color/black"></TextView>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/location_page_unselect"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/streetET"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="10dp"
-                        android:background="@color/white"
-                        android:hint="@string/enter_street"
-                        android:singleLine="true"
-                        android:textSize="14sp" />
-
-
-                </RelativeLayout>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/avenue"
-
-
-                    android:textColor="@color/black"></TextView>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="5dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/location_page_unselect"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/avenueEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="10dp"
-                        android:background="@color/white"
-                        android:hint="@string/enter_avenue"
-                        android:singleLine="true"
-                        android:textSize="14sp" />
-
-
-                </RelativeLayout>
-
-                <LinearLayout
-                    android:id="@+id/buildingLL"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/building"
-
-
-                        android:textColor="@color/black"></TextView>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="?actionBarSize"
-                        android:layout_gravity="start"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/location_page_unselect"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:visibility="visible">
-
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/buildingEditText"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="@color/white"
-                            android:hint="@string/enter_building"
-                            android:singleLine="true"
-                            android:textSize="14sp" />
-
-
-                    </RelativeLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:id="@+id/houseLL"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/house"
-
-
-                        android:textColor="@color/black"></TextView>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="?actionBarSize"
-                        android:layout_gravity="start"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/location_page_unselect"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:visibility="visible">
-
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/houseET"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="@color/white"
-                            android:hint="@string/enter_house"
-                            android:singleLine="true"
-                            android:textSize="14sp" />
-
-
-                    </RelativeLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/officeLL"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/office"
-
-
-                        android:textColor="@color/black"></TextView>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="?actionBarSize"
-                        android:layout_gravity="start"
-                        android:layout_marginTop="5dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/location_page_unselect"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:visibility="visible">
-
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/officeET"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginHorizontal="10dp"
-                            android:background="@color/white"
-                            android:hint="@string/enter_office"
-                            android:singleLine="true"
-                            android:textSize="14sp" />
-
-
-                    </RelativeLayout>
-                </LinearLayout>
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/floor"
-
-
-                    android:textColor="@color/black"></TextView>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginBottom="30dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/location_page_unselect"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:visibility="visible">
-
-                    <androidx.appcompat.widget.AppCompatEditText
-                        android:id="@+id/floor_numEditText"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginHorizontal="10dp"
-                        android:background="@color/white"
-                        android:hint="@string/enter_floor"
-                        android:singleLine="true"
-                        android:textSize="14sp" />
-
-
-                </RelativeLayout>
-
-            </LinearLayout>
+                android:text="@string/Address_details"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
 
             <LinearLayout
@@ -572,12 +124,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                android:visibility="gone">
+                android:orientation="horizontal">
 
                 <RelativeLayout
+                    android:id="@+id/city_layout"
                     android:layout_width="0dp"
-                    android:layout_height="?actionBarSize"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -588,6 +140,7 @@
                     android:visibility="visible">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_city"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -618,8 +171,9 @@
 
 
                 <RelativeLayout
+                    android:id="@+id/region_layout"
                     android:layout_width="0dp"
-                    android:layout_height="?actionBarSize"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -630,6 +184,7 @@
                     android:visibility="visible">
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_area"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -665,12 +220,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:visibility="gone">
+                android:orientation="horizontal">
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="?actionBarSize"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -681,6 +235,7 @@
                     android:visibility="visible">
 
                     <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/pieceEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
@@ -694,7 +249,7 @@
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="?actionBarSize"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -705,6 +260,7 @@
                     android:visibility="visible">
 
                     <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/avenueEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
@@ -719,18 +275,18 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
-
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
                 android:layout_marginRight="10dp"
                 android:background="@drawable/button_shap_spinner"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/roadEditText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
@@ -746,12 +302,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:orientation="horizontal"
-                android:visibility="gone">
+                android:orientation="horizontal">
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="?actionBarSize"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -762,6 +317,7 @@
                     android:visibility="visible">
 
                     <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/buildingEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
@@ -774,7 +330,7 @@
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="?actionBarSize"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -785,6 +341,7 @@
                     android:visibility="visible">
 
                     <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/floor_numEditText"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@android:color/transparent"
@@ -798,7 +355,7 @@
 
                 <RelativeLayout
                     android:layout_width="0dp"
-                    android:layout_height="?actionBarSize"
+                    android:layout_height="40dp"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
@@ -825,7 +382,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="?actionBarSize"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
@@ -833,7 +390,7 @@
                 android:background="@drawable/button_shap_spinner"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/other_notesEditText"
@@ -852,7 +409,6 @@
         </LinearLayout>
 
     </ScrollView>
-
     <LinearLayout
         android:id="@+id/lnr_bottom"
         android:layout_width="match_parent"
@@ -877,7 +433,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/en"
-                android:text="@string/SAVE_ADDRESS"
+                android:text="@string/next"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp" />
