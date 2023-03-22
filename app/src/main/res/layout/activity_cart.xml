@@ -107,6 +107,7 @@
                 android:id="@+id/ch_femailServices"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:checked="true"
                 android:clickable="false"
                 android:fontFamily="@font/en"

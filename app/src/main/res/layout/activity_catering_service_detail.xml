@@ -52,29 +52,57 @@
                         android:scaleType="centerCrop"
                         app:srcCompat="@drawable/gradient" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                         android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="15dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="right"
-                        android:layout_margin="@dimen/_15sdp"
-                        android:background="@drawable/ic_back_circle">
+                         android:orientation="horizontal">
 
-                        <androidx.appcompat.widget.AppCompatImageButton
-                            android:id="@+id/addToFavButton"
-                            android:layout_width="@dimen/_18sdp"
-                            android:layout_height="@dimen/_18sdp"
-                            android:layout_gravity="center"
-                            android:layout_margin="@dimen/_6sdp"
-                            android:background="@drawable/ic_heart" />
-                    </LinearLayout>
+                        <ImageButton
+                            android:id="@+id/backButton"
+                            android:layout_width="@dimen/_30sdp"
+                            android:layout_centerInParent="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_height="@dimen/_30sdp"
+                             android:background="@drawable/ic_back" />
 
-                    <ImageButton
-                        android:id="@+id/backButton"
-                        android:layout_width="@dimen/_30sdp"
-                        android:layout_height="@dimen/_30sdp"
-                        android:layout_gravity="top"
-                        android:layout_margin="@dimen/_15sdp"
-                        android:background="@drawable/ic_back" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:orientation="horizontal">
+                            <ImageView
+                                android:id="@+id/arrowImageView"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_marginHorizontal="15dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_info" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                 android:background="@drawable/ic_back_circle">
+
+                                <androidx.appcompat.widget.AppCompatImageButton
+                                    android:id="@+id/addToFavButton"
+                                    android:layout_width="@dimen/_18sdp"
+                                    android:layout_height="@dimen/_18sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_6sdp"
+                                    android:background="@drawable/ic_heart" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+
+
+                    </RelativeLayout>
+
                 </FrameLayout>
 
                 <!--                android:background="@color/colorPrimaryTrans"-->
@@ -162,10 +190,11 @@
                             android:textStyle="bold" />
 
                         <ImageView
-                            android:id="@+id/arrowImageView"
+
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_15sdp"
                             android:layout_gravity="center"
+                            android:visibility="gone"
                             android:layout_marginRight="20dp"
                             android:foregroundGravity="center"
                             android:src="@drawable/ic_info" />
@@ -207,9 +236,9 @@
                                 android:id="@+id/tv_setuUpTime"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:singleLine="true"
                                 android:layout_gravity="center_horizontal"
                                 android:fontFamily="@font/en"
+                                android:singleLine="true"
                                 android:textColor="@color/bottom_selected_color"
                                 android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold" />
@@ -247,9 +276,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:singleLine="true"
-                                android:fontFamily="@font/en"
                                 android:ellipsize="marquee"
+                                android:fontFamily="@font/en"
+                                android:singleLine="true"
                                 android:textColor="@color/bottom_selected_color"
                                 android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold" />
@@ -260,11 +289,11 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_20sdp"
                     android:alpha="7"
-                    android:background="@drawable/back_trans" />
+                    android:background="@drawable/back_trans"
+                    android:visibility="gone" />
 
 
             </FrameLayout>
@@ -284,8 +313,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:textStyle="bold"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/mealNameTextView"
@@ -294,10 +323,10 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_marginRight="@dimen/_30sdp"
                     android:layout_weight="1"
-                    android:textStyle="bold"
-                    app:textAllCaps="true"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16sdp" />
+                    android:textSize="@dimen/_16sdp"
+                    android:textStyle="bold"
+                    app:textAllCaps="true" />
 
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -306,14 +335,14 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/en"
-                     android:textColor="#ffa0a0a0"
+                    android:textColor="#ffa0a0a0"
                     android:textSize="@dimen/_12sdp" />
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="gone">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/serveTextView"
@@ -337,11 +366,11 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
@@ -377,8 +406,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/en"
                         android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/en"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
@@ -397,17 +426,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/en"
                         android:layout_marginTop="@dimen/_5sdp"
+                        android:fontFamily="@font/en"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
                     <LinearLayout
-                        android:visibility="gone"
                         android:id="@+id/lnr_serviceRequest"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:visibility="gone">
 
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
@@ -485,10 +514,9 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_Items"
-                    android:layout_marginTop="@dimen/_10sdp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    />
+                    android:layout_marginTop="@dimen/_10sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
@@ -503,45 +531,44 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_foodItems"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_5sdp"
-                    android:visibility="gone"
                     android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
                     android:text="@string/any_special_request"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_15sdp" />
+                    android:textSize="@dimen/_15sdp"
+                    android:visibility="gone" />
 
                 <CheckBox
                     android:id="@+id/ch_femailServices"
-                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/en"
-                    android:text="@string/request_female_service" />
+                    android:text="@string/request_female_service"
+                    android:visibility="gone" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/edt_note"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/tv_background"
-                    android:textColor="@android:color/black"
-                    android:maxLines="10"
-                    android:nestedScrollingEnabled="true"
-                    android:scrollbars="vertical"
                     android:layout_marginTop="30dp"
-                    android:scrollbarStyle="insideInset"
-                    android:textSize="@dimen/_12sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    android:background="@drawable/tv_background"
                     android:fontFamily="@font/en"
                     android:gravity="top|left"
+                    android:lines="10"
+                    android:maxLines="10"
+                    android:nestedScrollingEnabled="true"
                     android:padding="@dimen/_5sdp"
-                    android:layout_marginBottom="@dimen/_15sdp"
-                    android:lines="10"/>
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
 
@@ -590,21 +617,22 @@
                 android:layout_marginRight="15dp"
                 android:fontFamily="@font/en"
                 android:textAllCaps="false"
-                android:textStyle="bold"
                 android:textColor="@color/colorWhite"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </RelativeLayout>
+
         <RelativeLayout
             android:id="@+id/not_availableRL"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginLeft="@dimen/_20sdp"
-            android:backgroundTint="@color/gray_color"
-            android:visibility="gone"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:background="@drawable/button_shap_new">
+            android:background="@drawable/button_shap_new"
+            android:backgroundTint="@color/gray_color"
+            android:visibility="gone">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/not_availableTxt"
@@ -612,8 +640,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
-                android:text="Add To Cart"
                 android:fontFamily="@font/en"
+                android:text="Add To Cart"
                 android:textAllCaps="false"
                 android:textColor="@color/menu_name_color"
                 android:textSize="16sp" />

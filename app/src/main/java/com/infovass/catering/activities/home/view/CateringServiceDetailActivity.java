@@ -99,8 +99,8 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
     RecyclerView rv_foodItems;
     @BindView(R.id.edt_note)
     AppCompatEditText edt_note;
-    @BindView(R.id.ch_femailServices)
-    CheckBox ch_femailServices;
+//    @BindView(R.id.ch_femailServices)
+//    CheckBox ch_femailServices;
     @BindView(R.id.arrowImageView)
     ImageView arrowImageView;
     @BindView(R.id.tv_note)
@@ -329,11 +329,11 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
             case R.id.ch_femailServices:
                 try {
-                    if (ch_femailServices.isChecked()) {
-                        femailService = 1;
-                    } else {
-                        femailService = 0;
-                    }
+//                    if (ch_femailServices.isChecked()) {
+//                        femailService = 1;
+//                    } else {
+//                        femailService = 0;
+//                    }
                 } catch (Exception g) {
                 }
                 break;
@@ -437,9 +437,9 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
                 try {
                     if (productDetailResponse.getData().getCaterer().getFemaleService().equalsIgnoreCase("available")) {
-                        ch_femailServices.setVisibility(View.VISIBLE);
+//                        ch_femailServices.setVisibility(View.VISIBLE);
                     } else {
-                        ch_femailServices.setVisibility(View.GONE);
+//                        ch_femailServices.setVisibility(View.GONE);
                     }
                 } catch (Exception h) {
                 }

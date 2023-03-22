@@ -107,6 +107,7 @@
             <CheckBox
                 android:id="@+id/ch_femailServices"
                 android:layout_width="wrap_content"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:clickable="false"
