@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +34,7 @@ import com.infovass.catering.DM.ProfileDM.ProfileRoot;
 import com.infovass.catering.MyFormat.Controller.AppController;
 import com.infovass.catering.MyFormat.Utils.ConnectionDetector;
 import com.infovass.catering.R;
+import com.infovass.catering.activities.cart.view.CartActivity;
 import com.infovass.catering.activities.fav.FavFragment;
 import com.infovass.catering.activities.home.view.RestourentFragment;
 import com.infovass.catering.activities.home.view.SearchFragment;
@@ -68,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Dialog progress;
     private ConnectionDetector connectionDetector;
 
+    @BindView(R.id.cartImg)
+    ImageView cartImg;
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,22 +103,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    @OnClick({R.id.myOrderLayout, R.id.lnr_changLanguage})
-    public void onViewClicked(View view) {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        switch (view.getId()) {
-            case R.id.myOrderLayout:
-                Intent intent = new Intent(MainActivity.this, OrderListActivity.class);
-                startActivity(intent);
+//    @OnClick({R.id.myOrderLayout, R.id.lnr_changLanguage})
+//    public void onViewClicked(View view) {
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//        switch (view.getId()) {
+//            case R.id.myOrderLayout:
+//                Intent intent = new Intent(MainActivity.this, OrderListActivity.class);
+//                startActivity(intent);
+//
+//                break;
+//
+//            case R.id.lnr_changLanguage:
+//                Intent intentt = new Intent(MainActivity.this, ChangeLanguageActivity.class);
+//                startActivity(intentt);
+//                break;
+//        }
+//    }
 
-                break;
 
-            case R.id.lnr_changLanguage:
-                Intent intentt = new Intent(MainActivity.this, ChangeLanguageActivity.class);
-                startActivity(intentt);
-                break;
-        }
+    @OnClick(R.id.cartImg)
+    public void clickcartImg(){
+        startActivity(new Intent(MainActivity.this, CartActivity.class));
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -198,8 +211,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.profileMenu) {
             callProfileFragment("ProfileFragment");
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
