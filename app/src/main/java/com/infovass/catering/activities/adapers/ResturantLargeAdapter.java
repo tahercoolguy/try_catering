@@ -60,8 +60,7 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
 
         try {
             if (resRDAta.getCoverImages() != null && resRDAta.getCoverImages().size() > 0)
-                Picasso.get().load(resRDAta.getCoverImages().get(0).getCoverImagePath())
-                        .placeholder(R.drawable.logo_rec).into(holder.resturantImageView);
+                Picasso.get().load(resRDAta.getCoverImages().get(0).getCoverImagePath()).into(holder.resturantImageView);
             else
                 Picasso.get().load(resRDAta.getCoverImagePath()).into(holder.resturantImageView);
         } catch (Exception ex) {
