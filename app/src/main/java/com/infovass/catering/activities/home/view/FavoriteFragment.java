@@ -165,16 +165,14 @@ public class FavoriteFragment extends Fragment implements RestourentView {
                         .putExtra("restaurant_Status", restaurant_Status);
                 startActivity(intent);
                 activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+
             }
         });
-        closeKeyboard();
+
         return view;
     }
 
-    public void closeKeyboard() {
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-    }
 
     @OnClick(R.id.locationLL)
     public void ClickLocationLL() {

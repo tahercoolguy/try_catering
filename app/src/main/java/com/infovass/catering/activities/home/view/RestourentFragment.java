@@ -104,6 +104,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
         ButterKnife.bind(this, view);
         activity = getActivity();
 
+
         tv_city.setSelected(true);
         tv_date.setSelected(true);
         tv_time.setSelected(true);
@@ -168,17 +169,22 @@ public class RestourentFragment extends Fragment implements RestourentView {
                         .putExtra("restaurant_Status", restaurant_Status);
                 startActivity(intent);
                 activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
             }
         });
-        closeKeyboard();
         return view;
     }
 
-    public void closeKeyboard() {
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-    }
-
+//    public void closeKeyboard() {
+//        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+//        inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+//    }
+//    public static void hideKeyboard(Activity activity) {
+//        if (activity != null && activity.getWindow() != null && activity.getWindow().getDecorView() != null) {
+//            InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+//            imm.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), 0);
+//        }
+//    }
     @OnClick(R.id.locationLL)
     public void ClickLocationLL() {
 

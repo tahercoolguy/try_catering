@@ -12,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -20,6 +21,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -100,9 +102,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         connectionDetector = new ConnectionDetector(getApplicationContext());
 
         fireBaseNotification();
+        
 
     }
-
+    public void closeKeyboard() {
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+    }
 //    @OnClick({R.id.myOrderLayout, R.id.lnr_changLanguage})
 //    public void onViewClicked(View view) {
 //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -135,6 +141,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startFragment(restourentFragment);
 //        Common.CONTAINER_FRAGMENT = "RestourentFragment";
 //        toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
+        
+
+        
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -143,6 +152,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startFragment(fragment);
 //        Common.CONTAINER_FRAGMENT = "RestourentFragment";
 //        toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
+        
+
+        
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -151,6 +163,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startFragment(fragment);
 //        Common.CONTAINER_FRAGMENT = "RestourentFragment";
 //        toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
+        
+
+        
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -168,7 +183,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            fragmentTransaction.addToBackStack(fragment.getClass().getName());
 //        }
         fragmentTransaction.commitAllowingStateLoss();
-    }
+     }
 
 //    private void startFragment(Fragment fragment) {
 //        String backStateName = fragment.getClass().getName();
@@ -223,6 +238,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             bottomNavigationView.setSelectedItemId(R.id.homeMenu);
         }
+        
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

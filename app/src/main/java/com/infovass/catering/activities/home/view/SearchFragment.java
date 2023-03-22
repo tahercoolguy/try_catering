@@ -359,7 +359,7 @@ public class SearchFragment extends Fragment implements RestourentView {
     @Override
     public void showLoading() {
         try {
-            progressHUD.show();
+//            progressHUD.show();
         } catch (Exception f) {
         }
     }
@@ -367,7 +367,7 @@ public class SearchFragment extends Fragment implements RestourentView {
     @Override
     public void hideLoading() {
         try {
-            progressHUD.dismiss();
+//            progressHUD.dismiss();
         } catch (Exception f) {
         }
     }
@@ -381,4 +381,5 @@ public class SearchFragment extends Fragment implements RestourentView {
     public void onNoInternet() {
 
     }
+
 }
