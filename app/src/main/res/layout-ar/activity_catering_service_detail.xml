@@ -336,7 +336,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:fontFamily="@font/en"
-                    android:textColor="#ffa0a0a0"
+                    android:textColor="@color/black"
+
                     android:textSize="@dimen/_12sdp" />
 
                 <LinearLayout

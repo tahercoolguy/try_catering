@@ -593,7 +593,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/en"
                 android:maxLines="2"
-                android:textColor="@color/menu_name_color"
+                android:textColor="@color/black"
                 android:textSize="@dimen/_16sdp"
                 android:textStyle="bold" />
 
@@ -603,9 +603,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textColor="@color/black"
+
                 android:fontFamily="@font/en"
-                 android:textColor="#ffa0a0a0"
-                android:textSize="@dimen/_12sdp" />
+                 android:textSize="@dimen/_12sdp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -682,6 +683,7 @@
                 android:textColor="@android:color/black"
                 android:maxLines="10"
                 android:nestedScrollingEnabled="true"
+                android:layout_marginTop="20dp"
                 android:scrollbars="vertical"
                 android:scrollbarStyle="insideInset"
                 android:textSize="@dimen/_12sdp"

@@ -609,7 +609,8 @@
                 android:layout_gravity="center"
                 android:fontFamily="@font/en"
                  android:gravity="right"
-                android:textColor="#ffa0a0a0"
+                android:textColor="@color/black"
+
                 android:textSize="@dimen/_12sdp" />
 
             <RelativeLayout
@@ -684,6 +685,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/tv_background"
+                android:layout_marginTop="20dp"
                 android:textColor="@android:color/black"
                 android:maxLines="10"
                 android:nestedScrollingEnabled="true"
