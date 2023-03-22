@@ -391,14 +391,7 @@
     <string name="update_available">التحديث متاح</string>
     <string name="update">تحديث</string>
     <string name="cancellll">يلغي</string>
-    <string name="area">Area</string>
-    <string name="governate">Governate</string>
-    <string name="enter_block">Enter block</string>
-    <string name="enter_street">Enter street</string>
-    <string name="enter_avenue">Enter avenue</string>
-    <string name="enter_floor">Enter floor</string>
-    <string name="house">House</string>
-    <string name="office">Office</string>
+
 
     <string name="floor">أرضية</string>
     <string name="building">مبنى</string>
@@ -407,4 +400,15 @@
     <string name="select_area">حدد المنطقة</string>
     <string name="avenue">الجادة (اختياري)</string>
     <string name="enter_building">أدخل المبنى</string>
+    <string name="apartment">شقة</string>
+
+
+    <string name="area">منطقة</string>
+    <string name="governate">حكم</string>
+    <string name="enter_block">أدخل الكتلة</string>
+    <string name="enter_street">أدخل الشارع</string>
+    <string name="enter_avenue">أدخل الطريق</string>
+    <string name="enter_floor">أدخل الكلمة</string>
+    <string name="house">منزل</string>
+    <string name="office">مكتب</string>
 </resources>

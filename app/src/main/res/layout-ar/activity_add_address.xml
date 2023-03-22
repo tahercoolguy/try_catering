@@ -100,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:text="Add Address"
+                        android:text="@string/Add_address"
                         android:textColor="@android:color/white"
                         android:textSize="@dimen/_16sdp"
                         android:textStyle="bold" />
@@ -224,7 +224,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginHorizontal="10dp"
                         android:singleLine="true"
-                        android:text="Select City" />
+                        android:text="@string/select_city" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
