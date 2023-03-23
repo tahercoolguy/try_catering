@@ -1,7 +1,9 @@
 package com.infovass.catering.activities.adapers;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.infovass.catering.R;
+import com.infovass.catering.activities.order.OrderDetailActivity;
 import com.infovass.catering.activities.order.model.OrderListResponse;
 
 import java.util.ArrayList;
@@ -28,10 +31,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Viewholder> 
 
     int row_index;
     Context context;
+
     OrderAdapter.OnItemClickListener onItemClickListener;
     String lastValue = "";
     List<OrderListResponse.Datum> list = new ArrayList<>();
-    public OrderAdapter(Context context ,List<OrderListResponse.Datum> list) {
+
+    public OrderAdapter(Context context, List<OrderListResponse.Datum> list) {
         this.context = context;
         this.list = list;
     }
@@ -47,17 +52,24 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Viewholder> 
 
     @Override
     public void onBindViewHolder(@NonNull OrderAdapter.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
-        
 
-        holder.orderNameTextView.setText("Order NO : "+list.get(position).getInvoiceId());
-        holder.dateTextView.setText(""+list.get(position).getCreatedAt());
-        holder.tv_price.setText(list.get(position).getTotalAmount()+" KWD");
+
+        holder.orderNameTextView.setText("Order NO : " + list.get(position).getInvoiceId());
+        holder.dateTextView.setText("" + list.get(position).getCreatedAt());
+        holder.tv_price.setText(list.get(position).getTotalAmount() + " KWD");
         holder.paymentTextView.setText(list.get(position).getOrderStatus());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //   onItemClickListener.onItemClick(position ,holder.custom_tab_textView,holder.detail_item_linearLayout );
+                   onItemClickListener.onItemClick(String.valueOf(list.get(position).getId()));
+
+//                Intent i = new Intent().setClass(context, OrderDetailActivity.class);
+//                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+//
+//                i.putExtra("id",list.get(position).getId());
+//// Launch the new activity and add the additional flags to the intent
+//                context.getApplicationContext().startActivity(i);
             }
         });
     }
@@ -86,11 +98,11 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.Viewholder> 
 
         public Viewholder(View itemView) {
             super(itemView);
-             ButterKnife.bind(this, itemView);
+            ButterKnife.bind(this, itemView);
         }
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position , TextView custom_tab_textView , LinearLayout detail_item_linearLayout);
+        void onItemClick(String id);
     }
 }

@@ -16,8 +16,7 @@
             android:id="@+id/imgRIV"
             app:siRadius="8dp"
 
-            android:src="@drawable/img"
-            android:layout_height="120dp"></com.github.siyamed.shapeimageview.RoundedImageView>
+             android:layout_height="120dp"></com.github.siyamed.shapeimageview.RoundedImageView>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,7 +30,7 @@
                 android:id="@+id/titleTxt"
                 android:textColor="@color/black"
                 android:textSize="15dp"
-                  android:text="Subz Biryani"></TextView>
+                  ></TextView>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -41,7 +40,7 @@
                 android:layout_marginVertical="5dp"
 
                 android:textColor="@color/colorPrimary"
-                android:text="Subz Biryani"></TextView>
+                 ></TextView>
         </LinearLayout>
 
     </LinearLayout>
@@ -52,6 +51,6 @@
         android:layout_marginVertical="4dp"
         android:textColor="@color/black"
         android:textSize="15dp"
-        android:text="Add ons (if there are addons)"></TextView>
+        android:text=" "></TextView>
 
 </LinearLayout>

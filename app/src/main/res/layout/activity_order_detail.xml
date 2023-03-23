@@ -44,6 +44,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
+        android:id="@+id/scrollvuew"
         android:layout_height="match_parent">
 
         <LinearLayout
@@ -68,6 +69,7 @@
                 <ImageView
                     android:layout_width="25dp"
                     android:layout_height="25dp"
+                    android:saveEnabled="false"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     android:src="@drawable/ic_at_the_store"></ImageView>
@@ -97,6 +99,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/wrappedImg"
                     android:layout_gravity="center"
 
                     android:src="@drawable/circle_light_dark_white"></ImageView>
@@ -134,6 +137,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/ontheWayImg"
                     android:layout_gravity="center"
 
                     android:src="@drawable/circle_light_dark_white"></ImageView>
@@ -172,6 +176,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:id="@+id/deliveredImg"
 
                     android:src="@drawable/circle_light_dark_white"></ImageView>
 
@@ -226,8 +231,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="10393"
-                        android:textColor="@color/black"
+                        android:id="@+id/orderidTxt"
+                         android:textColor="@color/black"
                         android:textSize="16dp"></TextView>
                 </LinearLayout>
 
@@ -249,8 +254,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="end"
-                        android:text="KNET"
-                        android:textColor="@color/black"
+                        android:id="@+id/transectiontypeTxt"
+                         android:textColor="@color/black"
 
                         android:textSize="16dp"></TextView>
                 </LinearLayout>
@@ -274,8 +279,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="end"
                         android:singleLine="true"
-                        android:text="3487589656395763"
-                        android:textColor="@color/black"
+                        android:id="@+id/transectionidTxt"
+                         android:textColor="@color/black"
                         android:textSize="16dp"></TextView>
                 </LinearLayout>
 
@@ -297,8 +302,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="end"
                         android:singleLine="true"
-                        android:text="Successful"
-                        android:textColor="@color/black"
+                        android:id="@+id/paymentStatusTXt"
+                         android:textColor="@color/black"
                         android:textSize="16dp"></TextView>
                 </LinearLayout>
 
@@ -321,8 +326,8 @@
                         android:layout_height="wrap_content"
                         android:gravity="end"
                         android:singleLine="true"
-                        android:text="250.500KWD"
-                        android:textColor="@color/colorPrimary"
+                        android:id="@+id/totalPricaTxt"
+                         android:textColor="@color/colorPrimary"
                         android:textSize="16dp"
                         android:textStyle="bold"></TextView>
                 </LinearLayout>
@@ -342,10 +347,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:text="Governorate: Kuwait City, Area: Sharq, Block: 8,
-Street:10, House/Building - 10, Floor - 5,
-Apartment - 10
-Mobile: 65081410"
+                android:id="@+id/addressTxt"
+
                 android:textColor="@color/black"
                 android:textSize="16dp"></TextView>
 

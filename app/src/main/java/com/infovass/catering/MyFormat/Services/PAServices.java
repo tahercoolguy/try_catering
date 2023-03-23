@@ -7,6 +7,7 @@ package com.infovass.catering.MyFormat.Services;
 import com.infovass.catering.DM.AppVersionRootDM;
 import com.infovass.catering.DM.FavoriteCatererListDM.FavoriteCatererRoot;
 import com.infovass.catering.DM.GuestNotificationRoot;
+ import com.infovass.catering.DM.Order_DetailsDM.OrderDetailsRoot;
 import com.infovass.catering.DM.PrivacyPolicyRoot;
 import com.infovass.catering.DM.ProfileDM.ProfileData;
 import com.infovass.catering.DM.ProfileDM.ProfileRoot;
@@ -56,6 +57,10 @@ public interface PAServices {
     @Headers("Cache-Control: no-cache;Content-Type: application/json;")
     @POST("/favourite-caterer-list")
     void Favourite_Caterer_List(@Header("Authorization") String token, Callback<FavoriteCatererRoot> favoriteCatererRootCallback);
+
+//   @Headers("Cache-Control: no-cache;Content-Type: application/json;")
+    @GET("/order-details/{id}")
+    void OrderDetails( @Path("id")  String id,@Header("Authorization") String token, Callback<OrderDetailsRoot> orderDetailsRootCallback);
 
 
 

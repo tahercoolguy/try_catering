@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/_15sdp"
+        android:layout_marginHorizontal="20dp"
         android:fontFamily="@font/en"
         app:textAllCaps="true"
         android:layout_marginLeft="@dimen/_5sdp"

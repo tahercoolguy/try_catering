@@ -1,11 +1,16 @@
 package com.infovass.catering.activities.order;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.infovass.catering.R;
@@ -26,7 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class OrderListActivity extends BaseActivity implements OrderViews {
+public class OrderListActivity extends AppCompatActivity implements OrderViews {
 
     List<OrderListResponse.Datum> list = new ArrayList<>();
     private ProgressHUD progressHUD;
@@ -35,23 +40,37 @@ public class OrderListActivity extends BaseActivity implements OrderViews {
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
-    @Override
-    protected Context getActivityContext() {
-        return this;
-    }
+    Context context;
+    Activity activity;
+//    @Override
+//    protected Context getActivityContext() {
+//        return this;
+//    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_list);
         ButterKnife.bind(this);
+        context=getApplicationContext();
         progressHUD = ProgressHUD.create(this, getString(R.string.loading), false, null, null);
         orderPresenter = new OrderImpl(this);
-        orderPresenter.GetOrderListApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""));
+        orderPresenter.GetOrderListApi(SharedPreferencesUtils.getInstance(getApplicationContext()).getValue(Constants.TOKEN, ""));
 
-        orderAdapter = new OrderAdapter(getApplicationContext(),list);
+        orderAdapter = new OrderAdapter(context,list);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setAdapter(orderAdapter);
+
+        orderAdapter.setOnItemClickListener(new OrderAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(String id) {
+                id=id;
+                startActivity(new Intent(OrderListActivity.this,OrderDetailActivity.class).putExtra("id",id));
+                overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+            }
+        });
+
     }
 
     @OnClick({R.id.backButton})
@@ -91,7 +110,7 @@ public class OrderListActivity extends BaseActivity implements OrderViews {
                 list.clear();
                 if (orderListResponse.getData().size()==0) {
 
-                }
+                 }
                 else
                 {
                     list.addAll(orderListResponse.getData());
@@ -99,9 +118,21 @@ public class OrderListActivity extends BaseActivity implements OrderViews {
                 }
             }else
             {
-                Toast.makeText(getActivityContext() , orderListResponse.getMessage() , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext() , orderListResponse.getMessage() , Toast.LENGTH_SHORT).show();
             }
 
         }catch (Exception f){}
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
     }
 }
