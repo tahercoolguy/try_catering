@@ -403,6 +403,7 @@
     <string name="avenue">Avenue (Optional)</string>
     <string name="enter_building">Enter building</string>
     <string name="something_wrong">something wrong</string>
+    <string name="my_location">my location!!!</string>
 
 
 </resources>
