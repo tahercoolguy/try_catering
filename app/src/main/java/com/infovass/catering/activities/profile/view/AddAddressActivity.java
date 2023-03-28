@@ -55,6 +55,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -100,9 +101,11 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
     @BindView(R.id.lnr)
     LinearLayout lnr;
     @BindView(R.id.backButton)
-    ImageButton backButton;
+    ImageButton backButton;@BindView(R.id.currentAddressTxt)
+    TextView currentAddressTxt;
     Double Latitude, Longitude;
     private GoogleMap mMap;
+    String address, city, state, country, postalCode, knownName;
 
 
     //new map
@@ -120,8 +123,8 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
                             try {
                                 addressPresenter.AddAddressApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), "H", "H", floor
                                         , "", apartment, building, ""
-                                        , "OFFICE", "" + apartment + " " + building + " " + piece + " "
-                                                + avenue + " " + road, "", "", cityID
+                                        , "", address + apartment + " " + building + " " + piece + " "
+                                                + avenue + " " + road, String.valueOf(lattitude), String.valueOf(longitude), cityID
                                         , areaID, piece, avenue, road);
                             } catch (Exception j) {
                             }
@@ -256,7 +259,7 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
         return error;
     }
 
-
+    Double lattitude, longitude;
     @Override
     protected Context getActivityContext() {
         return this;
@@ -317,22 +320,19 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
                 smf.getMapAsync(new OnMapReadyCallback() {
                     @Override
                     public void onMapReady(@NonNull GoogleMap googleMap) {
-                        LatLng latLng= new LatLng(location.getLatitude(),location.getLongitude());
+                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
                         MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(getString(R.string.my_location));
 
-
                         googleMap.addMarker(markerOptions);
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
+                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
 
 
-                        Double lattitude,longitude;
-                        lattitude=location.getLatitude();
-                        longitude=location.getLongitude();
+                        lattitude = location.getLatitude();
+                        longitude = location.getLongitude();
 
-                        if(lattitude!=null && longitude!=null){
-                            getcurrentAddres(lattitude,longitude);
+                        if (lattitude != null && longitude != null) {
+                            getcurrentAddres(lattitude, longitude);
                         }
-
                     }
                 });
             }
@@ -341,7 +341,7 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
     }
 
 
-    private  void getcurrentAddres(Double latitude,Double longitude ){
+    private void getcurrentAddres(Double latitude, Double longitude) {
         Geocoder geocoder;
         List<Address> addresses;
         geocoder = new Geocoder(this, Locale.getDefault());
@@ -349,12 +349,14 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
         try {
             addresses = geocoder.getFromLocation(latitude, longitude, 1); // Here 1 represent max location result to returned, by documents it recommended 1 to 5
 
-            String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
-            String city = addresses.get(0).getLocality();
-            String state = addresses.get(0).getAdminArea();
-            String country = addresses.get(0).getCountryName();
-            String postalCode = addresses.get(0).getPostalCode();
-            String knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
+            address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+            city = addresses.get(0).getLocality();
+            state = addresses.get(0).getAdminArea();
+            country = addresses.get(0).getCountryName();
+            postalCode = addresses.get(0).getPostalCode();
+            knownName = addresses.get(0).getFeatureName(); // Only if available else return NULL
+
+            currentAddressTxt.setText(address);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -395,48 +397,47 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
     @Override
     public void onSuccessGetCityListAPi(CityList cityList) {
         try {
-            if(cityList.getStatus()) {
+            if (cityList.getStatus()) {
                 list.clear();
                 if (cityList.getResult().size() == 0) {
                 } else {
                     list.addAll(cityList.getResult());
                 }
             }
-        }catch (Exception ignore){}
+        } catch (Exception ignore) {
+        }
     }
 
     @Override
     public void onSuccessGetAreaListAPi(AreaList areaLList) {
         try {
             areaList.clear();
-            if (areaLList.getResult().size()==0) {
+            if (areaLList.getResult().size() == 0) {
 
-            }
-            else
-            {
+            } else {
 
                 areaList.addAll(areaLList.getResult());
             }
 
-        }catch (Exception ignore){}
+        } catch (Exception ignore) {
+        }
     }
 
     @Override
     public void onSuccessAddAddressAPi(AddAddressResponse addressResponse) {
         try {
-            if(addressResponse.getStatus())
-            {
-                Intent intent = new Intent(AddAddressActivity.this , AddressActivity.class);
+            if (addressResponse.getStatus()) {
+                Intent intent = new Intent(AddAddressActivity.this, AddressActivity.class);
                 startActivity(intent);
                 overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
                 finish();
 
-            }else
-            {
-                Toast.makeText(AddAddressActivity.this, ""+addressResponse.getMessage(), Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(AddAddressActivity.this, "" + addressResponse.getMessage(), Toast.LENGTH_SHORT).show();
             }
-        }catch (Exception f){}
+        } catch (Exception f) {
+        }
 
     }
 
@@ -455,6 +456,7 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
         super.finish();
         overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
     }
+
     @Override
     public void onBackPressed() {
         overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);

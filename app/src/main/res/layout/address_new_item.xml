@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginLeft="@dimen/_15sdp"
+    app:cardCornerRadius="10dp"
     android:layout_marginRight="@dimen/_15sdp"
     android:layout_marginTop="@dimen/_5sdp"
     android:layout_marginBottom="@dimen/_10sdp"
@@ -31,7 +32,7 @@
                 android:fontFamily="@font/en"
                 android:gravity="left|center_vertical"
                 android:maxLines="2"
-                android:text="@string/city"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp" />
 
@@ -44,13 +45,14 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_pen"
                     android:layout_width="@dimen/_15sdp"
+                    android:layout_gravity="center"
                     android:layout_height="@dimen/_15sdp"
                     android:src="@drawable/ic_editpen"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_delete"
-                    android:layout_width="13dp"
-                    android:layout_height="@dimen/_15sdp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="@dimen/_15sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:src="@drawable/ic_delete" />
@@ -70,6 +72,7 @@
                 android:fontFamily="@font/en"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:visibility="gone"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:gravity="left|center_vertical"
@@ -97,8 +100,8 @@
                 android:gravity="left|center_vertical"
                 android:maxLines="2"
                 android:text="Jeevan Tara Building, 1Sr Floor, Gate No.4, 5 Sansad Marg, New Delhi"
-                android:textColor="@color/gray_color"
-                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:textSize="14sp"
                 android:textStyle="bold" />
         </LinearLayout>
 

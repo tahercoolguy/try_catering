@@ -106,7 +106,13 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_250sdp" />
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:id="@+id/currentAddressTxt"
+                android:layout_margin="10dp"
+                android:text=""></TextView>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

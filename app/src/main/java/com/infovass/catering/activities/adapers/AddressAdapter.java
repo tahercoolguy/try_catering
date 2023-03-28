@@ -10,6 +10,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,7 +32,8 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.Viewhold
     AddressAdapter.OnItemClickListener onItemClickListener;
     String lastValue = "";
     List<AddressResponse.Datum> list = new ArrayList<>();
-    public AddressAdapter(Context context , List<AddressResponse.Datum> list) {
+
+    public AddressAdapter(Context context, List<AddressResponse.Datum> list) {
         this.context = context;
         this.list = list;
     }
@@ -47,16 +49,14 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.Viewhold
 
     @Override
     public void onBindViewHolder(@NonNull AddressAdapter.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
-        
-        if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar"))
-        {
+
+        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
             holder.tv_addressType.setText(list.get(position).getAddressType());
             holder.tv_city.setText(list.get(position).getLandmark());
             holder.addressTextView.setText(list.get(position).getAddress());
         }
 
-        if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en"))
-        {
+        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
             holder.tv_addressType.setText(list.get(position).getAddressType());
             holder.tv_city.setText(list.get(position).getLandmark());
             holder.addressTextView.setText(list.get(position).getAddress());
@@ -65,8 +65,15 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.Viewhold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            //    row_index = position;
+                //    row_index = position;
                 onItemClickListener.onItemClick(position);
+            }
+        });
+
+        holder.img_pen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
@@ -89,6 +96,8 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.Viewhold
         AppCompatTextView tv_city;
         @BindView(R.id.addressTextView)
         AppCompatTextView addressTextView;
+        @BindView(R.id.img_pen)
+        AppCompatImageView img_pen;
 
 
         public Viewholder(View itemView) {
