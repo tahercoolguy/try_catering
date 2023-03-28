@@ -161,7 +161,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
         resturantListView.setAdapter(resturantLargeAdapter);
         resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position, int Restaurant_Status) {
+            public void onItemClick(int position,int selectedposition, int Restaurant_Status,List<RestourentListResponse.Datum> restourentLIst) {
                 SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
                 int restaurententID = restourentLIst.get(position).getId();
                 String restaurant_Status = String.valueOf(Restaurant_Status);

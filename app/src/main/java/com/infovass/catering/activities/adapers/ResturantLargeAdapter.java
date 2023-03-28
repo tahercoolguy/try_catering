@@ -36,7 +36,7 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
     ResturantLargeAdapter.OnItemClickListener onItemClickListener;
     String lastValue = "";
     List<RestourentListResponse.Datum> restourentLIst = new ArrayList<>();
-
+int selectedposition;
     public ResturantLargeAdapter(Context context, List<RestourentListResponse.Datum> restourentLIst) {
         this.context = context;
         this.restourentLIst = restourentLIst;
@@ -210,11 +210,28 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
         }
 
 
-        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(position, Restaurant_Status));
+//        holder.itemView.setOnClickListener(v -> onItemClickListener.onItemClick(position, Restaurant_Status));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedposition=position;
+                onItemClickListener.onItemClick(position,selectedposition,Restaurant_Status,restourentLIst);
+            }
+        });
     }
 
     public void setOnItemClickListener(ResturantLargeAdapter.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
+    }
+    // method for filtering our recyclerview items.
+    public void filterList(ArrayList<RestourentListResponse.Datum> filterlist) {
+        // below line is to add our filtered
+        // list in our course array list.
+        restourentLIst = filterlist;
+        // below line is to notify our adapter
+        // as change in recycler view data.
+        notifyDataSetChanged();
     }
 
     @Override
@@ -249,7 +266,7 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position, int Restaurant_Status);
+        void onItemClick(int position,int selectedposition, int Restaurant_Status,List<RestourentListResponse.Datum> restourentLIst);
     }
 }
 

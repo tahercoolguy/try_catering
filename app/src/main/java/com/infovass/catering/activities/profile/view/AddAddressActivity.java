@@ -39,13 +39,17 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -101,7 +105,8 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
     @BindView(R.id.lnr)
     LinearLayout lnr;
     @BindView(R.id.backButton)
-    ImageButton backButton;@BindView(R.id.currentAddressTxt)
+    ImageButton backButton;
+    @BindView(R.id.currentAddressTxt)
     TextView currentAddressTxt;
     Double Latitude, Longitude;
     private GoogleMap mMap;
@@ -260,6 +265,7 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
     }
 
     Double lattitude, longitude;
+
     @Override
     protected Context getActivityContext() {
         return this;
@@ -317,24 +323,30 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
             @Override
             public void onSuccess(Location location) {
 
-                smf.getMapAsync(new OnMapReadyCallback() {
-                    @Override
-                    public void onMapReady(@NonNull GoogleMap googleMap) {
-                        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-                        MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(getString(R.string.my_location));
-
-                        googleMap.addMarker(markerOptions);
-                        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+                if (location != null) {
+                    smf.getMapAsync(new OnMapReadyCallback() {
+                        @Override
+                        public void onMapReady(@NonNull GoogleMap googleMap) {
 
 
-                        lattitude = location.getLatitude();
-                        longitude = location.getLongitude();
+                            lattitude = location.getLatitude();
+                            longitude = location.getLongitude();
 
-                        if (lattitude != null && longitude != null) {
-                            getcurrentAddres(lattitude, longitude);
+                            if (lattitude != null && longitude != null) {
+                                LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+                                MarkerOptions markerOptions = new MarkerOptions().position(latLng).title(getString(R.string.my_location));
+
+                                googleMap.addMarker(markerOptions);
+                                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
+
+                                getcurrentAddres(lattitude, longitude);
+                            }
                         }
-                    }
-                });
+                    });
+                } else {
+                    statusCheck();
+                }
+
             }
         });
 
@@ -362,6 +374,33 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
         }
 
 
+    }
+
+    public void statusCheck() {
+        final LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (!manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            buildAlertMessageNoGps();
+
+        }
+    }
+
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(getString(R.string.location_permission_give))
+                .setCancelable(false)
+                .setPositiveButton(getString(R.string.yes), new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton(getString(R.string.no), new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
     @Override

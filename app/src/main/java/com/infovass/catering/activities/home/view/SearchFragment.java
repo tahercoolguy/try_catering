@@ -28,6 +28,7 @@ import com.infovass.catering.activities.CalenderActivity;
 import com.infovass.catering.activities.Location.view.LocationActivity;
 import com.infovass.catering.activities.Location.view.TimeActivity;
 import com.infovass.catering.activities.adapers.RestourentcategoriesAdapter;
+import com.infovass.catering.activities.adapers.ResturantLargeAdapter;
 import com.infovass.catering.activities.adapers.ResturantSearchAdapter;
 import com.infovass.catering.activities.home.model.RestourentListResponse;
 import com.infovass.catering.activities.home.presenter.RestourentImpl;
@@ -50,7 +51,7 @@ public class SearchFragment extends Fragment implements RestourentView {
     RestourentPresenter restourentPresenter;
     View view;
     RestourentcategoriesAdapter restourentcategoriesAdapter;
-    ResturantSearchAdapter resturantLargeAdapter;
+    ResturantLargeAdapter resturantLargeAdapter;
     @BindView(R.id.resturantListView)
     RecyclerView resturantListView;
     @BindView(R.id.detail_recyclerView)
@@ -108,7 +109,7 @@ public class SearchFragment extends Fragment implements RestourentView {
         activity = getActivity();
         progressHUD = ProgressHUD.create(getContext(), getString(R.string.loading), false, null, null);
         restourentPresenter = new RestourentImpl(this);
-               restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
 //        restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
@@ -153,21 +154,38 @@ public class SearchFragment extends Fragment implements RestourentView {
             }
         });
 
-        resturantLargeAdapter = new ResturantSearchAdapter(getContext(), restourentLIst);
+//        resturantLargeAdapter = new ResturantSearchAdapter(getContext(), restourentLIst);
+//        resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        resturantListView.setAdapter(resturantLargeAdapter);
+//        resturantLargeAdapter.setOnItemClickListener(new ResturantSearchAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position, int Restaurant_Status) {
+//                SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
+//                int restaurententID = restourentLIst.get(position).getId();
+//                String restaurant_Status = String.valueOf(Restaurant_Status);
+//                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
+//                        .putExtra("restaurant_Status", restaurant_Status);
+//                startActivity(intent);
+//                activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+//            }
+//
+//        });
+
+        resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
         resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
         resturantListView.setAdapter(resturantLargeAdapter);
-        resturantLargeAdapter.setOnItemClickListener(new ResturantSearchAdapter.OnItemClickListener() {
+        resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(int position, int Restaurant_Status) {
-                SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
-                int restaurententID = restourentLIst.get(position).getId();
+            public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RestourentListResponse.Datum> restourentLIst) {
+                SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(selectedposition).getId());
+                int restaurententID = restourentLIst.get(selectedposition).getId();
                 String restaurant_Status = String.valueOf(Restaurant_Status);
                 Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
                         .putExtra("restaurant_Status", restaurant_Status);
                 startActivity(intent);
                 activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-            }
 
+            }
         });
         showKeyboard();
         setSearchData();
@@ -190,8 +208,8 @@ public class SearchFragment extends Fragment implements RestourentView {
 
                 // inside on query text change method we are
                 // calling a method to filter our recycler view.
-                 return false;
-             }
+                return false;
+            }
 
             // This method is overridden to filter the adapter according
             // to a search query when the user is typing search
@@ -340,7 +358,6 @@ public class SearchFragment extends Fragment implements RestourentView {
                     filteredlist.add(item);
                 }
             }
-
 
 
         }
