@@ -53,13 +53,30 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.Viewhold
         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
             holder.tv_addressType.setText(list.get(position).getAddressType());
             holder.tv_city.setText(list.get(position).getLandmark());
-            holder.addressTextView.setText(list.get(position).getAddress());
+            String newAddress;
+            newAddress = context.getString(R.string.governate) + " " + list.get(position).getCity() + ", " +
+                    context.getString(R.string.area) + " " + list.get(position).getArea() + ", " +
+                    context.getString(R.string.block) + " " + list.get(position).getBlock() + ", " +
+                    context.getString(R.string.street) + " " + list.get(position).getStreet() + ", " +
+                    context.getString(R.string.avenue_a) + " " + list.get(position).getAvenue() + ", " +
+                    context.getString(R.string.building) + " " + list.get(position).getAppartment() + ", " +
+                    context.getString(R.string.floor) + " " + list.get(position).getHouseNo() + ". ";
+            holder.addressTextView.setText(newAddress);
         }
 
         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
             holder.tv_addressType.setText(list.get(position).getAddressType());
             holder.tv_city.setText(list.get(position).getLandmark());
-            holder.addressTextView.setText(list.get(position).getAddress());
+
+            String newAddress;
+            newAddress = context.getString(R.string.governate) + " " + list.get(position).getCity() + ", " +
+                    context.getString(R.string.area) + " " + list.get(position).getArea() + ", " +
+                    context.getString(R.string.block) + " " + list.get(position).getBlock() + ", " +
+                    context.getString(R.string.street) + " " + list.get(position).getStreet() + ", " +
+                    context.getString(R.string.avenue_a) + " " + list.get(position).getAvenue() + ", " +
+                    context.getString(R.string.building) + " " + list.get(position).getAppartment() + ", " +
+                    context.getString(R.string.floor) + " " + list.get(position).getHouseNo() + ". ";
+            holder.addressTextView.setText(newAddress);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {

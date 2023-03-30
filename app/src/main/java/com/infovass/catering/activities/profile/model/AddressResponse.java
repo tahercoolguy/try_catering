@@ -1,6 +1,7 @@
 package com.infovass.catering.activities.profile.model;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -108,6 +109,39 @@ public class AddressResponse {
         @SerializedName("updated_at")
         @Expose
         private Object updatedAt;
+        @SerializedName("block")
+        @Expose
+        private String block;
+        @SerializedName("street")
+        @Expose
+        private String street;
+        @SerializedName("avenue")
+        @Expose
+        private String avenue;
+
+        public String getBlock() {
+            return block;
+        }
+
+        public void setBlock(String block) {
+            this.block = block;
+        }
+
+        public String getStreet() {
+            return street;
+        }
+
+        public void setStreet(String street) {
+            this.street = street;
+        }
+
+        public String getAvenue() {
+            return avenue;
+        }
+
+        public void setAvenue(String avenue) {
+            this.avenue = avenue;
+        }
 
         public Integer getId() {
             return id;

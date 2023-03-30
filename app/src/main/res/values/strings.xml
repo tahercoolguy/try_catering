@@ -265,7 +265,7 @@
     <string name="how_to_pay">How would you like to pay ?</string>
     <string name="have_code">do you have a promo code ?</string>
 
-    <string name="Add_address">Add an address</string>
+    <string name="Add_address">Add address</string>
     <string name="Pin_location">Pin your location</string>
     <string name="Select_location">Select your location on the map for faster delivery</string>
     <string name="Address_details">Address details</string>
@@ -393,18 +393,24 @@
     <string name="governate">Governate</string>
     <string name="enter_block">Enter block</string>
     <string name="enter_street">Enter street</string>
-    <string name="enter_avenue">Enter avenue</string>
-    <string name="enter_floor">Enter floor</string>
+    <string name="enter_avenue">Enter avenue (Optional)</string>
+    <string name="enter_floor">Enter floor (Optional)</string>
     <string name="floor">Floor</string>
     <string name="building">Building</string>
     <string name="enter_house">Enter house</string>
      <string name="enter_office">Enter office</string>
     <string name="select_area">Select Area</string>
-    <string name="avenue">Avenue (Optional)</string>
+    <string name="avenue">Avenue</string>
     <string name="enter_building">Enter building</string>
     <string name="something_wrong">something wrong</string>
     <string name="my_location">my location!!!</string>
     <string name="location_permission_give">Your GPS seems to be disabled, do you want to enable it?</string>
+    <string name="avenue_a">Avenue</string>
+    <string name="kindly_enter_building">kindly enter building name or number</string>
+    <string name="kindly_select_city_name">kindly select city name</string>
+    <string name="kindly_select_area_name">kindly select area name</string>
+    <string name="kindly_enter_block">kindly enter block</string>
+    <string name="kindly_enter_street_name">kindly enter street name</string>
 
 
 </resources>

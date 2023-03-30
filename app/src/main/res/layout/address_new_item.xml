@@ -95,11 +95,11 @@
                 android:id="@+id/addressTextView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:minLines="2"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:gravity="left|center_vertical"
-                android:maxLines="2"
-                android:text="Jeevan Tara Building, 1Sr Floor, Gate No.4, 5 Sansad Marg, New Delhi"
+                 android:text="Jeevan Tara Building, 1Sr Floor, Gate No.4, 5 Sansad Marg, New Delhi"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold" />

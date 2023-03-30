@@ -1,7 +1,6 @@
 package com.infovass.catering.activities.profile.view;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,6 +17,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.infovass.catering.R;
+import com.infovass.catering.Utils.Helper;
 import com.infovass.catering.activities.Location.model.AreaList;
 import com.infovass.catering.activities.Location.model.CityList;
 import com.infovass.catering.activities.adapers.AreaListAdapter;
@@ -39,11 +39,13 @@ import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -55,6 +57,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -74,32 +77,57 @@ import butterknife.OnClick;
 
 public class AddAddressActivity extends BaseActivity implements AddressViews, OnMapReadyCallback {
 
-    String piece, avenue, road, building, floor, apartment, other_notes, cityID = "", areaID = "";
+    //    String block, avenue, street, building, floor, apartment, other_notes, cityID = "", areaID = "";
+    String block, avenue, street, building, floor, cityID = "", areaID = "";
     List<CityList.Result> list = new ArrayList<>();
     List<AreaList.Result> areaList = new ArrayList<>();
     AddressPresenter addressPresenter;
     @BindView(R.id.city_layout)
     RelativeLayout city_layout;
+
     @BindView(R.id.region_layout)
     RelativeLayout region_layout;
+
     @BindView(R.id.tv_city)
     AppCompatTextView tv_city;
+
     @BindView(R.id.tv_area)
     AppCompatTextView tv_area;
-    @BindView(R.id.pieceEditText)
-    AppCompatEditText pieceEditText;
+
+    @BindView(R.id.blockET)
+    EditText blockET;
+
+
     @BindView(R.id.avenueEditText)
-    AppCompatEditText avenueEditText;
-    @BindView(R.id.roadEditText)
-    AppCompatEditText roadEditText;
+    EditText avenueEditText;
+
+
+    @BindView(R.id.streetET)
+    EditText streetET;
+
+
     @BindView(R.id.buildingEditText)
-    AppCompatEditText buildingEditText;
+    EditText buildingEditText;
+
     @BindView(R.id.floor_numEditText)
-    AppCompatEditText floor_numEditText;
-    @BindView(R.id.apartmentEditText)
-    AppCompatEditText apartmentEditText;
-    @BindView(R.id.other_notesEditText)
-    AppCompatEditText other_notesEditText;
+    EditText floor_numEditText;
+
+
+    @BindView(R.id.apartmentTxt)
+    TextView apartmentTxt;
+
+    @BindView(R.id.houseTxt)
+    TextView houseTxt;
+
+    @BindView(R.id.officeTxt)
+    TextView officeTxt;
+
+
+    //
+//    @BindView(R.id.apartmentEditText)
+//    EditText apartmentEditText;
+//    @BindView(R.id.other_notesEditText)
+//    EditText other_notesEditText;
     @BindView(R.id.rel_findFood)
     RelativeLayout rel_findFood;
     @BindView(R.id.lnr)
@@ -108,10 +136,13 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
     ImageButton backButton;
     @BindView(R.id.currentAddressTxt)
     TextView currentAddressTxt;
+    @BindView(R.id.building__house_office_HeadTxt)
+    TextView building__house_office_HeadTxt;
     Double Latitude, Longitude;
     private GoogleMap mMap;
     String address, city, state, country, postalCode, knownName;
 
+    String addressType;
 
     //new map
     SupportMapFragment smf;
@@ -126,11 +157,48 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
                     if (isNetAvail()) {
                         if (isValid()) {
                             try {
-                                addressPresenter.AddAddressApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), "H", "H", floor
-                                        , "", apartment, building, ""
-                                        , "", address + apartment + " " + building + " " + piece + " "
-                                                + avenue + " " + road, String.valueOf(lattitude), String.valueOf(longitude), cityID
-                                        , areaID, piece, avenue, road);
+
+                                String newAddress;
+                                newAddress = getString(R.string.governate) + " " + tv_city.getText().toString() + ", " +
+                                        getString(R.string.area) + " " + tv_area.getText().toString() + ", " +
+                                        getString(R.string.block) + " " + block + ", " +
+                                        getString(R.string.street) + " " + street + ", " +
+                                        getString(R.string.avenue_a) + " " + avenue + ", " +
+                                        getString(R.string.building) + " " + building + ", " +
+                                        getString(R.string.floor) + " " + floor + ". ";
+
+                                boolean correct = true;
+
+                                if (tv_city.getText().toString().equalsIgnoreCase("")) {
+                                    Helper.showToast(AddAddressActivity.this, getString(R.string.kindly_select_city_name));
+                                    correct = false;
+                                } else if (tv_area.getText().toString().equalsIgnoreCase("")) {
+                                    Helper.showToast(AddAddressActivity.this, getString(R.string.kindly_select_area_name));
+                                    correct = false;
+                                } else if (blockET.getText().toString().equalsIgnoreCase("")) {
+                                    Helper.showToast(AddAddressActivity.this, getString(R.string.kindly_enter_block));
+                                    correct = false;
+                                } else if (streetET.getText().toString().equalsIgnoreCase("")) {
+                                    Helper.showToast(AddAddressActivity.this, getString(R.string.kindly_enter_street_name));
+                                    correct = false;
+                                } else if (buildingEditText.getText().toString().equalsIgnoreCase("")) {
+                                    Helper.showToast(AddAddressActivity.this, getString(R.string.kindly_enter_building));
+                                    correct = false;
+                                }   if (correct) {
+                                    addressPresenter.AddAddressApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""),
+                                            SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.name, ""),
+                                            SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.surname, ""), floor
+                                            , SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.phone, ""), building, address, ""
+                                            , addressType, newAddress, String.valueOf(lattitude), String.valueOf(longitude), cityID
+                                            , areaID, block, avenue, street);
+                                }
+
+
+//                                addressPresenter.AddAddressApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), "H", "H", floor
+//                                        , "", apartment, building, ""
+//                                        , "", address + apartment + " " + building + " " + block + " "
+//                                                + avenue + " " + street, String.valueOf(lattitude), String.valueOf(longitude), cityID
+//                                        , areaID, block, avenue, street);
                             } catch (Exception j) {
                             }
                         }
@@ -228,13 +296,15 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
 
     private boolean isValid() {
         boolean error = true;
-        piece = Objects.requireNonNull(pieceEditText.getText()).toString().trim();
+        block = Objects.requireNonNull(blockET.getText()).toString().trim();
         avenue = Objects.requireNonNull(avenueEditText.getText()).toString().trim();
-        road = Objects.requireNonNull(roadEditText.getText()).toString().trim();
+        street = Objects.requireNonNull(streetET.getText()).toString().trim();
         building = Objects.requireNonNull(buildingEditText.getText()).toString().trim();
         floor = Objects.requireNonNull(floor_numEditText.getText()).toString().trim();
-        apartment = Objects.requireNonNull(apartmentEditText.getText()).toString().trim();
-        other_notes = Objects.requireNonNull(other_notesEditText.getText()).toString().trim();
+
+
+//        apartment = Objects.requireNonNull(apartmentEditText.getText()).toString().trim();
+//        other_notes = Objects.requireNonNull(other_notesEditText.getText()).toString().trim();
 
 //        if (InputValidations.isNullOrEmpty(mUserEmail)) {
 //            error = false;
@@ -274,10 +344,13 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_address);
+        setContentView(R.layout.activity_add_new_address);
         ButterKnife.bind(this);
         addressPresenter = new AddressImpl(this);
         addressPresenter.getCityListApi();
+
+        addressType = getString(R.string.apartment);
+
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         smf = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map_fragment);
         client = LocationServices.getFusedLocationProviderClient(this);
@@ -401,6 +474,64 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
                 });
         final AlertDialog alert = builder.create();
         alert.show();
+    }
+
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    @OnClick(R.id.apartmentTxt)
+    public void clickApartment() {
+
+        apartmentTxt.setTextColor(Color.WHITE);
+        apartmentTxt.setBackground(getResources().getDrawable(R.drawable.location_page_bg));
+
+        officeTxt.setTextColor(Color.BLACK);
+        officeTxt.setBackground(getResources().getDrawable(R.drawable.location_page_unselect));
+
+        houseTxt.setTextColor(Color.BLACK);
+        houseTxt.setBackground(getResources().getDrawable(R.drawable.location_page_unselect));
+
+        addressType = getString(R.string.apartment);
+
+        building__house_office_HeadTxt.setText(getString(R.string.building));
+        buildingEditText.setHint(getString(R.string.enter_building));
+
+
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    @OnClick(R.id.officeTxt)
+    public void clickOffice() {
+        apartmentTxt.setTextColor(Color.BLACK);
+        apartmentTxt.setBackground(getResources().getDrawable(R.drawable.location_page_unselect));
+
+        officeTxt.setTextColor(Color.WHITE);
+        officeTxt.setBackground(getResources().getDrawable(R.drawable.location_page_bg));
+
+        houseTxt.setTextColor(Color.BLACK);
+        houseTxt.setBackground(getResources().getDrawable(R.drawable.location_page_unselect));
+        addressType = getString(R.string.house);
+
+        building__house_office_HeadTxt.setText(getString(R.string.office));
+        buildingEditText.setHint(getString(R.string.enter_office));
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    @OnClick(R.id.houseTxt)
+    public void clickHouse() {
+
+        apartmentTxt.setTextColor(Color.BLACK);
+        apartmentTxt.setBackground(getResources().getDrawable(R.drawable.location_page_unselect));
+
+        officeTxt.setTextColor(Color.BLACK);
+        officeTxt.setBackground(getResources().getDrawable(R.drawable.location_page_unselect));
+
+        houseTxt.setTextColor(Color.WHITE);
+        houseTxt.setBackground(getResources().getDrawable(R.drawable.location_page_bg));
+
+        addressType = getString(R.string.office);
+
+        building__house_office_HeadTxt.setText(getString(R.string.house));
+        buildingEditText.setHint(getString(R.string.enter_house));
     }
 
     @Override

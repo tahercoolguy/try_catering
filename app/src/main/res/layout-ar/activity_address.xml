@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="My Addresses"
+            android:text="@string/Address_details"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_16sdp"
             android:textStyle="bold" />
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:fontFamily="@font/en"
-                android:text="ADD NEW ADDRESS "
+                android:text="@string/add_new_address"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp" />

@@ -225,12 +225,13 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_centerInParent="true"
+                    android:textColor="@color/black"
                     android:layout_marginTop="@dimen/_2sdp"
                     android:layout_marginRight="@dimen/_10sdp"
                     android:layout_toLeftOf="@+id/img_addAddress"
                     android:fontFamily="@font/en"
                     android:gravity="start"
-                    android:text="Add Address" />
+                    android:text=" " />
 
                 <ImageButton
                     android:id="@+id/img_addAddress"
