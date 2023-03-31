@@ -75,10 +75,10 @@ public class AddressResponse {
         private String addressType;
         @SerializedName("city")
         @Expose
-        private Object city;
+        private String city;
         @SerializedName("area")
         @Expose
-        private Object area;
+        private String area;
         @SerializedName("address")
         @Expose
         private String address;
@@ -223,19 +223,19 @@ public class AddressResponse {
             this.addressType = addressType;
         }
 
-        public Object getCity() {
+        public String getCity() {
             return city;
         }
 
-        public void setCity(Object city) {
+        public void setCity(String city) {
             this.city = city;
         }
 
-        public Object getArea() {
+        public String getArea() {
             return area;
         }
 
-        public void setArea(Object area) {
+        public void setArea(String area) {
             this.area = area;
         }
 

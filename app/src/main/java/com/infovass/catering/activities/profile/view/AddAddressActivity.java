@@ -16,6 +16,9 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.infovass.catering.DM.EditAddress.EditAddressRoot;
+import com.infovass.catering.MyFormat.Controller.AppController;
+import com.infovass.catering.MyFormat.Utils.ConnectionDetector;
 import com.infovass.catering.R;
 import com.infovass.catering.Utils.Helper;
 import com.infovass.catering.activities.Location.model.AreaList;
@@ -41,6 +44,7 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -74,6 +78,11 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.MultipartTypedOutput;
+import retrofit.mime.TypedString;
 
 public class AddAddressActivity extends BaseActivity implements AddressViews, OnMapReadyCallback {
 
@@ -121,7 +130,9 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
 
     @BindView(R.id.officeTxt)
     TextView officeTxt;
-
+    private AppController appController;
+    private Dialog progress;
+    private ConnectionDetector connectionDetector;
 
     //
 //    @BindView(R.id.apartmentEditText)
@@ -184,7 +195,8 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
                                 } else if (buildingEditText.getText().toString().equalsIgnoreCase("")) {
                                     Helper.showToast(AddAddressActivity.this, getString(R.string.kindly_enter_building));
                                     correct = false;
-                                }   if (correct) {
+                                }
+                                if (correct) {
                                     addressPresenter.AddAddressApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""),
                                             SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.name, ""),
                                             SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.surname, ""), floor
@@ -346,6 +358,8 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_new_address);
         ButterKnife.bind(this);
+        appController = (AppController) this.getApplicationContext();
+        connectionDetector = new ConnectionDetector(getApplicationContext());
         addressPresenter = new AddressImpl(this);
         addressPresenter.getCityListApi();
 
@@ -376,7 +390,29 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
                     }
                 }).check();
 
+
+        getdataFromIntent();
+
     }
+
+    String id, City, Area, Block, Street, Apartment, HouseNumber, Addresstype;
+    Double Lat,Lng;
+
+    private void getdataFromIntent() {
+        if (getIntent() != null) {
+            Intent intent = getIntent();
+            id = intent.getStringExtra("editAdressID");
+            City = intent.getStringExtra("city");
+            Area = intent.getStringExtra("Area");
+            Block = intent.getStringExtra("Block");
+            Street = intent.getStringExtra("Street");
+            Apartment = intent.getStringExtra("Apartment");
+            HouseNumber = intent.getStringExtra("HouseNumber");
+            Addresstype = intent.getStringExtra("Addresstype");
+
+        }
+    }
+
 
     private void getmylocation() {
 
@@ -632,4 +668,53 @@ public class AddAddressActivity extends BaseActivity implements AddressViews, On
         overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
         super.onBackPressed();
     }
+
+
+    public void EditAddressAPI() {
+        if (connectionDetector.isConnectingToInternet()) {
+            String token = "Bearer " + SharedPreferencesUtils.getInstance(AddAddressActivity.this).getValue(Constants.TOKEN, "");
+            MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
+
+            multipartTypedOutput.addPart("first_name", new TypedString(SharedPreferencesUtils.getInstance(AddAddressActivity.this).getValue(Constants.name, "")));
+            multipartTypedOutput.addPart("last_name", new TypedString(SharedPreferencesUtils.getInstance(AddAddressActivity.this).getValue(Constants.surname, "")));
+            multipartTypedOutput.addPart("house_no", new TypedString(houseTxt.getText().toString()));
+            multipartTypedOutput.addPart("contact_no", new TypedString(SharedPreferencesUtils.getInstance(AddAddressActivity.this).getValue(Constants.phone, "")));
+            multipartTypedOutput.addPart("appartment", new TypedString(buildingEditText.getText().toString()));
+            multipartTypedOutput.addPart("landmark", new TypedString(""));
+            multipartTypedOutput.addPart("pincode", new TypedString(""));
+            multipartTypedOutput.addPart("address_type", new TypedString(addressType));
+            multipartTypedOutput.addPart("lat", new TypedString(""));
+            multipartTypedOutput.addPart("lng", new TypedString(""));
+            multipartTypedOutput.addPart("city_id", new TypedString(cityID));
+            multipartTypedOutput.addPart("area_id", new TypedString(areaID));
+            multipartTypedOutput.addPart("piece", new TypedString(""));
+            multipartTypedOutput.addPart("avenue", new TypedString(avenueEditText.getText().toString()));
+            multipartTypedOutput.addPart("street", new TypedString(streetET.getText().toString()));
+            appController.paServices.Edit_Address(id, token, multipartTypedOutput, new Callback<EditAddressRoot>() {
+
+                public void success(EditAddressRoot editAddressRoot, Response response) {
+                    if (editAddressRoot.isStatus()) {
+
+
+
+                    } else {
+                        Helper.showToast(AddAddressActivity.this, getString(R.string.something_wrong));
+                    }
+
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                    error.printStackTrace();
+                }
+            });
+
+        } else {
+            Toast.makeText(AddAddressActivity.this, getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
 }

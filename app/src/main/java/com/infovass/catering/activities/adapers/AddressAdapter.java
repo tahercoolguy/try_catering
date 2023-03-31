@@ -2,12 +2,9 @@ package com.infovass.catering.activities.adapers;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
@@ -91,6 +88,26 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.Viewhold
             @Override
             public void onClick(View v) {
 
+                onItemClickListener.onEditAddressItemClick(position,
+                        list.get(position).getId().toString(),
+                        list.get(position).getCity(),
+                        list.get(position).getArea(),
+                        list.get(position).getBlock(),
+                        list.get(position).getStreet(),
+                        list.get(position).getAvenue(),
+                        list.get(position).getAppartment(),
+                        list.get(position).getHouseNo(),
+                        list.get(position).getAddressType(),
+                        list.get(position).getLat(),
+                        list.get(position).getLng()
+                );
+            }
+        });
+
+        holder.img_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onItemClickListener.onDeleteAddressItemClick(position, list.get(position).getId().toString());
             }
         });
     }
@@ -115,6 +132,8 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.Viewhold
         AppCompatTextView addressTextView;
         @BindView(R.id.img_pen)
         AppCompatImageView img_pen;
+        @BindView(R.id.img_delete)
+        AppCompatImageView img_delete;
 
 
         public Viewholder(View itemView) {
@@ -125,5 +144,9 @@ public class AddressAdapter extends RecyclerView.Adapter<AddressAdapter.Viewhold
 
     public interface OnItemClickListener {
         void onItemClick(int position);
+
+        void onEditAddressItemClick(int position, String id, String city, String Area, String Block, String Street, String Avenue, String Apartment, String HouseNumber,String AddressType,String lattitude,String longitude);
+
+        void onDeleteAddressItemClick(int position, String id);
     }
 }

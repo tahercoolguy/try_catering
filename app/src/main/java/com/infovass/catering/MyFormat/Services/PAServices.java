@@ -5,6 +5,7 @@ package com.infovass.catering.MyFormat.Services;
 
 
 import com.infovass.catering.DM.AppVersionRootDM;
+import com.infovass.catering.DM.EditAddress.EditAddressRoot;
 import com.infovass.catering.DM.FavoriteCatererListDM.FavoriteCatererRoot;
 import com.infovass.catering.DM.GuestNotificationRoot;
  import com.infovass.catering.DM.Order_DetailsDM.OrderDetailsRoot;
@@ -61,6 +62,9 @@ public interface PAServices {
 //   @Headers("Cache-Control: no-cache;Content-Type: application/json;")
     @GET("/order-details/{id}")
     void OrderDetails( @Path("id")  String id,@Header("Authorization") String token, Callback<OrderDetailsRoot> orderDetailsRootCallback);
+
+    @POST("/edit-address/{id}")
+    void Edit_Address( @Path("id")  String id,@Header("Authorization") String token,@Body MultipartTypedOutput multipartTypedOutput, Callback<EditAddressRoot> editAddressRootCallback);
 
 
 

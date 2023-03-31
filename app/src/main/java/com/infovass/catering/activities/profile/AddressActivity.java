@@ -1,5 +1,6 @@
 package com.infovass.catering.activities.profile;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.infovass.catering.MyFormat.Controller.AppController;
+import com.infovass.catering.MyFormat.Utils.ConnectionDetector;
 import com.infovass.catering.activities.Location.model.AreaList;
 import com.infovass.catering.activities.Location.model.CityList;
 import com.infovass.catering.activities.adapers.AddressAdapter;
@@ -50,6 +53,9 @@ public class AddressActivity extends BaseActivity implements AddressViews {
     @BindView(R.id.backButton)
     ImageButton backButton;
     String date, time;
+    Context context;
+
+    String editAdressID;
 
     @Override
     protected Context getActivityContext() {
@@ -83,8 +89,10 @@ public class AddressActivity extends BaseActivity implements AddressViews {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_address);
         ButterKnife.bind(this);
+        context = getActivityContext();
         progressHUD = ProgressHUD.create(this, getString(R.string.loading), false, null, null);
         addressPresenter = new AddressImpl(this);
+
         addressPresenter.addressListApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""));
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -114,8 +122,34 @@ public class AddressActivity extends BaseActivity implements AddressViews {
                 }
                 //addressPresenter.setDefaultAddressApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, "") , ""+list.get(position).getId());
             }
+
+            @Override
+            public void onEditAddressItemClick(int position, String id, String city, String Area, String Block, String Street, String Avenue, String Apartment, String HouseNumber, String Addresstype, String lattitude, String longitude) {
+
+                editAdressID = id;
+                Intent intent = new Intent(AddressActivity.this, AddAddressActivity.class)
+                        .putExtra("editAdressID", editAdressID)
+                        .putExtra("city", city)
+                        .putExtra("Area", Area)
+                        .putExtra("Block", Block)
+                        .putExtra("Street", Street)
+                        .putExtra("Street", Street)
+                        .putExtra("Apartment", Apartment)
+                        .putExtra("HouseNumber", HouseNumber)
+                        .putExtra("Addresstype", Addresstype)
+                        .putExtra("lattitude", lattitude)
+                        .putExtra("longitude", longitude);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onDeleteAddressItemClick(int position, String id) {
+
+            }
         });
     }
+
 
     @Override
     public void showLoading() {
