@@ -13,7 +13,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -116,6 +119,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
     @BindView(R.id.menuTextView)
     AppCompatTextView menuTextView;
+    @BindView(R.id.main_content)
+    LinearLayout main_content;
 
     DetailNewAdapter detailAdapter;
 
@@ -138,6 +143,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
         Intent mIntent = getIntent();
         restaurententID = mIntent.getIntExtra("restaurententID", 0);
         restaurant_Status = mIntent.getStringExtra("restaurant_Status");
+        main_content.setVisibility(View.GONE);
         try {
             productDetailAPI();
         } catch (Exception e) {
@@ -260,195 +266,215 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                 public void success(Root root, Response response) {
                     if (root.getStatus().equalsIgnoreCase("true")) {
 
-
-                        ////////////////////////////////////////////////////////////////////////////
-                        modes.clear();
-                        modeArrayList.clear();
-                        modeType = root.getData().getModes().get(0).getName();
-                        if (modeType.equalsIgnoreCase("Delivery")) {
-                            // lnr_deleveryServices.setVisibility(View.VISIBLE);
-                            //  lnr_cateringServices.setVisibility(View.GONE);
-                            menuTextView.setText("Delivery info");
-                            modeType = "Delivery";
-                        }
-                        if (modeType.equalsIgnoreCase("Table Booking")) {
-                            //  lnr_deleveryServices.setVisibility(View.VISIBLE);
-                            //  lnr_cateringServices.setVisibility(View.GONE);
-                            menuTextView.setText("Table Booking info");
-                            modeType = "Table Booking";
-                        }
-                        if (modeType.equalsIgnoreCase("Catering")) {
-                            //  lnr_deleveryServices.setVisibility(View.GONE);
-                            //  lnr_cateringServices.setVisibility(View.VISIBLE);
-                            menuTextView.setText("Catering info");
-                            modeType = "Catering";
-                        }
-                        //////////////////////////////////////////////////////////////////////////////////
-                        try {
-                            if (root.getData().getIs_favorite().equalsIgnoreCase("true")) {
-                                addToFavButton.setBackgroundResource(R.drawable.ic_heart_red);
-                                addToFev = true;
-
-                            } else {
-                                addToFavButton.setBackgroundResource(R.drawable.ic_heart);
-                                addToFev = false;
+                        if (!root.getData().getItem().isEmpty() && !root.getData().getModes().isEmpty()) {
+                            main_content.setVisibility(View.VISIBLE);
+                            ////////////////////////////////////////////////////////////////////////////
+                            modes.clear();
+                            modeArrayList.clear();
+                            modeType = root.getData().getModes().get(0).getName();
+                            if (modeType.equalsIgnoreCase("Delivery")) {
+                                // lnr_deleveryServices.setVisibility(View.VISIBLE);
+                                //  lnr_cateringServices.setVisibility(View.GONE);
+                                menuTextView.setText("Delivery info");
+                                modeType = "Delivery";
                             }
-                        } catch (Exception g) {
-                        }
+                            if (modeType.equalsIgnoreCase("Table Booking")) {
+                                //  lnr_deleveryServices.setVisibility(View.VISIBLE);
+                                //  lnr_cateringServices.setVisibility(View.GONE);
+                                menuTextView.setText("Table Booking info");
+                                modeType = "Table Booking";
+                            }
+                            if (modeType.equalsIgnoreCase("Catering")) {
+                                //  lnr_deleveryServices.setVisibility(View.GONE);
+                                //  lnr_cateringServices.setVisibility(View.VISIBLE);
+                                menuTextView.setText("Catering info");
+                                modeType = "Catering";
+                            }
+                            //////////////////////////////////////////////////////////////////////////////////
+                            try {
+                                if (root.getData().getIs_favorite().equalsIgnoreCase("true")) {
+                                    addToFavButton.setBackgroundResource(R.drawable.ic_heart_red);
+                                    addToFev = true;
+
+                                } else {
+                                    addToFavButton.setBackgroundResource(R.drawable.ic_heart);
+                                    addToFev = false;
+                                }
+                            } catch (Exception g) {
+                            }
 
 
-                        /////////////////////////////////////////////////////////////////////////////////
+                            /////////////////////////////////////////////////////////////////////////////////
 
-                        if (SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-                            resturantNameTextView.setText(root.getData().getArabic_name());
-                            resturantdetail.setText(root.getData().getArabic_detail());
-                            tv_minNots.setText(root.getData().getTime_show());
-                            tv_minOrder.setText(root.getData().getMin_order());
-                            tv_setuUpTime.setText(root.getData().getSetup_time_in_minute() + " Mins");
+                            if (SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+                                resturantNameTextView.setText(root.getData().getArabic_name());
+                                resturantdetail.setText(root.getData().getArabic_detail());
+                                tv_minNots.setText(root.getData().getTime_show());
+                                tv_minOrder.setText(root.getData().getMin_order());
+                                tv_setuUpTime.setText(root.getData().getSetup_time_in_minute() + " Mins");
 //                tv_requirements.setText(restourentDetailResponse.getData().getRequirements());
-                            tv_requirements.setText(String.valueOf(root.getData().getRequirements()));
-                        }
-
-                        if (SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
-                            resturantNameTextView.setText(root.getData().getName());
-                            resturantdetail.setText(root.getData().getDetail());
-                            tv_minNots.setText(root.getData().getTime_show());
-                            tv_minOrder.setText(root.getData().getMin_order());
-                            tv_setuUpTime.setText(root.getData().getSetup_time_in_minute() + " Mins");
-                            tv_requirements.setText(String.valueOf(root.getData().getRequirements()));
-                        }
-                        try {
-                            SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.INFO, "" + root.getData().getCash_order_policy());
-                        } catch (Exception h) {
-                        }
-                        restourentRatingBar.setRating(Float.parseFloat("" + root.getData().getRating()));
-                        if (Objects.equals(root.getData().getDelivery_charge(), "0")) {
-                            tv_deleveryCharges.setText("Free");
-                        } else {
-                            tv_deleveryCharges.setText("" + root.getData().getDelivery_charge());
-                        }
-
-
-                        /////////////////////////////////////////////////////////////////////////////////
-
-
-                        modeArrayList = root.getData().getModes();
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-                        modeArrayList.add(new Mode("4", "q", "q", ""));
-
-                        detailAdapter = new DetailNewAdapter(modeArrayList, getApplicationContext());
-                        LinearLayoutManager HorizontalLayout = new LinearLayoutManager(
-                                getApplicationContext(),
-                                LinearLayoutManager.HORIZONTAL,
-                                false);
-                        detail_recyclerView.setLayoutManager(HorizontalLayout);
-                        detail_recyclerView.setAdapter(detailAdapter);
-                        detailAdapter.setOnItemClickListener(new DetailNewAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(int position, TextView custom_tab_textView, LinearLayout detail_item_linearLayout) {
-                                SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.MODE_ID, "" + modeArrayList.get(position).getId());
-                                if (modeArrayList.get(position).getName().equalsIgnoreCase("Delivery")) {
-
-                                    menuTextView.setText("Delivery info");
-                                    modeType = "Delivery";
-                                }
-                                if (modeArrayList.get(position).getName().equalsIgnoreCase("Table Booking")) {
-
-                                    menuTextView.setText("Table Booking info");
-                                    modeType = "Table Booking";
-                                }
-                                if (modeArrayList.get(position).getName().equalsIgnoreCase("Catering")) {
-                                    menuTextView.setText("Catering info");
-                                    modeType = "Catering";
-                                }
-                                detailAdapter.notifyDataSetChanged();
-                                try {
-                                    restourentDetailPresenter.getRestourentDetailApi(SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, ""), "" + modeArrayList.get(position).getId());
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
+                                tv_requirements.setText(String.valueOf(root.getData().getRequirements()));
                             }
-                        });
 
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////
+                            if (SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+                                resturantNameTextView.setText(root.getData().getName());
+                                resturantdetail.setText(root.getData().getDetail());
+                                tv_minNots.setText(root.getData().getTime_show());
+                                tv_minOrder.setText(root.getData().getMin_order());
+                                tv_setuUpTime.setText(root.getData().getSetup_time_in_minute() + " Mins");
+                                tv_requirements.setText(String.valueOf(root.getData().getRequirements()));
+                            }
+                            try {
+                                SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.INFO, "" + root.getData().getCash_order_policy());
+                            } catch (Exception h) {
+                            }
+                            restourentRatingBar.setRating(Float.parseFloat("" + root.getData().getRating()));
+                            if (Objects.equals(root.getData().getDelivery_charge(), "0")) {
+                                tv_deleveryCharges.setText("Free");
+                            } else {
+                                tv_deleveryCharges.setText("" + root.getData().getDelivery_charge());
+                            }
 
-                        //for image banner
-                        // Initializing the ViewPagerAdapter
-                        mViewPagerAdapter = new RestourentDetailsIBN(RestaurentDetailNew.this, root.getData().getImages());
 
-                        // Adding the Adapter to the ViewPager
-                        restourentimage.setAdapter(mViewPagerAdapter);
+                            /////////////////////////////////////////////////////////////////////////////////
 
-                        ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-                        itemArrayList = root.getData().getItem();
-                        menusAdapter = new MainCategoriesNewAdapter(getApplicationContext(), itemArrayList);
-                        recyclerViewMenu.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-                        recyclerViewMenu.setAdapter(menusAdapter);
-                        menusAdapter.setOnItemClickListener(new MainCategoriesNewAdapter.OnItemClickListener() {
-                            @Override
-                            public void onItemClick(int position, int verPos, Integer id) {
-                                try {
-//                                    Log.i("Yhan", "===" + items.get(verPos));
-                                    SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.ITEM_ID, "" + id);
+                            modeArrayList = root.getData().getModes();
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+                            modeArrayList.add(new Mode("4", "q", "q", ""));
+
+                            detailAdapter = new DetailNewAdapter(modeArrayList, getApplicationContext());
+                            LinearLayoutManager HorizontalLayout = new LinearLayoutManager(
+                                    getApplicationContext(),
+                                    LinearLayoutManager.HORIZONTAL,
+                                    false);
+                            detail_recyclerView.setLayoutManager(HorizontalLayout);
+                            detail_recyclerView.setAdapter(detailAdapter);
+                            detailAdapter.setOnItemClickListener(new DetailNewAdapter.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position, TextView custom_tab_textView, LinearLayout detail_item_linearLayout) {
                                     SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.MODE_ID, "" + modeArrayList.get(position).getId());
-                                    if (modeType.equalsIgnoreCase("Delivery")) {
-                                        Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
-                                                .putExtra("status", restaurant_Status);
-                                        startActivity(intent);
-                                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-                                    }
-                                    if (modeType.equalsIgnoreCase("Table Booking")) {
-                                        Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
-                                                .putExtra("status", restaurant_Status);
-                                        startActivity(intent);
-                                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-                                    }
-                                    if (modeType.equalsIgnoreCase("Catering")) {
-                                        Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
-                                                .putExtra("status", restaurant_Status);
-                                        startActivity(intent);
-                                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-                                    }
+                                    if (modeArrayList.get(position).getName().equalsIgnoreCase("Delivery")) {
 
-                                } catch (Exception j) {
-                                    j.printStackTrace();
+                                        menuTextView.setText("Delivery info");
+                                        modeType = "Delivery";
+                                    }
+                                    if (modeArrayList.get(position).getName().equalsIgnoreCase("Table Booking")) {
+
+                                        menuTextView.setText("Table Booking info");
+                                        modeType = "Table Booking";
+                                    }
+                                    if (modeArrayList.get(position).getName().equalsIgnoreCase("Catering")) {
+                                        menuTextView.setText("Catering info");
+                                        modeType = "Catering";
+                                    }
+                                    detailAdapter.notifyDataSetChanged();
+                                    try {
+                                        restourentDetailPresenter.getRestourentDetailApi(SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, ""), "" + modeArrayList.get(position).getId());
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
+                            });
 
-                            @Override
-                            public void OnViewList() {
-                                Log.d("ss", "sks");
-                            }
-                        });
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+                            //for image banner
+                            // Initializing the ViewPagerAdapter
+                            mViewPagerAdapter = new RestourentDetailsIBN(RestaurentDetailNew.this, root.getData().getImages());
+
+                            // Adding the Adapter to the ViewPager
+                            restourentimage.setAdapter(mViewPagerAdapter);
+
+                            ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+                            itemArrayList = root.getData().getItem();
+                            menusAdapter = new MainCategoriesNewAdapter(getApplicationContext(), itemArrayList);
+                            recyclerViewMenu.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+                            recyclerViewMenu.setAdapter(menusAdapter);
+                            menusAdapter.setOnItemClickListener(new MainCategoriesNewAdapter.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position, int verPos, Integer id) {
+                                    try {
+//                                    Log.i("Yhan", "===" + items.get(verPos));
+                                        SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.ITEM_ID, "" + id);
+                                        SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.MODE_ID, "" + modeArrayList.get(position).getId());
+                                        if (modeType.equalsIgnoreCase("Delivery")) {
+                                            Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
+                                                    .putExtra("status", restaurant_Status);
+                                            startActivity(intent);
+                                            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                                        }
+                                        if (modeType.equalsIgnoreCase("Table Booking")) {
+                                            Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
+                                                    .putExtra("status", restaurant_Status);
+                                            startActivity(intent);
+                                            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                                        }
+                                        if (modeType.equalsIgnoreCase("Catering")) {
+                                            Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
+                                                    .putExtra("status", restaurant_Status);
+                                            startActivity(intent);
+                                            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                                        }
+
+                                    } catch (Exception j) {
+                                        j.printStackTrace();
+                                    }
+                                }
+
+                                @Override
+                                public void OnViewList() {
+                                    Log.d("ss", "sks");
+                                }
+                            });
+
+                        } else {
+                            Dialog dialog = new Dialog(RestaurentDetailNew.this, R.style.CustomAlertDialog);
+
+                            dialog.setContentView(R.layout.cusutm_item_no_data_dialog);
+                            dialog.getWindow().setLayout(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                            dialog.setCancelable(false);
+                            dialog.getWindow().getAttributes().windowAnimations = R.anim.dialog_enter_animation;
+                            main_content.setVisibility(View.GONE);
+                            Button backButton = dialog.findViewById(R.id.backButton);
+                            backButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    finish();
+                                }
+                            });
+                            dialog.show();
+                        }
                     } else {
-                        Toast.makeText(RestaurentDetailNew.this, getString(R.string.not_avilable_for_catering), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(RestaurentDetailNew.this, getString(R.string.not_avilable_for_catering), Toast.LENGTH_SHORT).show();
+
+
                     }
                 }
 
@@ -465,7 +491,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     }
 
     @Override
-    public void onSuccessGetRestourentDetailAPi(RestourentDetailResponse restourentDetailResponse) {
+    public void onSuccessGetRestourentDetailAPi(RestourentDetailResponse
+                                                        restourentDetailResponse) {
         try {
 
             try {
@@ -574,7 +601,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     }
 
     @Override
-    public void onSuccessAddToFevRestourentAPi(RestourentAddToFevResponse restourentAddToFevResponse) {
+    public void onSuccessAddToFevRestourentAPi(RestourentAddToFevResponse
+                                                       restourentAddToFevResponse) {
         try {
             if (restourentAddToFevResponse.getStatus()) {
 //                Toast.makeText(RestaurentDetailNew.this, restourentAddToFevResponse.getMessage(), Toast.LENGTH_SHORT).show();
@@ -586,7 +614,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     }
 
     @Override
-    public void onSuccessAddToFevRestourentModeAPi(AddtoFebRestourentResponse addtoFebRestourentResponse) {
+    public void onSuccessAddToFevRestourentModeAPi(AddtoFebRestourentResponse
+                                                           addtoFebRestourentResponse) {
 
     }
 
@@ -613,12 +642,12 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
     }
 
     @Override
     public void onBackPressed() {
-        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
         super.onBackPressed();
     }
 }
