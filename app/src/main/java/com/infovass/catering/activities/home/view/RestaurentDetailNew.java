@@ -238,7 +238,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     ArrayList<Item> itemArrayList = new ArrayList<>();
     List<RestourentDetailResponse.Mode> modes = new ArrayList<>();
     List<RestourentModeResponse.Item> items = new ArrayList<>();
-
+String min_time;
     public void productDetailAPI() {
         if (connectionDetector.isConnectingToInternet()) {
 
@@ -267,6 +267,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                     if (root.getStatus().equalsIgnoreCase("true")) {
 
                         if (!root.getData().getItem().isEmpty() && !root.getData().getModes().isEmpty()) {
+
+                            min_time=root.getData().getMinimum_time();
                             main_content.setVisibility(View.VISIBLE);
                             ////////////////////////////////////////////////////////////////////////////
                             modes.clear();
@@ -426,19 +428,23 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                                         SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.MODE_ID, "" + modeArrayList.get(position).getId());
                                         if (modeType.equalsIgnoreCase("Delivery")) {
                                             Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
-                                                    .putExtra("status", restaurant_Status);
+                                                    .putExtra("status", restaurant_Status)
+                                                    .putExtra("min_time",min_time);
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                                         }
                                         if (modeType.equalsIgnoreCase("Table Booking")) {
                                             Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
-                                                    .putExtra("status", restaurant_Status);
+                                                    .putExtra("status", restaurant_Status)
+                                                    .putExtra("min_time",min_time);
+
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                                         }
                                         if (modeType.equalsIgnoreCase("Catering")) {
                                             Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
-                                                    .putExtra("status", restaurant_Status);
+                                                    .putExtra("status", restaurant_Status)
+                                                    .putExtra("min_time",min_time);
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                                         }

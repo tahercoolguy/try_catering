@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.infovass.catering.R;
+import com.infovass.catering.Utils.Helper;
 import com.infovass.catering.activities.cart.view.CartActivity;
 import com.infovass.catering.activities.base.BaseActivity;
 import com.infovass.catering.activities.dialog.BottomSheetInfoFragment;
@@ -29,6 +30,10 @@ import com.infovass.catering.activities.network.Constants;
 import com.infovass.catering.activities.network.SharedPreferencesUtils;
 import com.infovass.catering.activities.utill.ProgressHUD;
 import com.squareup.picasso.Picasso;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -80,7 +85,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
 
     @BindView(R.id.rel_findFood)
     RelativeLayout rel_findFood;
-    String status;
+    String status, min_time;
 
     @Override
     protected Context getActivityContext() {
@@ -97,7 +102,9 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
         }
         ButterKnife.bind(this);
 
-        tv_minNots.setSelected(true);tv_minOrder.setSelected(true);tv_deleveryCharges.setSelected(true);
+        tv_minNots.setSelected(true);
+        tv_minOrder.setSelected(true);
+        tv_deleveryCharges.setSelected(true);
 
         progressHUD = ProgressHUD.create(getActivityContext(), getString(R.string.loading), false, null, null);
         productDetailPresenter = new ProductDetailImpl(this);
@@ -107,12 +114,13 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
 
         Intent mIntent = getIntent();
         status = mIntent.getStringExtra("status");
+        min_time = mIntent.getStringExtra("min_time");
 
 
         if (status.equalsIgnoreCase("1")) {
             not_availableRL.setVisibility(View.VISIBLE);
             rel_findFood.setVisibility(View.GONE);
-         } else {
+        } else {
             not_availableRL.setVisibility(View.GONE);
             rel_findFood.setVisibility(View.VISIBLE);
         }
@@ -181,8 +189,73 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
                     if (SharedPreferencesUtils.getInstance(this).getValue(Constants.KEY_LOGGED_IN, false)) {
                         SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.addressID, "");
                         SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.address, "");
-                        productDetailPresenter.productAddToCartApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""), tv_productCount.getText().toString(), edt_note.getText().toString(),
-                                SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""), "", "", SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""));
+
+                        Date d = new Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+                        String currentDateTimeString = sdf.format(d);
+                        String selectedTimeString = SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.KEY_TIME, "");
+
+                        String[] currentTime = currentDateTimeString.split(" ");
+                        String[] selectedTime = selectedTimeString.split(" ");
+
+
+                        // Creating a SimpleDateFormat object
+                        // to parse time in the format HH:MM:SS
+                        SimpleDateFormat simpleDateFormat
+                                = new SimpleDateFormat("HH:mm:ss");
+
+                        // Parsing the Time Period
+                        Date date1 = null, date2 = null;
+                        try {
+                            date1 = simpleDateFormat.parse(currentTime[0] + ":00");
+                            date2 = simpleDateFormat.parse(selectedTime[0] + ":00");
+                        } catch (ParseException exception) {
+                            exception.printStackTrace();
+                        }
+
+
+                        // Calculating the difference in milliseconds
+                        long differenceInMilliSeconds;
+
+
+                        differenceInMilliSeconds = Math.abs(date2.getTime() - date1.getTime());
+
+
+                        // Calculating the difference in Hours
+                        long differenceInHours
+                                = (differenceInMilliSeconds / (60 * 60 * 1000))
+                                % 24;
+
+                        // Calculating the difference in Minutes
+                        long differenceInMinutes
+                                = (differenceInMilliSeconds / (60 * 1000)) % 60;
+
+                        // Calculating the difference in Seconds
+                        long differenceInSeconds
+                                = (differenceInMilliSeconds / 1000) % 60;
+
+                        // Printing the answer
+                        System.out.println(
+                                "Difference is " + differenceInHours + " hours "
+                                        + differenceInMinutes + " minutes "
+                                        + differenceInSeconds + " Seconds. ");
+
+                        //
+                        int minTime, checkTime;
+                        minTime = Integer.parseInt(min_time);
+                        checkTime = Integer.parseInt(String.valueOf(differenceInHours));
+//
+//
+                        if (minTime > checkTime) {
+                            productDetailPresenter.productAddToCartApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""), tv_productCount.getText().toString(), edt_note.getText().toString(),
+                                    SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""), "", "", SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""));
+
+                        } else {
+                            Helper.showToast(ProductDetailActivity.this, getString(R.string.select_valid_time));
+
+                        }
+
+
                     } else {
                         Intent i1 = new Intent(this, LoginActivity.class);
                         startActivity(i1);
@@ -201,11 +274,14 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
         }
     }
 
+    String max_time_arabic;
+
     @Override
     public void onSuccessGetProductDetailAPi(ProductDetailResponse productDetailResponse) {
         try {
             if (productDetailResponse.getStatus()) {
 
+                max_time_arabic = productDetailResponse.getData().getArabicMaxTime();
 
                 try {
                     Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).into(img_productImage);
@@ -324,11 +400,14 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
     }
+
     @Override
     public void onBackPressed() {
-        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
         super.onBackPressed();
     }
 }

@@ -412,6 +412,7 @@
     <string name="kindly_enter_block">kindly enter block</string>
     <string name="kindly_enter_street_name">kindly enter street name</string>
     <string name="empty_restaurent_menu">Empty Restaurent Menu</string>
+    <string name="select_valid_time">select valid time</string>
 
 
 </resources>

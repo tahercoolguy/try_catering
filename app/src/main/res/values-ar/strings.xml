@@ -416,6 +416,7 @@
     <string name="location_permission_give">يبدو أن نظام تحديد المواقع العالمي (GPS) الخاص بك معطل ، هل تريد تمكينه؟</string>
     <string name="avenue_a">شارع</string>
     <string name="empty_restaurent_menu">قائمة المطعم فارغة</string>
+    <string name="select_valid_time">حدد وقتًا صالحًا</string>
 
 
 </resources>

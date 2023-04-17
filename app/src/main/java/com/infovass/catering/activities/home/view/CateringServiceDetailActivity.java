@@ -24,6 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.infovass.catering.R;
+import com.infovass.catering.Utils.Helper;
 import com.infovass.catering.activities.adapers.AddMainOnFoodItemAdapters;
 import com.infovass.catering.activities.adapers.ItemsAdapters;
 import com.infovass.catering.activities.base.BaseActivity;
@@ -41,7 +42,10 @@ import com.infovass.catering.activities.utill.ProgressHUD;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,7 +103,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
     RecyclerView rv_foodItems;
     @BindView(R.id.edt_note)
     AppCompatEditText edt_note;
-//    @BindView(R.id.ch_femailServices)
+    //    @BindView(R.id.ch_femailServices)
 //    CheckBox ch_femailServices;
     @BindView(R.id.arrowImageView)
     ImageView arrowImageView;
@@ -108,7 +112,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
     @BindView(R.id.rv_Items)
     RecyclerView rv_Items;
     int id;
-    String status;
+    String status, min_time;
 
     JsonArray jsonArray = new JsonArray();
     JsonArray jsonArray1 = new JsonArray();
@@ -144,6 +148,8 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
         Intent mIntent = getIntent();
         status = mIntent.getStringExtra("status");
+        min_time = mIntent.getStringExtra("min_time");
+
 
         if (status.equalsIgnoreCase("1")) {
             not_availableRL.setVisibility(View.VISIBLE);
@@ -177,7 +183,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                     tv_total.setText(total + " KWD");
 
 //                    tv_total.setText(String.format("%.3f", total) + " KWD");
-                    Log.d("sssss",total+ " KWD");
+                    Log.d("sssss", total + " KWD");
 
                     id = addons.get(postion).getItem().get(verposition).getId();
 
@@ -259,7 +265,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
         rv_Items.setAdapter(itemsAdapters);
         itemsAdapters.setOnItemClickListener(new ItemsAdapters.OnItemClickListener() {
             @Override
-            public void onClickaddOnMin(int verposition,int position, AppCompatTextView tv_femailServiceCount) {
+            public void onClickaddOnMin(int verposition, int position, AppCompatTextView tv_femailServiceCount) {
                 try {
                     int itemCount = Integer.parseInt(tv_femailServiceCount.getText().toString());
                     //  itemCount = itemCount - 1;
@@ -271,7 +277,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 //                        totalAmount = total;
 //                        tv_total.setText(total + " KWD");
 
-                       // id = meals.get(position).getId();
+                        // id = meals.get(position).getId();
                         id = meals.get(position).getMealItems().get(verposition).getId();
                         mealCartItems.put(String.valueOf(id), itemCount);
 
@@ -285,7 +291,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
             }
 
             @Override
-            public void onClickaddOnMax(int verposition,int position, AppCompatTextView tv_femailServiceCount) {
+            public void onClickaddOnMax(int verposition, int position, AppCompatTextView tv_femailServiceCount) {
                 try {
                     int itemCount = Integer.parseInt(tv_femailServiceCount.getText().toString());
                     //   itemCount = itemCount + 1;
@@ -401,10 +407,73 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                             jsonArray1.add(jsonObject);
                         }
 
-                        productDetailPresenter.productAddToCartApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""),
-                                SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""),
-                                "" + femailService, "no", edt_note.getText().toString(), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""),
-                                jsonArray, jsonArray1, "");
+
+                        Date d = new Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
+                        String currentDateTimeString = sdf.format(d);
+                        String selectedTimeString = SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.KEY_TIME, "");
+
+                        String[] currentTime = currentDateTimeString.split(" ");
+                        String[] selectedTime = selectedTimeString.split(" ");
+
+
+                        // Creating a SimpleDateFormat object
+                        // to parse time in the format HH:MM:SS
+                        SimpleDateFormat simpleDateFormat
+                                = new SimpleDateFormat("HH:mm:ss");
+
+                        // Parsing the Time Period
+                        Date date1 = null, date2 = null;
+                        try {
+                            date1 = simpleDateFormat.parse(currentTime[0]+":00");
+                            date2 = simpleDateFormat.parse(selectedTime[0]+":00");
+                        } catch (ParseException exception) {
+                            exception.printStackTrace();
+                        }
+
+
+                        // Calculating the difference in milliseconds
+                        long differenceInMilliSeconds;
+
+
+                        differenceInMilliSeconds = Math.abs(date2.getTime() - date1.getTime());
+
+
+                        // Calculating the difference in Hours
+                        long differenceInHours
+                                = (differenceInMilliSeconds / (60 * 60 * 1000))
+                                % 24;
+
+                        // Calculating the difference in Minutes
+                        long differenceInMinutes
+                                = (differenceInMilliSeconds / (60 * 1000)) % 60;
+
+                        // Calculating the difference in Seconds
+                        long differenceInSeconds
+                                = (differenceInMilliSeconds / 1000) % 60;
+
+                        // Printing the answer
+                        System.out.println(
+                                "Difference is " + differenceInHours + " hours "
+                                        + differenceInMinutes + " minutes "
+                                        + differenceInSeconds + " Seconds. ");
+
+ //
+                        int minTime, checkTime;
+                        minTime = Integer.parseInt(min_time);
+                        checkTime = Integer.parseInt(String.valueOf(differenceInHours));
+//
+//
+                        if (minTime > checkTime) {
+                            productDetailPresenter.productAddToCartApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""),
+                                    SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""),
+                                    "" + femailService, "no", edt_note.getText().toString(), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""),
+                                    jsonArray, jsonArray1, "");
+                        } else {
+                            Helper.showToast(CateringServiceDetailActivity.this, getString(R.string.select_valid_time));
+                        }
+
+
                     } else {
                         Intent i1 = new Intent(this, LoginActivity.class);
                         startActivity(i1);
@@ -421,13 +490,17 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                 break;
 
         }
+
     }
+
+    String max_time_arabic;
 
     @Override
     public void onSuccessGetProductDetailAPi(ProductDetailResponse productDetailResponse) {
         try {
             if (productDetailResponse.getStatus()) {
 
+                max_time_arabic = productDetailResponse.getData().getArabicMaxTime();
                 try {
 //                    Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(img_productImage);
                     Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).into(img_productImage);
@@ -603,11 +676,14 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
     }
+
     @Override
     public void onBackPressed() {
-        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
         super.onBackPressed();
     }
 
