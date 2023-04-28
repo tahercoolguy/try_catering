@@ -143,6 +143,7 @@ public class CartImpl implements CartPresenter {
             fields.put("request_date_time", request_date_time);
             fields.put("payment_type", payment_type);
             fields.put("time", time);
+            fields.put("device", token);
             Observable<PlaceOrderResponse> observable = webService.placeOrderAPI(fields);
             observable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())

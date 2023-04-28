@@ -66,7 +66,9 @@ public interface PAServices {
     @POST("/edit-address/{id}")
     void Edit_Address( @Path("id")  String id,@Header("Authorization") String token,@Body MultipartTypedOutput multipartTypedOutput, Callback<EditAddressRoot> editAddressRootCallback);
 
-
+    @Headers("Cache-Control: no-cache;Content-Type: application/json;")
+    @POST("/update-payment")
+    void Update_Payment(@Body MultipartTypedOutput multipartTypedOutput, Callback<GuestNotificationRoot> guestNotificationRootCallback);
 
 //    @Headers("Cache-Control: no-cache;Content-Type: application/json;")
 //    @POST("caterer-details/{id}")

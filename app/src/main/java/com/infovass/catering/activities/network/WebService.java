@@ -210,10 +210,12 @@ public interface WebService {
     @FormUrlEncoded
     @POST(WebUrl.updatePayment)
     Observable<PaymentResponse> updatePayment(
-            @Field("order_id") String order_id,
+            @Field("invoice_id") String order_id,
             @Field("payment_id") String payment_id,
-            @Field("payment_status") Boolean payment_status
-    );
+            @Field("payment_status") Boolean payment_status,
+            @Field("track_id") String track_id,
+            @Field("transaction_number") String transaction_number
+     );
 
     @FormUrlEncoded
     @POST(WebUrl.promocode)

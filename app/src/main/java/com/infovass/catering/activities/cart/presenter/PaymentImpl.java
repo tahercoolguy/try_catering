@@ -37,7 +37,7 @@ public class PaymentImpl implements PaymentPresenter{
             views.showLoading();
             WebService webService = ServiceGenerator.createService(WebService.class , token);
             JSONObject object = new JSONObject();
-            Observable<PaymentResponse> observable = webService.updatePayment(order_id,payment_id,payment_status);
+            Observable<PaymentResponse> observable = webService.updatePayment(order_id,payment_id,payment_status,track_id,transaction_number);
             observable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<PaymentResponse>() {
