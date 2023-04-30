@@ -69,6 +69,14 @@ public class PaymentActivity extends AppCompatActivity implements PaymentView {
     @Override
     public void onSuccessGetPayment(PaymentResponse cartResponse) {
         Log.d("ss", "ss");
+
+        if(cartResponse.getStatus()){
+            Intent intent = new Intent(PaymentActivity.this, ThankuActivity.class);
+            startActivity(intent);
+        }else{
+            Toast.makeText(PaymentActivity.this, "Transaction Failed", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     @Override
@@ -134,16 +142,14 @@ public class PaymentActivity extends AppCompatActivity implements PaymentView {
                         String Transaction_number = uri.getQueryParameter("reference_code");
                         String track_id = uri.getQueryParameter("transaction_id");
                         presenter.getPayment(SharedPreferencesUtils.getInstance(getApplicationContext()).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(getApplicationContext()).getValue(Constants.order_id, ""), payment_id, false, "", "", invoice_id);
-                        Toast.makeText(PaymentActivity.this, "Transaction Failed", Toast.LENGTH_SHORT).show();
-                        finish();
+
 
                     } else if (results.contains("CAPTURED")) {
                         String Transaction_number = uri.getQueryParameter("reference_code");
                         String track_id = uri.getQueryParameter("transaction_id");
 
                         presenter.getPayment(SharedPreferencesUtils.getInstance(getApplicationContext()).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(getApplicationContext()).getValue(Constants.order_id, ""), payment_id, true, Transaction_number, track_id, invoice_id);
-                        Intent intent = new Intent(PaymentActivity.this, ThankuActivity.class);
-                        startActivity(intent);
+
 //
                     }
                 }
