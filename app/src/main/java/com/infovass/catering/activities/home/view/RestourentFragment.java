@@ -2,7 +2,9 @@ package com.infovass.catering.activities.home.view;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,20 +22,37 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.infovass.catering.DM.Order_DetailsDM.OrderDetailsRoot;
+import com.infovass.catering.MyFormat.Controller.AppController;
+import com.infovass.catering.MyFormat.Utils.ConnectionDetector;
 import com.infovass.catering.R;
+import com.infovass.catering.Utils.Helper;
 import com.infovass.catering.activities.CalenderActivity;
+import com.infovass.catering.activities.DataModel.RD_TopRankedCaterersItem;
+import com.infovass.catering.activities.DataModel.RD_catererData;
+import com.infovass.catering.activities.DataModel.RD_caterers_Bannerdata;
+import com.infovass.catering.activities.DataModel.RD_caterers_Root;
+import com.infovass.catering.activities.DataModel.RD_caterers_TopRankeCaterers;
 import com.infovass.catering.activities.Location.view.LocationActivity;
 import com.infovass.catering.activities.Location.view.TimeActivity;
 import com.infovass.catering.activities.MainActivity;
+import com.infovass.catering.activities.adapers.HomeAdSliderAdapter;
+import com.infovass.catering.activities.adapers.Order_DetailAdapter;
 import com.infovass.catering.activities.adapers.RestourentcategoriesAdapter;
 import com.infovass.catering.activities.adapers.ResturantLargeAdapter;
+import com.infovass.catering.activities.adapers.ResturantMainLargeAdapter;
+import com.infovass.catering.activities.adapers.ResturantTopMenuAdapter;
+import com.infovass.catering.activities.adapers.ResturantTopRestaurentAdapter;
 import com.infovass.catering.activities.home.model.RestourentListResponse;
 import com.infovass.catering.activities.home.presenter.RestourentImpl;
 import com.infovass.catering.activities.home.presenter.RestourentPresenter;
 import com.infovass.catering.activities.network.Constants;
 import com.infovass.catering.activities.network.SharedPreferencesUtils;
+import com.infovass.catering.activities.order.OrderDetailActivity;
 import com.infovass.catering.activities.utill.ProgressHUD;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +61,12 @@ import java.util.Objects;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.MultipartTypedOutput;
+import retrofit.mime.TypedString;
+import retrofit2.http.Field;
 
 public class RestourentFragment extends Fragment implements RestourentView {
     private final static int LOCATION_REQUEST_CODE = 1;
@@ -80,7 +105,18 @@ public class RestourentFragment extends Fragment implements RestourentView {
     @BindView(R.id.framelayout)
     FrameLayout framelayout;
 
+    @BindView(R.id.imageSlider)
+    SliderView imageSlider;
+    @BindView(R.id.topMenuRcv)
+    RecyclerView topMenuRcv;
+    @BindView(R.id.topRestaurentsRcv)
+    RecyclerView topRestaurentsRcv;
+
     Activity activity;
+    private AppController appController;
+    private Dialog progress;
+    private ConnectionDetector connectionDetector;
+    Context context;
 
     public RestourentFragment() {
         // Required empty public constructor
@@ -103,8 +139,9 @@ public class RestourentFragment extends Fragment implements RestourentView {
         view = inflater.inflate(R.layout.fragment_restourent, container, false);
         ButterKnife.bind(this, view);
         activity = getActivity();
-
-
+        context = getActivity().getApplicationContext();
+        appController = (AppController) getActivity().getApplicationContext();
+        connectionDetector = new ConnectionDetector(getActivity());
         tv_city.setSelected(true);
         tv_date.setSelected(true);
         tv_time.setSelected(true);
@@ -112,70 +149,70 @@ public class RestourentFragment extends Fragment implements RestourentView {
         framelayout.setVisibility(View.VISIBLE);
         progressHUD = ProgressHUD.create(getContext(), getString(R.string.loading), false, null, null);
         restourentPresenter = new RestourentImpl(this);
-               restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+//        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
 //        restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
-
+        newRandomCaterers();
         tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
         tv_time.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_TIME, ""));
         tv_date.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
-        List<String> list = new ArrayList<>();
-        list.add(getResources().getString(R.string.all));
-        list.add(getResources().getString(R.string.catering));
-        list.add(getResources().getString(R.string.delivery));
-
-        restourentcategoriesAdapter = new RestourentcategoriesAdapter(list, getContext());
-        LinearLayoutManager HorizontalLayout = new LinearLayoutManager(
-                getContext(),
-                LinearLayoutManager.HORIZONTAL,
-                false);
-        detail_recyclerView.setLayoutManager(HorizontalLayout);
-        detail_recyclerView.setAdapter(restourentcategoriesAdapter);
-        restourentcategoriesAdapter.setOnItemClickListener(new RestourentcategoriesAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, TextView custom_tab_textView, LinearLayout detail_item_linearLayout) {
-                restourentcategoriesAdapter.notifyDataSetChanged();
-                if (position == 0) {
-                    restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
-                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.mode_id, position);
-                }
-                if (position == 1) {
-                    restourentPresenter.getRestourentlistApi("1", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
-                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.mode_id, position);
-                }
-                if (position == 2) {
-                    restourentPresenter.getRestourentlistApi("2", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
-                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.mode_id, position);
-                }
-//                if (position==3)
-//                {
-//                    restourentPresenter.getRestourentlistApi("3",SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""));
+//        List<String> list = new ArrayList<>();
+//        list.add(getResources().getString(R.string.all));
+//        list.add(getResources().getString(R.string.catering));
+//        list.add(getResources().getString(R.string.delivery));
+//
+//        restourentcategoriesAdapter = new RestourentcategoriesAdapter(list, getContext());
+//        LinearLayoutManager HorizontalLayout = new LinearLayoutManager(
+//                getContext(),
+//                LinearLayoutManager.HORIZONTAL,
+//                false);
+//        detail_recyclerView.setLayoutManager(HorizontalLayout);
+//        detail_recyclerView.setAdapter(restourentcategoriesAdapter);
+//        restourentcategoriesAdapter.setOnItemClickListener(new RestourentcategoriesAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position, TextView custom_tab_textView, LinearLayout detail_item_linearLayout) {
+//                restourentcategoriesAdapter.notifyDataSetChanged();
+//                if (position == 0) {
+//                    restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+//                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.mode_id, position);
 //                }
-            }
-        });
+//                if (position == 1) {
+//                    restourentPresenter.getRestourentlistApi("1", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+//                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.mode_id, position);
+//                }
+//                if (position == 2) {
+//                    restourentPresenter.getRestourentlistApi("2", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+//                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.mode_id, position);
+//                }
+////                if (position==3)
+////                {
+////                    restourentPresenter.getRestourentlistApi("3",SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""));
+////                }
+//            }
+//        });
 
-        resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
-        resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
-        resturantListView.setAdapter(resturantLargeAdapter);
-        resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position,int selectedposition, int Restaurant_Status,List<RestourentListResponse.Datum> restourentLIst) {
-                SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
-                int restaurententID = restourentLIst.get(position).getId();
-                String restaurant_Status = String.valueOf(Restaurant_Status);
-                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
-                        .putExtra("restaurant_Status", restaurant_Status);
-                startActivity(intent);
-                activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-
-            }
-        });
+//        resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
+//        resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        resturantListView.setAdapter(resturantLargeAdapter);
+//        resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RestourentListResponse.Datum> restourentLIst) {
+//                SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
+//                int restaurententID = restourentLIst.get(position).getId();
+//                String restaurant_Status = String.valueOf(Restaurant_Status);
+//                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
+//                        .putExtra("restaurant_Status", restaurant_Status);
+//                startActivity(intent);
+//                activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+//
+//            }
+//        });
         return view;
     }
 
-//    public void closeKeyboard() {
+    //    public void closeKeyboard() {
 //        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
 //        inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
 //    }
@@ -190,7 +227,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
         Intent intent = new Intent(getActivity(), LocationActivity.class);
         intent.putExtra("newlocationArea", "newlocationArea");
-        startActivityForResult(intent,RESULT_OK);
+        startActivityForResult(intent, RESULT_OK);
         activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
     }
@@ -246,13 +283,12 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
         if (requestCode == LOCATION_REQUEST_CODE) {
             if (data != null) {
-                  newlocation = data.getStringExtra("newlocationArea");
-                if(newlocation!=null){
+                newlocation = data.getStringExtra("newlocationArea");
+                if (newlocation != null) {
                     tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
                     tv_city.setText(newlocation);
                     restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
                 }
-
 
 
             }
@@ -299,6 +335,174 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
     @Override
     public void onNoInternet() {
+
+    }
+
+
+
+    public void newRandomCaterers() {
+        if (connectionDetector.isConnectingToInternet()) {
+
+            String area_id = SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, "");
+            String date = SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, "");
+            MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
+//            String token = SharedPreferencesUtils.getInstance(LocationActivity.this).getValue(Constants.TOKEN, "" );
+
+            multipartTypedOutput.addPart("mode_type", new TypedString(""));
+            multipartTypedOutput.addPart("area_id", new TypedString(area_id));
+            multipartTypedOutput.addPart("date", new TypedString(date));
+
+            appController.paServices.newRandomCaterers(multipartTypedOutput, new Callback<RD_caterers_Root>() {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void success(RD_caterers_Root rd_caterers_root, Response response) {
+
+                    if (rd_caterers_root.getStatus().equalsIgnoreCase("true")) {
+
+                        try {
+                            setImageSlider(rd_caterers_root.getData().getBannerData());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                        try {
+                            setTopMenuRcv(rd_caterers_root.getData().getTopRankedCaterersItems());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+
+                        try {
+                            setTopRestaurentsRcv(rd_caterers_root.getData().getTopRankedCaterers());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                        try {
+                            setRestaurentsLargeRcv(rd_caterers_root.getData().getCaterersData());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    } else {
+                        Helper.showToast(getActivity(), getString(R.string.something_wrong));
+                    }
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                    error.printStackTrace();
+                }
+            });
+
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+
+    private void setImageSlider(ArrayList<RD_caterers_Bannerdata> caterers_bannerdata) {
+
+        try {
+            HomeAdSliderAdapter sliderAdapter = new HomeAdSliderAdapter(activity, caterers_bannerdata);
+            imageSlider.setSliderAdapter(sliderAdapter);
+            imageSlider.setScrollTimeInSec(4); //set scroll delay in seconds :
+            imageSlider.startAutoCycle();
+            imageSlider.setIndicatorEnabled(false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void setTopMenuRcv(ArrayList<RD_TopRankedCaterersItem> topRankedCaterersItems) {
+
+        try {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false);
+            topMenuRcv.setLayoutManager(linearLayoutManager);
+            ResturantTopMenuAdapter topMenuAdapter = new ResturantTopMenuAdapter(activity, topRankedCaterersItems);
+            topMenuRcv.setAdapter(topMenuAdapter);
+
+            topMenuAdapter.setOnItemClickListener(new ResturantTopMenuAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position, int selectedposition, ArrayList<RD_TopRankedCaterersItem> restourentLIst) {
+
+                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
+                    int restaurententID = Integer.parseInt(restourentLIst.get(position).getId());
+                    String restaurant_Status = String.valueOf("0");
+                    Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
+                            .putExtra("restaurant_Status", restaurant_Status);
+                    startActivity(intent);
+                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void setTopRestaurentsRcv(ArrayList<RD_caterers_TopRankeCaterers> topRankedCaterersItems) {
+
+        try {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false);
+            topRestaurentsRcv.setLayoutManager(linearLayoutManager);
+
+            ResturantTopRestaurentAdapter topRestaurentAdapter = new ResturantTopRestaurentAdapter(activity, topRankedCaterersItems);
+
+            topRestaurentsRcv.setAdapter(topRestaurentAdapter);
+
+
+            topRestaurentAdapter.setOnItemClickListener(new ResturantTopRestaurentAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RD_caterers_TopRankeCaterers> restourentLIst) {
+                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
+                    int restaurententID = Integer.parseInt(restourentLIst.get(position).getId());
+                    String restaurant_Status = String.valueOf(Restaurant_Status);
+                    Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
+                            .putExtra("restaurant_Status", restaurant_Status);
+                    startActivity(intent);
+                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void setRestaurentsLargeRcv(ArrayList<RD_catererData> catererData) {
+
+        try {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
+            resturantListView.setLayoutManager(linearLayoutManager);
+
+            ResturantMainLargeAdapter resturantMainLargeAdapter = new ResturantMainLargeAdapter(activity, catererData);
+
+            resturantListView.setAdapter(resturantMainLargeAdapter);
+
+
+            resturantMainLargeAdapter.setOnItemClickListener(new ResturantMainLargeAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RD_catererData> restourentLIst) {
+                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
+                    int restaurententID = Integer.parseInt(restourentLIst.get(position).getId());
+                    String restaurant_Status = String.valueOf(Restaurant_Status);
+                    Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
+                            .putExtra("restaurant_Status", restaurant_Status);
+                    startActivity(intent);
+                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
 }

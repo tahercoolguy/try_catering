@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clickLL"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/menuRoImg"
+        android:layout_width="204dp"
+        android:layout_height="127dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/gradient"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="15dp"></com.makeramen.roundedimageview.RoundedImageView>
+
+    <TextView
+        android:id="@+id/mainResNameTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:ems="10"
+        android:singleLine="true"
+        android:text="Mini DIp and Dip bar"
+        android:textColor="@color/black"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/priceTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:ems="10"
+        android:singleLine="true"
+        android:text="65.000 KWD"></TextView>
+
+    <TextView
+        android:id="@+id/resNameTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="5dp"
+        android:ems="10"
+        android:singleLine="true"
+        android:text="Dip And Dip"></TextView>
+</LinearLayout>

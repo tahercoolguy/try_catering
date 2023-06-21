@@ -1,6 +1,8 @@
 package com.infovass.catering.activities.home.view;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,12 +25,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.infovass.catering.MyFormat.Controller.AppController;
+import com.infovass.catering.MyFormat.Utils.ConnectionDetector;
 import com.infovass.catering.R;
+import com.infovass.catering.Utils.Helper;
 import com.infovass.catering.activities.CalenderActivity;
+import com.infovass.catering.activities.DataModel.RD_catererData;
+import com.infovass.catering.activities.DataModel.RD_caterers_Root;
 import com.infovass.catering.activities.Location.view.LocationActivity;
 import com.infovass.catering.activities.Location.view.TimeActivity;
 import com.infovass.catering.activities.adapers.RestourentcategoriesAdapter;
 import com.infovass.catering.activities.adapers.ResturantLargeAdapter;
+import com.infovass.catering.activities.adapers.ResturantMainLargeAdapter;
 import com.infovass.catering.activities.adapers.ResturantSearchAdapter;
 import com.infovass.catering.activities.home.model.RestourentListResponse;
 import com.infovass.catering.activities.home.presenter.RestourentImpl;
@@ -43,15 +51,21 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+import retrofit.mime.MultipartTypedOutput;
+import retrofit.mime.TypedString;
 
-public class SearchFragment extends Fragment implements RestourentView {
+public class SearchFragment extends Fragment  {
 
-    List<RestourentListResponse.Datum> restourentLIst = new ArrayList<>();
+//    List<RestourentListResponse.Datum> restourentLIst = new ArrayList<>();
+    ArrayList<RD_catererData> restourentLIst = new ArrayList<>();
     private ProgressHUD progressHUD;
     RestourentPresenter restourentPresenter;
     View view;
     RestourentcategoriesAdapter restourentcategoriesAdapter;
-    ResturantLargeAdapter resturantLargeAdapter;
+//    ResturantLargeAdapter resturantLargeAdapter;
     @BindView(R.id.resturantListView)
     RecyclerView resturantListView;
     @BindView(R.id.detail_recyclerView)
@@ -82,7 +96,11 @@ public class SearchFragment extends Fragment implements RestourentView {
     ListView listView;
     ArrayList<String> list;
     ArrayAdapter<String> adapter;
-
+     private AppController appController;
+    private Dialog progress;
+    private ConnectionDetector connectionDetector;
+    Context context;
+    ResturantMainLargeAdapter resturantMainLargeAdapter;
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -103,56 +121,59 @@ public class SearchFragment extends Fragment implements RestourentView {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.search_fragment, container, false);
         ButterKnife.bind(this, view);
-
+        activity = getActivity();
+        context = getActivity().getApplicationContext();
+        appController = (AppController) getActivity().getApplicationContext();
+        connectionDetector = new ConnectionDetector(getActivity());
         searchLL.setVisibility(View.VISIBLE);
         framelayout.setVisibility(View.INVISIBLE);
         activity = getActivity();
         progressHUD = ProgressHUD.create(getContext(), getString(R.string.loading), false, null, null);
-        restourentPresenter = new RestourentImpl(this);
-        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+//        restourentPresenter = new RestourentImpl(this);
+//        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
 //        restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
-
+        newRandomCaterers();
         tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
         tv_time.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_TIME, ""));
         tv_date.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
-        List<String> list = new ArrayList<>();
-        list.add(getResources().getString(R.string.all));
-        list.add(getResources().getString(R.string.catering));
-        list.add(getResources().getString(R.string.delivery));
-
-        restourentcategoriesAdapter = new RestourentcategoriesAdapter(list, getContext());
-        LinearLayoutManager HorizontalLayout = new LinearLayoutManager(
-                getContext(),
-                LinearLayoutManager.HORIZONTAL,
-                false);
-        detail_recyclerView.setLayoutManager(HorizontalLayout);
-//        detail_recyclerView.setAdapter(restourentcategoriesAdapter);
-        restourentcategoriesAdapter.setOnItemClickListener(new RestourentcategoriesAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, TextView custom_tab_textView, LinearLayout detail_item_linearLayout) {
-                restourentcategoriesAdapter.notifyDataSetChanged();
-                if (position == 0) {
-                    restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
-                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.mode_id, position);
-
-                }
-                if (position == 1) {
-                    restourentPresenter.getRestourentlistApi("1", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
-                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.mode_id, position);
-                }
-                if (position == 2) {
-                    restourentPresenter.getRestourentlistApi("2", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
-                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.mode_id, position);
-                }
-//                if (position==3)
-//                {
-//                    restourentPresenter.getRestourentlistApi("3",SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""));
+//        List<String> list = new ArrayList<>();
+//        list.add(getResources().getString(R.string.all));
+//        list.add(getResources().getString(R.string.catering));
+//        list.add(getResources().getString(R.string.delivery));
+//
+//        restourentcategoriesAdapter = new RestourentcategoriesAdapter(list, getContext());
+//        LinearLayoutManager HorizontalLayout = new LinearLayoutManager(
+//                getContext(),
+//                LinearLayoutManager.HORIZONTAL,
+//                false);
+//        detail_recyclerView.setLayoutManager(HorizontalLayout);
+////        detail_recyclerView.setAdapter(restourentcategoriesAdapter);
+//        restourentcategoriesAdapter.setOnItemClickListener(new RestourentcategoriesAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position, TextView custom_tab_textView, LinearLayout detail_item_linearLayout) {
+//                restourentcategoriesAdapter.notifyDataSetChanged();
+//                if (position == 0) {
+//                    restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+//                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.mode_id, position);
+//
 //                }
-            }
-        });
+//                if (position == 1) {
+//                    restourentPresenter.getRestourentlistApi("1", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+//                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.mode_id, position);
+//                }
+//                if (position == 2) {
+//                    restourentPresenter.getRestourentlistApi("2", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+//                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.mode_id, position);
+//                }
+////                if (position==3)
+////                {
+////                    restourentPresenter.getRestourentlistApi("3",SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""));
+////                }
+//            }
+//        });
 
 //        resturantLargeAdapter = new ResturantSearchAdapter(getContext(), restourentLIst);
 //        resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -171,23 +192,23 @@ public class SearchFragment extends Fragment implements RestourentView {
 //
 //        });
 
-        resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
-        resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
-        resturantListView.setAdapter(resturantLargeAdapter);
-        resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RestourentListResponse.Datum> restourentLIst) {
-                SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(selectedposition).getId());
-                int restaurententID = restourentLIst.get(selectedposition).getId();
-                String restaurant_Status = String.valueOf(Restaurant_Status);
-                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
-                        .putExtra("restaurant_Status", restaurant_Status);
-                startActivity(intent);
-                activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-                hideKeyboard(activity);
-
-            }
-        });
+//        resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
+//        resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        resturantListView.setAdapter(resturantLargeAdapter);
+//        resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RestourentListResponse.Datum> restourentLIst) {
+//                SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(selectedposition).getId());
+//                int restaurententID = restourentLIst.get(selectedposition).getId();
+//                String restaurant_Status = String.valueOf(Restaurant_Status);
+//                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
+//                        .putExtra("restaurant_Status", restaurant_Status);
+//                startActivity(intent);
+//                activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+//                hideKeyboard(activity);
+//
+//            }
+//        });
         showKeyboard();
         setSearchData();
 
@@ -307,54 +328,54 @@ public class SearchFragment extends Fragment implements RestourentView {
         activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
     }
 
-    @Override
-    public void onSuccessGetRestourentListAPi(RestourentListResponse restourentListResponse) {
-        try {
-            restourentLIst.clear();
-            if (restourentListResponse.getData().size() == 0) {
-//                lnr_noProduct.setVisibility(View.VISIBLE);
-                resturantListView.setVisibility(View.GONE);
-
-//                restourentLIst = new ArrayList<>();
-//                resturantLargeAdapter.notifyDataSetChanged();
-            } else {
-//                lnr_noProduct.setVisibility(View.GONE);
-//                resturantListView.setVisibility(View.VISIBLE);
-                restourentLIst.addAll(restourentListResponse.getData());
-                resturantLargeAdapter.notifyDataSetChanged();
-
-
-//                for (RestourentListResponse.Datum da : restourentListResponse.getData()
-//                ) {
-//                    if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-//                        list.add(da.getArabicName());
-//                    } else {
-//                        list.add(da.getName());
-//                    }
-//                }
-            }
-
-        } catch (Exception ignore) {
-            restourentLIst = new ArrayList<>();
-            ignore.printStackTrace();
-            resturantLargeAdapter.notifyDataSetChanged();
-
-        }
-    }
+//    @Override
+//    public void onSuccessGetRestourentListAPi(RestourentListResponse restourentListResponse) {
+//        try {
+//            restourentLIst.clear();
+//            if (restourentListResponse.getData().size() == 0) {
+////                lnr_noProduct.setVisibility(View.VISIBLE);
+//                resturantListView.setVisibility(View.GONE);
+//
+////                restourentLIst = new ArrayList<>();
+////                resturantLargeAdapter.notifyDataSetChanged();
+//            } else {
+////                lnr_noProduct.setVisibility(View.GONE);
+////                resturantListView.setVisibility(View.VISIBLE);
+////                restourentLIst.addAll(restourentListResponse.getData());
+//                resturantMainLargeAdapter.notifyDataSetChanged();
+//
+//
+////                for (RestourentListResponse.Datum da : restourentListResponse.getData()
+////                ) {
+////                    if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+////                        list.add(da.getArabicName());
+////                    } else {
+////                        list.add(da.getName());
+////                    }
+////                }
+//            }
+//
+//        } catch (Exception ignore) {
+//            restourentLIst = new ArrayList<>();
+//            ignore.printStackTrace();
+//            resturantMainLargeAdapter.notifyDataSetChanged();
+//
+//        }
+//    }
 
 
     private void filter(String text) {
         // creating a new array list to filter our data.
-        ArrayList<RestourentListResponse.Datum> filteredlist = new ArrayList<>();
+        ArrayList<RD_catererData> filteredlist = new ArrayList<>();
 
         // running a for loop to compare elements.
-        for (RestourentListResponse.Datum item : restourentLIst) {
+        for (RD_catererData item : restourentLIst) {
 
             // checking if the entered string matched with any item of our recycler view.
 
 
             if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-                if (item.getArabicName().contains(text.toLowerCase())) {
+                if (item.getArabic_name().contains(text.toLowerCase())) {
                     // if the item is matched we are
                     // adding it to our filtered list.
                     filteredlist.add(item);
@@ -378,35 +399,109 @@ public class SearchFragment extends Fragment implements RestourentView {
         } else {
             // at last we are passing that filtered
             // list to our adapter class.
-            resturantLargeAdapter.filterList(filteredlist);
+            resturantMainLargeAdapter.filterList(filteredlist);
         }
     }
 
+//
+//    @Override
+//    public void showLoading() {
+//        try {
+////            progressHUD.show();
+//        } catch (Exception f) {
+//        }
+//    }
+//
+//    @Override
+//    public void hideLoading() {
+//        try {
+////            progressHUD.dismiss();
+//        } catch (Exception f) {
+//        }
+//    }
+//
+//    @Override
+//    public void onFail(String msg) {
+//        resturantListView.setVisibility(View.GONE);
+//    }
+//
+//    @Override
+//    public void onNoInternet() {
+//
+//    }
 
-    @Override
-    public void showLoading() {
+    public void newRandomCaterers() {
+        if (connectionDetector.isConnectingToInternet()) {
+
+            String area_id = SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, "");
+            String date = SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, "");
+            MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
+//            String token = SharedPreferencesUtils.getInstance(LocationActivity.this).getValue(Constants.TOKEN, "" );
+
+            multipartTypedOutput.addPart("mode_type", new TypedString(""));
+            multipartTypedOutput.addPart("area_id", new TypedString(area_id));
+            multipartTypedOutput.addPart("date", new TypedString(date));
+
+            appController.paServices.newRandomCaterers(multipartTypedOutput, new Callback<RD_caterers_Root>() {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void success(RD_caterers_Root rd_caterers_root, Response response) {
+
+                    if (rd_caterers_root.getStatus().equalsIgnoreCase("true")) {
+
+                        resturantListView.setVisibility(View.VISIBLE);
+                        try {
+                            setRestaurentsLargeRcv(rd_caterers_root.getData().getCaterersData());
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+
+                    } else {
+                        Helper.showToast(getActivity(), getString(R.string.something_wrong));
+                    }
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                    error.printStackTrace();
+                }
+            });
+
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+    private void setRestaurentsLargeRcv(ArrayList<RD_catererData> catererData) {
+
         try {
-//            progressHUD.show();
-        } catch (Exception f) {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
+            resturantListView.setLayoutManager(linearLayoutManager);
+
+              resturantMainLargeAdapter = new ResturantMainLargeAdapter(activity, catererData);
+
+            resturantListView.setAdapter(resturantMainLargeAdapter);
+
+
+            resturantMainLargeAdapter.setOnItemClickListener(new ResturantMainLargeAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RD_catererData> restourentLIst) {
+                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
+                    int restaurententID = Integer.parseInt(restourentLIst.get(position).getId());
+                    String restaurant_Status = String.valueOf(Restaurant_Status);
+                    Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
+                            .putExtra("restaurant_Status", restaurant_Status);
+                    startActivity(intent);
+                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-    }
-
-    @Override
-    public void hideLoading() {
-        try {
-//            progressHUD.dismiss();
-        } catch (Exception f) {
-        }
-    }
-
-    @Override
-    public void onFail(String msg) {
-        resturantListView.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void onNoInternet() {
 
     }
-
 }

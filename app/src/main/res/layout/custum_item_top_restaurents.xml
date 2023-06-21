@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clickLL"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="204dp"
+        android:layout_height="127dp"
+        android:layout_margin="5dp"
+
+        app:cardCornerRadius="15dp">
+        <View
+            android:id="@+id/overlay_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginEnd="0dp"
+            android:layout_marginBottom="0dp"
+            android:alpha="0.15"
+            android:background="@color/black" />
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/menuRoImg"
+            android:layout_width="204dp"
+            android:layout_height="127dp"
+            android:background="@drawable/gradient"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="15dp"></com.makeramen.roundedimageview.RoundedImageView>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom">
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/mainResNameTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:ems="10"
+                    android:shadowRadius="5"
+                    android:textColor="@color/white"
+                      android:singleLine="true"
+                    android:text="Mini DIp and Dip bar"
+                     android:textStyle="bold"></TextView>
+
+
+                <TextView
+                    android:id="@+id/resNameTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:ems="10"
+                    android:textSize="13dp"
+                    android:singleLine="true"
+                    android:shadowColor="@color/black"
+                     android:textColor="@color/white"
+                     android:text="Dip And Dip"></TextView>
+            </LinearLayout>
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

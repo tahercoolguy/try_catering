@@ -13,6 +13,7 @@ import com.infovass.catering.DM.PrivacyPolicyRoot;
 import com.infovass.catering.DM.ProfileDM.ProfileData;
 import com.infovass.catering.DM.ProfileDM.ProfileRoot;
 import com.infovass.catering.MyFormat.MyDM.Root;
+import com.infovass.catering.activities.DataModel.RD_caterers_Root;
 import com.infovass.catering.activities.home.model.RestourentModeResponse;
 
 ;import retrofit.Callback;
@@ -76,4 +77,8 @@ public interface PAServices {
 //            @Path("id") String id,
 //            @Body TypedInput body
 //    );
+
+    @Headers("Cache-Control: no-cache;Content-Type: application/json;")
+    @POST("/random-caterers")
+    void newRandomCaterers(@Body MultipartTypedOutput multipartTypedOutput, Callback<RD_caterers_Root> caterers_rootCallback);
 }

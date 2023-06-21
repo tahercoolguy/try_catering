@@ -72,8 +72,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Dialog progress;
     private ConnectionDetector connectionDetector;
 
-    @BindView(R.id.cartImg)
-    ImageView cartImg;
+    @BindView(R.id.searchImg)
+    ImageView searchImg;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -102,9 +102,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         connectionDetector = new ConnectionDetector(getApplicationContext());
 
         fireBaseNotification();
-        
+
 
     }
+
     public void closeKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
@@ -128,10 +129,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //    }
 
 
-    @OnClick(R.id.cartImg)
-    public void clickcartImg(){
-        startActivity(new Intent(MainActivity.this, CartActivity.class));
-        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+    @OnClick(R.id.searchImg)
+    public void clicksearchImg() {
+//        startActivity(new Intent(MainActivity.this, CartActivity.class));
+//        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+        SearchFragment fragment = SearchFragment.newInstance();
+        startFragment(fragment);
 
     }
 
@@ -141,9 +145,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startFragment(restourentFragment);
 //        Common.CONTAINER_FRAGMENT = "RestourentFragment";
 //        toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
-        
 
-        
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -152,9 +155,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startFragment(fragment);
 //        Common.CONTAINER_FRAGMENT = "RestourentFragment";
 //        toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
-        
 
-        
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -163,9 +165,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startFragment(fragment);
 //        Common.CONTAINER_FRAGMENT = "RestourentFragment";
 //        toolbar.setNavigationIcon(R.drawable.ic_baseline_menu_24);
-        
 
-        
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -183,7 +184,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            fragmentTransaction.addToBackStack(fragment.getClass().getName());
 //        }
         fragmentTransaction.commitAllowingStateLoss();
-     }
+    }
 
 //    private void startFragment(Fragment fragment) {
 //        String backStateName = fragment.getClass().getName();
@@ -219,11 +220,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         if (id == R.id.homeMenu) {
             callRestourentFragment("RestourentFragment");
-        } else if (id == R.id.favMenu) {
-            callFavFragment("FavFragment");
-        } else if (id == R.id.searchMenu) {
-            callSearchFragment("SearchFragment");
-        } else if (id == R.id.profileMenu) {
+        }
+//        else if (id == R.id.favMenu) {
+//            callFavFragment("FavFragment");
+//        }
+        else if (id == R.id.cartMenu) {
+//            callSearchFragment("SearchFragment");
+            startActivity(new Intent(MainActivity.this, CartActivity.class));
+            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+        }
+
+//        else if (id == R.id.searchMenu) {
+//            callSearchFragment("SearchFragment");
+//        }
+
+        else if (id == R.id.profileMenu) {
             callProfileFragment("ProfileFragment");
         }
 //        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -238,7 +250,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else {
             bottomNavigationView.setSelectedItemId(R.id.homeMenu);
         }
-        
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -261,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    public void fireBaseNotification(){
+    public void fireBaseNotification() {
         FirebaseMessaging.getInstance().getToken()
                 .addOnCompleteListener(new OnCompleteListener<String>() {
                     @Override
@@ -275,12 +287,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         String token = task.getResult();
                         notificationGuestAPI(token);
                         // Log and toast
-                        String msg =  token;
+                        String msg = token;
 //                        Log.d(TAG, msg);
 //                        Toast.makeText(MainActivity.this, msg, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
+
     public void notificationGuestAPI(String token) {
         if (connectionDetector.isConnectingToInternet()) {
             MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
