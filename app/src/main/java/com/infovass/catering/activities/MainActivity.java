@@ -128,12 +128,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        }
 //    }
 
+    boolean searchClicked = false;
 
     @OnClick(R.id.searchImg)
     public void clicksearchImg() {
 //        startActivity(new Intent(MainActivity.this, CartActivity.class));
 //        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-
+        searchClicked = true;
         SearchFragment fragment = SearchFragment.newInstance();
         startFragment(fragment);
 
@@ -141,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void callRestourentFragment(String value) {
+        searchClicked=false;
         RestourentFragment restourentFragment = RestourentFragment.newInstance();
         startFragment(restourentFragment);
 //        Common.CONTAINER_FRAGMENT = "RestourentFragment";
@@ -243,10 +245,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBackPressed() {
         if (bottomNavigationView.getSelectedItemId() == R.id.homeMenu) {
-            finish();
+            if(searchClicked){
+                callRestourentFragment("RestourentFragment");
+            }else{
+                finish();
+            }
+
         } else {
             bottomNavigationView.setSelectedItemId(R.id.homeMenu);
         }
