@@ -9,10 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.infovass.catering.R;
@@ -36,7 +38,8 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
     ResturantLargeAdapter.OnItemClickListener onItemClickListener;
     String lastValue = "";
     List<RestourentListResponse.Datum> restourentLIst = new ArrayList<>();
-int selectedposition;
+    int selectedposition;
+
     public ResturantLargeAdapter(Context context, List<RestourentListResponse.Datum> restourentLIst) {
         this.context = context;
         this.restourentLIst = restourentLIst;
@@ -53,7 +56,6 @@ int selectedposition;
 
     @Override
     public void onBindViewHolder(@NonNull ResturantLargeAdapter.Viewholder holder, @SuppressLint("RecyclerView") final int position) {
-        
 
 
         RestourentListResponse.Datum resRDAta = restourentLIst.get(position);
@@ -140,25 +142,25 @@ int selectedposition;
 //            }
 
 
-            if (resModeid.equalsIgnoreCase("2")) {
-                holder.img_delevery.setVisibility(View.VISIBLE);
-                holder.img_delevery.setImageResource(R.drawable.ic_deleivery);
-
-            } else {
-                holder.img_delevery.setVisibility(View.INVISIBLE);
-            }
-            if (resModeid.equalsIgnoreCase("1")) {
-                holder.img_catering.setImageResource(R.drawable.ic_catering);
-                holder.img_catering.setVisibility(View.VISIBLE);
-
-            } else {
-                holder.img_catering.setVisibility(View.INVISIBLE);
-            }
+//            if (resModeid.equalsIgnoreCase("2")) {
+//                holder.img_delevery.setVisibility(View.VISIBLE);
+//                holder.img_delevery.setImageResource(R.drawable.ic_deleivery);
+//
+//            } else {
+//                holder.img_delevery.setVisibility(View.INVISIBLE);
+//            }
+//            if (resModeid.equalsIgnoreCase("1")) {
+//                holder.img_catering.setImageResource(R.drawable.ic_catering);
+//                holder.img_catering.setVisibility(View.VISIBLE);
+//
+//            } else {
+//                holder.img_catering.setVisibility(View.INVISIBLE);
+//            }
             if (resStatus.equalsIgnoreCase("1")) {
-                holder.img_table.setImageResource(R.drawable.busyicon);
-                holder.img_table.setVisibility(View.VISIBLE);
+//                holder.img_table.setImageResource(R.drawable.busyicon);
+                holder.busyCV.setVisibility(View.VISIBLE);
             } else {
-                holder.img_table.setVisibility(View.INVISIBLE);
+                holder.busyCV.setVisibility(View.INVISIBLE);
             }
 
 
@@ -215,8 +217,8 @@ int selectedposition;
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectedposition=position;
-                onItemClickListener.onItemClick(position,selectedposition,Restaurant_Status,restourentLIst);
+                selectedposition = position;
+                onItemClickListener.onItemClick(position, selectedposition, Restaurant_Status, restourentLIst);
             }
         });
     }
@@ -224,6 +226,7 @@ int selectedposition;
     public void setOnItemClickListener(ResturantLargeAdapter.OnItemClickListener onItemClickListener) {
         this.onItemClickListener = onItemClickListener;
     }
+
     // method for filtering our recyclerview items.
     public void filterList(ArrayList<RestourentListResponse.Datum> filterlist) {
         // below line is to add our filtered
@@ -244,20 +247,27 @@ int selectedposition;
     public class Viewholder extends RecyclerView.ViewHolder {
         @BindView(R.id.resturantImageView)
         RoundedImageView resturantImageView;
+
         @BindView(R.id.resNameTextView)
         AppCompatTextView resNameTextView;
+
         @BindView(R.id.resNotesTextView)
         AppCompatTextView resNotesTextView;
 
         @BindView(R.id.img_delevery)
         CircularImageView img_delevery;
+
         @BindView(R.id.img_table)
-        CircularImageView img_table;
+        ImageView img_table;
+
         @BindView(R.id.img_catering)
         CircularImageView img_catering;
 
         @BindView(R.id.simpleRatingBar)
         RatingBar simpleRatingBar;
+
+        @BindView(R.id.busyCV)
+        CardView busyCV;
 
         public Viewholder(View itemView) {
             super(itemView);
@@ -266,7 +276,7 @@ int selectedposition;
     }
 
     public interface OnItemClickListener {
-        void onItemClick(int position,int selectedposition, int Restaurant_Status,List<RestourentListResponse.Datum> restourentLIst);
+        void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RestourentListResponse.Datum> restourentLIst);
     }
 }
 

@@ -79,6 +79,10 @@ public interface PAServices {
 //    );
 
     @Headers("Cache-Control: no-cache;Content-Type: application/json;")
-    @POST("/random-caterers")
+    @POST("/random-caterers-test")
     void newRandomCaterers(@Body MultipartTypedOutput multipartTypedOutput, Callback<RD_caterers_Root> caterers_rootCallback);
+
+    @Headers("Cache-Control: no-cache;Content-Type: application/json;")
+    @POST("/random-caterers")
+    void RandomCaterers(@Body MultipartTypedOutput multipartTypedOutput, Callback<RD_caterers_Root> caterers_rootCallback);
 }

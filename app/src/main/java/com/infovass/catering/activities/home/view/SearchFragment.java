@@ -57,15 +57,15 @@ import retrofit.client.Response;
 import retrofit.mime.MultipartTypedOutput;
 import retrofit.mime.TypedString;
 
-public class SearchFragment extends Fragment implements ResturantMainLargeAdapter.AdapterCallback {
+public class SearchFragment extends Fragment implements RestourentView {
 
-    //    List<RestourentListResponse.Datum> restourentLIst = new ArrayList<>();
-    ArrayList<RD_catererData> restourentLIst = new ArrayList<>();
+        List<RestourentListResponse.Datum> restourentLIst = new ArrayList<>();
+//    ArrayList<RD_catererData> restourentLIst = new ArrayList<>();
     private ProgressHUD progressHUD;
     RestourentPresenter restourentPresenter;
     View view;
     RestourentcategoriesAdapter restourentcategoriesAdapter;
-    //    ResturantLargeAdapter resturantLargeAdapter;
+        ResturantLargeAdapter resturantLargeAdapter;
     @BindView(R.id.resturantListView)
     RecyclerView resturantListView;
     @BindView(R.id.detail_recyclerView)
@@ -131,12 +131,12 @@ public class SearchFragment extends Fragment implements ResturantMainLargeAdapte
         framelayout.setVisibility(View.INVISIBLE);
         activity = getActivity();
         progressHUD = ProgressHUD.create(getContext(), getString(R.string.loading), false, null, null);
-//        restourentPresenter = new RestourentImpl(this);
-//        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+        restourentPresenter = new RestourentImpl(this);
+        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
 //        restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
-        newRandomCaterers();
+//        newRandomCaterers();
         tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
         tv_time.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_TIME, ""));
         tv_date.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
@@ -194,85 +194,85 @@ public class SearchFragment extends Fragment implements ResturantMainLargeAdapte
 //
 //        });
 
-//        resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
-//        resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        resturantListView.setAdapter(resturantLargeAdapter);
-//        resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RestourentListResponse.Datum> restourentLIst) {
-//                SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(selectedposition).getId());
-//                int restaurententID = restourentLIst.get(selectedposition).getId();
-//                String restaurant_Status = String.valueOf(Restaurant_Status);
-//                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
-//                        .putExtra("restaurant_Status", restaurant_Status);
-//                startActivity(intent);
-//                activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-//                hideKeyboard(activity);
-//
-//            }
-//        });
+        resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
+        resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
+        resturantListView.setAdapter(resturantLargeAdapter);
+        resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RestourentListResponse.Datum> restourentLIst) {
+                SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(selectedposition).getId());
+                int restaurententID = restourentLIst.get(selectedposition).getId();
+                String restaurant_Status = String.valueOf(Restaurant_Status);
+                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
+                        .putExtra("restaurant_Status", restaurant_Status);
+                startActivity(intent);
+                activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                hideKeyboard(activity);
+
+            }
+        });
         showKeyboard();
         setSearchData();
 
 
         // attach setOnQueryTextListener
         // to search view defined above
-        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-
-                try {
-                    resturantMainLargeAdapter.filterList(query);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-
-                try {
-                    resturantMainLargeAdapter.filterList(newText);
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-                return false;
-            }
-        });
 //        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            // Override onQueryTextSubmit method which is call when submit query is searched
 //            @Override
 //            public boolean onQueryTextSubmit(String query) {
-//                resturantMainLargeAdapter.filterList(query);
-//                // If the list contains the search query than filter the adapter
-//                // using the filter method with the query as its argument
-////                if (list.contains(query)) {
-////                    adapter.getFilter().filter(query);
-////                } else {
-////                    // Search query not found in List View
-////                    Toast.makeText(activity, getString(R.string.not_found), Toast.LENGTH_LONG).show();
-////                }
 //
-//                // inside on query text change method we are
-//                // calling a method to filter our recycler view.
+//                try {
+//                    resturantMainLargeAdapter.filterList(query);
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
 //                return false;
 //            }
 //
-//            // This method is overridden to filter the adapter according
-//            // to a search query when the user is typing search
 //            @Override
 //            public boolean onQueryTextChange(String newText) {
-////                filter(newText);
 //
-//                resturantMainLargeAdapter.filterList(newText);
+//                try {
+//                    resturantMainLargeAdapter.filterList(newText);
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
 //                return false;
 //            }
 //        });
+        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            // Override onQueryTextSubmit method which is call when submit query is searched
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+//                resturantMainLargeAdapter.filterList(query);
+                // If the list contains the search query than filter the adapter
+                // using the filter method with the query as its argument
+//                if (list.contains(query)) {
+//                    adapter.getFilter().filter(query);
+//                } else {
+//                    // Search query not found in List View
+//                    Toast.makeText(activity, getString(R.string.not_found), Toast.LENGTH_LONG).show();
+//                }
+
+                // inside on query text change method we are
+                // calling a method to filter our recycler view.
+                return false;
+            }
+
+            // This method is overridden to filter the adapter according
+            // to a search query when the user is typing search
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filter(newText);
+
+//                resturantMainLargeAdapter.filterList(newText);
+                return false;
+            }
+        });
 
 
         return view;
@@ -361,107 +361,109 @@ public class SearchFragment extends Fragment implements ResturantMainLargeAdapte
         activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
     }
 
-//    @Override
-//    public void onSuccessGetRestourentListAPi(RestourentListResponse restourentListResponse) {
-//        try {
-//            restourentLIst.clear();
-//            if (restourentListResponse.getData().size() == 0) {
-////                lnr_noProduct.setVisibility(View.VISIBLE);
+    @Override
+    public void onSuccessGetRestourentListAPi(RestourentListResponse restourentListResponse) {
+        try {
+            resturantListView.setVisibility(View.VISIBLE);
+            restourentLIst.clear();
+            if (restourentListResponse.getData().size() == 0) {
+//                lnr_noProduct.setVisibility(View.VISIBLE);
 //                resturantListView.setVisibility(View.GONE);
-//
-////                restourentLIst = new ArrayList<>();
-////                resturantLargeAdapter.notifyDataSetChanged();
-//            } else {
-////                lnr_noProduct.setVisibility(View.GONE);
-////                resturantListView.setVisibility(View.VISIBLE);
-////                restourentLIst.addAll(restourentListResponse.getData());
+
+//                restourentLIst = new ArrayList<>();
+//                resturantLargeAdapter.notifyDataSetChanged();
+            } else {
+//                lnr_noProduct.setVisibility(View.GONE);
+//                resturantListView.setVisibility(View.VISIBLE);
+                restourentLIst.addAll(restourentListResponse.getData());
+                resturantLargeAdapter.notifyDataSetChanged();
 //                resturantMainLargeAdapter.notifyDataSetChanged();
-//
-//
-////                for (RestourentListResponse.Datum da : restourentListResponse.getData()
-////                ) {
-////                    if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-////                        list.add(da.getArabicName());
-////                    } else {
-////                        list.add(da.getName());
-////                    }
-////                }
-//            }
-//
-//        } catch (Exception ignore) {
-//            restourentLIst = new ArrayList<>();
-//            ignore.printStackTrace();
+
+
+//                for (RestourentListResponse.Datum da : restourentListResponse.getData()
+//                ) {
+//                    if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+//                        list.add(da.getArabicName());
+//                    } else {
+//                        list.add(da.getName());
+//                    }
+//                }
+            }
+
+        } catch (Exception ignore) {
+            restourentLIst = new ArrayList<>();
+            ignore.printStackTrace();
 //            resturantMainLargeAdapter.notifyDataSetChanged();
-//
-//        }
-//    }
+
+        }
+    }
 
 
-//    private void filter(String text) {
-//        // creating a new array list to filter our data.
-//        ArrayList<RD_catererData> filteredlist = new ArrayList<>();
-//
-//        // running a for loop to compare elements.
-//        for (RD_catererData item : restourentLIst) {
-//
-//            // checking if the entered string matched with any item of our recycler view.
-//
-//
-//            if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-//                if (item.getArabic_name().contains(text.toLowerCase())) {
-//                    // if the item is matched we are
-//                    // adding it to our filtered list.
-//                    filteredlist.add(item);
-//                }
-//            }
-//
-//            if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
-//                if (item.getName().toLowerCase().contains(text.toLowerCase())) {
-//                    // if the item is matched we are
-//                    // adding it to our filtered list.
-//                    filteredlist.add(item);
-//                }
-//            }
-//
-//
-//        }
-//        if (filteredlist.isEmpty()) {
-//            // if no item is added in filtered list we are
-//            // displaying a toast message as no data found.
-////            Toast.makeText(getContext(), getString(R.string.not_found), Toast.LENGTH_SHORT).show();
-//        } else {
-//            // at last we are passing that filtered
-//            // list to our adapter class.
-//            resturantMainLargeAdapter.filterList(filteredlist);
-//        }
-//    }
+    private void filter(String text) {
+        // creating a new array list to filter our data.
+        ArrayList<RestourentListResponse.Datum> filteredlist = new ArrayList<>();
+
+        // running a for loop to compare elements.
+        for (RestourentListResponse.Datum item : restourentLIst) {
+
+            // checking if the entered string matched with any item of our recycler view.
+
+
+            if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+                if (item.getArabicName().contains(text.toLowerCase())) {
+                    // if the item is matched we are
+                    // adding it to our filtered list.
+                    filteredlist.add(item);
+                }
+            }
+
+            if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+                if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+                    // if the item is matched we are
+                    // adding it to our filtered list.
+                    filteredlist.add(item);
+                }
+            }
+
+
+        }
+        if (filteredlist.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+//            Toast.makeText(getContext(), getString(R.string.not_found), Toast.LENGTH_SHORT).show();
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            resturantLargeAdapter.filterList(filteredlist);
+        }
+    }
 
     //
-//    @Override
-//    public void showLoading() {
-//        try {
-////            progressHUD.show();
-//        } catch (Exception f) {
-//        }
-//    }
-//
-//    @Override
-//    public void hideLoading() {
-//        try {
-////            progressHUD.dismiss();
-//        } catch (Exception f) {
-//        }
-//    }
-//
-//    @Override
-//    public void onFail(String msg) {
-//        resturantListView.setVisibility(View.GONE);
-//    }
-//
-//    @Override
-//    public void onNoInternet() {
-//
-//    }
+    @Override
+    public void showLoading() {
+        try {
+//            progressHUD.show();
+        } catch (Exception f) {
+        }
+    }
+
+    @Override
+    public void hideLoading() {
+        try {
+//            progressHUD.dismiss();
+        } catch (Exception f) {
+        }
+    }
+
+    @Override
+    public void onFail(String msg) {
+        resturantListView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onNoInternet() {
+
+    }
     public void newRandomCaterers() {
         if (connectionDetector.isConnectingToInternet()) {
 
@@ -485,7 +487,7 @@ public class SearchFragment extends Fragment implements ResturantMainLargeAdapte
                         try {
                             catererData = new ArrayList<>();
                             catererData = rd_caterers_root.getData().getCaterersData();
-                            setRestaurentsLargeRcv(rd_caterers_root.getData().getCaterersData());
+//                            setRestaurentsLargeRcv(rd_caterers_root.getData().getCaterersData());
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -509,41 +511,41 @@ public class SearchFragment extends Fragment implements ResturantMainLargeAdapte
         }
     }
 
-    private void setRestaurentsLargeRcv(ArrayList<RD_catererData> catererData) {
+//    private void setRestaurentsLargeRcv(ArrayList<RD_catererData> catererData) {
+//
+//        try {
+//            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
+//            resturantListView.setLayoutManager(linearLayoutManager);
+//
+//            resturantMainLargeAdapter = new ResturantMainLargeAdapter(activity, catererData);
+//
+//            resturantListView.setAdapter(resturantMainLargeAdapter);
+//
+//
+//            resturantMainLargeAdapter.setOnItemClickListener(new ResturantMainLargeAdapter.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RD_catererData> restourentLIst) {
+//                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
+//                    int restaurententID = Integer.parseInt(restourentLIst.get(position).getId());
+//                    String restaurant_Status = String.valueOf(Restaurant_Status);
+//                    Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
+//                            .putExtra("restaurant_Status", restaurant_Status);
+//                    startActivity(intent);
+//                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+//                }
+//            });
+//            resturantMainLargeAdapter.setCallback(this);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
 
-        try {
-            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
-            resturantListView.setLayoutManager(linearLayoutManager);
-
-            resturantMainLargeAdapter = new ResturantMainLargeAdapter(activity, catererData);
-
-            resturantListView.setAdapter(resturantMainLargeAdapter);
-
-
-            resturantMainLargeAdapter.setOnItemClickListener(new ResturantMainLargeAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RD_catererData> restourentLIst) {
-                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
-                    int restaurententID = Integer.parseInt(restourentLIst.get(position).getId());
-                    String restaurant_Status = String.valueOf(Restaurant_Status);
-                    Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
-                            .putExtra("restaurant_Status", restaurant_Status);
-                    startActivity(intent);
-                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-                }
-            });
-            resturantMainLargeAdapter.setCallback(this);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    @Override
-    public void onItemClick(String data) {
-        if (data.equalsIgnoreCase("data")) {
-            newRandomCaterers();
-        }
-    }
+//    @Override
+//    public void onItemClick(String data) {
+//        if (data.equalsIgnoreCase("data")) {
+//            newRandomCaterers();
+//        }
+//    }
 }

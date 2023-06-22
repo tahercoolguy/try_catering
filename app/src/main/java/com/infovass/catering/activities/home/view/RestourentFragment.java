@@ -154,9 +154,9 @@ public class RestourentFragment extends Fragment implements RestourentView {
         framelayout.setVisibility(View.VISIBLE);
         progressHUD = ProgressHUD.create(getContext(), getString(R.string.loading), false, null, null);
         restourentPresenter = new RestourentImpl(this);
-//        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
 //        restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
         newRandomCaterers();
         tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
@@ -198,22 +198,22 @@ public class RestourentFragment extends Fragment implements RestourentView {
 //            }
 //        });
 
-//        resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
-//        resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        resturantListView.setAdapter(resturantLargeAdapter);
-//        resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RestourentListResponse.Datum> restourentLIst) {
-//                SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
-//                int restaurententID = restourentLIst.get(position).getId();
-//                String restaurant_Status = String.valueOf(Restaurant_Status);
-//                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
-//                        .putExtra("restaurant_Status", restaurant_Status);
-//                startActivity(intent);
-//                activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-//
-//            }
-//        });
+        resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
+        resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
+        resturantListView.setAdapter(resturantLargeAdapter);
+        resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RestourentListResponse.Datum> restourentLIst) {
+                SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
+                int restaurententID = restourentLIst.get(position).getId();
+                String restaurant_Status = String.valueOf(Restaurant_Status);
+                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
+                        .putExtra("restaurant_Status", restaurant_Status);
+                startActivity(intent);
+                activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+            }
+        });
         return view;
     }
 
@@ -362,6 +362,16 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 public void success(RD_caterers_Root rd_caterers_root, Response response) {
 
                     if (rd_caterers_root.getStatus().equalsIgnoreCase("true")) {
+                        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+                            topResTxt.setText(context.getString(R.string.top_restaurants));
+                            topmenuTxt.setText(context.getString(R.string.top_menus));
+                        }
+
+                        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+                            topResTxt.setText(context.getString(R.string.top_restaurants));
+                            topmenuTxt.setText(context.getString(R.string.top_menus));
+                        }
+
 
                         try {
                             setImageSlider(rd_caterers_root.getData().getBannerData());
@@ -383,11 +393,6 @@ public class RestourentFragment extends Fragment implements RestourentView {
                             e.printStackTrace();
                         }
 
-                        try {
-                            setRestaurentsLargeRcv(rd_caterers_root.getData().getCaterersData());
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
 
                     } else {
                         Helper.showToast(getActivity(), getString(R.string.something_wrong));
@@ -426,13 +431,6 @@ public class RestourentFragment extends Fragment implements RestourentView {
     private void setTopMenuRcv(ArrayList<RD_TopRankedCaterersItem> topRankedCaterersItems) {
 
         try {
-            if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-                topResTxt.setText(getString(R.string.top_menus));
-            }
-
-            if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
-                topResTxt.setText(getString(R.string.top_menus));
-            }
 
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false);
             topMenuRcv.setLayoutManager(linearLayoutManager);
@@ -442,14 +440,25 @@ public class RestourentFragment extends Fragment implements RestourentView {
             topMenuAdapter.setOnItemClickListener(new ResturantTopMenuAdapter.OnItemClickListener() {
                 @Override
                 public void onItemClick(int position, int selectedposition, ArrayList<RD_TopRankedCaterersItem> restourentLIst) {
+                    SharedPreferencesUtils.getInstance(activity.getApplicationContext()).setValue(Constants.ITEM_ID, "" + restourentLIst.get(position).getId());
+//                SharedPreferencesUtils.getInstance(activity.getApplicationContext()).setValue(Constants.MODE_ID, "" + modeArrayList.get(position).getId());
 
-                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
-                    int restaurententID = Integer.parseInt(restourentLIst.get(position).getId());
-                    String restaurant_Status = String.valueOf("0");
-                    Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
-                            .putExtra("restaurant_Status", restaurant_Status);
-                    startActivity(intent);
-                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                    if (restourentLIst.get(position).getItem_logo().contains("caterer_item")) {
+                        Intent intent = new Intent(activity.getApplicationContext(), CateringServiceDetailActivity.class)
+                                .putExtra("status", restourentLIst.get(position).getStatus())
+                                .putExtra("min_time", "0");
+                        activity.startActivity(intent);
+                        activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                    } else {
+                        Intent intent = new Intent(activity.getApplicationContext(), ProductDetailActivity.class)
+                                .putExtra("status", restourentLIst.get(position).getStatus())
+                                .putExtra("min_time", "0");
+                        activity.startActivity(intent);
+
+                        activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                    }
+
+
                 }
             });
         } catch (Exception e) {
@@ -461,15 +470,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
     private void setTopRestaurentsRcv(ArrayList<RD_caterers_TopRankeCaterers> topRankedCaterersItems) {
 
         try {
-            if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-                topResTxt.setText(getString(R.string.top_restaurants));
 
-            }
-
-            if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
-                topResTxt.setText(getString(R.string.top_restaurants));
-
-            }
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false);
             topRestaurentsRcv.setLayoutManager(linearLayoutManager);
 

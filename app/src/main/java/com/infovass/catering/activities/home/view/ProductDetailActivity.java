@@ -56,7 +56,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
     @BindView(R.id.img_maxButton)
     AppCompatImageView img_maxButton;
     @BindView(R.id.addToFavButton)
-    AppCompatImageView addToFavButton;
+    androidx.appcompat.widget.AppCompatImageButton addToFavButton;
 
     @BindView(R.id.img_productImage)
     AppCompatImageView img_productImage;
