@@ -57,15 +57,15 @@ import retrofit.client.Response;
 import retrofit.mime.MultipartTypedOutput;
 import retrofit.mime.TypedString;
 
-public class SearchFragment extends Fragment  {
+public class SearchFragment extends Fragment implements ResturantMainLargeAdapter.AdapterCallback {
 
-//    List<RestourentListResponse.Datum> restourentLIst = new ArrayList<>();
+    //    List<RestourentListResponse.Datum> restourentLIst = new ArrayList<>();
     ArrayList<RD_catererData> restourentLIst = new ArrayList<>();
     private ProgressHUD progressHUD;
     RestourentPresenter restourentPresenter;
     View view;
     RestourentcategoriesAdapter restourentcategoriesAdapter;
-//    ResturantLargeAdapter resturantLargeAdapter;
+    //    ResturantLargeAdapter resturantLargeAdapter;
     @BindView(R.id.resturantListView)
     RecyclerView resturantListView;
     @BindView(R.id.detail_recyclerView)
@@ -96,11 +96,13 @@ public class SearchFragment extends Fragment  {
     ListView listView;
     ArrayList<String> list;
     ArrayAdapter<String> adapter;
-     private AppController appController;
+    private AppController appController;
     private Dialog progress;
     private ConnectionDetector connectionDetector;
     Context context;
     ResturantMainLargeAdapter resturantMainLargeAdapter;
+    ArrayList<RD_catererData> catererData;
+
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -216,32 +218,61 @@ public class SearchFragment extends Fragment  {
         // attach setOnQueryTextListener
         // to search view defined above
         searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            // Override onQueryTextSubmit method which is call when submit query is searched
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // If the list contains the search query than filter the adapter
-                // using the filter method with the query as its argument
-//                if (list.contains(query)) {
-//                    adapter.getFilter().filter(query);
-//                } else {
-//                    // Search query not found in List View
-//                    Toast.makeText(activity, getString(R.string.not_found), Toast.LENGTH_LONG).show();
-//                }
 
-                // inside on query text change method we are
-                // calling a method to filter our recycler view.
+                try {
+                    resturantMainLargeAdapter.filterList(query);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
                 return false;
             }
 
-            // This method is overridden to filter the adapter according
-            // to a search query when the user is typing search
             @Override
             public boolean onQueryTextChange(String newText) {
-                filter(newText);
+
+                try {
+                    resturantMainLargeAdapter.filterList(newText);
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 return false;
             }
         });
+//        searchview.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            // Override onQueryTextSubmit method which is call when submit query is searched
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                resturantMainLargeAdapter.filterList(query);
+//                // If the list contains the search query than filter the adapter
+//                // using the filter method with the query as its argument
+////                if (list.contains(query)) {
+////                    adapter.getFilter().filter(query);
+////                } else {
+////                    // Search query not found in List View
+////                    Toast.makeText(activity, getString(R.string.not_found), Toast.LENGTH_LONG).show();
+////                }
+//
+//                // inside on query text change method we are
+//                // calling a method to filter our recycler view.
+//                return false;
+//            }
+//
+//            // This method is overridden to filter the adapter according
+//            // to a search query when the user is typing search
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+////                filter(newText);
+//
+//                resturantMainLargeAdapter.filterList(newText);
+//                return false;
+//            }
+//        });
 
 
         return view;
@@ -256,6 +287,7 @@ public class SearchFragment extends Fragment  {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
     }
+
     public static void hideKeyboard(Activity activity) {
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         //Find the currently focused view, so we can grab the correct window token from it.
@@ -266,6 +298,7 @@ public class SearchFragment extends Fragment  {
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
     public void closeKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
@@ -364,46 +397,46 @@ public class SearchFragment extends Fragment  {
 //    }
 
 
-    private void filter(String text) {
-        // creating a new array list to filter our data.
-        ArrayList<RD_catererData> filteredlist = new ArrayList<>();
-
-        // running a for loop to compare elements.
-        for (RD_catererData item : restourentLIst) {
-
-            // checking if the entered string matched with any item of our recycler view.
-
-
-            if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-                if (item.getArabic_name().contains(text.toLowerCase())) {
-                    // if the item is matched we are
-                    // adding it to our filtered list.
-                    filteredlist.add(item);
-                }
-            }
-
-            if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
-                if (item.getName().toLowerCase().contains(text.toLowerCase())) {
-                    // if the item is matched we are
-                    // adding it to our filtered list.
-                    filteredlist.add(item);
-                }
-            }
-
-
-        }
-        if (filteredlist.isEmpty()) {
-            // if no item is added in filtered list we are
-            // displaying a toast message as no data found.
-//            Toast.makeText(getContext(), getString(R.string.not_found), Toast.LENGTH_SHORT).show();
-        } else {
-            // at last we are passing that filtered
-            // list to our adapter class.
-            resturantMainLargeAdapter.filterList(filteredlist);
-        }
-    }
-
+//    private void filter(String text) {
+//        // creating a new array list to filter our data.
+//        ArrayList<RD_catererData> filteredlist = new ArrayList<>();
 //
+//        // running a for loop to compare elements.
+//        for (RD_catererData item : restourentLIst) {
+//
+//            // checking if the entered string matched with any item of our recycler view.
+//
+//
+//            if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+//                if (item.getArabic_name().contains(text.toLowerCase())) {
+//                    // if the item is matched we are
+//                    // adding it to our filtered list.
+//                    filteredlist.add(item);
+//                }
+//            }
+//
+//            if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+//                if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+//                    // if the item is matched we are
+//                    // adding it to our filtered list.
+//                    filteredlist.add(item);
+//                }
+//            }
+//
+//
+//        }
+//        if (filteredlist.isEmpty()) {
+//            // if no item is added in filtered list we are
+//            // displaying a toast message as no data found.
+////            Toast.makeText(getContext(), getString(R.string.not_found), Toast.LENGTH_SHORT).show();
+//        } else {
+//            // at last we are passing that filtered
+//            // list to our adapter class.
+//            resturantMainLargeAdapter.filterList(filteredlist);
+//        }
+//    }
+
+    //
 //    @Override
 //    public void showLoading() {
 //        try {
@@ -429,7 +462,6 @@ public class SearchFragment extends Fragment  {
 //    public void onNoInternet() {
 //
 //    }
-
     public void newRandomCaterers() {
         if (connectionDetector.isConnectingToInternet()) {
 
@@ -451,6 +483,8 @@ public class SearchFragment extends Fragment  {
 
                         resturantListView.setVisibility(View.VISIBLE);
                         try {
+                            catererData = new ArrayList<>();
+                            catererData = rd_caterers_root.getData().getCaterersData();
                             setRestaurentsLargeRcv(rd_caterers_root.getData().getCaterersData());
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -481,7 +515,7 @@ public class SearchFragment extends Fragment  {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
             resturantListView.setLayoutManager(linearLayoutManager);
 
-              resturantMainLargeAdapter = new ResturantMainLargeAdapter(activity, catererData);
+            resturantMainLargeAdapter = new ResturantMainLargeAdapter(activity, catererData);
 
             resturantListView.setAdapter(resturantMainLargeAdapter);
 
@@ -498,10 +532,18 @@ public class SearchFragment extends Fragment  {
                     activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 }
             });
+            resturantMainLargeAdapter.setCallback(this);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void onItemClick(String data) {
+        if (data.equalsIgnoreCase("data")) {
+            newRandomCaterers();
+        }
     }
 }

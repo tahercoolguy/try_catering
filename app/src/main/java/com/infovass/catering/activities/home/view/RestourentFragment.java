@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -111,6 +112,10 @@ public class RestourentFragment extends Fragment implements RestourentView {
     RecyclerView topMenuRcv;
     @BindView(R.id.topRestaurentsRcv)
     RecyclerView topRestaurentsRcv;
+    @BindView(R.id.topmenuTxt)
+    TextView topmenuTxt;
+    @BindView(R.id.topResTxt)
+    TextView topResTxt;
 
     Activity activity;
     private AppController appController;
@@ -339,7 +344,6 @@ public class RestourentFragment extends Fragment implements RestourentView {
     }
 
 
-
     public void newRandomCaterers() {
         if (connectionDetector.isConnectingToInternet()) {
 
@@ -422,6 +426,14 @@ public class RestourentFragment extends Fragment implements RestourentView {
     private void setTopMenuRcv(ArrayList<RD_TopRankedCaterersItem> topRankedCaterersItems) {
 
         try {
+            if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+                topResTxt.setText(getString(R.string.top_menus));
+            }
+
+            if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+                topResTxt.setText(getString(R.string.top_menus));
+            }
+
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false);
             topMenuRcv.setLayoutManager(linearLayoutManager);
             ResturantTopMenuAdapter topMenuAdapter = new ResturantTopMenuAdapter(activity, topRankedCaterersItems);
@@ -449,6 +461,15 @@ public class RestourentFragment extends Fragment implements RestourentView {
     private void setTopRestaurentsRcv(ArrayList<RD_caterers_TopRankeCaterers> topRankedCaterersItems) {
 
         try {
+            if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+                topResTxt.setText(getString(R.string.top_restaurants));
+
+            }
+
+            if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+                topResTxt.setText(getString(R.string.top_restaurants));
+
+            }
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.HORIZONTAL, false);
             topRestaurentsRcv.setLayoutManager(linearLayoutManager);
 

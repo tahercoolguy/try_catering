@@ -35,11 +35,18 @@ public class ResturantMainLargeAdapter extends RecyclerView.Adapter<ResturantMai
     ResturantMainLargeAdapter.OnItemClickListener onItemClickListener;
     String lastValue = "";
     ArrayList<RD_catererData> restourentLIst = new ArrayList<>();
+    ArrayList<RD_catererData> filterrestourentLIst = new ArrayList<>();
+    ArrayList<RD_catererData> updaterestourentLIst = new ArrayList<>();
     int selectedposition;
+    private AdapterCallback callback;
 
     public ResturantMainLargeAdapter(Context context, ArrayList<RD_catererData> restourentLIst) {
         this.context = context;
         this.restourentLIst = restourentLIst;
+        this.updaterestourentLIst = restourentLIst;
+    }
+    public void setCallback(AdapterCallback callback) {
+        this.callback = callback;
     }
 
     @NonNull
@@ -225,13 +232,48 @@ public class ResturantMainLargeAdapter extends RecyclerView.Adapter<ResturantMai
         this.onItemClickListener = onItemClickListener;
     }
 
-    // method for filtering our recyclerview items.
-    public void filterList(ArrayList<RD_catererData> filterlist) {
-        // below line is to add our filtered
-        // list in our course array list.
-        restourentLIst = filterlist;
-        // below line is to notify our adapter
-        // as change in recycler view data.
+    //    // method for filtering our recyclerview items.
+//    public void filterList(ArrayList<RD_catererData> filterlist) {
+//        // below line is to add our filtered
+//        // list in our course array list.
+//        restourentLIst = filterlist;
+//        // below line is to notify our adapter
+//        // as change in recycler view data.
+//        notifyDataSetChanged();
+//    }
+    public void filterList(String query) {
+        // Clear the existing list
+        ArrayList<RD_catererData> filterrestourentLIst = new ArrayList<>();
+
+        // If the query is empty, add all items from the original dataset
+        if (query.isEmpty()) {
+            // Check if the original list is already empty
+            if (callback != null) {
+                callback.onItemClick("data");
+            }
+        } else {
+            // Iterate through the original dataset and add matching items to the filtered list
+            for (RD_catererData item : restourentLIst) {
+                if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+                    if (item.getArabic_name().contains(query.toLowerCase())) {
+                        // if the item is matched we are adding it to our filtered list.
+                        filterrestourentLIst.add(item);
+                    }
+                }
+
+                if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+                    if (item.getName().toLowerCase().contains(query.toLowerCase())) {
+                        // if the item is matched we are adding it to our filtered list.
+                        filterrestourentLIst.add(item);
+                    }
+                }
+            }
+        }
+
+        // Update the original list with the filtered list
+        restourentLIst.clear();
+        restourentLIst.addAll(filterrestourentLIst);
+
         notifyDataSetChanged();
     }
 
@@ -258,7 +300,8 @@ public class ResturantMainLargeAdapter extends RecyclerView.Adapter<ResturantMai
         CircularImageView img_catering;
 
         @BindView(R.id.simpleRatingBar)
-        RatingBar simpleRatingBar; @BindView(R.id.busyCV)
+        RatingBar simpleRatingBar;
+        @BindView(R.id.busyCV)
         CardView busyCV;
 
         public Viewholder(View itemView) {
@@ -269,6 +312,9 @@ public class ResturantMainLargeAdapter extends RecyclerView.Adapter<ResturantMai
 
     public interface OnItemClickListener {
         void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RD_catererData> restourentLIst);
+    }
+    public interface AdapterCallback {
+        void onItemClick(String data);
     }
 }
 

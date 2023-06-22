@@ -450,7 +450,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                          android:layout_marginHorizontal="21dp"
-                        android:text="@string/top_menus"
+                         android:id="@+id/topmenuTxt"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/black"
                         android:textStyle="bold"></TextView>
@@ -466,10 +466,10 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/topResTxt"
                         android:layout_marginHorizontal="21dp"
                         android:layout_marginTop="20dp"
-                        android:text="@string/top_restaurants"
-                        android:textColor="@color/black"
+                         android:textColor="@color/black"
                         android:textStyle="bold"></TextView>
 
                     <androidx.recyclerview.widget.RecyclerView
