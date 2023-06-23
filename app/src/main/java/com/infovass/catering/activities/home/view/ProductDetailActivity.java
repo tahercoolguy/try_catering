@@ -245,15 +245,20 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
                         minTime = Integer.parseInt(min_time);
                         checkTime = Integer.parseInt(String.valueOf(differenceInHours));
 //
-//
-                        if (minTime > checkTime) {
+                        if (minTime == 0) {
                             productDetailPresenter.productAddToCartApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""), tv_productCount.getText().toString(), edt_note.getText().toString(),
                                     SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""), "", "", SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""));
-
                         } else {
-                            Helper.showToast(ProductDetailActivity.this, getString(R.string.select_valid_time));
+                            if (minTime > checkTime) {
+                                productDetailPresenter.productAddToCartApi(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""), tv_productCount.getText().toString(), edt_note.getText().toString(),
+                                        SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""), "", "", SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""));
 
+                            } else {
+                                Helper.showToast(ProductDetailActivity.this, getString(R.string.select_valid_time));
+
+                            }
                         }
+//
 
 
                     } else {

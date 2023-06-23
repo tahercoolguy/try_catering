@@ -21,6 +21,8 @@ import com.makeramen.roundedimageview.RoundedImageView;
 import com.smarteist.autoimageslider.SliderViewAdapter;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class HomeAdSliderAdapter extends SliderViewAdapter<HomeAdSliderAdapter.SliderViewHolder> {
 
@@ -57,10 +59,18 @@ public class HomeAdSliderAdapter extends SliderViewAdapter<HomeAdSliderAdapter.S
 
                 if (banner_type.equalsIgnoreCase("caterer_item")) {
                     SharedPreferencesUtils.getInstance(activity.getApplicationContext()).setValue(Constants.ITEM_ID, "" + caterers_bannerdata.get(position).getCaterer_item().getId());
+                    String inputString = caterers_bannerdata.get(position).getCaterer_item().getMax_time();
 
-                    Intent intent = new Intent(activity.getApplicationContext(), CateringServiceDetailActivity.class)
-                            .putExtra("status", caterers_bannerdata.get(position).getCaterer_item().getStatus());
-//                            .putExtra("min_time", caterers_bannerdata.get(position).getCaterer_item().getMinimum_time());
+                    Pattern pattern = Pattern.compile("\\d+");
+                    Matcher matcher = pattern.matcher(inputString);
+                    String number = "0";
+                    if (matcher.find()) {
+                        String extractedNumber = matcher.group();
+                        number = extractedNumber;
+                    }
+                    Intent intent = new Intent(activity.getApplicationContext(), ProductDetailActivity.class)
+                            .putExtra("status", caterers_bannerdata.get(position).getCaterer_item().getStatus())
+                            .putExtra("min_time", number);
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 } else {

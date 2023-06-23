@@ -1,7 +1,8 @@
 package com.infovass.catering.activities.DataModel;
 
-public class Caterer {
+import java.util.ArrayList;
 
+public class Caterer {
     private String id ;
     private String created_by ;
     private String name ;
@@ -38,10 +39,12 @@ public class Caterer {
     private String start_time ;
     private String end_time ;
     private String email ;
+    private String Restaurant_Status ;
+    private ArrayList<RD_Mode> modes ;
     private String logo_path ;
     private String cover_image_path ;
 
-    public Caterer(String id, String created_by, String name, String arabic_name, String detail, String arabic_detail, String status, String female_service, String logo, String cover_image, String time_show, String delivery_charge, String min_order, String setup_time_in_minute, String requirements, String arabic_setup_time_in_minute, String arabic_requirements, String discount_available, String discount_type, String discount_value, String start_date, String end_date, String time, String cash_order_policy, String cancellation_policy, String cancellation_policy_arabic, String is_active, String is_top_ranked, String created_at, String updated_at, String deleted_at, String commission, String minimum_time, String start_time, String end_time, String email, String logo_path, String cover_image_path) {
+    public Caterer(String id, String created_by, String name, String arabic_name, String detail, String arabic_detail, String status, String female_service, String logo, String cover_image, String time_show, String delivery_charge, String min_order, String setup_time_in_minute, String requirements, String arabic_setup_time_in_minute, String arabic_requirements, String discount_available, String discount_type, String discount_value, String start_date, String end_date, String time, String cash_order_policy, String cancellation_policy, String cancellation_policy_arabic, String is_active, String is_top_ranked, String created_at, String updated_at, String deleted_at, String commission, String minimum_time, String start_time, String end_time, String email, String restaurant_Status, ArrayList<RD_Mode> modes, String logo_path, String cover_image_path) {
         this.id = id;
         this.created_by = created_by;
         this.name = name;
@@ -78,6 +81,8 @@ public class Caterer {
         this.start_time = start_time;
         this.end_time = end_time;
         this.email = email;
+        this.Restaurant_Status = restaurant_Status;
+        this.modes = modes;
         this.logo_path = logo_path;
         this.cover_image_path = cover_image_path;
     }
@@ -368,6 +373,22 @@ public class Caterer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getRestaurant_Status() {
+        return Restaurant_Status;
+    }
+
+    public void setRestaurant_Status(String restaurant_Status) {
+        Restaurant_Status = restaurant_Status;
+    }
+
+    public ArrayList<RD_Mode> getModes() {
+        return modes;
+    }
+
+    public void setModes(ArrayList<RD_Mode> modes) {
+        this.modes = modes;
     }
 
     public String getLogo_path() {

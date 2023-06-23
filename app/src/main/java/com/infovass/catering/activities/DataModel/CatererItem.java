@@ -39,9 +39,10 @@ public class CatererItem {
     private String deleted_at ;
     private String created_at ;
     private String updated_at ;
+    private String addon_item ;
     private String item_logo_path ;
 
-    public CatererItem(String id, String item_code, String category_id, String subcategory_id, String organisation, String item_name, String item_display_name, String item_short_description, String item_long_description, String item_cost_per_serve, String item_markup_per_serve, String item_serving_capacity, String setup_time_in_minute, String max_time, String requirements, String service_and_presentation, String food_details, String currency_id, String item_logo, String item_status, String arabic_item_code, String arabic_item_name, String arabic_item_display_name, String arabic_item_short_description, String arabic_item_long_description, String arabic_item_cost_per_serve, String arabic_item_markup_per_serve, String arabic_item_serving_capacity, String arabic_setup_time_in_minute, String arabic_max_time, String arabic_requirements, String arabic_service_and_presentation, String arabic_food_details, String status, String is_top_ranked, String deleted_at, String created_at, String updated_at, String item_logo_path) {
+    public CatererItem(String id, String item_code, String category_id, String subcategory_id, String organisation, String item_name, String item_display_name, String item_short_description, String item_long_description, String item_cost_per_serve, String item_markup_per_serve, String item_serving_capacity, String setup_time_in_minute, String max_time, String requirements, String service_and_presentation, String food_details, String currency_id, String item_logo, String item_status, String arabic_item_code, String arabic_item_name, String arabic_item_display_name, String arabic_item_short_description, String arabic_item_long_description, String arabic_item_cost_per_serve, String arabic_item_markup_per_serve, String arabic_item_serving_capacity, String arabic_setup_time_in_minute, String arabic_max_time, String arabic_requirements, String arabic_service_and_presentation, String arabic_food_details, String status, String is_top_ranked, String deleted_at, String created_at, String updated_at, String addon_item, String item_logo_path) {
         this.id = id;
         this.item_code = item_code;
         this.category_id = category_id;
@@ -80,6 +81,7 @@ public class CatererItem {
         this.deleted_at = deleted_at;
         this.created_at = created_at;
         this.updated_at = updated_at;
+        this.addon_item = addon_item;
         this.item_logo_path = item_logo_path;
     }
 
@@ -385,6 +387,14 @@ public class CatererItem {
 
     public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public String getAddon_item() {
+        return addon_item;
+    }
+
+    public void setAddon_item(String addon_item) {
+        this.addon_item = addon_item;
     }
 
     public String getItem_logo_path() {

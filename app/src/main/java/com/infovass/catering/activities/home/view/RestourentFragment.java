@@ -441,22 +441,22 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 @Override
                 public void onItemClick(int position, int selectedposition, ArrayList<RD_TopRankedCaterersItem> restourentLIst) {
                     SharedPreferencesUtils.getInstance(activity.getApplicationContext()).setValue(Constants.ITEM_ID, "" + restourentLIst.get(position).getId());
-//                SharedPreferencesUtils.getInstance(activity.getApplicationContext()).setValue(Constants.MODE_ID, "" + modeArrayList.get(position).getId());
-
-                    if (restourentLIst.get(position).getItem_logo().contains("caterer_item")) {
-                        Intent intent = new Intent(activity.getApplicationContext(), CateringServiceDetailActivity.class)
-                                .putExtra("status", restourentLIst.get(position).getStatus())
-                                .putExtra("min_time", "0");
-                        activity.startActivity(intent);
-                        activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-                    } else {
+//                SharedPreferencesUtils.getInstance(activity.getApplicationContext()).setValue(Constants.MODE_ID, "" + restourentLIst.get(position).getSubcategory_id());
+//
+//                    if (restourentLIst.get(position).getItem_logo().contains("caterer_item")) {
+//                        Intent intent = new Intent(activity.getApplicationContext(), CateringServiceDetailActivity.class)
+//                                .putExtra("status", restourentLIst.get(position).getStatus())
+//                                .putExtra("min_time", restourentLIst.get(position).getAddon_item());
+//                        activity.startActivity(intent);
+//                        activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+//                    } else {
                         Intent intent = new Intent(activity.getApplicationContext(), ProductDetailActivity.class)
                                 .putExtra("status", restourentLIst.get(position).getStatus())
                                 .putExtra("min_time", "0");
                         activity.startActivity(intent);
 
                         activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-                    }
+//                    }
 
 
                 }

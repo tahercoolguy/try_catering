@@ -14,8 +14,9 @@ public class RD_TopRankedCaterersItem {
     private String item_logo ;
     private String status ;
     private String is_top_ranked ;
+    private String addon_item ;
 
-    public RD_TopRankedCaterersItem(String id, String item_code, String category_id, String subcategory_id, String item_name, String item_display_name, String item_short_description, String item_cost_per_serve, String item_markup_per_serve, String item_serving_capacity, String item_logo, String status, String is_top_ranked) {
+    public RD_TopRankedCaterersItem(String id, String item_code, String category_id, String subcategory_id, String item_name, String item_display_name, String item_short_description, String item_cost_per_serve, String item_markup_per_serve, String item_serving_capacity, String item_logo, String status, String is_top_ranked, String addon_item) {
         this.id = id;
         this.item_code = item_code;
         this.category_id = category_id;
@@ -29,6 +30,7 @@ public class RD_TopRankedCaterersItem {
         this.item_logo = item_logo;
         this.status = status;
         this.is_top_ranked = is_top_ranked;
+        this.addon_item = addon_item;
     }
 
     public String getId() {
@@ -133,5 +135,13 @@ public class RD_TopRankedCaterersItem {
 
     public void setIs_top_ranked(String is_top_ranked) {
         this.is_top_ranked = is_top_ranked;
+    }
+
+    public String getAddon_item() {
+        return addon_item;
+    }
+
+    public void setAddon_item(String addon_item) {
+        this.addon_item = addon_item;
     }
 }
