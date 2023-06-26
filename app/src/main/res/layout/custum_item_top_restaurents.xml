@@ -15,6 +15,14 @@
         android:layout_margin="5dp"
 
         app:cardCornerRadius="15dp">
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/menuRoImg"
+            android:layout_width="204dp"
+            android:layout_height="127dp"
+            android:background="@drawable/gradient"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="15dp"></com.makeramen.roundedimageview.RoundedImageView>
         <View
             android:id="@+id/overlay_image"
             android:layout_width="match_parent"
@@ -23,16 +31,8 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="0dp"
-            android:alpha="0.15"
+            android:alpha="0.2"
             android:background="@color/black" />
-        <com.makeramen.roundedimageview.RoundedImageView
-            android:id="@+id/menuRoImg"
-            android:layout_width="204dp"
-            android:layout_height="127dp"
-            android:background="@drawable/gradient"
-            android:scaleType="centerCrop"
-            app:riv_corner_radius="15dp"></com.makeramen.roundedimageview.RoundedImageView>
-
         <RelativeLayout
             android:layout_width="wrap_content"
             android:padding="@dimen/_10sdp"

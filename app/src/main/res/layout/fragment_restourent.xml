@@ -446,22 +446,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                           app:sliderIndicatorEnabled="false" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                         android:layout_marginHorizontal="21dp"
-                         android:id="@+id/topmenuTxt"
-                        android:layout_marginTop="10dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"></TextView>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/topMenuRcv"
-                        android:layout_width="match_parent"
-                        android:layout_marginStart="21dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -480,6 +464,22 @@
                         android:layout_marginTop="10dp"
                         android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="21dp"
+                        android:id="@+id/topmenuTxt"
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"></TextView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/topMenuRcv"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="21dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/resturantListView"

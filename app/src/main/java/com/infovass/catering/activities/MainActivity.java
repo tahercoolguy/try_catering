@@ -22,6 +22,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -71,9 +72,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AppController appController;
     private Dialog progress;
     private ConnectionDetector connectionDetector;
-
+    int iconPosition=0;
     @BindView(R.id.searchImg)
     ImageView searchImg;
+
+    @BindView(R.id.cartImgButton)
+    ImageView cartImgButton;
+
+    @BindView(R.id.homeImgButton)
+    ImageView homeImgButton;
+
+    @BindView(R.id.searchImgButton)
+    ImageView searchImgButton;
+
+    @BindView(R.id.accountImgbutton)
+    ImageView accountImgbutton;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -142,7 +155,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void callRestourentFragment(String value) {
-        searchClicked=false;
+        iconPosition=0;
+        searchClicked = false;
         RestourentFragment restourentFragment = RestourentFragment.newInstance();
         startFragment(restourentFragment);
 //        Common.CONTAINER_FRAGMENT = "RestourentFragment";
@@ -222,14 +236,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
         if (id == R.id.homeMenu) {
             callRestourentFragment("RestourentFragment");
-        }
-//        else if (id == R.id.favMenu) {
-//            callFavFragment("FavFragment");
-//        }
-        else if (id == R.id.cartMenu) {
+        } else if (id == R.id.searchMenu) {
+            callSearchFragment("SearchFragment");
+        } else if (id == R.id.cartMenu) {
 //            callSearchFragment("SearchFragment");
             startActivity(new Intent(MainActivity.this, CartActivity.class));
             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+            bottomNavigationView.setSelectedItemId(R.id.homeMenu);
 
         }
 
@@ -248,16 +261,43 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBackPressed() {
-        if (bottomNavigationView.getSelectedItemId() == R.id.homeMenu) {
-            if(searchClicked){
-                callRestourentFragment("RestourentFragment");
-            }else{
-                finish();
-            }
 
-        } else {
-            bottomNavigationView.setSelectedItemId(R.id.homeMenu);
+        if(iconPosition==0){
+          finish();
+        }else{
+
+            callRestourentFragment("RestourentFragment");
+            homeImgButton.setImageDrawable(getDrawable(R.drawable.ic_home_selected));
+            cartImgButton.setImageDrawable(getDrawable(R.drawable.ic_cart_unselected));
+            searchImgButton.setImageDrawable(getDrawable(R.drawable.ic_search_unselected));
+            accountImgbutton.setImageDrawable(getDrawable(R.drawable.ic_profile_unselected));
         }
+        if (searchClicked) {
+            callRestourentFragment("RestourentFragment");
+            homeImgButton.setImageDrawable(getDrawable(R.drawable.ic_home_selected));
+            cartImgButton.setImageDrawable(getDrawable(R.drawable.ic_cart_unselected));
+            searchImgButton.setImageDrawable(getDrawable(R.drawable.ic_search_unselected));
+            accountImgbutton.setImageDrawable(getDrawable(R.drawable.ic_profile_unselected));
+        }
+//        else {
+//            if(iconPosition!=0){
+//                iconPosition=0;
+//                callRestourentFragment("RestourentFragment");
+//                homeImgButton.setImageDrawable(getDrawable(R.drawable.ic_home_selected));
+//                cartImgButton.setImageDrawable(getDrawable(R.drawable.ic_cart_unselected));
+//                searchImgButton.setImageDrawable(getDrawable(R.drawable.ic_search_unselected));
+//                accountImgbutton.setImageDrawable(getDrawable(R.drawable.ic_profile_unselected));
+//            }else{
+//                finish();
+//            }
+//        }
+
+//        if (bottomNavigationView.getSelectedItemId() == R.id.homeMenu) {
+//
+//
+//        } else {
+//            bottomNavigationView.setSelectedItemId(R.id.homeMenu);
+//        }
 
     }
 
@@ -359,5 +399,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @OnClick(R.id.homeImgButton)
+    public void clickHome() {
+        iconPosition=0;
+        callRestourentFragment("RestourentFragment");
+
+
+        homeImgButton.setImageDrawable(getDrawable(R.drawable.ic_home_selected));
+        cartImgButton.setImageDrawable(getDrawable(R.drawable.ic_cart_unselected));
+        searchImgButton.setImageDrawable(getDrawable(R.drawable.ic_search_unselected));
+        accountImgbutton.setImageDrawable(getDrawable(R.drawable.ic_profile_unselected));
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @OnClick(R.id.cartImgButton)
+    public void clickCart() {
+        iconPosition=1;
+        startActivity(new Intent(MainActivity.this, CartActivity.class));
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+        cartImgButton.setImageDrawable(getDrawable(R.drawable.ic_cart_selected));
+        homeImgButton.setImageDrawable(getDrawable(R.drawable.ic_home_unselected));
+         searchImgButton.setImageDrawable(getDrawable(R.drawable.ic_search_unselected));
+        accountImgbutton.setImageDrawable(getDrawable(R.drawable.ic_profile_unselected));
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @OnClick(R.id.searchImgButton)
+    public void clickSearch() {
+        iconPosition=2;
+        callSearchFragment("SearchFragment");
+
+
+        cartImgButton.setImageDrawable(getDrawable(R.drawable.ic_cart_unselected));
+        homeImgButton.setImageDrawable(getDrawable(R.drawable.ic_home_unselected));
+        searchImgButton.setImageDrawable(getDrawable(R.drawable.ic_search_selected));
+        accountImgbutton.setImageDrawable(getDrawable(R.drawable.ic_profile_unselected));
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @OnClick(R.id.accountImgbutton)
+    public void clickAccount() {
+        iconPosition=3;
+        callProfileFragment("ProfileFragment");
+
+
+        cartImgButton.setImageDrawable(getDrawable(R.drawable.ic_cart_unselected));
+        homeImgButton.setImageDrawable(getDrawable(R.drawable.ic_home_unselected));
+        searchImgButton.setImageDrawable(getDrawable(R.drawable.ic_search_unselected));
+        accountImgbutton.setImageDrawable(getDrawable(R.drawable.ic_profile_selected));
     }
 }

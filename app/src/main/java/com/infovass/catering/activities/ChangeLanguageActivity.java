@@ -70,6 +70,7 @@ public class ChangeLanguageActivity extends AppCompatActivity {
                     Intent intent = new Intent(ChangeLanguageActivity.this, SplashActivity.class);
                     setLanguageResource("ar");
                     new AppSettings().setAppLanguage(this, "ar");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intent);
                     overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
@@ -82,6 +83,7 @@ public class ChangeLanguageActivity extends AppCompatActivity {
                 try {
                     SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.Language, "en");
                     Intent intent = new Intent(ChangeLanguageActivity.this, SplashActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     setLanguageResource("en");
                     new AppSettings().setAppLanguage(this, "en");
                     startActivity(intent);
