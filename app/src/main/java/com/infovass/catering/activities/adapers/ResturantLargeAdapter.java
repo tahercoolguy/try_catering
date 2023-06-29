@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -205,6 +207,9 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
             holder.resNameTextView.setText("" + restourentLIst.get(position).getArabicName());
             holder.resNotesTextView.setText("" + restourentLIst.get(position).getArabicDetail());
             holder.busyTxt.setText("مشغول");
+
+            holder.busySideLL.setGravity(View.FOCUS_RIGHT);
+
         }
 
         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
@@ -212,6 +217,12 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
             holder.resNameTextView.setText("" + restourentLIst.get(position).getName());
             holder.resNotesTextView.setText("" + restourentLIst.get(position).getDetail());
             holder.busyTxt.setText(context.getString(R.string.busy));
+
+
+
+
+            holder.busySideLL.setGravity(View.FOCUS_LEFT);
+
 
         }
 
@@ -225,6 +236,9 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
                 onItemClickListener.onItemClick(position, selectedposition, Restaurant_Status, restourentLIst);
             }
         });
+
+
+
     }
 
     public void setOnItemClickListener(ResturantLargeAdapter.OnItemClickListener onItemClickListener) {
@@ -271,8 +285,11 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
         RatingBar simpleRatingBar;
 
         @BindView(R.id.busyCV)
-        CardView busyCV; @BindView(R.id.busyTxt)
+        CardView busyCV;
+        @BindView(R.id.busyTxt)
         TextView busyTxt;
+        @BindView(R.id.busySideLL)
+        LinearLayout busySideLL;
 
         public Viewholder(View itemView) {
             super(itemView);

@@ -33,6 +33,7 @@ public @interface Constants {
 
     String KEY_CITY_ID = "city_id";
     String KEY_AREA_NAME = "area_name";
+    String KEY_ARABIC_AREA_NAME = "arabic_area_name";
     String KEY_AREA_ID = "area_id";
     String KEY_RESTOURENT_ID = "restourent_id";
     String ITEM_ID = "item_id";

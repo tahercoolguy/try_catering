@@ -17,10 +17,10 @@
 
     <TextView
         android:id="@+id/mainResNameTxt"
-        android:layout_width="wrap_content"
+        android:layout_width="204dp"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:ems="10"
+        android:layout_marginHorizontal="5dp"
+         android:ems="10"
         android:singleLine="true"
         android:text="Mini DIp and Dip bar"
         android:textColor="@color/black"
@@ -28,19 +28,23 @@
 
     <TextView
         android:id="@+id/priceTxt"
-        android:layout_width="wrap_content"
+        android:layout_width="204dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
-        android:ems="10"
-        android:singleLine="true"
-        android:text="65.000 KWD"></TextView>
+         android:singleLine="true"
+        android:gravity="start"
+        android:layout_gravity="start"
+        android:textSize="13dp"
+        android:text="@string/arabic"></TextView>
 
     <TextView
         android:id="@+id/resNameTxt"
-        android:layout_width="wrap_content"
+        android:layout_width="204dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
         android:ems="10"
+        android:textSize="13dp"
+
         android:singleLine="true"
         android:text="Dip And Dip"></TextView>
 </LinearLayout>

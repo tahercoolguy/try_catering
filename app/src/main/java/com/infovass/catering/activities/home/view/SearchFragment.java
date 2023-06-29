@@ -193,7 +193,13 @@ public class SearchFragment extends Fragment implements RestourentView {
 //            }
 //
 //        });
+        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+            resturantListView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
 
+        } else {
+            resturantListView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
+        }
         resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
         resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
         resturantListView.setAdapter(resturantLargeAdapter);

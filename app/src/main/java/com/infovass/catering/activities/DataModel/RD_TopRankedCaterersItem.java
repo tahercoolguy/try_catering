@@ -1,27 +1,33 @@
 package com.infovass.catering.activities.DataModel;
 
 public class RD_TopRankedCaterersItem {
-    private String id ;
-    private String item_code ;
-    private String category_id ;
-    private String subcategory_id ;
-    private String item_name ;
-    private String item_display_name ;
-    private String item_short_description ;
-    private String item_cost_per_serve ;
-    private String item_markup_per_serve ;
-    private String item_serving_capacity ;
-    private String item_logo ;
-    private String status ;
-    private String is_top_ranked ;
-    private String addon_item ;
+    public String id ;
+    public String item_code ;
+    public String item_code_arabic ;
+    public String category_id ;
+    public String subcategory_id ;
+    public String item_name ;
+    public String item_name_arabic ;
+    public String item_display_name ;
+    public String item_short_description ;
+    public String item_cost_per_serve ;
+    public String item_markup_per_serve ;
+    public String item_serving_capacity ;
+    public String item_logo ;
+    public String status ;
+    public String is_top_ranked ;
+    public String addon_item ;
+    public String currency ;
+    public Caterer caterer ;
 
-    public RD_TopRankedCaterersItem(String id, String item_code, String category_id, String subcategory_id, String item_name, String item_display_name, String item_short_description, String item_cost_per_serve, String item_markup_per_serve, String item_serving_capacity, String item_logo, String status, String is_top_ranked, String addon_item) {
+    public RD_TopRankedCaterersItem(String id, String item_code, String item_code_arabic, String category_id, String subcategory_id, String item_name, String item_name_arabic, String item_display_name, String item_short_description, String item_cost_per_serve, String item_markup_per_serve, String item_serving_capacity, String item_logo, String status, String is_top_ranked, String addon_item, String currency, Caterer caterer) {
         this.id = id;
         this.item_code = item_code;
+        this.item_code_arabic = item_code_arabic;
         this.category_id = category_id;
         this.subcategory_id = subcategory_id;
         this.item_name = item_name;
+        this.item_name_arabic = item_name_arabic;
         this.item_display_name = item_display_name;
         this.item_short_description = item_short_description;
         this.item_cost_per_serve = item_cost_per_serve;
@@ -31,6 +37,8 @@ public class RD_TopRankedCaterersItem {
         this.status = status;
         this.is_top_ranked = is_top_ranked;
         this.addon_item = addon_item;
+        this.currency = currency;
+        this.caterer = caterer;
     }
 
     public String getId() {
@@ -47,6 +55,14 @@ public class RD_TopRankedCaterersItem {
 
     public void setItem_code(String item_code) {
         this.item_code = item_code;
+    }
+
+    public String getItem_code_arabic() {
+        return item_code_arabic;
+    }
+
+    public void setItem_code_arabic(String item_code_arabic) {
+        this.item_code_arabic = item_code_arabic;
     }
 
     public String getCategory_id() {
@@ -71,6 +87,14 @@ public class RD_TopRankedCaterersItem {
 
     public void setItem_name(String item_name) {
         this.item_name = item_name;
+    }
+
+    public String getItem_name_arabic() {
+        return item_name_arabic;
+    }
+
+    public void setItem_name_arabic(String item_name_arabic) {
+        this.item_name_arabic = item_name_arabic;
     }
 
     public String getItem_display_name() {
@@ -143,5 +167,21 @@ public class RD_TopRankedCaterersItem {
 
     public void setAddon_item(String addon_item) {
         this.addon_item = addon_item;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
+    }
+
+    public Caterer getCaterer() {
+        return caterer;
+    }
+
+    public void setCaterer(Caterer caterer) {
+        this.caterer = caterer;
     }
 }

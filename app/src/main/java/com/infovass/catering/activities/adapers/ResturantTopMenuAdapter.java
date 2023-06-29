@@ -67,16 +67,16 @@ public class ResturantTopMenuAdapter extends RecyclerView.Adapter<ResturantTopMe
 
         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
             Log.i("UUUIUIU", "UIUIUIU");
-            holder.mainResNameTxt.setText("" + restourentLIst.get(position).getItem_display_name());
-            holder.priceTxt.setText("" + restourentLIst.get(position).getItem_cost_per_serve()+" KD");
-            holder.resNameTxt.setText("" + restourentLIst.get(position).getItem_name());
+            holder.mainResNameTxt.setText("" + restourentLIst.get(position).getItem_name_arabic());
+            holder.priceTxt.setText("" + restourentLIst.get(position).getItem_cost_per_serve()+" دينار كويتي ");
+            holder.resNameTxt.setText("" + restourentLIst.get(position).getCaterer().getArabic_name());
         }
 
         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
 
-            holder.mainResNameTxt.setText("" + restourentLIst.get(position).getItem_display_name());
+            holder.mainResNameTxt.setText("" + restourentLIst.get(position).getItem_name());
             holder.priceTxt.setText("" + restourentLIst.get(position).getItem_cost_per_serve()+" KD");
-            holder.resNameTxt.setText("" + restourentLIst.get(position).getItem_name());
+            holder.resNameTxt.setText("" + restourentLIst.get(position).getCaterer().getName());
         }
 
 

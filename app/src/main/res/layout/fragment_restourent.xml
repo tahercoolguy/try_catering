@@ -57,6 +57,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/en"
+                                android:id="@+id/locationTxt"
                                 android:text="@string/location"
                                 android:textColor="@android:color/white"
                                 android:textSize="@dimen/_8sdp" />
@@ -102,6 +103,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/en"
+                                android:id="@+id/dateTxt"
                                 android:text="@string/date"
                                 android:textColor="@android:color/white"
                                 android:textSize="@dimen/_8sdp" />
@@ -147,6 +149,7 @@
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/en"
                                 android:text="@string/Time"
+                                android:id="@+id/timeTxt"
                                 android:textColor="@android:color/white"
                                 android:textSize="@dimen/_8sdp" />
 
@@ -463,7 +466,7 @@
                         android:id="@+id/topRestaurentsRcv"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="21dp"
+                         android:layout_marginLeft="21dp"
                         android:layout_marginTop="10dp"
                         android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>
 
@@ -479,7 +482,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/topMenuRcv"
                         android:layout_width="match_parent"
-                        android:layout_marginStart="21dp"
+                        android:layout_marginLeft="21dp"
                         android:layout_marginTop="10dp"
                         android:layout_height="wrap_content"
                         android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>

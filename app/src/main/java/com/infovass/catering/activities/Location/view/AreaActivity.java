@@ -82,12 +82,12 @@ public class AreaActivity extends BaseActivity implements LocationViews {
             @Override
             public void onItemClick(int position) {
 
-                if(SharedPreferencesUtils.getInstance(AreaActivity.this).getValue(Constants.Language, "").equalsIgnoreCase("ar"))
-                {
-                    SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_AREA_NAME, "" + list.get(position).getArabicName());
-
-                }else{
+                if (SharedPreferencesUtils.getInstance(AreaActivity.this).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+                    SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_ARABIC_AREA_NAME, "" + list.get(position).getArabicName());
                     SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_AREA_NAME, "" + list.get(position).getName());
+                } else {
+                    SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_AREA_NAME, "" + list.get(position).getName());
+                    SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_ARABIC_AREA_NAME, "" + list.get(position).getArabicName());
 
                 }
 
@@ -102,7 +102,7 @@ public class AreaActivity extends BaseActivity implements LocationViews {
         });
         UpdateLocation();
 
-     }
+    }
 
     public void UpdateLocation() {
         Intent intent = getIntent();
@@ -129,14 +129,14 @@ public class AreaActivity extends BaseActivity implements LocationViews {
                 try {
                     if (selectAreaStatus) {
 
-                        if(newlocation!=null){
+                        if (newlocation != null) {
                             Intent intent = new Intent();
                             intent.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                             intent.putExtra("newlocationArea", newlocation);
                             setResult(RESULT_OK, intent);
 
                             finish();
-                        }else{
+                        } else {
                             Intent intent = new Intent(AreaActivity.this, CalenderActivity.class);
                             startActivity(intent);
                             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
@@ -181,7 +181,7 @@ public class AreaActivity extends BaseActivity implements LocationViews {
     @Override
     public void showLoading() {
         try {
-             //progressHUD.show();
+            //progressHUD.show();
         } catch (Exception f) {
         }
     }

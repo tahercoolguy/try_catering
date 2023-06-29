@@ -128,6 +128,12 @@ public class RestourentFragment extends Fragment implements RestourentView {
     NestedScrollView scroolNested;
     @BindView(R.id.headingLayout)
     LinearLayout headingLayout;
+    @BindView(R.id.locationTxt)
+    AppCompatTextView locationTxt;
+    @BindView(R.id.dateTxt)
+    AppCompatTextView dateTxt;
+    @BindView(R.id.timeTxt)
+    AppCompatTextView timeTxt;
 
     Activity activity;
     private AppController appController;
@@ -136,6 +142,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
     Context context;
     int previousScrollY = 0;
     int scrollThreshold = 30;
+    boolean refreshBoolean = false;
 
     public RestourentFragment() {
         // Required empty public constructor
@@ -169,11 +176,12 @@ public class RestourentFragment extends Fragment implements RestourentView {
         progressHUD = ProgressHUD.create(getContext(), getString(R.string.loading), false, null, null);
         restourentPresenter = new RestourentImpl(this);
 
+        swiperefresh.setRefreshing(true);
 //        restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
         restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
         newRandomCaterers();
-        tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
+
         tv_time.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_TIME, ""));
         tv_date.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
@@ -211,7 +219,36 @@ public class RestourentFragment extends Fragment implements RestourentView {
 ////                }
 //            }
 //        });
+        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+            resturantListView.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+            // Create LayoutParams and set margins programmatically
+            LinearLayout.LayoutParams topRestaurentsRcvlayoutParams = (LinearLayout.LayoutParams) topRestaurentsRcv.getLayoutParams();
+            LinearLayout.LayoutParams topMenuRcvlayoutParams = (LinearLayout.LayoutParams) topMenuRcv.getLayoutParams();
 
+
+            topRestaurentsRcvlayoutParams.setMargins(0, 0, 21, 0);
+            topMenuRcvlayoutParams.setMargins(0, 0, 21, 0);
+            topRestaurentsRcv.setLayoutParams(topRestaurentsRcvlayoutParams);
+            topMenuRcv.setLayoutParams(topMenuRcvlayoutParams);
+
+            tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_ARABIC_AREA_NAME, ""));
+
+
+        } else {
+            resturantListView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
+            // Create LayoutParams and set margins programmatically
+
+            LinearLayout.LayoutParams topRestaurentsRcvlayoutParams = (LinearLayout.LayoutParams) topRestaurentsRcv.getLayoutParams();
+            LinearLayout.LayoutParams topMenuRcvlayoutParams = (LinearLayout.LayoutParams) topMenuRcv.getLayoutParams();
+
+            tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
+            topRestaurentsRcvlayoutParams.setMargins(21, 0, 0, 0);
+            topMenuRcvlayoutParams.setMargins(21, 0, 0, 0);
+            topRestaurentsRcv.setLayoutParams(topRestaurentsRcvlayoutParams);
+            topMenuRcv.setLayoutParams(topMenuRcvlayoutParams);
+
+        }
         resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
         resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
         resturantListView.setAdapter(resturantLargeAdapter);
@@ -233,12 +270,16 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
+                        if (refreshBoolean) {
+                            // This method performs the actual data-refresh operation.
+                            // The method calls setRefreshing(false) when it's finished.
+                            restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
-                        // This method performs the actual data-refresh operation.
-                        // The method calls setRefreshing(false) when it's finished.
-                        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+                            newRandomCaterers();
+                        } else {
+                            refreshBoolean = false;
 
-                        newRandomCaterers();
+                        }
                     }
                 }
         );
@@ -259,24 +300,41 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 if (scrollY > oldScrollY) {
                     Log.i("TAG", "Scroll DOWN");
                     hideIcon();
+                    refreshBoolean = false;
                 }
-                if (scrollY < oldScrollY) {
-                    Log.i(TAG, "Scroll UP");
-                    showIcon();
-                }
+//                if (scrollY < oldScrollY) {
+//                    Log.i(TAG, "Scroll UP");
+//                    showIcon();
+//                }
 
                 if (scrollY == 0) {
                     Log.i(TAG, "TOP SCROLL");
                     showIcon();
+                    refreshBoolean = false;
                 }
 
-                if (scrollY == ( v.getMeasuredHeight() - v.getChildAt(0).getMeasuredHeight() )) {
+                if (scrollY == (v.getMeasuredHeight() - v.getChildAt(0).getMeasuredHeight())) {
                     Log.i(TAG, "BOTTOM SCROLL");
                     hideIcon();
+                    refreshBoolean = false;
+
                 }
 
             }
         });
+
+
+        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+            locationTxt.setText("موقع");
+            dateTxt.setText("تاريخ");
+            timeTxt.setText("وقت");
+        } else {
+
+            locationTxt.setText("Location");
+            dateTxt.setText("Date");
+            timeTxt.setText("Time");
+        }
+
         return view;
     }
 
@@ -322,21 +380,38 @@ public class RestourentFragment extends Fragment implements RestourentView {
     @Override
     public void onSuccessGetRestourentListAPi(RestourentListResponse restourentListResponse) {
         try {
-            restourentLIst.clear();
+
             if (restourentListResponse.getData().size() == 0) {
 //                lnr_noProduct.setVisibility(View.VISIBLE);
                 resturantListView.setVisibility(View.GONE);
 
                 swiperefresh.setRefreshing(false);
-//                restourentLIst = new ArrayList<>();
-//                resturantLargeAdapter.notifyDataSetChanged();
+                restourentLIst = new ArrayList<>();
+                resturantLargeAdapter.notifyDataSetChanged();
             } else {
 //                lnr_noProduct.setVisibility(View.GONE);
                 resturantListView.setVisibility(View.VISIBLE);
                 restourentLIst.addAll(restourentListResponse.getData());
                 resturantLargeAdapter.notifyDataSetChanged();
                 swiperefresh.setRefreshing(false);
+                resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
+                resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
+                resturantListView.setAdapter(resturantLargeAdapter);
+                resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RestourentListResponse.Datum> restourentLIst) {
+                        SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
+                        int restaurententID = restourentLIst.get(position).getId();
+                        String restaurant_Status = String.valueOf(Restaurant_Status);
+                        Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
+                                .putExtra("restaurant_Status", restaurant_Status);
+                        startActivity(intent);
+                        activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+                    }
+                });
             }
+
 
         } catch (Exception ignore) {
             restourentLIst = new ArrayList<>();
@@ -427,10 +502,10 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 public void success(RD_caterers_Root rd_caterers_root, Response response) {
 
                     if (rd_caterers_root.getStatus().equalsIgnoreCase("true")) {
-                        swiperefresh.setRefreshing(false);
+
                         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-                            topResTxt.setText(context.getString(R.string.top_restaurants));
-                            topmenuTxt.setText(context.getString(R.string.top_menus));
+                            topResTxt.setText("أفضل المطاعم");
+                            topmenuTxt.setText("القوائم العلوية");
                         }
 
                         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
@@ -461,7 +536,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
 
                     } else {
-                        swiperefresh.setRefreshing(false);
+
                         Helper.showToast(getActivity(), getString(R.string.something_wrong));
                     }
 
@@ -517,9 +592,11 @@ public class RestourentFragment extends Fragment implements RestourentView {
 //                        activity.startActivity(intent);
 //                        activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 //                    } else {
+                    String min_time = "0";
+                    min_time = restourentLIst.get(position).getCaterer().getMinimum_time();
                     Intent intent = new Intent(activity.getApplicationContext(), ProductDetailActivity.class)
                             .putExtra("status", restourentLIst.get(position).getStatus())
-                            .putExtra("min_time", "0");
+                            .putExtra("min_time", min_time);
                     activity.startActivity(intent);
 
                     activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
@@ -528,6 +605,14 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
                 }
             });
+
+            if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+                topMenuRcv.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+
+            } else {
+                topMenuRcv.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -558,6 +643,15 @@ public class RestourentFragment extends Fragment implements RestourentView {
                     activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 }
             });
+
+            if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+                topRestaurentsRcv.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+
+            } else {
+                topRestaurentsRcv.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
+
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -608,4 +702,5 @@ public class RestourentFragment extends Fragment implements RestourentView {
         // For example: icon.setVisibility(View.VISIBLE);
         headingLayout.setVisibility(View.VISIBLE);
     }
+
 }

@@ -25,31 +25,28 @@ public class RestourentImpl implements RestourentPresenter {
     }
 
     @Override
-    public void getRestourentlistApi(String mode_type , String area_id,String date) {
-        try
-        {
+    public void getRestourentlistApi(String mode_type, String area_id, String date) {
+        try {
             views.showLoading();
             WebService webService = ServiceGenerator.createService(WebService.class);
-            Observable<RestourentListResponse> observable = webService.restourentList(mode_type , area_id,date);
+            Observable<RestourentListResponse> observable = webService.restourentList(mode_type, area_id, date);
             observable.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<RestourentListResponse>() {
                         @Override
                         public void onSubscribe(Disposable d) {
-                            // views.hideLoading();
+                            // No action needed
                         }
 
                         @Override
                         public void onNext(RestourentListResponse restourentListResponse) {
-                            try
-                            {
-                                views.hideLoading();
-
-                                if(restourentListResponse.getStatus())
+                            try {
+                                if (restourentListResponse.getStatus()) {
                                     views.onSuccessGetRestourentListAPi(restourentListResponse);
-                                else
-                                    views.onSuccessGetRestourentListAPi(restourentListResponse);
-                            }catch (Exception e){
+                                } else {
+                                    views.onFail(restourentListResponse.getMessage());
+                                }
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
@@ -58,7 +55,7 @@ public class RestourentImpl implements RestourentPresenter {
                         public void onError(Throwable e) {
                             views.hideLoading();
 
-                            if (e instanceof SocketTimeoutException) {//ClassNotFoundException
+                            if (e instanceof SocketTimeoutException) {
                                 views.onFail(Constants.StatusMessage.TIMEOUT);
                             } else if (e instanceof ConnectException || e instanceof UnknownHostException) {
                                 views.onNoInternet();
@@ -72,8 +69,8 @@ public class RestourentImpl implements RestourentPresenter {
                             views.hideLoading();
                         }
                     });
-        }catch (Exception j){
-            j.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
