@@ -11,6 +11,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -203,12 +204,15 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
             Log.i("UUUIUIU", "UIUIUIU");
             holder.resNameTextView.setText("" + restourentLIst.get(position).getArabicName());
             holder.resNotesTextView.setText("" + restourentLIst.get(position).getArabicDetail());
+            holder.busyTxt.setText("مشغول");
         }
 
         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
             Log.i("UUUIUIU", "" + restourentLIst.get(position).getName());
             holder.resNameTextView.setText("" + restourentLIst.get(position).getName());
             holder.resNotesTextView.setText("" + restourentLIst.get(position).getDetail());
+            holder.busyTxt.setText(context.getString(R.string.busy));
+
         }
 
 
@@ -267,7 +271,8 @@ public class ResturantLargeAdapter extends RecyclerView.Adapter<ResturantLargeAd
         RatingBar simpleRatingBar;
 
         @BindView(R.id.busyCV)
-        CardView busyCV;
+        CardView busyCV; @BindView(R.id.busyTxt)
+        TextView busyTxt;
 
         public Viewholder(View itemView) {
             super(itemView);

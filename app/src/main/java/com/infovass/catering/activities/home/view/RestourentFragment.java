@@ -2,6 +2,10 @@ package com.infovass.catering.activities.home.view;
 
 import static android.app.Activity.RESULT_OK;
 
+import static androidx.core.content.PackageManagerCompat.LOG_TAG;
+
+import static com.infovass.catering.Controller.AppController.TAG;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -11,9 +15,11 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -116,12 +122,20 @@ public class RestourentFragment extends Fragment implements RestourentView {
     TextView topmenuTxt;
     @BindView(R.id.topResTxt)
     TextView topResTxt;
+    @BindView(R.id.swiperefresh)
+    SwipeRefreshLayout swiperefresh;
+    @BindView(R.id.scroolNested)
+    NestedScrollView scroolNested;
+    @BindView(R.id.headingLayout)
+    LinearLayout headingLayout;
 
     Activity activity;
     private AppController appController;
     private Dialog progress;
     private ConnectionDetector connectionDetector;
     Context context;
+    int previousScrollY = 0;
+    int scrollThreshold = 30;
 
     public RestourentFragment() {
         // Required empty public constructor
@@ -214,6 +228,55 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
             }
         });
+
+        swiperefresh.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+
+                        // This method performs the actual data-refresh operation.
+                        // The method calls setRefreshing(false) when it's finished.
+                        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+
+                        newRandomCaterers();
+                    }
+                }
+        );
+
+        // Set up the scroll listener
+        scroolNested.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                int scrollDifference = scrollY - previousScrollY;
+//                if (scrollDifference > scrollThreshold) {
+//                    // Scrolling downwards
+//                    hideIcon();
+//                } else if (scrollDifference < -scrollThreshold) {
+//                    // Scrolling upwards
+//                    showIcon();
+//                }
+//                previousScrollY = scrollY;
+                if (scrollY > oldScrollY) {
+                    Log.i("TAG", "Scroll DOWN");
+                    hideIcon();
+                }
+                if (scrollY < oldScrollY) {
+                    Log.i(TAG, "Scroll UP");
+                    showIcon();
+                }
+
+                if (scrollY == 0) {
+                    Log.i(TAG, "TOP SCROLL");
+                    showIcon();
+                }
+
+                if (scrollY == ( v.getMeasuredHeight() - v.getChildAt(0).getMeasuredHeight() )) {
+                    Log.i(TAG, "BOTTOM SCROLL");
+                    hideIcon();
+                }
+
+            }
+        });
         return view;
     }
 
@@ -264,6 +327,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
 //                lnr_noProduct.setVisibility(View.VISIBLE);
                 resturantListView.setVisibility(View.GONE);
 
+                swiperefresh.setRefreshing(false);
 //                restourentLIst = new ArrayList<>();
 //                resturantLargeAdapter.notifyDataSetChanged();
             } else {
@@ -271,6 +335,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 resturantListView.setVisibility(View.VISIBLE);
                 restourentLIst.addAll(restourentListResponse.getData());
                 resturantLargeAdapter.notifyDataSetChanged();
+                swiperefresh.setRefreshing(false);
             }
 
         } catch (Exception ignore) {
@@ -362,6 +427,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 public void success(RD_caterers_Root rd_caterers_root, Response response) {
 
                     if (rd_caterers_root.getStatus().equalsIgnoreCase("true")) {
+                        swiperefresh.setRefreshing(false);
                         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
                             topResTxt.setText(context.getString(R.string.top_restaurants));
                             topmenuTxt.setText(context.getString(R.string.top_menus));
@@ -395,6 +461,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
 
                     } else {
+                        swiperefresh.setRefreshing(false);
                         Helper.showToast(getActivity(), getString(R.string.something_wrong));
                     }
 
@@ -450,12 +517,12 @@ public class RestourentFragment extends Fragment implements RestourentView {
 //                        activity.startActivity(intent);
 //                        activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 //                    } else {
-                        Intent intent = new Intent(activity.getApplicationContext(), ProductDetailActivity.class)
-                                .putExtra("status", restourentLIst.get(position).getStatus())
-                                .putExtra("min_time", "0");
-                        activity.startActivity(intent);
+                    Intent intent = new Intent(activity.getApplicationContext(), ProductDetailActivity.class)
+                            .putExtra("status", restourentLIst.get(position).getStatus())
+                            .putExtra("min_time", "0");
+                    activity.startActivity(intent);
 
-                        activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 //                    }
 
 
@@ -526,5 +593,19 @@ public class RestourentFragment extends Fragment implements RestourentView {
             e.printStackTrace();
         }
 
+    }
+
+    // Define methods to hide and show the icon
+    private void hideIcon() {
+        // Hide the icon
+        // For example: icon.setVisibility(View.GONE);
+        headingLayout.setVisibility(View.GONE);
+
+    }
+
+    private void showIcon() {
+        // Show the icon
+        // For example: icon.setVisibility(View.VISIBLE);
+        headingLayout.setVisibility(View.VISIBLE);
     }
 }

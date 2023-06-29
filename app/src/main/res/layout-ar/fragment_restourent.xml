@@ -1,8 +1,9 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/swiperefresh"
     android:orientation="vertical"
     android:background="@color/background_color"
     >
@@ -29,6 +30,7 @@
             android:paddingTop="@dimen/_20sdp"
             android:paddingBottom="@dimen/_8sdp"
             android:layout_width="match_parent"
+            android:id="@+id/headingLayout"
             android:layout_height="wrap_content"
             android:background="@drawable/home_menu_background"
             android:weightSum="3">
@@ -439,6 +441,8 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
+            android:id="@+id/scroolNested"
+
             android:layout_height="match_parent">
 
             <LinearLayout
@@ -507,4 +511,4 @@
         <include layout="@layout/search_bar"></include>
 
     </RelativeLayout>
-</LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
