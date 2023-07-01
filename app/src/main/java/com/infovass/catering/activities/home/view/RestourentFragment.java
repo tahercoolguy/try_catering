@@ -275,9 +275,11 @@ public class RestourentFragment extends Fragment implements RestourentView {
                             // The method calls setRefreshing(false) when it's finished.
                             restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
+                            swiperefresh.setRefreshing(false);
                             newRandomCaterers();
                         } else {
                             refreshBoolean = false;
+                            swiperefresh.setRefreshing(false);
 
                         }
                     }
@@ -297,11 +299,14 @@ public class RestourentFragment extends Fragment implements RestourentView {
 //                    showIcon();
 //                }
 //                previousScrollY = scrollY;
-                if (scrollY > oldScrollY) {
-                    Log.i("TAG", "Scroll DOWN");
-                    hideIcon();
-                    refreshBoolean = false;
+                if(scrollY>100){
+                    if (scrollY > oldScrollY) {
+                        Log.i("TAG", "Scroll DOWN");
+                        hideIcon();
+                        refreshBoolean = false;
+                    }
                 }
+
 //                if (scrollY < oldScrollY) {
 //                    Log.i(TAG, "Scroll UP");
 //                    showIcon();
