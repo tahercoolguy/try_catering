@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
@@ -327,7 +328,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
         }
+        if (resultCode == Activity.RESULT_CANCELED) {
+            // Handle the canceled result
 
+        }
 
         super.onActivityResult(requestCode, resultCode, data);
 
