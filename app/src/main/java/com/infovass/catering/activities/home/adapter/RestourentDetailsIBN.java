@@ -14,6 +14,7 @@ import com.infovass.catering.MyFormat.MyDM.Image;
 import com.infovass.catering.MyFormat.MyDM.Image_;
 import com.infovass.catering.R;
 import com.infovass.catering.activities.home.model.RestourentDetailResponse;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class RestourentDetailsIBN extends PagerAdapter {
         View itemView = mLayoutInflater.inflate(R.layout.imagei_viewpager_tem, container, false);
 
         // referencing the image view from the item.xml file
-        ImageView imageView = (ImageView) itemView.findViewById(R.id.imageViewMain);
+        RoundedImageView imageView = (RoundedImageView) itemView.findViewById(R.id.imageViewMain);
 
         // setting the image in the imageView
 //        imageView.setImageResource((bookList.get(position).getImage()));

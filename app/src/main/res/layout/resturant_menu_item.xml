@@ -10,8 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingRight="10dp"
-        android:orientation="horizontal">
+         android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="130dp"
@@ -19,11 +18,13 @@
             android:layout_gravity="center"
             android:gravity="center">
 
-            <com.github.siyamed.shapeimageview.RoundedImageView
+            <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/menu_image"
                 android:layout_width="@dimen/_100sdp"
                 android:layout_height="@dimen/_100sdp"
                 android:scaleType="fitXY"
+                android:background="@drawable/gradient"
+                app:riv_corner_radius="15dp"
                 app:siRadius="10dp"
                 app:siSquare="true" />
 
@@ -71,6 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:text="hfkhgfkafafa"
                     android:maxLines="2"
                     android:fontFamily="@font/en"
                     android:textColor="@color/menu_name_color"
@@ -83,6 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:text="shdskdgsadghd"
                     android:maxLines="2"
                     android:textColor="#ffa0a0a0"
                     android:textSize="@dimen/_10sdp" />
@@ -96,20 +99,24 @@
                         android:id="@+id/tv_persions"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="dlsagdsadgd"
                         android:layout_gravity="center_vertical"
                         android:fontFamily="@font/en"
                         android:textColor="@android:color/darker_gray"
                         />
+
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:fontFamily="@font/en"
                         android:id="@+id/priceTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:singleLine="true"
+                        android:fontFamily="@font/en"
                         android:gravity="end|center_vertical"
+                        android:singleLine="true"
+                        android:layout_marginEnd="@dimen/_20sdp"
+                        android:text="sdgsdgdg"
                         android:textColor="#ffb70913"
                         android:textSize="@dimen/_12sdp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>

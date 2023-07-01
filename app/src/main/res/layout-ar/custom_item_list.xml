@@ -2,17 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:id="@+id/ll_list"
+
     android:orientation="vertical">
 
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/_1sdp"
+        android:visibility="invisible"
         android:background="@color/gray_color" />
 
     <LinearLayout
-        android:id="@+id/ll_list"
-        android:layout_width="match_parent"
+         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="@dimen/_10sdp"
@@ -32,16 +34,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight=".2"
-            android:gravity="left"
-            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:gravity="center"
+             android:textColor="@color/black"
             android:textSize="@dimen/_15sdp" />
 
 
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_1sdp"
-        android:layout_marginTop="@dimen/_2sdp"
+        android:layout_height=".7dp"
+         android:layout_marginTop="@dimen/_2sdp"
         android:background="@color/gray_color" />
 
     <androidx.recyclerview.widget.RecyclerView

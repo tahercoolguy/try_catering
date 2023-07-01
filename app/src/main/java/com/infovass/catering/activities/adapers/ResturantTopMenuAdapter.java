@@ -68,7 +68,7 @@ public class ResturantTopMenuAdapter extends RecyclerView.Adapter<ResturantTopMe
         if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
             Log.i("UUUIUIU", "UIUIUIU");
             holder.mainResNameTxt.setText("" + restourentLIst.get(position).getItem_name_arabic());
-            holder.priceTxt.setText("" + restourentLIst.get(position).getItem_cost_per_serve()+" دينار كويتي ");
+            holder.priceTxt.setText("" + restourentLIst.get(position).getItem_cost_per_serve()+" د.ك "+" ");
             holder.resNameTxt.setText("" + restourentLIst.get(position).getCaterer().getArabic_name());
         }
 

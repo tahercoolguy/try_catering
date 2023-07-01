@@ -14,12 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.github.siyamed.shapeimageview.RoundedImageView;
 import com.infovass.catering.MyFormat.MyDM.Item_;
 import com.infovass.catering.R;
 import com.infovass.catering.activities.home.model.RestourentModeResponse;
 import com.infovass.catering.activities.network.Constants;
 import com.infovass.catering.activities.network.SharedPreferencesUtils;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -60,8 +60,8 @@ class ResturentMenuNewAdapter extends RecyclerView.Adapter<ResturentMenuNewAdapt
             if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
                 holder.mealNameTextView.setText("" + items.get(position).getArabic_item_name());
                 holder.mealTagTextView.setText(Html.fromHtml("" + items.get(position).getArabic_item_short_description()));
-                holder.tv_persions.setText("For " + items.get(position).getItem_serving_capacity() + " Persons");
-                holder.priceTextView.setText("" + items.get(position).getItem_cost_per_serve() + " KWD");
+                holder.tv_persions.setText("ل " + items.get(position).getItem_serving_capacity() + " الأشخاص");
+                holder.priceTextView.setText("" + items.get(position).getItem_cost_per_serve() + " د.ك");
             }
 
             if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
@@ -77,10 +77,10 @@ class ResturentMenuNewAdapter extends RecyclerView.Adapter<ResturentMenuNewAdapt
         try {
             Item_ item = items.get(position);
             if (item != null && item.getImages() != null && item.getImages().size()!=0) {
-                Picasso.get().load(item.getImages().get(0).getItem_logo_path()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.menu_image);
+                Picasso.get().load(item.getImages().get(0).getItem_logo_path()).error(R.drawable.gradient).placeholder(R.drawable.gradient).into(holder.menu_image);
             } else {
                 if (item != null && item.getItem_logo_path() != null)
-                    Picasso.get().load(item.getItem_logo_path()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.menu_image);
+                    Picasso.get().load(item.getItem_logo_path()).error(R.drawable.gradient).placeholder(R.drawable.gradient).into(holder.menu_image);
  //                  Picasso.get().load(items.get(0).getItemLogoPath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.menu_image);
 
             }

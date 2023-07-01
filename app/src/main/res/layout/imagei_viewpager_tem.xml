@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- image viwer to view the images -->
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageViewMain"
         android:layout_width="match_parent"
+        app:riv_corner_radius_bottom_left="30dp"
+        app:riv_corner_radius_bottom_right="30dp"
         android:layout_height="match_parent"
+        android:src="@drawable/gradient"
         android:scaleType="centerCrop"/>
+
     <View
         android:id="@+id/overlay_image"
         android:layout_width="match_parent"
-        android:alpha="0.15"
         android:layout_height="match_parent"
-        android:background="@color/black"
-        />
+        android:alpha="0.15"
+        android:background="@color/black" />
 </RelativeLayout>
