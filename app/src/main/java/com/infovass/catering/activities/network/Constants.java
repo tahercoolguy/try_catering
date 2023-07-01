@@ -27,6 +27,7 @@ public @interface Constants {
     String KEY_CATEGORIE_ID = "categorie_id";
     String KEY_ACTIVITY = "activity";
     String KEY_TIME = "time";
+    String KEY_ARABIC_TIME = "ar_time";
     String KEY_DATE = "date";
     String KEY_DATE1 = "date";
     String mode_id = "mode_id";

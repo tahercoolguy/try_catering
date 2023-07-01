@@ -426,4 +426,6 @@
       <string name="top_restaurants">أفضل المطاعم</string>
     <string name="top_menus">القوائم العلوية</string>
     <string name="busy">مشغول</string>
+    <string name="please_select_city_first">الرجاء تحديد المدينة أولاً.</string>
+    <string name="please_select_area_first">يرجى تحديد المنطقة أولاً.</string>
 </resources>

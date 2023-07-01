@@ -50,13 +50,12 @@
 
         <LinearLayout
             android:id="@+id/busySideLL"
-            android:layout_width="match_parent"
-            android:gravity="right"
-            android:layout_alignParentStart="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_marginLeft="@dimen/_13sdp"
             android:layout_marginRight="@dimen/_13sdp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/lnr_sideLayout"
@@ -121,7 +120,7 @@
                             android:layout_marginStart="2dp"
                             android:layout_marginEnd="2dp"
                             android:singleLine="true"
-                            android:text="@string/busy"
+                            android:text="busy"
                             android:textColor="@color/black"></TextView>
                     </LinearLayout>
 

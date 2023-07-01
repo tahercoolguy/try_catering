@@ -416,6 +416,8 @@
     <string name="top_restaurants">Top Restaurants</string>
     <string name="top_menus">Top Menus</string>
     <string name="busy">Busy</string>
+    <string name="please_select_city_first">Please Select City First.</string>
+    <string name="please_select_area_first">Please Select Area First.</string>
 
 
 </resources>

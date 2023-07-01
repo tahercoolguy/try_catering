@@ -16,6 +16,7 @@ import android.widget.RelativeLayout;
 
 import com.infovass.catering.R;
 import com.infovass.catering.activities.ChangeLanguageActivity;
+import com.infovass.catering.activities.MainActivity;
 import com.infovass.catering.activities.login.view.LoginActivity;
 import com.infovass.catering.activities.network.Constants;
 import com.infovass.catering.activities.network.SharedPreferencesUtils;
@@ -74,9 +75,11 @@ public class ProfileFragment extends Fragment {
 
             case R.id.rel_changeLanguage:
                 try {
-                    Intent intent = new Intent(getActivity(), ChangeLanguageActivity.class);
-                    startActivity(intent);
-                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+                    ((MainActivity)getContext()).startLanguageActivity();
+//                    Intent intent = new Intent(getActivity(), ChangeLanguageActivity.class);
+//                    startActivity(intent);
+//                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 } catch (Exception g) {
                 }
                 break;

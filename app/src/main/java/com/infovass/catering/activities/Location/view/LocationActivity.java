@@ -176,7 +176,7 @@ public class LocationActivity extends BaseActivity implements LocationViews {
                         }
 
                     } else {
-                        Toast.makeText(LocationActivity.this, "Please Select Area First.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LocationActivity.this, getString(R.string.please_select_area_first), Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception g) {
                 }

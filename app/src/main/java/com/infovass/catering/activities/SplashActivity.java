@@ -66,14 +66,14 @@ public class SplashActivity extends AppCompatActivity {
         }.start();
     }
 
-    private void setLanguageResource(String language_code) {
-        Resources res = getResources();
-        // Change locale main_settings in the app.
-        DisplayMetrics dm = res.getDisplayMetrics();
-        Configuration conf = res.getConfiguration();
-        conf.locale = new Locale(language_code.toLowerCase());
-        res.updateConfiguration(conf, dm);
-    }
+//    private void setLanguageResource(String language_code) {
+//        Resources res = getResources();
+//        // Change locale main_settings in the app.
+//        DisplayMetrics dm = res.getDisplayMetrics();
+//        Configuration conf = res.getConfiguration();
+//        conf.locale = new Locale(language_code.toLowerCase());
+//        res.updateConfiguration(conf, dm);
+//    }
     @Override
     public void finish() {
         super.finish();
@@ -83,5 +83,14 @@ public class SplashActivity extends AppCompatActivity {
     public void onBackPressed() {
         overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
         super.onBackPressed();
+    }
+
+    public void setLanguageResource(String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+
+        Configuration configuration = getResources().getConfiguration();
+        configuration.setLocale(locale);
+        getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
     }
 }

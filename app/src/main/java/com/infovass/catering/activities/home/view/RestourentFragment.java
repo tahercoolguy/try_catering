@@ -328,11 +328,15 @@ public class RestourentFragment extends Fragment implements RestourentView {
             locationTxt.setText("موقع");
             dateTxt.setText("تاريخ");
             timeTxt.setText("وقت");
+            topmenuTxt.setText("القوائم");
+            topResTxt.setText("أفضل");
         } else {
 
             locationTxt.setText("Location");
             dateTxt.setText("Date");
             timeTxt.setText("Time");
+            topmenuTxt.setText(getString(R.string.top_menus));
+            topResTxt.setText(getString(R.string.top_restaurants));
         }
 
         return view;
@@ -503,15 +507,15 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
                     if (rd_caterers_root.getStatus().equalsIgnoreCase("true")) {
 
-                        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-                            topResTxt.setText("أفضل المطاعم");
-                            topmenuTxt.setText("القوائم العلوية");
-                        }
-
-                        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
-                            topResTxt.setText(context.getString(R.string.top_restaurants));
-                            topmenuTxt.setText(context.getString(R.string.top_menus));
-                        }
+//                        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+//                            topResTxt.setText("أفضل المطاعم");
+//                            topmenuTxt.setText("القوائم العلوية");
+//                        }
+//
+//                        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+//                            topResTxt.setText(context.getString(R.string.top_restaurants));
+//                            topmenuTxt.setText(context.getString(R.string.top_menus));
+//                        }
 
 
                         try {

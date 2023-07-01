@@ -32,6 +32,7 @@ public class ChangeLanguageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_language);
         ButterKnife.bind(this);
+        setAppLocale("en");
     }
 
     public static void setLanguageLocale(Context context, String languageCode) {
@@ -67,13 +68,14 @@ public class ChangeLanguageActivity extends AppCompatActivity {
             case R.id.btn_lang_arabic:
                 try {
                     SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.Language, "ar");
-                    Intent intent = new Intent(ChangeLanguageActivity.this, SplashActivity.class);
-                    setLanguageResource("ar");
-                    new AppSettings().setAppLanguage(this, "ar");
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                    Intent intent = new Intent();
 
+//                    setLanguageResource("ar");
+                    setAppLocale("ar");
+                    new AppSettings().setAppLanguage(this, "ar");
+
+                    intent.putExtra("restart", "restart"); // Replace "KEY" with a unique identifier and "data" with the actual data you want to pass back
+                    setResult(RESULT_OK, intent);
                     finish();
                 } catch (Exception g) {
                 }
@@ -82,13 +84,14 @@ public class ChangeLanguageActivity extends AppCompatActivity {
             case R.id.btn_lang_english:
                 try {
                     SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.Language, "en");
-                    Intent intent = new Intent(ChangeLanguageActivity.this, SplashActivity.class);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    setLanguageResource("en");
-                    new AppSettings().setAppLanguage(this, "en");
-                    startActivity(intent);
-                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                    Intent intent = new Intent();
 
+//                    setLanguageResource("ar");
+                    setAppLocale("en");
+                    new AppSettings().setAppLanguage(this, "ar");
+
+                    intent.putExtra("restart", "restart"); // Replace "KEY" with a unique identifier and "data" with the actual data you want to pass back
+                    setResult(RESULT_OK, intent);
                     finish();
                 } catch (Exception g) {
                 }
@@ -97,15 +100,24 @@ public class ChangeLanguageActivity extends AppCompatActivity {
         }
     }
 
+    public void setAppLocale(String languageCode) {
+        Locale locale = new Locale(languageCode);
+        Locale.setDefault(locale);
+
+        Configuration configuration = getResources().getConfiguration();
+        configuration.setLocale(locale);
+        getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
+    }
+
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(R.anim.right_slide_in, R.anim.right_slide_in);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
     }
 
     @Override
     public void onBackPressed() {
-        overridePendingTransition(R.anim.right_slide_in, R.anim.left_slide_out);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
         super.onBackPressed();
     }
 }

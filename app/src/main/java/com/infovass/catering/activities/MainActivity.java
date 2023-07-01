@@ -304,6 +304,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        if (requestCode == 10 && resultCode == RESULT_OK) {
+            if (data != null) {
+                String receivedData = data.getStringExtra("KEY"); // Replace "KEY" with the unique identifier you used in the target activity
+                // Use the received data as needed
+                  this.finish();
+                  startActivity(new Intent(MainActivity.this,SplashActivity.class));
+            }
+        }
+
         if (data != null) {
 
             String newlocationArea = data.getStringExtra("newlocationArea");
@@ -317,6 +327,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
 
         }
+
+
         super.onActivityResult(requestCode, resultCode, data);
 
     }
@@ -456,4 +468,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         searchImgButton.setImageDrawable(getDrawable(R.drawable.ic_search_unselected));
         accountImgbutton.setImageDrawable(getDrawable(R.drawable.ic_profile_selected));
     }
+
+    public void startLanguageActivity(){
+
+        Intent intent = new Intent(MainActivity.this, ChangeLanguageActivity.class);
+        startActivityForResult(intent, 10);
+        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+    }
+
+
 }
