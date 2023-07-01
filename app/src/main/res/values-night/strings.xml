@@ -418,6 +418,8 @@
     <string name="busy">Busy</string>
     <string name="please_select_city_first">Please Select City First.</string>
     <string name="please_select_area_first">Please Select Area First.</string>
+    <string name="select_language">Select Language</string>
+    <string name="terms_and_condition">Terms and Condition</string>
 
 
 </resources>

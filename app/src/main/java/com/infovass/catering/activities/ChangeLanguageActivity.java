@@ -32,7 +32,7 @@ public class ChangeLanguageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_language);
         ButterKnife.bind(this);
-     }
+    }
 
     public static void setLanguageLocale(Context context, String languageCode) {
         Locale locale = new Locale(languageCode);

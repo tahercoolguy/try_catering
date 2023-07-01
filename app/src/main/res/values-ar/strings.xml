@@ -428,4 +428,7 @@
     <string name="busy">مشغول</string>
     <string name="please_select_city_first">الرجاء تحديد المدينة أولاً.</string>
     <string name="please_select_area_first">يرجى تحديد المنطقة أولاً.</string>
+    <string name="select_language">اختار اللغة</string>
+    <string name="terms_and_condition">أحكام وشروط</string>
+
 </resources>
