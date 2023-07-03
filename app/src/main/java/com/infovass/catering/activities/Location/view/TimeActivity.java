@@ -17,8 +17,10 @@ import com.infovass.catering.activities.MainActivity;
 import com.infovass.catering.activities.network.Constants;
 import com.infovass.catering.activities.network.SharedPreferencesUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import butterknife.BindView;
@@ -168,6 +170,8 @@ public class TimeActivity extends AppCompatActivity {
                                 // You can update your UI or perform any other operations with the formatted times
 
                                 // Add leading zeros if the hour is less than 10
+
+
                                 if (hour < 10) {
                                     formattedTimeEnglish = "0" + formattedTimeEnglish;
                                 }
@@ -183,8 +187,8 @@ public class TimeActivity extends AppCompatActivity {
 
                         } else {
 
-                            hour = timePicker.getCurrentHour();
-                            minute = timePicker.getCurrentMinute();
+                            hour = timePicker.getHour();
+                            minute = timePicker.getMinute();
                             // Create a Calendar instance to set the selected time
                             Calendar selectedTime = Calendar.getInstance();
                             selectedTime.set(Calendar.HOUR_OF_DAY, hour);
@@ -273,13 +277,53 @@ public class TimeActivity extends AppCompatActivity {
 //                        }
 
                         if (newtime != null) {
-                            SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + time);
 
-                            Intent intent = new Intent();
-                            intent.putExtra("newtime", time);
-                            setResult(RESULT_OK, intent);
+                            if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+                                Intent intent = new Intent();
+                                String originalTime = time;
+                                String modifiedTime = "";
 
-                            finish();
+                                SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm a",  new Locale("ar"));
+                                SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm a",  new Locale("ar"));
+                                Date timedata = null;
+                                try {
+                                    timedata = inputFormat.parse(originalTime);
+                                    modifiedTime = outputFormat.format(timedata);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                System.out.println(modifiedTime);  // Output: 06:05 PM
+                                intent.putExtra("newtime", modifiedTime);
+                                setResult(RESULT_OK, intent);
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + modifiedTime);
+
+                                finish();
+
+                            }else{
+
+                                Intent intent = new Intent();
+                                String originalTime = time;
+                                String modifiedTime = "";
+
+                                SimpleDateFormat inputFormat = new SimpleDateFormat("hh:mm a", Locale.US);
+                                SimpleDateFormat outputFormat = new SimpleDateFormat("hh:mm a", Locale.US);
+                                Date timedata = null;
+                                try {
+                                    timedata = inputFormat.parse(originalTime);
+                                    modifiedTime = outputFormat.format(timedata);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+                                System.out.println(modifiedTime);  // Output: 06:05 PM
+                                intent.putExtra("newtime", modifiedTime);
+                                setResult(RESULT_OK, intent);
+                                SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + modifiedTime);
+
+                                finish();
+                            }
+
                         } else {
                             SharedPreferencesUtils.getInstance(getApplicationContext()).setValue(Constants.KEY_TIME, "" + time);
                             Intent intent = new Intent(TimeActivity.this, MainActivity.class);

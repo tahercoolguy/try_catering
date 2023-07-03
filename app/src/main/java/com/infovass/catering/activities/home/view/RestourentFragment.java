@@ -280,6 +280,8 @@ public class RestourentFragment extends Fragment implements RestourentView {
                         } else {
                             refreshBoolean = false;
                             swiperefresh.setRefreshing(false);
+                            restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+                            newRandomCaterers();
 
                         }
                     }

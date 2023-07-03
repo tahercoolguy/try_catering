@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AppController appController;
     private Dialog progress;
     private ConnectionDetector connectionDetector;
-    int iconPosition=0;
+    int iconPosition = 0;
     @BindView(R.id.searchImg)
     ImageView searchImg;
 
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void callRestourentFragment(String value) {
-        iconPosition=0;
+        iconPosition = 0;
         searchClicked = false;
         RestourentFragment restourentFragment = RestourentFragment.newInstance();
         startFragment(restourentFragment);
@@ -263,9 +263,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onBackPressed() {
 
-        if(iconPosition==0){
-          finish();
-        }else{
+        if (iconPosition == 0) {
+            finish();
+        } else {
 
             callRestourentFragment("RestourentFragment");
             homeImgButton.setImageDrawable(getDrawable(R.drawable.ic_home_selected));
@@ -310,11 +310,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (data != null) {
                 String receivedData = data.getStringExtra("KEY"); // Replace "KEY" with the unique identifier you used in the target activity
                 // Use the received data as needed
-                  this.finish();
-                  startActivity(new Intent(MainActivity.this,SplashActivity.class));
+                this.finish();
+                startActivity(new Intent(MainActivity.this, SplashActivity.class));
             }
         }
-
+        if (requestCode == 11 && resultCode == RESULT_OK) {
+            if (data != null) {
+                String receivedData = data.getStringExtra("restart"); // Replace "KEY" with the unique identifier you used in the target activity
+                // Use the received data as needed
+                homeImgButton.setImageDrawable(getDrawable(R.drawable.ic_home_selected));
+                cartImgButton.setImageDrawable(getDrawable(R.drawable.ic_cart_unselected));
+                searchImgButton.setImageDrawable(getDrawable(R.drawable.ic_search_unselected));
+                accountImgbutton.setImageDrawable(getDrawable(R.drawable.ic_profile_unselected));
+            }
+        }
         if (data != null) {
 
             String newlocationArea = data.getStringExtra("newlocationArea");
@@ -418,11 +427,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.N)
     @OnClick(R.id.homeImgButton)
     public void clickHome() {
-        iconPosition=0;
+        iconPosition = 0;
         callRestourentFragment("RestourentFragment");
 
 
@@ -435,13 +443,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @RequiresApi(api = Build.VERSION_CODES.N)
     @OnClick(R.id.cartImgButton)
     public void clickCart() {
-        iconPosition=1;
-        startActivity(new Intent(MainActivity.this, CartActivity.class));
+        iconPosition = 1;
+        Intent intent = new Intent(MainActivity.this, CartActivity.class);
+        startActivityForResult(intent, 11);
         overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
         cartImgButton.setImageDrawable(getDrawable(R.drawable.ic_cart_selected));
         homeImgButton.setImageDrawable(getDrawable(R.drawable.ic_home_unselected));
-         searchImgButton.setImageDrawable(getDrawable(R.drawable.ic_search_unselected));
+        searchImgButton.setImageDrawable(getDrawable(R.drawable.ic_search_unselected));
         accountImgbutton.setImageDrawable(getDrawable(R.drawable.ic_profile_unselected));
 
     }
@@ -449,7 +458,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @RequiresApi(api = Build.VERSION_CODES.N)
     @OnClick(R.id.searchImgButton)
     public void clickSearch() {
-        iconPosition=2;
+        iconPosition = 2;
         callSearchFragment("SearchFragment");
 
 
@@ -463,7 +472,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @RequiresApi(api = Build.VERSION_CODES.N)
     @OnClick(R.id.accountImgbutton)
     public void clickAccount() {
-        iconPosition=3;
+        iconPosition = 3;
         callProfileFragment("ProfileFragment");
 
 
@@ -473,7 +482,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         accountImgbutton.setImageDrawable(getDrawable(R.drawable.ic_profile_selected));
     }
 
-    public void startLanguageActivity(){
+    public void startLanguageActivity() {
 
         Intent intent = new Intent(MainActivity.this, ChangeLanguageActivity.class);
         startActivityForResult(intent, 10);

@@ -43,6 +43,7 @@ import com.infovass.catering.activities.cart.presenter.CartPresenter;
 import com.infovass.catering.activities.network.Constants;
 import com.infovass.catering.activities.network.SharedPreferencesUtils;
 import com.infovass.catering.activities.profile.AddressActivity;
+import com.infovass.catering.activities.utill.AppSettings;
 import com.infovass.catering.activities.utill.InputValidations;
 import com.infovass.catering.activities.utill.ProgressHUD;
 
@@ -525,7 +526,10 @@ public class CartActivity extends BaseActivity implements CartView {
     @Override
     public void onBackPressed() {
         overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-
+        Intent intent = new Intent();
+        intent.putExtra("restart", "restart"); // Replace "KEY" with a unique identifier and "data" with the actual data you want to pass back
+        setResult(RESULT_OK, intent);
+        finish();
         super.onBackPressed();
     }
 }
