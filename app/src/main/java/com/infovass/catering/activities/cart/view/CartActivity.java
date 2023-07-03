@@ -220,7 +220,8 @@ public class CartActivity extends BaseActivity implements CartView {
                     int itemCount = Integer.parseInt(tv_productCount.getText().toString());
                     itemCount = itemCount - 1;
                     if (itemCount == 0) {
-                        Toast.makeText(CartActivity.this, "Cannot set item count 0.", Toast.LENGTH_SHORT).show();
+
+                         Toast.makeText(CartActivity.this, getString(R.string.cannot_item_count_zero), Toast.LENGTH_SHORT).show();
                     } else {
                         tv_productCount.setText("" + itemCount);
                         float total = totalAmount - items.get(position).getTotalCost();
@@ -249,8 +250,8 @@ public class CartActivity extends BaseActivity implements CartView {
             @Override
             public void deleteItem(int position) {
                 AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivityContext());
-                alertDialogBuilder.setMessage("Are you sure, You wanted to delete cart item.");
-                alertDialogBuilder.setPositiveButton("yes",
+                alertDialogBuilder.setMessage(getString(string.are_you_sure_want_to_delete_cart));
+                alertDialogBuilder.setPositiveButton(getString(string.yes),
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface arg0, int arg1) {
@@ -258,7 +259,7 @@ public class CartActivity extends BaseActivity implements CartView {
                             }
                         });
 
-                alertDialogBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                alertDialogBuilder.setNegativeButton(getString(string.no), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -279,7 +280,7 @@ public class CartActivity extends BaseActivity implements CartView {
         cartCodeAppy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cartPresenter.getUserPromoCode(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), et_promoCode.getText().toString(),SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.addressID,"0"));
+                cartPresenter.getUserPromoCode(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), et_promoCode.getText().toString(), SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.addressID, "0"));
             }
         });
 
@@ -287,15 +288,14 @@ public class CartActivity extends BaseActivity implements CartView {
         cart_temp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cartPresenter.getUserPromoCode(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), "",SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.addressID,"0"));
+                cartPresenter.getUserPromoCode(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), "", SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.addressID, "0"));
                 et_promoCode.setText("");
             }
         });
         try {
-            String addressid= SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.addressID,"0");
-            cartPresenter.getUserPromoCode(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), "",addressid);
-        }catch (Exception ex)
-        {
+            String addressid = SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.addressID, "0");
+            cartPresenter.getUserPromoCode(SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""), "", addressid);
+        } catch (Exception ex) {
 
         }
     }
@@ -373,8 +373,8 @@ public class CartActivity extends BaseActivity implements CartView {
         if (InputValidations.isNullOrEmpty(addressID)) {
             error = false;
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivityContext());
-            alertDialogBuilder.setMessage("Please Select address .");
-            alertDialogBuilder.setPositiveButton("Ok",
+            alertDialogBuilder.setMessage(string.please_select_address);
+            alertDialogBuilder.setPositiveButton(getString(string.ok),
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface arg0, int arg1) {
@@ -441,7 +441,7 @@ public class CartActivity extends BaseActivity implements CartView {
 //                    SharedPreferencesUtils.getInstance(getActivityContext()).setValue(Constants.invoice_id, "" + placeOrderResponse.getData().getOrder().getInvoiceid());
 
                     Intent intent = new Intent(CartActivity.this, PaymentActivity.class);
-                    intent.putExtra("invoiceid",placeOrderResponse.getData().getOrder().getInvoiceid().toString());
+                    intent.putExtra("invoiceid", placeOrderResponse.getData().getOrder().getInvoiceid().toString());
                     startActivity(intent);
                     finish();
                 } else {
@@ -523,6 +523,7 @@ public class CartActivity extends BaseActivity implements CartView {
         overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
     }
+
     @Override
     public void onBackPressed() {
         overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);

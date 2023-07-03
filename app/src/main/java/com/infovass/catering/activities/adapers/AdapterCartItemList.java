@@ -21,7 +21,7 @@ import com.infovass.catering.R;
 import com.infovass.catering.activities.cart.model.CartResponse;
 import com.infovass.catering.activities.network.Constants;
 import com.infovass.catering.activities.network.SharedPreferencesUtils;
-import com.github.siyamed.shapeimageview.RoundedImageView;
+import com.makeramen.roundedimageview.RoundedImageView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -140,7 +140,7 @@ public class AdapterCartItemList extends RecyclerView.Adapter<AdapterCartItemLis
             if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar"))
             {
                 holder.mealNameTextView.setText(items.get(position).getIteam().getArabicItemName());
-                holder.tv_for_persons.setText("For "+items.get(position).getIteam().getItemServingCapacity()+" Persons");
+                holder.tv_for_persons.setText(" ل "+items.get(position).getIteam().getItemServingCapacity()+" الأشخاص ");
                 holder.tv_productPrice.setText(""+items.get(position).getCost()+" KWD");
                 holder.tv_productCount.setText(""+items.get(position).getQuantity());
             }
@@ -155,7 +155,7 @@ public class AdapterCartItemList extends RecyclerView.Adapter<AdapterCartItemLis
         }catch (Exception j){}
 
         try {
-            Picasso.get().load(""+items.get(position).getIteam().getItemLogoPath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(holder.image_product);
+            Picasso.get().load(""+items.get(position).getIteam().getItemLogoPath()).error(R.drawable.gradient).placeholder(R.drawable.gradient).into(holder.image_product);
         }
         catch (Exception ex)
         { }

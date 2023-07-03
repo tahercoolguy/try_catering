@@ -1,10 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/background_color"
-    >
+    android:background="@color/background_color">
 
     <RelativeLayout
         android:id="@+id/lnr_top"
@@ -29,7 +28,7 @@
             android:fontFamily="@font/en"
             android:text="@string/cart"
             android:textColor="@android:color/white"
-            android:textSize="@dimen/_16sdp"
+            android:textSize="17dp"
             android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatTextView
@@ -72,47 +71,48 @@
                 android:layout_weight="1"
                 android:fitsSystemWindows="true" />
 
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/_40sdp"
-                android:background="@drawable/cart_button_background">
+                android:layout_height="45dp"
+                android:background="@drawable/cart_button_background"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/cartToatal"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_weight="1"
                     android:fontFamily="@font/en"
+                    android:gravity="start"
                     android:padding="@dimen/_5sdp"
                     android:text="@string/total_amount"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="17dp"
                     android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_total"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/_10sdp"
-                    android:layout_toRightOf="@id/cartToatal"
-                    android:gravity="end"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="10dp"
                     android:padding="@dimen/_5sdp"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_15sdp"
+                    android:textSize="15dp"
                     android:textStyle="bold" />
-            </RelativeLayout>
+            </LinearLayout>
 
             <CheckBox
                 android:id="@+id/ch_femailServices"
                 android:layout_width="wrap_content"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:clickable="false"
                 android:fontFamily="@font/en"
-                android:text="@string/request_female_service" />
+                android:text="@string/request_female_service"
+                android:visibility="gone" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -121,7 +121,7 @@
                 android:layout_marginBottom="@dimen/_8sdp"
                 android:fontFamily="@font/en"
                 android:text="@string/select_pickup_branch"
-                android:textSize="@dimen/_14sdp"
+                android:textSize="17dp"
                 android:visibility="gone" />
 
             <androidx.cardview.widget.CardView
@@ -145,7 +145,7 @@
                         android:paddingTop="@dimen/_10sdp"
                         android:paddingBottom="@dimen/_10sdp"
                         android:text="@string/salmiya_branch_10"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textSize="15dp" />
 
                     <ImageView
                         android:id="@+id/branch"
@@ -157,18 +157,19 @@
                         android:gravity="end"
                         android:padding="@dimen/_5sdp"
                         android:src="@drawable/down"
-                        android:textSize="@dimen/_16sdp" />
+                        android:textSize="15dp" />
                 </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="43dp"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/en"
                 android:text="@string/date_time"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -181,40 +182,47 @@
                 <TextView
                     android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
-                    android:layout_height="43dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/custvbackground"
+                    android:background="@drawable/rounded_rectangle"
+                    android:elevation="1dp"
                     android:fontFamily="@font/en"
                     android:gravity="center"
+                    android:paddingVertical="13dp"
                     android:text="@string/date"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_time"
                     android:layout_width="wrap_content"
-                    android:layout_height="43dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
                     android:layout_weight="1"
-                    android:background="@drawable/custvbackground"
+                    android:background="@drawable/rounded_rectangle"
+                    android:elevation="1dp"
                     android:fontFamily="@font/en"
                     android:gravity="center"
+                    android:paddingVertical="13dp"
                     android:text="@string/Times"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="15dp" />
             </LinearLayout>
 
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="43dp"
+                android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
                 android:layout_toLeftOf="@id/branch"
                 android:fontFamily="@font/en"
                 android:text="@string/address"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="17dp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -249,21 +257,22 @@
                 android:layout_marginTop="@dimen/_10sdp"
                 android:background="@drawable/promocode_background">
 
-<!--                <ImageView-->
-<!--                    android:id="@+id/cart_temp"-->
-<!--                    android:layout_width="@dimen/_20sdp"-->
-<!--                    android:layout_height="@dimen/_20sdp"-->
-<!--                    android:layout_alignParentLeft="true"-->
-<!--                    android:layout_centerVertical="true"-->
-<!--                    android:layout_marginLeft="@dimen/_10sdp"-->
-<!--                    android:src="@drawable/ic_correct" />-->
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/cart_temp"-->
+                <!--                    android:layout_width="@dimen/_20sdp"-->
+                <!--                    android:layout_height="@dimen/_20sdp"-->
+                <!--                    android:layout_alignParentLeft="true"-->
+                <!--                    android:layout_centerVertical="true"-->
+                <!--                    android:layout_marginLeft="@dimen/_10sdp"-->
+                <!--                    android:src="@drawable/ic_correct" />-->
                 <ImageView
                     android:id="@+id/cart_temp"
-                    android:layout_width="@dimen/_40sdp"
-                    android:layout_height="@dimen/_40sdp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_baseline_cancel_24" />
+                    android:layout_marginHorizontal="10dp"
+                    android:src="@drawable/ic_discount" />
 
                 <EditText
                     android:id="@+id/et_promoCode"
@@ -271,13 +280,16 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginRight="@dimen/_10sdp"
                     android:layout_toLeftOf="@id/cartCodeAppy"
                     android:layout_toRightOf="@id/cart_temp"
+                    android:backgroundTint="@color/white"
                     android:fontFamily="@font/en"
                     android:hint="@string/enter_code"
                     android:paddingTop="@dimen/_10sdp"
                     android:paddingBottom="@dimen/_10sdp"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textSize="15dp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/cartCodeAppy"
@@ -296,7 +308,7 @@
                     android:paddingBottom="@dimen/_7sdp"
                     android:text="@string/apply"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="15dp" />
             </RelativeLayout>
 
             <TextView
@@ -309,29 +321,30 @@
                 android:fontFamily="@font/en"
                 android:text="@string/summary"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_14sdp" />
+                android:textSize="17dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                 android:layout_height="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                     android:text="@string/Totalamount"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
-
-                <TextView
-                    android:id="@+id/tv_totalAmount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="end"
+                    android:text="@string/Totalamount"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/tv_totalAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -343,9 +356,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                        android:text="@string/Discount"
+                    android:text="@string/Discount"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_discount"
@@ -353,9 +366,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="0"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -367,9 +379,9 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                     android:text="@string/ServiceCharges"
+                    android:text="@string/ServiceCharges"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="15dp" />
 
                 <TextView
                     android:id="@+id/tv_serviceCharge"
@@ -377,9 +389,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="end"
-                    android:text="0"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <LinearLayout
@@ -389,20 +400,19 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                     android:text="@string/grandTotal"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
-
-                <TextView
-                    android:id="@+id/tv_GrandTotal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="end"
+                    android:text="@string/grandTotal"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_12sdp" />
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/tv_GrandTotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="15dp" />
             </LinearLayout>
 
             <TextView
@@ -410,11 +420,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="20dp"
                 android:layout_toLeftOf="@id/branch"
                 android:fontFamily="@font/en"
                 android:text="@string/payment"
-                android:textSize="@dimen/_14sdp" />
+                android:textSize="17dp" />
 
             <RadioGroup
                 android:id="@+id/rg_payment"
@@ -441,19 +451,22 @@
                         android:src="@drawable/knetlogo" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
                         android:fontFamily="@font/en"
+                        android:gravity="end"
                         android:text="@string/knet"
-                        android:textSize="@dimen/_12sdp" />
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                     android:orientation="horizontal">
+                    android:orientation="horizontal">
 
                     <RadioButton
                         android:id="@+id/rb_COD"
@@ -465,19 +478,19 @@
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="@dimen/_30sdp"
                         android:layout_gravity="center"
-                        android:src="@drawable/cash"
-                        />
+                        android:src="@drawable/cash" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
-                        android:gravity="center"
-                        android:textColor="@color/black"
+                        android:layout_weight="1"
+                        android:gravity="end"
                         android:maxLines="1"
-                        android:text="نقداً"
-                        android:textSize="@dimen/_12sdp" />
+                        android:text="نقدي"
+                        android:textColor="@color/black"
+                        android:textSize="15dp" />
                 </LinearLayout>
             </RadioGroup>
 

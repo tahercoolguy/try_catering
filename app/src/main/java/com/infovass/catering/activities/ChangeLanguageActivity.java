@@ -76,6 +76,7 @@ public class ChangeLanguageActivity extends AppCompatActivity {
                     intent.putExtra("restart", "restart"); // Replace "KEY" with a unique identifier and "data" with the actual data you want to pass back
                     setResult(RESULT_OK, intent);
                     finish();
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 } catch (Exception g) {
                 }
                 break;
@@ -92,6 +93,7 @@ public class ChangeLanguageActivity extends AppCompatActivity {
                     intent.putExtra("restart", "restart"); // Replace "KEY" with a unique identifier and "data" with the actual data you want to pass back
                     setResult(RESULT_OK, intent);
                     finish();
+                    overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 } catch (Exception g) {
                 }
                 break;
