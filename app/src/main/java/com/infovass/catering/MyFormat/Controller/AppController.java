@@ -13,7 +13,6 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.infovass.catering.MyFormat.Services.PAServices;
-import com.infovass.catering.MyFormat.Utils.MyUrlConnectionClient;
 
 import java.util.Locale;
 
@@ -58,16 +57,16 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
         GsonBuilder builder = new GsonBuilder();
-
         Gson deserializerGson = builder.create();
-        //     .setConverter(new GsonConverter(deserializerGson))
-        restAdapter = new RestAdapter.Builder().
-                setEndpoint(SHOPCH11_SERVER)
+
+        restAdapter = new RestAdapter.Builder()
+                .setEndpoint(SHOPCH11_SERVER)
                 .setClient(new MyUrlConnectionClient())
                 .setConverter(new GsonConverter(deserializerGson))
                 .build();
-        paServices= restAdapter.create(PAServices.class);
+        paServices = restAdapter.create(PAServices.class);
         mInstance = this;
+
 //        googleEndpoint.initialize(this);
 //        facebookEndpoint.initialize(this);
      //   TwitterEndpoint.initialize(this);

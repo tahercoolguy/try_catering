@@ -446,6 +446,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/homeAdShimmerLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:animateLayoutChanges="true"
+                        android:animationCache="true"
+                        android:layout_gravity="center"
+                        app:shimmer_repeat_mode="restart"
+                        app:shimmer_shape="radial">
+
+                        <include layout="@layout/home_ad_shimeer"></include>
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
 
                     <com.smarteist.autoimageslider.SliderView
                         android:id="@+id/imageSlider"
@@ -460,6 +473,41 @@
                         android:layout_marginHorizontal="21dp"
                          android:textColor="@color/black"
                         android:textStyle="bold"></TextView>
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/topResShimmerLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:animateLayoutChanges="true"
+                        android:animationCache="true"
+                        app:shimmer_repeat_mode="restart"
+                        app:shimmer_shape="radial">
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:scrollbars="none"
+
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                <include layout="@layout/top_restaurent_shimmer"></include>
+
+                            </LinearLayout>
+
+                        </HorizontalScrollView>
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/topRestaurentsRcv"
@@ -477,7 +525,41 @@
                         android:layout_marginTop="20dp"
                         android:textColor="@color/black"
                         android:textStyle="bold"></TextView>
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/topMenuShimmerLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="10dp"
+                        android:animateLayoutChanges="true"
+                        android:animationCache="true"
+                        app:shimmer_repeat_mode="restart"
+                        app:shimmer_shape="radial">
 
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:scrollbars="none"
+
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                <include layout="@layout/top_restaurent_shimmer"></include>
+
+                            </LinearLayout>
+
+                        </HorizontalScrollView>
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/topMenuRcv"
                         android:layout_width="match_parent"
@@ -491,10 +573,46 @@
                         android:layout_width="match_parent"
                         android:layout_marginBottom="100dp"
                         android:layout_marginTop="20dp"
+                        android:visibility="gone"
                         android:layout_height="wrap_content"
                         ></androidx.recyclerview.widget.RecyclerView>
 
+                    <!--below is the view for our shimmer-->
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmerFrameLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:animateLayoutChanges="true"
+                        android:animationCache="true"
+                        app:shimmer_repeat_mode="restart"
+                        app:shimmer_shape="radial">
 
+                        <!--For shimmer we are creating a same
+                            layout but setting its background
+                            as a gray colour and not providing
+                            any view inside it-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical">
+
+                            <!--below we are displaying multiple
+                                shimmer layouts using include
+                                to show them in list format-->
+                            <include layout="@layout/main_restaurent_shimmer" />
+
+                            <include layout="@layout/main_restaurent_shimmer" />
+
+                            <include layout="@layout/main_restaurent_shimmer" />
+
+                            <include layout="@layout/main_restaurent_shimmer" />
+
+                            <include layout="@layout/main_restaurent_shimmer" />
+
+                        </LinearLayout>
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
 
                 </LinearLayout>
             </androidx.core.widget.NestedScrollView>

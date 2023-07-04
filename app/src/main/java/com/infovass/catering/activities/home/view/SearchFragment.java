@@ -25,11 +25,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.infovass.catering.MyFormat.Controller.AppController;
 import com.infovass.catering.MyFormat.Utils.ConnectionDetector;
 import com.infovass.catering.R;
 import com.infovass.catering.Utils.Helper;
 import com.infovass.catering.activities.CalenderActivity;
+import com.infovass.catering.activities.DataModel.MainRestaurentDM.RC_Data;
+import com.infovass.catering.activities.DataModel.MainRestaurentDM.RC_Root;
 import com.infovass.catering.activities.DataModel.RD_catererData;
 import com.infovass.catering.activities.DataModel.RD_caterers_Root;
 import com.infovass.catering.activities.Location.view.LocationActivity;
@@ -37,6 +40,7 @@ import com.infovass.catering.activities.Location.view.TimeActivity;
 import com.infovass.catering.activities.adapers.RestourentcategoriesAdapter;
 import com.infovass.catering.activities.adapers.ResturantLargeAdapter;
 import com.infovass.catering.activities.adapers.ResturantMainLargeAdapter;
+import com.infovass.catering.activities.adapers.ResturantNewLargeAdapter;
 import com.infovass.catering.activities.adapers.ResturantSearchAdapter;
 import com.infovass.catering.activities.home.model.RestourentListResponse;
 import com.infovass.catering.activities.home.presenter.RestourentImpl;
@@ -59,13 +63,15 @@ import retrofit.mime.TypedString;
 
 public class SearchFragment extends Fragment implements RestourentView {
 
-        List<RestourentListResponse.Datum> restourentLIst = new ArrayList<>();
-//    ArrayList<RD_catererData> restourentLIst = new ArrayList<>();
+    //        List<RestourentListResponse.Datum> restourentLIst = new ArrayList<>();
+    List<RC_Data> restourentLIst = new ArrayList<>();
+    //    ArrayList<RD_catererData> restourentLIst = new ArrayList<>();
     private ProgressHUD progressHUD;
     RestourentPresenter restourentPresenter;
     View view;
     RestourentcategoriesAdapter restourentcategoriesAdapter;
-        ResturantLargeAdapter resturantLargeAdapter;
+    //        ResturantLargeAdapter resturantLargeAdapter;
+//    ResturantNewLargeAdapter resturantMainLargeAdapter;
     @BindView(R.id.resturantListView)
     RecyclerView resturantListView;
     @BindView(R.id.detail_recyclerView)
@@ -100,8 +106,12 @@ public class SearchFragment extends Fragment implements RestourentView {
     private Dialog progress;
     private ConnectionDetector connectionDetector;
     Context context;
-    ResturantMainLargeAdapter resturantMainLargeAdapter;
+    ResturantNewLargeAdapter resturantMainLargeAdapter;
     ArrayList<RD_catererData> catererData;
+
+    @BindView(R.id.shimmerFrameLayout)
+    ShimmerFrameLayout shimmerFrameLayout;
+
 
     public SearchFragment() {
         // Required empty public constructor
@@ -129,14 +139,16 @@ public class SearchFragment extends Fragment implements RestourentView {
         connectionDetector = new ConnectionDetector(getActivity());
         searchLL.setVisibility(View.VISIBLE);
         framelayout.setVisibility(View.INVISIBLE);
+        shimmerFrameLayout.startShimmer();
         activity = getActivity();
         progressHUD = ProgressHUD.create(getContext(), getString(R.string.loading), false, null, null);
-        restourentPresenter = new RestourentImpl(this);
-        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+//        restourentPresenter = new RestourentImpl(this);
+//        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
 //        restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
 //        newRandomCaterers();
+        restaurentAPI();
         tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
         tv_time.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_TIME, ""));
         tv_date.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
@@ -200,24 +212,24 @@ public class SearchFragment extends Fragment implements RestourentView {
             resturantListView.setLayoutDirection(View.LAYOUT_DIRECTION_LTR);
 
         }
-        resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
-        resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
-        resturantListView.setAdapter(resturantLargeAdapter);
-        resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RestourentListResponse.Datum> restourentLIst) {
-                SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(selectedposition).getId());
-                int restaurententID = restourentLIst.get(selectedposition).getId();
-                String restaurant_Status = String.valueOf(Restaurant_Status);
-                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
-                        .putExtra("restaurant_Status", restaurant_Status);
-                startActivity(intent);
-                activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-                hideKeyboard(activity);
-
-            }
-        });
-        showKeyboard();
+//        resturantLargeAdapter = new ResturantLargeAdapter(getContext(), restourentLIst);
+//        resturantListView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        resturantListView.setAdapter(resturantLargeAdapter);
+//        resturantLargeAdapter.setOnItemClickListener(new ResturantLargeAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RestourentListResponse.Datum> restourentLIst) {
+//                SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(selectedposition).getId());
+//                int restaurententID = restourentLIst.get(selectedposition).getId();
+//                String restaurant_Status = String.valueOf(Restaurant_Status);
+//                Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
+//                        .putExtra("restaurant_Status", restaurant_Status);
+//                startActivity(intent);
+//                activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+//                hideKeyboard(activity);
+//
+//            }
+//        });
+//        showKeyboard();
         setSearchData();
 
 
@@ -369,54 +381,61 @@ public class SearchFragment extends Fragment implements RestourentView {
 
     @Override
     public void onSuccessGetRestourentListAPi(RestourentListResponse restourentListResponse) {
-        try {
-            resturantListView.setVisibility(View.VISIBLE);
-            restourentLIst.clear();
-            if (restourentListResponse.getData().size() == 0) {
-//                lnr_noProduct.setVisibility(View.VISIBLE);
-//                resturantListView.setVisibility(View.GONE);
-
-//                restourentLIst = new ArrayList<>();
+//        try {
+//            resturantListView.setVisibility(View.VISIBLE);
+//            restourentLIst.clear();
+//            if (restourentListResponse.getData().size() == 0) {
+////                lnr_noProduct.setVisibility(View.VISIBLE);
+////                resturantListView.setVisibility(View.GONE);
+//                // on below line we are stopping our shimmer
+//                // and making its visibility to gone.
+//                shimmerFrameLayout.startShimmer();
+//                shimmerFrameLayout.setVisibility(View.VISIBLE);
+////                restourentLIst = new ArrayList<>();
+////                resturantLargeAdapter.notifyDataSetChanged();
+//            } else {
+////                lnr_noProduct.setVisibility(View.GONE);
+////                resturantListView.setVisibility(View.VISIBLE);
+//                // on below line we are stopping our shimmer
+//                // and making its visibility to gone.
+//                shimmerFrameLayout.stopShimmer();
+//                shimmerFrameLayout.setVisibility(View.GONE);
+//                restourentLIst.addAll(restourentListResponse.getData());
 //                resturantLargeAdapter.notifyDataSetChanged();
-            } else {
-//                lnr_noProduct.setVisibility(View.GONE);
-//                resturantListView.setVisibility(View.VISIBLE);
-                restourentLIst.addAll(restourentListResponse.getData());
-                resturantLargeAdapter.notifyDataSetChanged();
-//                resturantMainLargeAdapter.notifyDataSetChanged();
-
-
-//                for (RestourentListResponse.Datum da : restourentListResponse.getData()
-//                ) {
-//                    if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-//                        list.add(da.getArabicName());
-//                    } else {
-//                        list.add(da.getName());
-//                    }
-//                }
-            }
-
-        } catch (Exception ignore) {
-            restourentLIst = new ArrayList<>();
-            ignore.printStackTrace();
-//            resturantMainLargeAdapter.notifyDataSetChanged();
-
-        }
+////                resturantMainLargeAdapter.notifyDataSetChanged();
+//
+//
+////                for (RestourentListResponse.Datum da : restourentListResponse.getData()
+////                ) {
+////                    if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+////                        list.add(da.getArabicName());
+////                    } else {
+////                        list.add(da.getName());
+////                    }
+////                }
+//            }
+//
+//        } catch (Exception ignore) {
+//            restourentLIst = new ArrayList<>();
+//            ignore.printStackTrace();
+////            resturantMainLargeAdapter.notifyDataSetChanged();
+//
+//        }
     }
 
 
     private void filter(String text) {
         // creating a new array list to filter our data.
-        ArrayList<RestourentListResponse.Datum> filteredlist = new ArrayList<>();
+        ArrayList<RC_Data> filteredlist = new ArrayList<>();
 
         // running a for loop to compare elements.
-        for (RestourentListResponse.Datum item : restourentLIst) {
+        for (RC_Data item : restourentLIst) {
 
             // checking if the entered string matched with any item of our recycler view.
 
 
             if (SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
-                if (item.getArabicName().contains(text.toLowerCase())) {
+                if (item.getArabic_name().contains(text.toLowerCase())) {
                     // if the item is matched we are
                     // adding it to our filtered list.
                     filteredlist.add(item);
@@ -440,7 +459,7 @@ public class SearchFragment extends Fragment implements RestourentView {
         } else {
             // at last we are passing that filtered
             // list to our adapter class.
-            resturantLargeAdapter.filterList(filteredlist);
+            resturantMainLargeAdapter.filterList(filteredlist);
         }
     }
 
@@ -470,6 +489,7 @@ public class SearchFragment extends Fragment implements RestourentView {
     public void onNoInternet() {
 
     }
+
     public void newRandomCaterers() {
         if (connectionDetector.isConnectingToInternet()) {
 
@@ -554,4 +574,92 @@ public class SearchFragment extends Fragment implements RestourentView {
 //            newRandomCaterers();
 //        }
 //    }
+
+    public void restaurentAPI() {
+        if (connectionDetector.isConnectingToInternet()) {
+
+            String area_id = SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, "");
+            String date = SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, "");
+            MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
+//            String token = SharedPreferencesUtils.getInstance(LocationActivity.this).getValue(Constants.TOKEN, "" );
+
+            multipartTypedOutput.addPart("mode_type", new TypedString(""));
+            multipartTypedOutput.addPart("area_id", new TypedString(area_id));
+            multipartTypedOutput.addPart("date", new TypedString(date));
+
+            appController.paServices.RandomCaterers(multipartTypedOutput, new Callback<RC_Root>() {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void success(RC_Root rd_caterers_root, Response response) {
+
+                    if (rd_caterers_root.getStatus().equalsIgnoreCase("true")) {
+
+                        shimmerFrameLayout.stopShimmer();
+                        shimmerFrameLayout.setVisibility(View.GONE);
+
+                        resturantListView.setVisibility(View.VISIBLE);
+                        restourentLIst.addAll(rd_caterers_root.getData());
+
+
+                        try {
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
+                            resturantListView.setLayoutManager(linearLayoutManager);
+
+                            resturantMainLargeAdapter = new ResturantNewLargeAdapter(activity, rd_caterers_root.getData());
+
+                            resturantListView.setAdapter(resturantMainLargeAdapter);
+
+
+                            resturantMainLargeAdapter.setOnItemClickListener(new ResturantNewLargeAdapter.OnItemClickListener() {
+                                @Override
+                                public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RC_Data> restourentLIst) {
+                                    SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
+                                    int restaurententID = Integer.parseInt(restourentLIst.get(position).getId());
+                                    String restaurant_Status = String.valueOf(Restaurant_Status);
+                                    Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
+                                            .putExtra("restaurant_Status", restaurant_Status);
+                                    startActivity(intent);
+                                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                                }
+                            });
+                        } catch (Exception e) {
+                            resturantListView.setVisibility(View.GONE);
+
+
+                            restourentLIst = new ArrayList<>();
+
+                            // on below line we are stopping our shimmer
+                            // and making its visibility to gone.
+                            shimmerFrameLayout.startShimmer();
+                            shimmerFrameLayout.setVisibility(View.VISIBLE);
+                            e.printStackTrace();
+                        }
+
+
+                    } else {
+                        resturantListView.setVisibility(View.GONE);
+
+
+                        restourentLIst = new ArrayList<>();
+                        // on below line we are stopping our shimmer
+                        // and making its visibility to gone.
+                        shimmerFrameLayout.startShimmer();
+                        shimmerFrameLayout.setVisibility(View.VISIBLE);
+                        Helper.showToast(getActivity(), getString(R.string.something_wrong));
+                    }
+
+                }
+
+                @Override
+                public void failure(RetrofitError error) {
+
+                    error.printStackTrace();
+                }
+            });
+
+        } else {
+            Toast.makeText(getActivity(), getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
+
+        }
+    }
 }
