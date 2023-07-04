@@ -141,6 +141,7 @@ public class SearchFragment extends Fragment implements RestourentView {
         framelayout.setVisibility(View.INVISIBLE);
         shimmerFrameLayout.startShimmer();
         activity = getActivity();
+        searchview.setEnabled(true);
         progressHUD = ProgressHUD.create(getContext(), getString(R.string.loading), false, null, null);
 //        restourentPresenter = new RestourentImpl(this);
 //        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));

@@ -204,6 +204,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
 //        restourentPresenter.getRestourentlistApi("", SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_ID, ""), SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
         newRandomCaterers();
+        restaurentAPI();
 
 
         tv_time.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_TIME, ""));
@@ -542,7 +543,6 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 public void success(RD_caterers_Root rd_caterers_root, Response response) {
 
                     if (rd_caterers_root.getStatus().equalsIgnoreCase("true")) {
-                        restaurentAPI();
                         homeAdShimmerLayout.setVisibility(View.GONE);
                         topResShimmerLayout.setVisibility(View.GONE);
                         topMenuShimmerLayout.setVisibility(View.GONE);
