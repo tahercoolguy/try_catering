@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,7 +24,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.infovass.catering.R;
 import com.infovass.catering.Utils.Helper;
+import com.infovass.catering.activities.DataModel.RD_Image;
 import com.infovass.catering.activities.adapers.AddMainOnFoodItemAdapters;
+import com.infovass.catering.activities.adapers.CateringSDSliderAdapter;
 import com.infovass.catering.activities.adapers.ItemsAdapters;
 import com.infovass.catering.activities.base.BaseActivity;
 import com.infovass.catering.activities.cart.view.CartActivity;
@@ -39,6 +40,7 @@ import com.infovass.catering.activities.login.view.LoginActivity;
 import com.infovass.catering.activities.network.Constants;
 import com.infovass.catering.activities.network.SharedPreferencesUtils;
 import com.infovass.catering.activities.utill.ProgressHUD;
+import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -126,6 +128,9 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
     @BindView(R.id.not_availableRL)
     RelativeLayout not_availableRL;
 
+    @BindView(R.id.imageSlider)
+    SliderView imageSlider;
+
 
     @Override
     protected Context getActivityContext() {
@@ -158,6 +163,14 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
             not_availableRL.setVisibility(View.GONE);
             rel_findFood.setVisibility(View.VISIBLE);
         }
+
+
+        progressHUD = ProgressHUD.create(getActivityContext(), getString(R.string.loading), false, null, null);
+        productDetailPresenter = new ProductDetailImpl(this);
+        productDetailPresenter.getProductDetailApi(//SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""),
+                SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""));
+//                , SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""));
+        //  productDetailPresenter.getProductDetailApi("36");
 
         //for adapter
         addOnFoodItemsAdapters = new AddMainOnFoodItemAdapters(getActivityContext(), addons);
@@ -203,7 +216,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                     int itemCount = Integer.parseInt(tv_femailServiceCount.getText().toString());
                     itemCount = itemCount - 1;
                     if (itemCount < 0) {
-                        Toast.makeText(CateringServiceDetailActivity.this, "Cannot set item count -ve.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CateringServiceDetailActivity.this, getString(R.string.cannot_set_item_count__ve), Toast.LENGTH_SHORT).show();
                     } else {
                         tv_femailServiceCount.setText("" + itemCount);
                         Float total = totalAmount - addons.get(postion).getItem().get(verposition).getPrice();
@@ -270,7 +283,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                     int itemCount = Integer.parseInt(tv_femailServiceCount.getText().toString());
                     //  itemCount = itemCount - 1;
                     if (itemCount < 0) {
-                        Toast.makeText(CateringServiceDetailActivity.this, "Cannot set item count -ve.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CateringServiceDetailActivity.this, getString(R.string.cannot_set_item_count__ve), Toast.LENGTH_SHORT).show();
                     } else {
 //                        tv_femailServiceCount.setText("" + itemCount);
 //                        Double total = totalAmount - addons.get(position).getItem().get(position).getPrice();
@@ -313,12 +326,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
         });
 
-        progressHUD = ProgressHUD.create(getActivityContext(), getString(R.string.loading), false, null, null);
-        productDetailPresenter = new ProductDetailImpl(this);
-        productDetailPresenter.getProductDetailApi(//SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.TOKEN, ""),
-                SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.ITEM_ID, ""));
-//                , SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.MODE_ID, ""));
-        //  productDetailPresenter.getProductDetailApi("36");
+
     }
 
     @OnClick({R.id.arrowImageView, R.id.ch_femailServices, R.id.addToFavButton, R.id.rel_findFood, R.id.backButton, R.id.img_femailServiceMin, R.id.img_femailServiceMax})
@@ -358,7 +366,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                     int itemCount = Integer.parseInt(tv_femailServiceCount.getText().toString());
                     itemCount = itemCount - 1;
                     if (itemCount < 0) {
-                        Toast.makeText(getActivityContext(), "You cannot set value in -.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivityContext(), getString(R.string.cannot_set_item_count__ve), Toast.LENGTH_SHORT).show();
                     } else {
                         tv_femailServiceCount.setText("" + itemCount);
                     }
@@ -425,8 +433,8 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                         // Parsing the Time Period
                         Date date1 = null, date2 = null;
                         try {
-                            date1 = simpleDateFormat.parse(currentTime[0]+":00");
-                            date2 = simpleDateFormat.parse(selectedTime[0]+":00");
+                            date1 = simpleDateFormat.parse(currentTime[0] + ":00");
+                            date2 = simpleDateFormat.parse(selectedTime[0] + ":00");
                         } catch (ParseException exception) {
                             exception.printStackTrace();
                         }
@@ -458,7 +466,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                                         + differenceInMinutes + " minutes "
                                         + differenceInSeconds + " Seconds. ");
 
- //
+                        //
                         int minTime, checkTime;
                         minTime = Integer.parseInt(min_time);
                         checkTime = Integer.parseInt(String.valueOf(differenceInHours));
@@ -503,10 +511,12 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                 max_time_arabic = productDetailResponse.getData().getArabicMaxTime();
                 try {
 //                    Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(img_productImage);
-                    Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).into(img_productImage);
-
+//                    Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).into(img_productImage);
+                    setImageSlider(productDetailResponse.getData().getImages());
                 } catch (Exception ex) {
                 }
+
+
 
                 try {
                     if (productDetailResponse.getData().getCaterer().getFemaleService().equalsIgnoreCase("available")) {
@@ -556,21 +566,21 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                     totalAmount = Float.valueOf((String.valueOf(productDetailResponse.getData().getArabicItemCostPerServe())));
                     String SetupTimeInMinute = "" + productDetailResponse.getData().getCaterer().getSetupTimeInMinute();
                     if (SetupTimeInMinute != null) {
-                        tv_setuUpTime.setText("" + productDetailResponse.getData().getSetupTimeInMinute() + " Min");
+                        tv_setuUpTime.setText("" + productDetailResponse.getData().getArabicSetupTimeInMinute() + " " + getString(R.string.min));
                     } else {
                         tv_setuUpTime.setText("---");
                     }
 
-                    String arabicRecuirement = "" + productDetailResponse.getData().getCaterer().getRequirements();
+                    String arabicRecuirement = "" + productDetailResponse.getData().getCaterer().getArabicRequirements();
                     if (arabicRecuirement != null) {
-                        tv_requirements.setText("" + productDetailResponse.getData().getRequirements());
+                        tv_requirements.setText("" + productDetailResponse.getData().getArabicRequirements());
                     } else {
                         tv_requirements.setText("---");
                     }
-                    tv_forPersons.setText("For " + productDetailResponse.getData().getItemServingCapacity() + " Persons");
+                    tv_forPersons.setText(getString(R.string._for_) + " " + productDetailResponse.getData().getArabicItemServingCapacity() + " " + getString(R.string.persons));
                     mealNameTextView.setText("" + productDetailResponse.getData().getArabicItemName());
                     mealTagTextView.setText(Html.fromHtml("" + productDetailResponse.getData().getArabicItemLongDescription()));
-                    serveTagTextView.setText("For " + productDetailResponse.getData().getItemServingCapacity() + " Persons");
+                    serveTagTextView.setText(getString(R.string._for_) + " " + productDetailResponse.getData().getArabicItemServingCapacity() + " " + getString(R.string.persons));
                     tv_foodDetail.setText("" + productDetailResponse.getData().getArabicFoodDetails());
                     //  tv_note.setText(""+productDetailResponse.getData().getArabicFoodDetails());
                     tv_service.setText("" + productDetailResponse.getData().getArabicServiceAndPresentation());
@@ -578,26 +588,26 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
                 if (SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
                     tv_total.setText(productDetailResponse.getData().getItemCostPerServe() + " KWD");
-                    totalAmount = Float.valueOf((String.valueOf(productDetailResponse.getData().getArabicItemCostPerServe())));
+                    totalAmount = Float.valueOf((String.valueOf(productDetailResponse.getData().getItemCostPerServe())));
                     String SetupTimeInMinute = "" + productDetailResponse.getData().getCaterer().getSetupTimeInMinute();
                     String SetupTime = "" + productDetailResponse.getData().getCaterer().getSetupTimeInMinute();
                     if (SetupTime != null) {
-                        tv_setuUpTime.setText("" + productDetailResponse.getData().getSetupTimeInMinute() + " Min");
+                        tv_setuUpTime.setText("" + productDetailResponse.getData().getSetupTimeInMinute() + " " + getString(R.string.min));
                     } else {
                         tv_setuUpTime.setText("---");
                     }
 
-                    String recuirement = "" + productDetailResponse.getData().getCaterer().getRequirements();
-                    if (recuirement != null) {
-                        tv_requirements.setText("" + productDetailResponse.getData().getRequirements());
-                    } else {
-                        tv_requirements.setText("---");
-                    }
+//                    String recuirement = "" + productDetailResponse.getData().getCaterer().getRequirements();
+//                    if (recuirement != null) {
+//                        tv_requirements.setText("" + productDetailResponse.getData().getRequirements());
+//                    } else {
+//                        tv_requirements.setText("---");
+//                    }
 
-                    tv_forPersons.setText("For " + productDetailResponse.getData().getItemServingCapacity() + " Persons");
+                    tv_forPersons.setText(getString(R.string._for_) + " " + productDetailResponse.getData().getItemServingCapacity() + " " + getString(R.string.persons));
                     mealNameTextView.setText("" + productDetailResponse.getData().getItemName());
                     mealTagTextView.setText(Html.fromHtml("" + productDetailResponse.getData().getItemLongDescription()));
-                    serveTagTextView.setText("For " + productDetailResponse.getData().getItemServingCapacity() + " Persons");
+                    serveTagTextView.setText(getString(R.string._for_) + " " + productDetailResponse.getData().getItemServingCapacity() + " " + getString(R.string.persons));
                     tv_foodDetail.setText("" + productDetailResponse.getData().getFoodDetails());
                     // tv_note.setText(""+productDetailResponse.getData().getArabicFoodDetails());
                     tv_service.setText("" + productDetailResponse.getData().getServiceAndPresentation());
@@ -687,4 +697,19 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
         super.onBackPressed();
     }
 
+    private void setImageSlider(ArrayList<RD_Image> rd_imageArrayList) {
+
+        try {
+            CateringSDSliderAdapter sliderAdapter = new CateringSDSliderAdapter(CateringServiceDetailActivity.this, rd_imageArrayList);
+            imageSlider.setSliderAdapter(sliderAdapter);
+            imageSlider.setScrollTimeInSec(5); //set scroll delay in seconds :
+            imageSlider.startAutoCycle();
+            imageSlider.setIndicatorEnabled(false);
+            imageSlider.setAutoCycle(true);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
 }

@@ -433,4 +433,9 @@
     <string name="cannot_item_count_zero">لا يمكن تعيين عدد العناصر 0.</string>
     <string name="are_you_sure_want_to_delete_cart">هل أنت متأكد أنك تريد حذف عنصر سلة التسوق.</string>
     <string name="please_select_address">الرجاء تحديد العنوان.</string>
+    <string name="cannot_set_item_count__ve">لا يمكن تعيين عدد العناصر.</string>
+    <string name="persons">الأشخاص</string>
+    <string name="_for_">ل</string>
+    <string name="min">دقيقة</string>
+    <string name="you_can_choose_only">يمكنك الاختيار فقط</string>
 </resources>

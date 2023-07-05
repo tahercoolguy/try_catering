@@ -29,6 +29,8 @@ import com.infovass.catering.MyFormat.MyDM.Root;
 import com.infovass.catering.MyFormat.Utils.ConnectionDetector;
 import com.infovass.catering.R;
 import com.infovass.catering.Utils.Helper;
+import com.infovass.catering.activities.DataModel.RD_Image;
+import com.infovass.catering.activities.adapers.CateringSDSliderAdapter;
 import com.infovass.catering.activities.adapers.DetailAdapter;
 import com.infovass.catering.activities.adapers.DetailNewAdapter;
 import com.infovass.catering.activities.adapers.MainCategoriesNewAdapter;
@@ -45,6 +47,7 @@ import com.infovass.catering.activities.login.view.LoginActivity;
 import com.infovass.catering.activities.network.Constants;
 import com.infovass.catering.activities.network.SharedPreferencesUtils;
 import com.infovass.catering.activities.utill.ProgressHUD;
+import com.smarteist.autoimageslider.SliderView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -121,6 +124,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     AppCompatTextView menuTextView;
     @BindView(R.id.main_content)
     LinearLayout main_content;
+    @BindView(R.id.imageSlider)
+    SliderView imageSlider;
 
     DetailNewAdapter detailAdapter;
 
@@ -238,7 +243,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     ArrayList<Item> itemArrayList = new ArrayList<>();
     List<RestourentDetailResponse.Mode> modes = new ArrayList<>();
     List<RestourentModeResponse.Item> items = new ArrayList<>();
-String min_time;
+    String min_time;
+
     public void productDetailAPI() {
         if (connectionDetector.isConnectingToInternet()) {
 
@@ -268,7 +274,7 @@ String min_time;
 
                         if (!root.getData().getItem().isEmpty() && !root.getData().getModes().isEmpty()) {
 
-                            min_time=root.getData().getMinimum_time();
+                            min_time = root.getData().getMinimum_time();
                             main_content.setVisibility(View.VISIBLE);
                             ////////////////////////////////////////////////////////////////////////////
                             modes.clear();
@@ -407,11 +413,13 @@ String min_time;
                             ///////////////////////////////////////////////////////////////////////////////////////////////////
 
                             //for image banner
-                            // Initializing the ViewPagerAdapter
-                            mViewPagerAdapter = new RestourentDetailsIBN(RestaurentDetailNew.this, root.getData().getImages());
+//                            // Initializing the ViewPagerAdapter
+//                            mViewPagerAdapter = new RestourentDetailsIBN(RestaurentDetailNew.this, root.getData().getImages());
+//
+//                            // Adding the Adapter to the ViewPager
+//                            restourentimage.setAdapter(mViewPagerAdapter);
 
-                            // Adding the Adapter to the ViewPager
-                            restourentimage.setAdapter(mViewPagerAdapter);
+                            setImageSlider(root.getData().getImages());
 
                             ///////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -429,14 +437,14 @@ String min_time;
                                         if (modeType.equalsIgnoreCase("Delivery")) {
                                             Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
                                                     .putExtra("status", restaurant_Status)
-                                                    .putExtra("min_time",min_time);
+                                                    .putExtra("min_time", min_time);
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                                         }
                                         if (modeType.equalsIgnoreCase("Table Booking")) {
                                             Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
                                                     .putExtra("status", restaurant_Status)
-                                                    .putExtra("min_time",min_time);
+                                                    .putExtra("min_time", min_time);
 
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
@@ -444,7 +452,7 @@ String min_time;
                                         if (modeType.equalsIgnoreCase("Catering")) {
                                             Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
                                                     .putExtra("status", restaurant_Status)
-                                                    .putExtra("min_time",min_time);
+                                                    .putExtra("min_time", min_time);
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                                         }
@@ -655,5 +663,20 @@ String min_time;
     public void onBackPressed() {
         overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
         super.onBackPressed();
+    }
+
+    private void setImageSlider(ArrayList<RD_Image> rd_imageArrayList) {
+
+        try {
+            CateringSDSliderAdapter sliderAdapter = new CateringSDSliderAdapter(RestaurentDetailNew.this, rd_imageArrayList);
+            imageSlider.setSliderAdapter(sliderAdapter);
+            imageSlider.setScrollTimeInSec(5); //set scroll delay in seconds :
+            imageSlider.startAutoCycle();
+            imageSlider.setIndicatorEnabled(false);
+            imageSlider.setAutoCycle(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

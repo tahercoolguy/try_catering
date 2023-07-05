@@ -32,7 +32,8 @@ public class AppController extends Application {
     RestAdapter restAdapter;
     RestAdapter restAdaptergoogle;
 
-    private static final String SHOPCH11_SERVER = "https://try-catering.com/api";
+    public static final String SHOPCH11_SERVER = "https://try-catering.com/api";
+    public static final String CATERERCOVER = "https://try-catering.com/caterer_cover/";
 
     public static final String TAG = AppController.class.getSimpleName();
 

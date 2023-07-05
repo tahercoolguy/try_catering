@@ -6,9 +6,12 @@
     android:layout_marginTop="@dimen/_3sdp"
     android:layout_marginBottom="@dimen/_5sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="5dp"
+         android:layout_height="wrap_content"
         >
         <LinearLayout
             android:layout_width="wrap_content"
@@ -24,8 +27,9 @@
                     android:id="@+id/mealNameTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="left"
-                    android:textSize="@dimen/_10sdp" />
+                    android:text="addsdadaaada"
+                    android:gravity="start"
+                     android:textSize="@dimen/_10sdp" />
 
 
         </LinearLayout>
@@ -77,5 +81,5 @@
 
             </LinearLayout>
         </LinearLayout>
-    </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

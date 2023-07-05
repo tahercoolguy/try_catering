@@ -292,13 +292,13 @@ public class Restaurent_Detail_MyActivity extends AppCompatActivity {
 
                         /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-                        ArrayList<Image>imagesArrayList=root.getData().getImages();
-                        //for image banner
-                        // Initializing the ViewPagerAdapter
-                        mViewPagerAdapter = new RestourentDetailsIBN(Restaurent_Detail_MyActivity.this,imagesArrayList );
-
-                        // Adding the Adapter to the ViewPager
-                        restourentimage.setAdapter(mViewPagerAdapter);
+//                        ArrayList<Image>imagesArrayList=root.getData().getImages();
+//                        //for image banner
+//                        // Initializing the ViewPagerAdapter
+//                        mViewPagerAdapter = new RestourentDetailsIBN(Restaurent_Detail_MyActivity.this,imagesArrayList );
+//
+//                        // Adding the Adapter to the ViewPager
+//                        restourentimage.setAdapter(mViewPagerAdapter);
 
                     } else {
                         Toast.makeText(Restaurent_Detail_MyActivity.this, getString(R.string.not_avilable_for_catering), Toast.LENGTH_SHORT).show();

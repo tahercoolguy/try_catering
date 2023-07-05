@@ -1,82 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:weightSum="2"
-    android:orientation="horizontal"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="@dimen/_16sdp"
-    android:layout_margin="@dimen/_2sdp"
     android:layout_marginBottom="@dimen/_5sdp"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:elevation="@dimen/_16sdp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:orientation="horizontal">
+
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/image"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/_5sdp"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mealNameTextView"
+                android:layout_width="match_parent"
+                android:textSize="16dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+              />
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/image"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="@dimen/_5sdp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
+                android:layout_marginTop="@dimen/_4sdp"
+                android:orientation="horizontal">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/mealNameTextView"
+                    android:id="@+id/tv_persions"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/en"
+                    android:textSize="16dp"
+                    android:textColor="@android:color/darker_gray" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/priceTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textColor="@color/menu_name_color"
-                    android:textSize="@dimen/_10sdp" />
+                    android:fontFamily="@font/en"
+                     android:gravity="end"
+                    android:singleLine="true"
+                    android:textSize="16dp"
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    >
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/tv_persions"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/en"
-                        android:textColor="@android:color/darker_gray"
-                        />
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/priceTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:gravity="left|center_vertical"
-                        android:textColor="#ffb70913"
-                        android:textSize="@dimen/_10sdp"
-                        android:textStyle="bold"/>
-                </LinearLayout>
-
+                    android:textColor="#ffb70913"
+                     android:textStyle="bold" />
             </LinearLayout>
-
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:gravity="right"
-            android:layout_marginRight="@dimen/_5sdp"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginRight="@dimen/_5sdp"
+         android:gravity="right">
 
         <LinearLayout
             android:id="@+id/changeFemaleService"
@@ -116,5 +114,5 @@
                 android:src="@drawable/ic_baseline_add_24" />
 
         </LinearLayout>
-        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

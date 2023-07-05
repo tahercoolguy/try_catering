@@ -37,10 +37,17 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/myoffer_placeholder" />
 
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/imageSlider"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/gradient"
 
+                    android:layout_height="match_parent"
+                    app:sliderIndicatorEnabled="false" />
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/restourentimage"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:background="@drawable/gradient"
 
                     android:layout_height="match_parent" />

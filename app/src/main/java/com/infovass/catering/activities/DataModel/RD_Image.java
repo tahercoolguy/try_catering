@@ -8,14 +8,18 @@ public class RD_Image {
     private String created_at ;
     private String updated_at ;
     private String cover_image_path ;
+    private String coverImagePath ;
+    private String item_logo_path ;
 
-    public RD_Image(String id, String caterer_id, String image, String created_at, String updated_at, String cover_image_path) {
+    public RD_Image(String id, String caterer_id, String image, String created_at, String updated_at, String cover_image_path, String coverImagePath, String item_logo_path) {
         this.id = id;
         this.caterer_id = caterer_id;
         this.image = image;
         this.created_at = created_at;
         this.updated_at = updated_at;
         this.cover_image_path = cover_image_path;
+        this.coverImagePath = coverImagePath;
+        this.item_logo_path = item_logo_path;
     }
 
     public String getId() {
@@ -64,5 +68,21 @@ public class RD_Image {
 
     public void setCover_image_path(String cover_image_path) {
         this.cover_image_path = cover_image_path;
+    }
+
+    public String getCoverImagePath() {
+        return coverImagePath;
+    }
+
+    public void setCoverImagePath(String coverImagePath) {
+        this.coverImagePath = coverImagePath;
+    }
+
+    public String getItem_logo_path() {
+        return item_logo_path;
+    }
+
+    public void setItem_logo_path(String item_logo_path) {
+        this.item_logo_path = item_logo_path;
     }
 }

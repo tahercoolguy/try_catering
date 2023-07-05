@@ -64,7 +64,7 @@ public class ItemsAdapters extends RecyclerView.Adapter<ItemsAdapters.Viewholder
             if(SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar"))
             {
                 holder.tv_categorieName.setText(meals.get(position).getMealTypeArabicTitle());
-                holder.tv_choose.setText("Choose Only "+meals.get(position).getNumOfTaken());
+                holder.tv_choose.setText(" اختر فقط "+meals.get(position).getNumOfTaken());
             }
 
         }catch (Exception g){}
@@ -86,7 +86,7 @@ public class ItemsAdapters extends RecyclerView.Adapter<ItemsAdapters.Viewholder
                     int itemCount = Integer.parseInt(tv_femailServiceCount.getText().toString());
                     itemCount = itemCount - 1;
                     if (itemCount<0) {
-                        Toast.makeText(context, "Cannot set item count -ve.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.cannot_set_item_count__ve), Toast.LENGTH_SHORT).show();
                     } else {
                         tv_femailServiceCount.setText("" + itemCount);
                     }
@@ -103,7 +103,7 @@ public class ItemsAdapters extends RecyclerView.Adapter<ItemsAdapters.Viewholder
                     if(array[popopo]>=chooseValue)
                     {
                         Log.i("yuyu" , "yuy");
-                        Toast.makeText(context , "You can choose only "+chooseValue+" items.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context , context.getString(R.string.you_can_choose_only)+chooseValue+" items.",Toast.LENGTH_SHORT).show();
                     }
                     else {
                         array[popopo] =array[popopo]+1;

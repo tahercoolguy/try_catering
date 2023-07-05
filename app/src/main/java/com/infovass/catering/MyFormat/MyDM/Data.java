@@ -1,7 +1,8 @@
 package com.infovass.catering.MyFormat.MyDM;
 
+import com.infovass.catering.activities.DataModel.RD_Image;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class Data {
     public int id;
@@ -48,10 +49,10 @@ public class Data {
     public String logo_path;
     public String cover_image_path;
     public Credential credential;
-    public ArrayList<Image> images;
+    public ArrayList<RD_Image> images;
     public ArrayList<Area> areas;
 
-    public Data(int id, int created_by, String name, String arabic_name, String detail, String arabic_detail, String status, String female_service, String logo, String cover_image, String time_show, String delivery_charge, String min_order, Object setup_time_in_minute, Object requirements, Object arabic_setup_time_in_minute, Object arabic_requirements, String discount_available, String discount_type, Object discount_value, Object start_date, Object end_date, Object time, Object cash_order_policy, String cancellation_policy, String cancellation_policy_arabic, String is_active, String created_at, String updated_at, Object deleted_at, String commission, String minimum_time, String start_time, String end_time, String is_favorite, String offday, ArrayList<CoverImage> cover_images, ArrayList<Mode> modes, ArrayList<Item> item, int number_of_review, int rating, String logo_path, String cover_image_path, Credential credential, ArrayList<Image> images, ArrayList<Area> areas) {
+    public Data(int id, int created_by, String name, String arabic_name, String detail, String arabic_detail, String status, String female_service, String logo, String cover_image, String time_show, String delivery_charge, String min_order, Object setup_time_in_minute, Object requirements, Object arabic_setup_time_in_minute, Object arabic_requirements, String discount_available, String discount_type, Object discount_value, Object start_date, Object end_date, Object time, Object cash_order_policy, String cancellation_policy, String cancellation_policy_arabic, String is_active, String created_at, String updated_at, Object deleted_at, String commission, String minimum_time, String start_time, String end_time, String is_favorite, String offday, ArrayList<CoverImage> cover_images, ArrayList<Mode> modes, ArrayList<Item> item, int number_of_review, int rating, String logo_path, String cover_image_path, Credential credential, ArrayList<RD_Image> images, ArrayList<Area> areas) {
         this.id = id;
         this.created_by = created_by;
         this.name = name;
@@ -452,11 +453,11 @@ public class Data {
         this.credential = credential;
     }
 
-    public ArrayList<Image> getImages() {
+    public ArrayList<RD_Image> getImages() {
         return images;
     }
 
-    public void setImages(ArrayList<Image> images) {
+    public void setImages(ArrayList<RD_Image> images) {
         this.images = images;
     }
 

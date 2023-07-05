@@ -2,7 +2,9 @@ package com.infovass.catering.activities.home.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.infovass.catering.activities.DataModel.RD_Image;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDetailResponse {
@@ -165,7 +167,7 @@ public class ProductDetailResponse {
         private String area;
         @SerializedName("images")
         @Expose
-        private List<Object> images = null;
+        private ArrayList<RD_Image> images ;
         @SerializedName("item_logo_path")
         @Expose
         private String itemLogoPath;
@@ -496,11 +498,11 @@ public class ProductDetailResponse {
             this.area = area;
         }
 
-        public List<Object> getImages() {
+        public ArrayList<RD_Image> getImages() {
             return images;
         }
 
-        public void setImages(List<Object> images) {
+        public void setImages(ArrayList<RD_Image> images) {
             this.images = images;
         }
 

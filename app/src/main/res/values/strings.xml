@@ -423,6 +423,11 @@
     <string name="cannot_item_count_zero">Cannot set item count 0.</string>
     <string name="are_you_sure_want_to_delete_cart">Are you sure, You wanted to delete cart item.</string>
     <string name="please_select_address">Please Select address .</string>
+    <string name="cannot_set_item_count__ve">Cannot set item count -ve.</string>
+    <string name="_for_">For</string>
+    <string name="persons">Persons</string>
+    <string name="min">Minute</string>
+    <string name="you_can_choose_only">You can choose only</string>
 
 
 </resources>

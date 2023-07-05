@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.infovass.catering.R;
 import com.infovass.catering.Utils.Helper;
+import com.infovass.catering.activities.DataModel.RD_Image;
+import com.infovass.catering.activities.adapers.CateringSDSliderAdapter;
 import com.infovass.catering.activities.cart.view.CartActivity;
 import com.infovass.catering.activities.base.BaseActivity;
 import com.infovass.catering.activities.dialog.BottomSheetInfoFragment;
@@ -29,10 +31,12 @@ import com.infovass.catering.activities.login.view.LoginActivity;
 import com.infovass.catering.activities.network.Constants;
 import com.infovass.catering.activities.network.SharedPreferencesUtils;
 import com.infovass.catering.activities.utill.ProgressHUD;
+import com.smarteist.autoimageslider.SliderView;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -85,6 +89,8 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
 
     @BindView(R.id.rel_findFood)
     RelativeLayout rel_findFood;
+    @BindView(R.id.imageSlider)
+    SliderView imageSlider;
     String status, min_time;
 
     @Override
@@ -174,7 +180,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
                     int itemCount = Integer.parseInt(tv_productCount.getText().toString());
                     itemCount = itemCount - 1;
                     if (itemCount == 0) {
-                        Toast.makeText(getActivityContext(), "You cannot set Product count 0.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivityContext(), getString(R.string.cannot_item_count_zero), Toast.LENGTH_SHORT).show();
                     } else {
                         tv_productCount.setText("" + itemCount);
                         tv_totalPrice.setText(mProductPrice * itemCount + " KWD");
@@ -289,8 +295,8 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
                 max_time_arabic = productDetailResponse.getData().getArabicMaxTime();
 
                 try {
-                    Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).into(img_productImage);
-
+//                    Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).into(img_productImage);
+                    setImageSlider(productDetailResponse.getData().getImages());
 //                    Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(img_productImage);
                 } catch (Exception ex) {
                 }
@@ -311,7 +317,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
                     mealNameTextView.setText("" + productDetailResponse.getData().getArabicItemName());
                     mealTagTextView.setText(Html.fromHtml("" + productDetailResponse.getData().getArabicItemLongDescription()));
                     priceTextView.setText("" + productDetailResponse.getData().getItemCostPerServe() + " KWD");
-                    tv_forPersions.setText("For " + productDetailResponse.getData().getItemServingCapacity() + " Persons");
+                    tv_forPersions.setText( getString(R.string._for_)+" " + productDetailResponse.getData().getItemServingCapacity()+" "+getString(R.string.persons));
                     tv_minNots.setText("" + productDetailResponse.getData().getCaterer().getTimeShow());
                     tv_minOrder.setText("" + productDetailResponse.getData().getCaterer().getMinOrder() + " KWD");
                 }
@@ -414,5 +420,20 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
         overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
         super.onBackPressed();
+    }
+
+    private void setImageSlider(ArrayList<RD_Image> rd_imageArrayList) {
+
+        try {
+            CateringSDSliderAdapter sliderAdapter = new CateringSDSliderAdapter(ProductDetailActivity.this, rd_imageArrayList);
+            imageSlider.setSliderAdapter(sliderAdapter);
+            imageSlider.setScrollTimeInSec(5); //set scroll delay in seconds :
+            imageSlider.startAutoCycle();
+            imageSlider.setIndicatorEnabled(false);
+            imageSlider.setAutoCycle(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }
