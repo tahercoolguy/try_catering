@@ -28,6 +28,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:fontFamily="@font/ar_font_regular"
+
             android:text="@string/terms_and_condition"
             android:textColor="@android:color/white"
             android:textSize="@dimen/_16sdp"
@@ -61,6 +63,8 @@
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_15sdp"
+            android:fontFamily="@font/ar_font_regular"
+
             android:layout_marginEnd="@dimen/_15sdp"
             android:layout_marginBottom="@dimen/_15sdp"
             android:textColor="@android:color/black"

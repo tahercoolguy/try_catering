@@ -30,6 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="Privacy Policy"
+            android:fontFamily="@font/ar_font_regular"
 
             android:textColor="@android:color/white"
             android:textSize="@dimen/_16sdp"
@@ -60,6 +61,8 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_termAndCondition"
             android:layout_width="match_parent"
+            android:fontFamily="@font/ar_font_regular"
+
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_15sdp"

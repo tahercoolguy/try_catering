@@ -51,6 +51,8 @@
                     android:layout_height="wrap_content"
                      android:ems="10"
                     android:shadowRadius="5"
+                    android:fontFamily="@font/ar_font_regular"
+
                     android:textColor="@color/white"
                       android:singleLine="true"
                     android:text="Mini DIp and Dip bar"
@@ -63,6 +65,8 @@
                     android:layout_height="wrap_content"
                      android:ems="10"
                      android:singleLine="true"
+                    android:fontFamily="@font/ar_font_regular"
+
                     android:shadowColor="@color/black"
                      android:textColor="@color/white"
                      android:text="Dip And Dip"></TextView>

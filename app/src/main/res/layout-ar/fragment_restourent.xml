@@ -56,7 +56,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/en"
+                                android:fontFamily="@font/ar_font_regular"
+
                                 android:id="@+id/locationTxt"
                                 android:text="@string/location"
                                 android:textColor="@android:color/white"
@@ -102,7 +103,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/en"
+                                android:fontFamily="@font/ar_font_regular"
+
                                 android:id="@+id/dateTxt"
                                 android:text="@string/date"
                                 android:textColor="@android:color/white"
@@ -114,7 +116,8 @@
                                 android:layout_height="wrap_content"
                                 android:ellipsize="marquee"
 
-                                android:fontFamily="@font/en"
+                                android:fontFamily="@font/ar_font_regular"
+
                                 android:textColor="@android:color/white"
                                 android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold" />
@@ -147,7 +150,8 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/en"
+                                android:fontFamily="@font/ar_font_regular"
+
                                 android:text="@string/Time"
                                 android:id="@+id/timeTxt"
                                 android:textColor="@android:color/white"
@@ -158,7 +162,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:ellipsize="marquee"
-                                android:fontFamily="@font/en"
+                                android:fontFamily="@font/ar_font_regular"
+
 
                                 android:textColor="@android:color/white"
                                 android:textSize="@dimen/_10sdp"
@@ -355,7 +360,8 @@
                             android:id="@+id/areaNameTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/en"
+                            android:fontFamily="@font/ar_font_regular"
+
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/all_text"
@@ -368,7 +374,8 @@
                             android:id="@+id/addressDetailsTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/en"
+                            android:fontFamily="@font/ar_font_regular"
+
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:text="@string/all_text"
@@ -414,7 +421,8 @@
                             android:id="@+id/timeNameTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/en"
+                            android:fontFamily="@font/ar_font_regular"
+
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:textColor="#ff8a8a8f"
@@ -425,7 +433,8 @@
                             android:id="@+id/timeDetailsTextView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/en"
+                            android:fontFamily="@font/ar_font_regular"
+
                             android:paddingLeft="5dp"
                             android:paddingRight="5dp"
                             android:textColor="#ff8a8a8f"

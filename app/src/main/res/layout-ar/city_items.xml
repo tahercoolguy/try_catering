@@ -32,13 +32,14 @@
         android:drawablePadding="@dimen/_10sdp"
         android:singleLine="true"
         android:text=" "
+        android:fontFamily="@font/ar_font_regular"
+
         android:layout_centerInParent="true"
         android:layout_marginHorizontal="5dp"
 
         android:layout_marginLeft="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_10sdp"
-        android:fontFamily="@font/ar"
-        android:paddingTop="@dimen/_8sdp"
+         android:paddingTop="@dimen/_8sdp"
         android:paddingBottom="@dimen/_8sdp"
         android:textColor="@color/black"
         android:textSize="@dimen/_13sdp" />

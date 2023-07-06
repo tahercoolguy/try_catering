@@ -40,7 +40,8 @@
             <!--            </androidx.cardview.widget.CardView>-->
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:fontFamily="@font/en"
+                                    android:fontFamily="@font/ar_font_regular"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -66,7 +67,8 @@
                     android:hint="@string/name"
                     android:inputType="textPersonName"
                     android:background="@android:color/transparent"
-                    android:fontFamily="@font/en"
+                                        android:fontFamily="@font/ar_font_regular"
+
                     android:singleLine="true"
                     android:paddingTop="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
@@ -93,7 +95,8 @@
                     android:hint="@string/phone_text"
                     android:inputType="phone"
                     android:background="@android:color/transparent"
-                    android:fontFamily="@font/en"
+                                        android:fontFamily="@font/ar_font_regular"
+
                     android:singleLine="true"
                     android:paddingTop="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
@@ -118,7 +121,8 @@
                     android:hint="@string/email_text"
                     android:inputType="textEmailAddress"
                     android:background="@android:color/transparent"
-                    android:fontFamily="@font/en"
+                                        android:fontFamily="@font/ar_font_regular"
+
                     android:singleLine="true"
                     android:paddingTop="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
@@ -150,7 +154,8 @@
                     android:hint="@string/password_text"
                     android:inputType="textPassword"
                     android:background="@android:color/transparent"
-                    android:fontFamily="@font/en"
+                                        android:fontFamily="@font/ar_font_regular"
+
                     android:singleLine="true"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"
@@ -177,7 +182,8 @@
                     android:hint="@string/password_text"
                     android:inputType="textPassword"
                     android:background="@android:color/transparent"
-                    android:fontFamily="@font/en"
+                                        android:fontFamily="@font/ar_font_regular"
+
                     android:singleLine="true"
                     android:paddingTop="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
@@ -193,7 +199,8 @@
                 android:id="@+id/registerTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/en"
+                                    android:fontFamily="@font/ar_font_regular"
+
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:text="@string/register_text" />
@@ -206,14 +213,16 @@
                     android:id="@+id/tv_termAndCondition"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/en"
+                                        android:fontFamily="@font/ar_font_regular"
+
                     android:gravity="center"
                     android:textColor="@android:color/holo_red_dark"
                     android:text="@string/term_of_use" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/en"
+                                        android:fontFamily="@font/ar_font_regular"
+
                     android:gravity="center"
                     android:text="@string/and_our" />
 
@@ -221,7 +230,8 @@
                     android:id="@+id/tv_privacyPolicy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/en"
+                                        android:fontFamily="@font/ar_font_regular"
+
                     android:gravity="center"
                     android:textColor="@android:color/holo_red_dark"
                     android:text="@string/privacy_policy" />
@@ -234,7 +244,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="@dimen/_20sdp"
-                android:fontFamily="@font/en"
+                                    android:fontFamily="@font/ar_font_regular"
+
                 android:background="@drawable/language_rounded_rectangle_with_border"
                 android:text="@string/register_titile_text"
                 android:textColor="@color/colorWhite"

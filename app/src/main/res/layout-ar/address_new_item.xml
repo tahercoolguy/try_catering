@@ -21,20 +21,22 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_addressType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
-                android:layout_weight="1"
                 android:layout_marginRight="20dp"
-                android:fontFamily="@font/en"
+                android:layout_weight="1"
+                android:fontFamily="@font/ar_font_regular"
+
                 android:gravity="right"
-                android:text="sdsd"
+
                 android:maxLines="2"
+                android:text="sdsd"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp" />
 
@@ -74,14 +76,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
-                android:visibility="gone"
                 android:layout_marginRight="20dp"
-                android:fontFamily="@font/en"
+                android:fontFamily="@font/ar_font_regular"
                 android:gravity="left|center_vertical"
+
                 android:maxLines="2"
                 android:text="@string/regions"
                 android:textColor="@color/black"
-                android:textSize="@dimen/_12sdp" />
+                android:textSize="@dimen/_12sdp"
+                android:visibility="gone" />
 
         </LinearLayout>
 
@@ -98,13 +101,14 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:minLines="2"
-                android:fontFamily="@font/en"
+                android:fontFamily="@font/ar_font_regular"
                 android:gravity="left|center_vertical"
+
+                android:minLines="2"
                 android:text="Jeevan Tara Building, 1Sr Floor, Gate No.4, 5 Sansad Marg, New Delhi"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                android:textStyle="bold" />
+                 />
         </LinearLayout>
 
         <LinearLayout
@@ -120,7 +124,8 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:fontFamily="@font/en"
+                android:fontFamily="@font/ar_font_regular"
+
                 android:gravity="left|center_vertical"
                 android:maxLines="2"
                 android:text="Delhi"

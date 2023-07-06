@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="@dimen/_15sdp"
+            android:fontFamily="@font/ar_font_regular"
             android:layout_weight=".2"/>
 <!--        <ImageView-->
 <!--            android:id="@+id/iv_list"-->

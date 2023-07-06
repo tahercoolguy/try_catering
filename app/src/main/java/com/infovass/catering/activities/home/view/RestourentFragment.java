@@ -473,7 +473,10 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 if (newlocation != null) {
                     tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
                     tv_city.setText(newlocation);
-                    restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+//                    restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+
+                    newRandomCaterers();
+                    restaurentAPI();
                 }
 
 
@@ -483,7 +486,9 @@ public class RestourentFragment extends Fragment implements RestourentView {
             if (data != null) {
                 String newdate = data.getStringExtra("newdate");
                 tv_date.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
-                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+//                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+                newRandomCaterers();
+                restaurentAPI();
             }
         }
         if (requestCode == TIME_REQUEST_CODE) {
@@ -491,8 +496,10 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 String newtime = data.getStringExtra("newtime");
                 String newtimes = data.getStringExtra("newtime");
                 tv_time.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_TIME, ""));
-                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
+//                restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
+                newRandomCaterers();
+                restaurentAPI();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);

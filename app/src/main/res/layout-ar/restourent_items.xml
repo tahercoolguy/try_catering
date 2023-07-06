@@ -119,6 +119,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="2dp"
+                            android:fontFamily="@font/ar_font_regular"
+
                             android:layout_marginEnd="2dp"
                             android:singleLine="true"
                             android:text="busy"
@@ -184,6 +186,8 @@
                 android:padding="3dp"
                 android:shadowRadius="5"
                 android:singleLine="true"
+                android:fontFamily="@font/ar_font_regular"
+
                 android:text="hfugfsfgfg"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_18sdp"
@@ -198,6 +202,8 @@
                 android:layout_marginBottom="@dimen/_10sdp"
                 android:padding="3dp"
                 android:shadowColor="@color/black"
+                android:fontFamily="@font/ar_font_regular"
+
                 android:singleLine="true"
                 android:text="fhsgfhfgf"
                 android:textColor="@color/white"

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color"
+
     android:orientation="vertical"
     tools:context=".activities.home.view.RestaurentDetailNew">
 
@@ -140,6 +141,8 @@
                     android:id="@+id/resturantNameTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/ar_font_regular"
+
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/_10sdp"
 
@@ -159,6 +162,8 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_20sdp"
                     android:layout_marginBottom="@dimen/_25sdp"
+                    android:fontFamily="@font/ar_font_regular"
+
                     android:gravity="center_vertical"
                     android:shadowRadius="5"
                     android:singleLine="true"
@@ -253,9 +258,10 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/en"
-                            android:singleLine="true"
+                             android:singleLine="true"
                             android:text="@string/min_notice"
+                            android:fontFamily="@font/ar_font_regular"
+
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/_8sdp"
 
@@ -266,8 +272,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/en"
-                            android:textColor="@color/bottom_selected_color"
+                            android:fontFamily="@font/ar_font_regular"
+
+                             android:textColor="@color/bottom_selected_color"
                             android:textSize="@dimen/_10sdp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -289,8 +296,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                            android:fontFamily="@font/en"
-                            android:singleLine="true"
+                             android:singleLine="true"
+                            android:fontFamily="@font/ar_font_regular"
+
                             android:text="@string/min_order"
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/_8sdp" />

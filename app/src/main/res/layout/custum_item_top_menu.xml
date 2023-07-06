@@ -21,6 +21,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
          android:ems="10"
+        android:fontFamily="@font/ar_font_regular"
+
         android:singleLine="true"
         android:text="Mini DIp and Dip bar"
         android:textColor="@color/black"
@@ -32,6 +34,8 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
          android:singleLine="true"
+        android:fontFamily="@font/ar_font_regular"
+
         android:gravity="start"
         android:layout_gravity="start"
         android:textSize="13dp"
@@ -44,6 +48,8 @@
         android:layout_marginHorizontal="5dp"
         android:ems="10"
         android:textSize="13dp"
+        android:fontFamily="@font/ar_font_regular"
+
 
         android:singleLine="true"
         android:text="Dip And Dip"></TextView>

@@ -45,7 +45,8 @@
                 android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:text="@string/welcome"
-                android:fontFamily="@font/en"
+                                    android:fontFamily="@font/ar_font_regular"
+
                 android:textColor="@color/black"
                 android:textSize="@dimen/_20sdp"
                 android:textStyle="bold" />
@@ -57,7 +58,8 @@
                 android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:text="@string/login_with_your_email_and_password_or_nsocial_media_details_to_continue"
-                android:fontFamily="@font/en"
+                                    android:fontFamily="@font/ar_font_regular"
+
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
                 android:layout_marginBottom="@dimen/_15sdp"
@@ -76,7 +78,8 @@
                     android:hint="@string/email_text"
                     android:inputType="textEmailAddress"
                     android:background="@android:color/transparent"
-                    android:fontFamily="@font/en"
+                                        android:fontFamily="@font/ar_font_regular"
+
                     android:singleLine="true"
                     android:paddingTop="@dimen/_8sdp"
                     android:paddingBottom="@dimen/_8sdp"
@@ -107,7 +110,8 @@
                     android:paddingLeft="@dimen/_15sdp"
                     android:paddingRight="@dimen/_15sdp"
                     android:background="@android:color/transparent"
-                    android:fontFamily="@font/en"
+                                        android:fontFamily="@font/ar_font_regular"
+
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold"
                     android:gravity="end"
@@ -122,7 +126,8 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:fontFamily="@font/en"
+                                    android:fontFamily="@font/ar_font_regular"
+
                 android:textColor="@color/colorPrimaryDark"
                 android:gravity="right"
                 android:text="@string/forget_password" />
@@ -131,7 +136,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/en"
+                                    android:fontFamily="@font/ar_font_regular"
+
                 android:layout_gravity="center"
                 android:textStyle="bold"
                 android:textSize="@dimen/_12sdp"
@@ -145,7 +151,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@color/black"
-                android:fontFamily="@font/en"
+                                    android:fontFamily="@font/ar_font_regular"
+
                 android:layout_marginLeft="10dp"
                 android:visibility="gone"
                 android:layout_marginRight="10dp"
@@ -188,7 +195,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/google"
-                        android:fontFamily="@font/en"
+                                            android:fontFamily="@font/ar_font_regular"
+
                         android:textColor="@color/black"
                         android:textSize="@dimen/_15sdp"
                         />
@@ -224,7 +232,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="@string/apple"
-                        android:fontFamily="@font/en"
+                                            android:fontFamily="@font/ar_font_regular"
+
                         android:textColor="@color/white"
                         android:textSize="@dimen/_15sdp" />
 
@@ -239,7 +248,8 @@
                 android:layout_marginBottom="@dimen/_20sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/en"
+                                    android:fontFamily="@font/ar_font_regular"
+
                 android:text="@string/join_uss"
                 android:textSize="@dimen/_13sdp"
                 android:layout_gravity="center"

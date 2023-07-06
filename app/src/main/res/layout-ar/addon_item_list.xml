@@ -22,6 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/image"
+
             android:layout_alignParentStart="true"
             android:layout_alignParentLeft="true"
             android:layout_weight="1"
@@ -32,6 +33,8 @@
                 android:id="@+id/mealNameTextView"
                 android:layout_width="match_parent"
                 android:textSize="16dp"
+                android:fontFamily="@font/ar_font_regular"
+
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
               />
@@ -46,17 +49,19 @@
                     android:id="@+id/tv_persions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/ar_font_regular"
+
                     android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/en"
-                    android:textSize="16dp"
+                     android:textSize="16dp"
                     android:textColor="@android:color/darker_gray" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/priceTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/en"
-                     android:gravity="end"
+                     android:fontFamily="@font/ar_font_regular"
+
+                    android:gravity="end"
                     android:singleLine="true"
                     android:textSize="16dp"
 
