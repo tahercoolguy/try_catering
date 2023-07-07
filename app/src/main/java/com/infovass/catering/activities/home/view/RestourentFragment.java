@@ -11,10 +11,12 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +27,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -325,7 +329,9 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 if (scrollY > 100) {
                     if (scrollY > oldScrollY) {
                         Log.i("TAG", "Scroll DOWN");
-                        hideIcon();
+//                        hideIcon();
+                        setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.white));
+                        setStatusBarIconColor(true);
                         refreshBoolean = false;
                     }
                 }
@@ -337,13 +343,17 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
                 if (scrollY == 0) {
                     Log.i(TAG, "TOP SCROLL");
-                    showIcon();
-                    refreshBoolean = false;
+//                    showIcon();
+                    setStatusBarIconColor(false);
+                    setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+                    refreshBoolean = true;
                 }
 
                 if (scrollY == (v.getMeasuredHeight() - v.getChildAt(0).getMeasuredHeight())) {
                     Log.i(TAG, "BOTTOM SCROLL");
-                    hideIcon();
+//                    hideIcon();
+                    setStatusBarIconColor(true);
+                    setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.white));
                     refreshBoolean = false;
 
                 }
@@ -366,7 +376,8 @@ public class RestourentFragment extends Fragment implements RestourentView {
 //            topmenuTxt.setText(getString(R.string.top_menus));
 //            topResTxt.setText(getString(R.string.top_restaurants));
         }
-
+        // Set the initial color of the status bar
+        setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
         return view;
     }
 
@@ -911,4 +922,29 @@ public class RestourentFragment extends Fragment implements RestourentView {
         }
     }
 
+    private void setStatusBarColor(int color) {
+        // Set the color of the status bar dynamically
+        Window window = getActivity().getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
+        }
+    }
+
+    private void setStatusBarIconColor(boolean isDark) {
+        // Set the icon color of the status bar dynamically
+        Window window = getActivity().getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            View decorView = window.getDecorView();
+            int flags = decorView.getSystemUiVisibility();
+            if (isDark) {
+                // Set icon color to black
+                flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            } else {
+                // Set icon color to white
+                flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            }
+            decorView.setSystemUiVisibility(flags);
+        }
+    }
 }

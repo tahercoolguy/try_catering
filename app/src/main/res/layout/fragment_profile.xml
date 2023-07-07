@@ -7,6 +7,33 @@
     android:background="@color/colorWhite"
     android:clickable="true"
     android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:src="@drawable/logo_c"
+            android:tint="@android:color/white" />
+
+        <ImageView
+            android:id="@+id/searchImg"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:src="@drawable/search_bar"
+            android:visibility="gone"
+            app:tint="@color/white"></ImageView>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

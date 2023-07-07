@@ -1,635 +1,669 @@
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swiperefresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/swiperefresh"
     android:background="@color/background_color"
     android:orientation="vertical">
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/scroolNested"
 
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/framelayout"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_10sdp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/headingLayout"
-                    android:background="@drawable/home_menu_background"
-                    android:paddingTop="@dimen/_20sdp"
-                    android:paddingBottom="@dimen/_8sdp"
-                    android:weightSum="3">
-
-                    <LinearLayout
-                        android:id="@+id/locationLL"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/_3sdp">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_gravity="center"
-                            android:layout_margin="@dimen/_3sdp"
-                            android:src="@drawable/ic_location"
-                            android:tint="@color/white" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ar_font_regular"
-
-                                android:id="@+id/locationTxt"
-                                android:text="@string/location"
-                                android:textColor="@android:color/white"
-                                android:textSize="@dimen/_8sdp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tv_city"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="marquee"
-                                android:singleLine="true"
-
-                                android:textColor="@android:color/white"
-                                android:textSize="@dimen/_10sdp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/dateLL"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/_3sdp">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_gravity="center"
-                            android:layout_margin="@dimen/_3sdp"
-                            android:src="@drawable/ic_calender"
-                            android:tint="@color/white" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ar_font_regular"
-
-                                android:id="@+id/dateTxt"
-                                android:text="@string/date"
-                                android:textColor="@android:color/white"
-                                android:textSize="@dimen/_8sdp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tv_date"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="marquee"
-
-                                android:fontFamily="@font/ar_font_regular"
-
-                                android:textColor="@android:color/white"
-                                android:textSize="@dimen/_10sdp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/timeLL"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:padding="@dimen/_3sdp">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/_20sdp"
-                            android:layout_height="@dimen/_20sdp"
-                            android:layout_gravity="center"
-                            android:layout_margin="@dimen/_3sdp"
-                            android:src="@drawable/ic_time"
-                            android:tint="@color/white" />
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/ar_font_regular"
-
-                                android:text="@string/Time"
-                                android:id="@+id/timeTxt"
-                                android:textColor="@android:color/white"
-                                android:textSize="@dimen/_8sdp" />
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/tv_time"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="marquee"
-                                android:fontFamily="@font/ar_font_regular"
-
-
-                                android:textColor="@android:color/white"
-                                android:textSize="@dimen/_10sdp"
-                                android:textStyle="bold" />
-
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_20sdp"
-                    android:background="@drawable/top_background" />
-
-            </FrameLayout>
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/detail_recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:visibility="gone" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:orientation="horizontal"
-                android:visibility="gone">
-
-
-                <LinearLayout
-                    android:id="@+id/allSelectLayout"
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@color/colorPrimary"
-                    android:orientation="horizontal"
-
-                    />
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-
-                    <LinearLayout
-                        android:id="@+id/cateringSelectTabLayout"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@color/colorPrimary"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:visibility="invisible" />
-
-
-                    <LinearLayout
-                        android:id="@+id/deliverySelectLayout"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@color/colorPrimary"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:visibility="invisible" />
-
-
-                    <LinearLayout
-                        android:id="@+id/tableBookingSelectLayout"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@color/colorPrimary"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:visibility="invisible" />
-
-
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray_color"
-                android:visibility="gone" />
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/resTabsLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:tabGravity="fill"
-                    app:tabMode="fixed">
-
-                    <!--            <android.support.design.widget.TabItem-->
-                    <!--                android:id="@+id/allResTabItem"-->
-                    <!--                android:layout_width="wrap_content"-->
-                    <!--                android:layout_height="wrap_content"-->
-                    <!--                android:text="All" />-->
-
-                    <!--            <android.support.design.widget.TabItem-->
-                    <!--                android:id="@+id/cateringResTabItem"-->
-                    <!--                android:layout_width="wrap_content"-->
-                    <!--                -->
-                    <!--                android:layout_height="wrap_content"-->
-                    <!--                android:icon="@drawable/catering_icon"-->
-                    <!--                android:text="@string/catering_text" />-->
-
-                    <!--            <android.support.design.widget.TabItem-->
-                    <!--                android:id="@+id/deliveryResTabItem"-->
-                    <!--                android:layout_width="wrap_content"-->
-                    <!--                android:layout_height="wrap_content"-->
-                    <!--                android:icon="@drawable/delivery_icon"-->
-                    <!--                android:text="@string/delivery_text" />-->
-
-                    <!--            <android.support.design.widget.TabItem-->
-                    <!--                android:id="@+id/tableResTabItem"-->
-                    <!--                android:layout_width="wrap_content"-->
-                    <!--                android:layout_height="wrap_content"-->
-                    <!--                android:icon="@drawable/table_booking_icon"-->
-                    <!--                android:text="@string/table_booking" />-->
-                </com.google.android.material.tabs.TabLayout>
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:id="@+id/locationTimeLayout"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/main_res_data_shap"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:visibility="gone">
-
-
-                <LinearLayout
-                    android:id="@+id/locationLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@drawable/location_icon" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-
-                        <TextView
-                            android:id="@+id/areaNameTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/ar_font_regular"
-
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp"
-                            android:text="@string/all_text"
-
-                            android:textColor="#ff8a8a8f"
-                            android:textSize="13sp" />
-
-
-                        <TextView
-                            android:id="@+id/addressDetailsTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/ar_font_regular"
-
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp"
-                            android:text="@string/all_text"
-                            android:textColor="#ff8a8a8f"
-                            android:textSize="8sp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:background="@color/white" />
-
-                <LinearLayout
-                    android:id="@+id/timeLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:background="@drawable/time_booking" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="vertical">
-
-
-                        <TextView
-                            android:id="@+id/timeNameTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/ar_font_regular"
-
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp"
-                            android:textColor="#ff8a8a8f"
-                            android:textSize="13sp" />
-
-
-                        <TextView
-                            android:id="@+id/timeDetailsTextView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/ar_font_regular"
-
-                            android:paddingLeft="5dp"
-                            android:paddingRight="5dp"
-                            android:textColor="#ff8a8a8f"
-                            android:textSize="8sp" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-            <androidx.core.widget.NestedScrollView
-                android:layout_width="match_parent"
-                android:id="@+id/scroolNested"
                 android:layout_height="match_parent">
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/homeAdShimmerLayout"
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:animateLayoutChanges="true"
-                        android:animationCache="true"
+                        android:layout_height="50dp"
                         android:layout_gravity="center"
-                        app:shimmer_repeat_mode="restart"
-                        app:shimmer_shape="radial">
+                        android:background="@color/colorPrimary"
+                        android:gravity="center"
+                        android:orientation="vertical">
 
-                        <include layout="@layout/home_ad_shimeer"></include>
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="@dimen/_20sdp"
+                            android:layout_height="@dimen/_20sdp"
+                            android:layout_centerInParent="true"
+                            android:layout_gravity="center"
+                            android:src="@drawable/logo_c"
+                            android:tint="@android:color/white" />
 
-                    </com.facebook.shimmer.ShimmerFrameLayout>
+                        <ImageView
+                            android:id="@+id/searchImg"
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="20dp"
+                            android:src="@drawable/search_bar"
+                            android:visibility="gone"
+                            app:tint="@color/white"></ImageView>
+                    </LinearLayout>
 
-                    <com.smarteist.autoimageslider.SliderView
-                        android:id="@+id/imageSlider"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        app:sliderIndicatorEnabled="false" />
-
-                    <TextView
+                    <FrameLayout
+                        android:id="@+id/framelayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/topResTxt"
-                        android:layout_marginHorizontal="21dp"
-                         android:textColor="@color/black"
-                        android:textStyle="bold"></TextView>
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/topResShimmerLayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="10dp"
-                        android:animateLayoutChanges="true"
-                        android:animationCache="true"
-                        app:shimmer_repeat_mode="restart"
-                        app:shimmer_shape="radial">
+                        android:layout_marginBottom="@dimen/_10sdp">
 
-                        <HorizontalScrollView
+                        <LinearLayout
+                            android:id="@+id/headingLayout"
                             android:layout_width="match_parent"
-                            android:scrollbars="none"
-
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/home_menu_background"
+                            android:paddingTop="@dimen/_20sdp"
+                            android:paddingBottom="@dimen/_8sdp"
+                            android:weightSum="3">
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:id="@+id/locationLL"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:padding="@dimen/_3sdp">
 
-                                <include layout="@layout/top_restaurent_shimmer"></include>
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_3sdp"
+                                    android:src="@drawable/ic_location"
+                                    android:tint="@color/white" />
 
-                                <include layout="@layout/top_restaurent_shimmer"></include>
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
 
-                                <include layout="@layout/top_restaurent_shimmer"></include>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/locationTxt"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/en"
+                                        android:text="@string/location"
+                                        android:textColor="@android:color/white"
+                                        android:textSize="@dimen/_8sdp" />
 
-                                <include layout="@layout/top_restaurent_shimmer"></include>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tv_city"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="marquee"
+                                        android:singleLine="true"
+
+                                        android:textColor="@android:color/white"
+                                        android:textSize="@dimen/_10sdp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
 
                             </LinearLayout>
 
-                        </HorizontalScrollView>
-
-                    </com.facebook.shimmer.ShimmerFrameLayout>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/topRestaurentsRcv"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="21dp"
-                        android:layout_marginTop="10dp"
-                        android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="21dp"
-                        android:id="@+id/topmenuTxt"
-                        android:layout_marginTop="20dp"
-                        android:textColor="@color/black"
-                        android:textStyle="bold"></TextView>
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/topMenuShimmerLayout"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginTop="10dp"
-                        android:animateLayoutChanges="true"
-                        android:animationCache="true"
-                        app:shimmer_repeat_mode="restart"
-                        app:shimmer_shape="radial">
-
-                        <HorizontalScrollView
-                            android:layout_width="match_parent"
-                            android:scrollbars="none"
-
-                            android:layout_height="wrap_content">
-
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:id="@+id/dateLL"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal">
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:padding="@dimen/_3sdp">
 
-                                <include layout="@layout/top_restaurent_shimmer"></include>
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_3sdp"
+                                    android:src="@drawable/ic_calender"
+                                    android:tint="@color/white" />
 
-                                <include layout="@layout/top_restaurent_shimmer"></include>
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
 
-                                <include layout="@layout/top_restaurent_shimmer"></include>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/dateTxt"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/en"
+                                        android:text="@string/date"
+                                        android:textColor="@android:color/white"
+                                        android:textSize="@dimen/_8sdp" />
 
-                                <include layout="@layout/top_restaurent_shimmer"></include>
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tv_date"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="marquee"
+
+                                        android:fontFamily="@font/en"
+                                        android:textColor="@android:color/white"
+                                        android:textSize="@dimen/_10sdp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
 
                             </LinearLayout>
 
-                        </HorizontalScrollView>
+                            <LinearLayout
+                                android:id="@+id/timeLL"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:padding="@dimen/_3sdp">
 
-                    </com.facebook.shimmer.ShimmerFrameLayout>
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:layout_width="@dimen/_20sdp"
+                                    android:layout_height="@dimen/_20sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_3sdp"
+                                    android:src="@drawable/ic_time"
+                                    android:tint="@color/white" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/timeTxt"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/en"
+                                        android:text="@string/Time"
+                                        android:textColor="@android:color/white"
+                                        android:textSize="@dimen/_8sdp" />
+
+                                    <androidx.appcompat.widget.AppCompatTextView
+                                        android:id="@+id/tv_time"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:ellipsize="marquee"
+                                        android:fontFamily="@font/en"
+
+                                        android:textColor="@android:color/white"
+                                        android:textSize="@dimen/_10sdp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_20sdp"
+                            android:background="@drawable/top_background" />
+
+                    </FrameLayout>
+
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/topMenuRcv"
-                        android:layout_width="match_parent"
-                        android:layout_marginLeft="21dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_height="wrap_content"
-                        android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/resturantListView"
-                        android:layout_width="match_parent"
-                        android:layout_marginBottom="100dp"
-                        android:layout_marginTop="20dp"
-                        android:visibility="gone"
-                        android:layout_height="wrap_content"
-                        ></androidx.recyclerview.widget.RecyclerView>
-
-                    <!--below is the view for our shimmer-->
-                    <com.facebook.shimmer.ShimmerFrameLayout
-                        android:id="@+id/shimmerFrameLayout"
+                        android:id="@+id/detail_recyclerView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:animateLayoutChanges="true"
-                        android:animationCache="true"
-                        app:shimmer_repeat_mode="restart"
-                        app:shimmer_shape="radial">
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:visibility="gone" />
 
-                        <!--For shimmer we are creating a same
-                            layout but setting its background
-                            as a gray colour and not providing
-                            any view inside it-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+
+                        <LinearLayout
+                            android:id="@+id/allSelectLayout"
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@color/colorPrimary"
+                            android:orientation="horizontal"
+
+                            />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+
+                            <LinearLayout
+                                android:id="@+id/cateringSelectTabLayout"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorPrimary"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:visibility="invisible" />
+
+
+                            <LinearLayout
+                                android:id="@+id/deliverySelectLayout"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorPrimary"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:visibility="invisible" />
+
+
+                            <LinearLayout
+                                android:id="@+id/tableBookingSelectLayout"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_weight="1"
+                                android:background="@color/colorPrimary"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:visibility="invisible" />
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/gray_color"
+                        android:visibility="gone" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/resTabsLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:tabGravity="fill"
+                            app:tabMode="fixed">
+
+                            <!--            <android.support.design.widget.TabItem-->
+                            <!--                android:id="@+id/allResTabItem"-->
+                            <!--                android:layout_width="wrap_content"-->
+                            <!--                android:layout_height="wrap_content"-->
+                            <!--                android:text="All" />-->
+
+                            <!--            <android.support.design.widget.TabItem-->
+                            <!--                android:id="@+id/cateringResTabItem"-->
+                            <!--                android:layout_width="wrap_content"-->
+                            <!--                -->
+                            <!--                android:layout_height="wrap_content"-->
+                            <!--                android:icon="@drawable/catering_icon"-->
+                            <!--                android:text="@string/catering_text" />-->
+
+                            <!--            <android.support.design.widget.TabItem-->
+                            <!--                android:id="@+id/deliveryResTabItem"-->
+                            <!--                android:layout_width="wrap_content"-->
+                            <!--                android:layout_height="wrap_content"-->
+                            <!--                android:icon="@drawable/delivery_icon"-->
+                            <!--                android:text="@string/delivery_text" />-->
+
+                            <!--            <android.support.design.widget.TabItem-->
+                            <!--                android:id="@+id/tableResTabItem"-->
+                            <!--                android:layout_width="wrap_content"-->
+                            <!--                android:layout_height="wrap_content"-->
+                            <!--                android:icon="@drawable/table_booking_icon"-->
+                            <!--                android:text="@string/table_booking" />-->
+                        </com.google.android.material.tabs.TabLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:id="@+id/locationTimeLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_margin="10dp"
+                        android:background="@drawable/main_res_data_shap"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:visibility="gone">
+
+
+                        <LinearLayout
+                            android:id="@+id/locationLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/location_icon" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <TextView
+                                    android:id="@+id/areaNameTextView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/en"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:text="@string/all_text"
+
+                                    android:textColor="#ff8a8a8f"
+                                    android:textSize="13sp" />
+
+
+                                <TextView
+                                    android:id="@+id/addressDetailsTextView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/en"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:text="@string/all_text"
+                                    android:textColor="#ff8a8a8f"
+                                    android:textSize="8sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:background="@color/white" />
+
+                        <LinearLayout
+                            android:id="@+id/timeLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:background="@drawable/time_booking" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+
+                                <TextView
+                                    android:id="@+id/timeNameTextView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/en"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:textColor="#ff8a8a8f"
+                                    android:textSize="13sp" />
+
+
+                                <TextView
+                                    android:id="@+id/timeDetailsTextView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/en"
+                                    android:paddingLeft="5dp"
+                                    android:paddingRight="5dp"
+                                    android:textColor="#ff8a8a8f"
+                                    android:textSize="8sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <androidx.core.widget.NestedScrollView
+                         android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
-                            <!--below we are displaying multiple
-                                shimmer layouts using include
-                                to show them in list format-->
-                            <include layout="@layout/main_restaurent_shimmer" />
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/homeAdShimmerLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:animateLayoutChanges="true"
+                                android:animationCache="true"
+                                app:shimmer_repeat_mode="restart"
+                                app:shimmer_shape="radial">
 
-                            <include layout="@layout/main_restaurent_shimmer" />
+                                <include layout="@layout/home_ad_shimeer"></include>
 
-                            <include layout="@layout/main_restaurent_shimmer" />
+                            </com.facebook.shimmer.ShimmerFrameLayout>
 
-                            <include layout="@layout/main_restaurent_shimmer" />
+                            <com.smarteist.autoimageslider.SliderView
+                                android:id="@+id/imageSlider"
+                                android:layout_width="match_parent"
+                                android:layout_height="200dp"
+                                app:sliderIndicatorEnabled="false" />
 
-                            <include layout="@layout/main_restaurent_shimmer" />
+                            <TextView
+                                android:id="@+id/topResTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="21dp"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"></TextView>
+
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/topResShimmerLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="10dp"
+                                android:animateLayoutChanges="true"
+                                android:animationCache="true"
+                                app:shimmer_repeat_mode="restart"
+                                app:shimmer_shape="radial">
+
+                                <HorizontalScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:scrollbars="none">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                        <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                        <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                        <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                    </LinearLayout>
+
+                                </HorizontalScrollView>
+
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/topRestaurentsRcv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="21dp"
+                                android:layout_marginTop="10dp"
+                                android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>
+
+                            <TextView
+                                android:id="@+id/topmenuTxt"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="21dp"
+                                android:layout_marginTop="20dp"
+                                android:textColor="@color/black"
+                                android:textStyle="bold"></TextView>
+
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/topMenuShimmerLayout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="15dp"
+                                android:layout_marginTop="10dp"
+                                android:animateLayoutChanges="true"
+                                android:animationCache="true"
+                                app:shimmer_repeat_mode="restart"
+                                app:shimmer_shape="radial">
+
+                                <HorizontalScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+
+                                    android:scrollbars="none">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal">
+
+                                        <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                        <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                        <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                        <include layout="@layout/top_restaurent_shimmer"></include>
+
+                                    </LinearLayout>
+
+                                </HorizontalScrollView>
+
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/topMenuRcv"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="21dp"
+                                android:layout_marginTop="10dp"
+                                android:scrollbars="none"></androidx.recyclerview.widget.RecyclerView>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/resturantListView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="20dp"
+                                android:layout_marginBottom="100dp"
+                                android:visibility="gone"></androidx.recyclerview.widget.RecyclerView>
+                            <!--below is the view for our shimmer-->
+                            <com.facebook.shimmer.ShimmerFrameLayout
+                                android:id="@+id/shimmerFrameLayout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:animateLayoutChanges="true"
+                                android:animationCache="true"
+                                app:shimmer_repeat_mode="restart"
+                                app:shimmer_shape="radial">
+
+                                <!--For shimmer we are creating a same
+                                    layout but setting its background
+                                    as a gray colour and not providing
+                                    any view inside it-->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+                                    <!--below we are displaying multiple
+                                        shimmer layouts using include
+                                        to show them in list format-->
+                                    <include layout="@layout/main_restaurent_shimmer" />
+
+                                    <include layout="@layout/main_restaurent_shimmer" />
+
+                                    <include layout="@layout/main_restaurent_shimmer" />
+
+                                    <include layout="@layout/main_restaurent_shimmer" />
+
+                                    <include layout="@layout/main_restaurent_shimmer" />
+
+                                </LinearLayout>
+
+                            </com.facebook.shimmer.ShimmerFrameLayout>
+
 
                         </LinearLayout>
+                    </androidx.core.widget.NestedScrollView>
 
-                    </com.facebook.shimmer.ShimmerFrameLayout>
 
                 </LinearLayout>
-            </androidx.core.widget.NestedScrollView>
 
+
+                <include layout="@layout/search_bar"></include>
+            </RelativeLayout>
 
         </LinearLayout>
-
-
-        <include layout="@layout/search_bar"></include>
-    </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

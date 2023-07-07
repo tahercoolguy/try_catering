@@ -1,15 +1,20 @@
 package com.infovass.catering.activities.home.view;
 
+import static com.infovass.catering.Controller.AppController.TAG;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +26,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -97,6 +104,8 @@ public class SearchFragment extends Fragment implements RestourentView {
     android.widget.SearchView searchview;
     @BindView(R.id.framelayout)
     FrameLayout framelayout;
+    @BindView(R.id.scroolNested)
+    NestedScrollView scroolNested;
 
     Activity activity;
     ListView listView;
@@ -293,7 +302,54 @@ public class SearchFragment extends Fragment implements RestourentView {
             }
         });
 
+        searchview.requestFocus();
+        searchview.setEnabled(true);
+        searchview.onActionViewExpanded();
 
+        // Set up the scroll listener
+        scroolNested.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                int scrollDifference = scrollY - previousScrollY;
+//                if (scrollDifference > scrollThreshold) {
+//                    // Scrolling downwards
+//                    hideIcon();
+//                } else if (scrollDifference < -scrollThreshold) {
+//                    // Scrolling upwards
+//                    showIcon();
+//                }
+//                previousScrollY = scrollY;
+                if (scrollY > 100) {
+                    if (scrollY > oldScrollY) {
+                        Log.i("TAG", "Scroll DOWN");
+//                        hideIcon();
+                        setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.white));
+
+                    }
+                }
+
+//                if (scrollY < oldScrollY) {
+//                    Log.i(TAG, "Scroll UP");
+//                    showIcon();
+//                }
+
+                if (scrollY == 0) {
+                    Log.i(TAG, "TOP SCROLL");
+//                    showIcon();
+                    setStatusBarIconColor(true);
+                    setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+                }
+
+                if (scrollY == (v.getMeasuredHeight() - v.getChildAt(0).getMeasuredHeight())) {
+                    Log.i(TAG, "BOTTOM SCROLL");
+//                    hideIcon();
+                    setStatusBarIconColor(false);
+                    setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.white));
+
+                }
+
+            }
+        });
         return view;
     }
 
@@ -661,6 +717,32 @@ public class SearchFragment extends Fragment implements RestourentView {
         } else {
             Toast.makeText(getActivity(), getString(R.string.no_internet), Toast.LENGTH_SHORT).show();
 
+        }
+    }
+
+    private void setStatusBarColor(int color) {
+        // Set the color of the status bar dynamically
+        Window window = getActivity().getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
+        }
+    }
+
+    private void setStatusBarIconColor(boolean isDark) {
+        // Set the icon color of the status bar dynamically
+        Window window = getActivity().getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            View decorView = window.getDecorView();
+            int flags = decorView.getSystemUiVisibility();
+            if (isDark) {
+                // Set icon color to black
+                flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            } else {
+                // Set icon color to white
+                flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            }
+            decorView.setSystemUiVisibility(flags);
         }
     }
 }
