@@ -90,7 +90,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
     RestourentPresenter restourentPresenter;
     View view;
     RestourentcategoriesAdapter restourentcategoriesAdapter;
-//    ResturantLargeAdapter resturantLargeAdapter;
+    //    ResturantLargeAdapter resturantLargeAdapter;
     ResturantNewLargeAdapter resturantLargeAdapter;
     @BindView(R.id.resturantListView)
     RecyclerView resturantListView;
@@ -356,15 +356,15 @@ public class RestourentFragment extends Fragment implements RestourentView {
             locationTxt.setText("موقع");
             dateTxt.setText("تاريخ");
             timeTxt.setText("وقت");
-            topmenuTxt.setText("القوائم");
-            topResTxt.setText("أفضل");
+//            topmenuTxt.setText("القوائم");
+//            topResTxt.setText("أفضل");
         } else {
 
             locationTxt.setText("Location");
             dateTxt.setText("Date");
             timeTxt.setText("Time");
-            topmenuTxt.setText(getString(R.string.top_menus));
-            topResTxt.setText(getString(R.string.top_restaurants));
+//            topmenuTxt.setText(getString(R.string.top_menus));
+//            topResTxt.setText(getString(R.string.top_restaurants));
         }
 
         return view;
@@ -550,16 +550,18 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 public void success(RD_caterers_Root rd_caterers_root, Response response) {
 
                     if (rd_caterers_root.getStatus().equalsIgnoreCase("true")) {
-                        homeAdShimmerLayout.setVisibility(View.GONE);
-                        topResShimmerLayout.setVisibility(View.GONE);
-                        topMenuShimmerLayout.setVisibility(View.GONE);
-                        homeAdShimmerLayout.setVisibility(View.GONE);
-                        homeAdShimmerLayout.stopShimmer();
-                        topResShimmerLayout.stopShimmer();
-                        topMenuShimmerLayout.stopShimmer();
-                        imageSlider.setVisibility(View.VISIBLE);
-                        topRestaurentsRcv.setVisibility(View.VISIBLE);
-                        topMenuRcv.setVisibility(View.VISIBLE);
+
+                        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+
+                            topmenuTxt.setText("القوائم");
+                            topResTxt.setText("أفضل");
+                        } else {
+
+
+                            topmenuTxt.setText(context.getString(R.string.top_menus));
+                            topResTxt.setText(context.getString(R.string.top_restaurants));
+                        }
+
 //                        if (SharedPreferencesUtils.getInstance(context).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
 //                            topResTxt.setText("أفضل المطاعم");
 //                            topmenuTxt.setText("القوائم العلوية");
@@ -572,22 +574,72 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
 
                         try {
-                            setImageSlider(rd_caterers_root.getData().getBannerData());
+
+                            if (rd_caterers_root.getData().getBannerData().size() > 0) {
+                                homeAdShimmerLayout.setVisibility(View.GONE);
+                                homeAdShimmerLayout.stopShimmer();
+                                imageSlider.setVisibility(View.VISIBLE);
+                                setImageSlider(rd_caterers_root.getData().getBannerData());
+                            } else {
+                                homeAdShimmerLayout.setVisibility(View.GONE);
+                                homeAdShimmerLayout.stopShimmer();
+                                imageSlider.setVisibility(View.GONE);
+                            }
+
                         } catch (Exception e) {
+                            homeAdShimmerLayout.setVisibility(View.GONE);
+                            homeAdShimmerLayout.stopShimmer();
+                            imageSlider.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
 
 
                         try {
-                            setTopMenuRcv(rd_caterers_root.getData().getTopRankedCaterersItems());
+                            if (rd_caterers_root.getData().getTopRankedCaterersItems().size() > 0) {
+                                topMenuShimmerLayout.setVisibility(View.GONE);
+                                topMenuShimmerLayout.stopShimmer();
+                                topMenuRcv.setVisibility(View.VISIBLE);
+                                topmenuTxt.setVisibility(View.VISIBLE);
+                                setTopMenuRcv(rd_caterers_root.getData().getTopRankedCaterersItems());
+                            } else {
+                                topMenuShimmerLayout.setVisibility(View.GONE);
+                                topMenuShimmerLayout.stopShimmer();
+                                topMenuRcv.setVisibility(View.GONE);
+                                topmenuTxt.setVisibility(View.GONE);
+                            }
+
                         } catch (Exception e) {
+                            topMenuShimmerLayout.setVisibility(View.GONE);
+                            topMenuShimmerLayout.stopShimmer();
+                            topMenuRcv.setVisibility(View.GONE);
+                            topmenuTxt.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
 
 
                         try {
-                            setTopRestaurentsRcv(rd_caterers_root.getData().getTopRankedCaterers());
+
+
+                            if (rd_caterers_root.getData().getTopRankedCaterers().size() > 0) {
+
+                                topResShimmerLayout.setVisibility(View.GONE);
+                                topResShimmerLayout.stopShimmer();
+                                topRestaurentsRcv.setVisibility(View.VISIBLE);
+                                topResTxt.setVisibility(View.VISIBLE);
+                                setTopRestaurentsRcv(rd_caterers_root.getData().getTopRankedCaterers());
+
+                            } else {
+                                topResShimmerLayout.setVisibility(View.GONE);
+                                topResShimmerLayout.stopShimmer();
+                                topRestaurentsRcv.setVisibility(View.GONE);
+                                topResTxt.setVisibility(View.GONE);
+                            }
+
                         } catch (Exception e) {
+                            topResShimmerLayout.setVisibility(View.GONE);
+                            topResShimmerLayout.stopShimmer();
+                            topRestaurentsRcv.setVisibility(View.GONE);
+                            topResTxt.setVisibility(View.GONE);
                             e.printStackTrace();
                         }
 
@@ -797,7 +849,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
                         resturantListView.setVisibility(View.VISIBLE);
                         restourentLIst.addAll(rd_caterers_root.getData());
-                         swiperefresh.setRefreshing(false);
+                        swiperefresh.setRefreshing(false);
                         try {
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, RecyclerView.VERTICAL, false);
                             resturantListView.setLayoutManager(linearLayoutManager);
@@ -824,7 +876,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
                             swiperefresh.setRefreshing(false);
                             restourentLIst = new ArrayList<>();
-                             // on below line we are stopping our shimmer
+                            // on below line we are stopping our shimmer
                             // and making its visibility to gone.
                             shimmerFrameLayout.startShimmer();
                             shimmerFrameLayout.setVisibility(View.VISIBLE);
@@ -837,7 +889,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
 
                         swiperefresh.setRefreshing(false);
                         restourentLIst = new ArrayList<>();
-                         // on below line we are stopping our shimmer
+                        // on below line we are stopping our shimmer
                         // and making its visibility to gone.
                         shimmerFrameLayout.startShimmer();
                         shimmerFrameLayout.setVisibility(View.VISIBLE);
