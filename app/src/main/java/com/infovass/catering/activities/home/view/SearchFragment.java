@@ -158,6 +158,8 @@ public class SearchFragment extends Fragment implements RestourentView {
 //        restourentPresenter.getRestourentlist_Api(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_DATE, ""));
 
 //        newRandomCaterers();
+        setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+setStatusBarIconColor(false);
         restaurentAPI();
         tv_city.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_AREA_NAME, ""));
         tv_time.setText(SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_TIME, ""));
@@ -324,7 +326,7 @@ public class SearchFragment extends Fragment implements RestourentView {
                         Log.i("TAG", "Scroll DOWN");
 //                        hideIcon();
                         setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.white));
-
+                        setStatusBarIconColor(true);
                     }
                 }
 
@@ -336,7 +338,7 @@ public class SearchFragment extends Fragment implements RestourentView {
                 if (scrollY == 0) {
                     Log.i(TAG, "TOP SCROLL");
 //                    showIcon();
-                    setStatusBarIconColor(true);
+                    setStatusBarIconColor(false);
                     setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
                 }
 
@@ -745,4 +747,5 @@ public class SearchFragment extends Fragment implements RestourentView {
             decorView.setSystemUiVisibility(flags);
         }
     }
+
 }

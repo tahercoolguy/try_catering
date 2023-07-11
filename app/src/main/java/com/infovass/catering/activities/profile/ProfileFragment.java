@@ -3,14 +3,18 @@ package com.infovass.catering.activities.profile;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 
@@ -76,7 +80,7 @@ public class ProfileFragment extends Fragment {
             case R.id.rel_changeLanguage:
                 try {
 
-                    ((MainActivity)getContext()).startLanguageActivity();
+                    ((MainActivity) getContext()).startLanguageActivity();
 //                    Intent intent = new Intent(getActivity(), ChangeLanguageActivity.class);
 //                    startActivity(intent);
 //                    activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
@@ -157,7 +161,8 @@ public class ProfileFragment extends Fragment {
         ButterKnife.bind(this, view);
         activity = getActivity();
         tv_userName.setText(SharedPreferencesUtils.getInstance(getActivity()).getValue(Constants.UserName, ""));
-
+        setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+        setStatusBarIconColor(false);
         if ((SharedPreferencesUtils.getInstance(getContext()).getValue(Constants.KEY_LOGGED_IN, false))) {
             logOut.setVisibility(View.VISIBLE);
             logIn.setVisibility(View.GONE);
@@ -184,6 +189,32 @@ public class ProfileFragment extends Fragment {
         if (activity != null && activity.getWindow() != null && activity.getWindow().getDecorView() != null) {
             InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(activity.getWindow().getDecorView().getWindowToken(), 0);
+        }
+    }
+
+    private void setStatusBarColor(int color) {
+        // Set the color of the status bar dynamically
+        Window window = getActivity().getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(color);
+        }
+    }
+
+    private void setStatusBarIconColor(boolean isDark) {
+        // Set the icon color of the status bar dynamically
+        Window window = getActivity().getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            View decorView = window.getDecorView();
+            int flags = decorView.getSystemUiVisibility();
+            if (isDark) {
+                // Set icon color to black
+                flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            } else {
+                // Set icon color to white
+                flags &= ~View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+            }
+            decorView.setSystemUiVisibility(flags);
         }
     }
 }

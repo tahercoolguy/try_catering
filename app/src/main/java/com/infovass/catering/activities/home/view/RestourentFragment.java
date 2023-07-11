@@ -195,7 +195,8 @@ public class RestourentFragment extends Fragment implements RestourentView {
         framelayout.setVisibility(View.VISIBLE);
         progressHUD = ProgressHUD.create(getContext(), getString(R.string.loading), false, null, null);
 //        restourentPresenter = new RestourentImpl(this);
-
+        setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.colorPrimary));
+        setStatusBarIconColor(false);
         swiperefresh.setRefreshing(true);
         shimmerFrameLayout.startShimmer();
         homeAdShimmerLayout.startShimmer();

@@ -183,8 +183,7 @@
                 android:padding="3dp"
                 android:shadowRadius="5"
                 android:singleLine="true"
-                android:text="hfugfsfgfg"
-                android:textColor="@color/white"
+                 android:textColor="@color/white"
                 android:textSize="@dimen/_18sdp"
                 android:textStyle="bold" />
 
@@ -198,8 +197,7 @@
                 android:padding="3dp"
                 android:shadowColor="@color/black"
                 android:singleLine="true"
-                android:text="fhsgfhfgf"
-                android:textColor="@color/white"
+                 android:textColor="@color/white"
                 android:textSize="@dimen/_12sdp"
                 app:layout_constraintBottom_toTopOf="@+id/ratingImageView"
                 app:layout_constraintStart_toStartOf="parent" />
