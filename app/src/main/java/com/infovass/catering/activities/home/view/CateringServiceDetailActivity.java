@@ -1,5 +1,6 @@
 package com.infovass.catering.activities.home.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.infovass.catering.DeepLinking.DynamicLinkHelper;
 import com.infovass.catering.R;
 import com.infovass.catering.Utils.Helper;
 import com.infovass.catering.activities.DataModel.RD_Image;
@@ -115,7 +117,8 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
     RecyclerView rv_Items;
     int id;
     String status, min_time;
-
+    private DynamicLinkHelper dynamicLinkHelper;
+    Activity activity;
     JsonArray jsonArray = new JsonArray();
     JsonArray jsonArray1 = new JsonArray();
 
@@ -131,6 +134,10 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
     @BindView(R.id.imageSlider)
     SliderView imageSlider;
 
+    @BindView(R.id.shareImageView)
+    AppCompatImageView shareImageView;
+
+    String tittle = "", subtittle = "", img  = "", type = "", price = "";
 
     @Override
     protected Context getActivityContext() {
@@ -142,6 +149,9 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_catering_service_detail);
         Bundle bundle = getIntent().getExtras();
+        activity=CateringServiceDetailActivity.this;
+        dynamicLinkHelper = new DynamicLinkHelper(this,activity);
+
         try {
             getWindow().setStatusBarColor(Color.BLACK);
         } catch (Exception t) {
@@ -712,4 +722,11 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
         }
 
     }
+
+
+    @OnClick(R.id.shareImageView)
+    public void onclickshareImageView(){
+        dynamicLinkHelper.createDynamicLinkForFirebase(tittle,img, "","catering_detail",subtittle,"","");
+    }
+
 }

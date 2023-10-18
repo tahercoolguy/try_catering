@@ -1,5 +1,6 @@
 package com.infovass.catering.activities.home.view;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -7,9 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +25,12 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.dynamiclinks.DynamicLink;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.ShortDynamicLink;
+import com.infovass.catering.DeepLinking.DynamicLinkHelper;
 import com.infovass.catering.MyFormat.Controller.AppController;
 import com.infovass.catering.MyFormat.MyDM.Item;
 import com.infovass.catering.MyFormat.MyDM.Mode;
@@ -74,7 +83,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     private Dialog progress;
     private ConnectionDetector connectionDetector;
     RestourentDetailPresenter restourentDetailPresenter;
-    String restaurant_Status;
+    String restaurant_Status="0";
     @BindView(R.id.detail_recyclerView)
     RecyclerView detail_recyclerView;
 
@@ -125,17 +134,20 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     @BindView(R.id.main_content)
     LinearLayout main_content;
     @BindView(R.id.imageSlider)
-    SliderView imageSlider;
+    SliderView imageSlider;  @BindView(R.id.shareImageView)
+    AppCompatImageView shareImageView;
 
     DetailNewAdapter detailAdapter;
 
     MainCategoriesNewAdapter menusAdapter;
     int restaurententID;
+    String tittle = "", subtittle = "", img = "", id = "", type = "", price = "";
 
 
     RestourentDetailsIBN mViewPagerAdapter;
     String modeType = "";
-
+    private DynamicLinkHelper dynamicLinkHelper;
+    Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -145,6 +157,9 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 //        restaurententID = Integer.parseInt(getIntent().getStringExtra("restaurententID"));
         appController = (AppController) this.getApplicationContext();
         connectionDetector = new ConnectionDetector(getApplicationContext());
+        activity=RestaurentDetailNew.this;
+        dynamicLinkHelper = new DynamicLinkHelper(this,activity);
+
         Intent mIntent = getIntent();
         restaurententID = mIntent.getIntExtra("restaurententID", 0);
         restaurant_Status = mIntent.getStringExtra("restaurant_Status");
@@ -160,6 +175,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
         } catch (Exception t) {
         }
     }
+
 
     int modefirstItem = 1;
 
@@ -316,7 +332,9 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
                             if (SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
                                 resturantNameTextView.setText(root.getData().getArabic_name());
+                                tittle=root.getData().getArabic_name();
                                 resturantdetail.setText(root.getData().getArabic_detail());
+                                subtittle=root.getData().getArabic_detail();
                                 tv_minNots.setText(root.getData().getTime_show());
                                 tv_minOrder.setText(root.getData().getMin_order());
                                 tv_setuUpTime.setText(root.getData().getSetup_time_in_minute() + " Mins");
@@ -326,6 +344,9 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
                             if (SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
                                 resturantNameTextView.setText(root.getData().getName());
+                                tittle=root.getData().getName();
+                                subtittle=root.getData().getDetail();
+
                                 resturantdetail.setText(root.getData().getDetail());
                                 tv_minNots.setText(root.getData().getTime_show());
                                 tv_minOrder.setText(root.getData().getMin_order());
@@ -421,6 +442,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
                             setImageSlider(root.getData().getImages());
 
+
+                            img= String.valueOf(root.getData().getCover_images().get(0).getCover_image_path());
                             ///////////////////////////////////////////////////////////////////////////////////////////////////
 
                             itemArrayList = root.getData().getItem();
@@ -679,4 +702,10 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
         }
 
     }
+
+    @OnClick(R.id.shareImageView)
+    public void onclickshareImageView(){
+        dynamicLinkHelper.createDynamicLinkForFirebase(tittle,img, String.valueOf(restaurententID),"menu",subtittle,"","");
+    }
+
 }

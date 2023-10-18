@@ -4,6 +4,7 @@ import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.infovass.catering.DeepLinking.DynamicLinkHelper;
 import com.infovass.catering.R;
 import com.infovass.catering.Utils.Helper;
 import com.infovass.catering.activities.DataModel.RD_Image;
@@ -91,7 +93,14 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
     RelativeLayout rel_findFood;
     @BindView(R.id.imageSlider)
     SliderView imageSlider;
+
+    @BindView(R.id.shareImageView)
+    AppCompatImageView shareImageView;
     String status, min_time;
+    private DynamicLinkHelper dynamicLinkHelper;
+    Activity activity;
+    String tittle = "", subtittle = "", img  = "", type = "", price = "";
+
 
     @Override
     protected Context getActivityContext() {
@@ -102,6 +111,10 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_product_detail);
+        activity=ProductDetailActivity.this;
+        dynamicLinkHelper = new DynamicLinkHelper(this,activity);
+
+
         try {
             getWindow().setStatusBarColor(Color.BLACK);
         } catch (Exception t) {
@@ -436,4 +449,11 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
         }
 
     }
+
+
+    @OnClick(R.id.shareImageView)
+    public void onclickshareImageView(){
+        dynamicLinkHelper.createDynamicLinkForFirebase(tittle,img, "","product_detail",subtittle,"","");
+    }
+
 }

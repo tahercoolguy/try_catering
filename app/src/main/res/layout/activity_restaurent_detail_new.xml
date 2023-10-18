@@ -33,25 +33,26 @@
                     android:layout_height="match_parent"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
-                    android:visibility="gone"
                     android:layout_alignParentTop="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/myoffer_placeholder" />
+                    android:src="@drawable/myoffer_placeholder"
+                    android:visibility="gone" />
 
                 <com.smarteist.autoimageslider.SliderView
                     android:id="@+id/imageSlider"
                     android:layout_width="match_parent"
-                    android:background="@drawable/gradient"
-
                     android:layout_height="match_parent"
+
+                    android:background="@drawable/gradient"
                     app:sliderIndicatorEnabled="false" />
+
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/restourentimage"
                     android:layout_width="match_parent"
-                    android:visibility="gone"
+                    android:layout_height="match_parent"
                     android:background="@drawable/gradient"
 
-                    android:layout_height="match_parent" />
+                    android:visibility="gone" />
 
                 <!--                <androidx.appcompat.widget.AppCompatImageView-->
                 <!--                    android:id="@+id/restourentimage"-->
@@ -70,20 +71,21 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <LinearLayout
                             android:layout_width="@dimen/_30sdp"
                             android:layout_height="@dimen/_30sdp"
                             android:layout_gravity="center"
-                            android:backgroundTint="@color/colorPrimary"
                             android:background="@drawable/ic_back_circle"
+                            android:backgroundTint="@color/colorPrimary"
                             android:gravity="center">
 
                             <ImageButton
                                 android:id="@+id/backButton"
                                 android:layout_width="30dp"
-                                android:backgroundTint="@color/white"
                                 android:layout_height="30dp"
-                                android:background="@drawable/ic_back_button" />
+                                android:background="@drawable/ic_back_button"
+                                android:backgroundTint="@color/white" />
                         </LinearLayout>
 
 
@@ -100,8 +102,26 @@
                                 android:layout_width="@dimen/_30sdp"
                                 android:layout_height="@dimen/_30sdp"
                                 android:layout_gravity="center"
-                                android:layout_marginHorizontal="15dp"
-                                android:src="@drawable/ic_info" />
+                                 android:src="@drawable/ic_info" />
+
+                            <LinearLayout
+                                android:layout_width="@dimen/_24sdp"
+                                android:layout_height="@dimen/_24sdp"
+                                android:layout_gravity="center"
+                                android:layout_marginHorizontal="5dp"
+                                android:background="@drawable/ic_back_circle"
+                                android:gravity="center">
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/shareImageView"
+                                    android:layout_width="@dimen/_18sdp"
+                                    android:layout_height="@dimen/_18sdp"
+                                    android:backgroundTint="#CDD2D4"
+                                    android:layout_gravity="center"
+                                     android:layout_margin="@dimen/_6sdp"
+                                    android:background="@drawable/ic_menu_share" />
+                            </LinearLayout>
+
 
                             <LinearLayout
                                 android:layout_width="@dimen/_24sdp"
@@ -114,6 +134,7 @@
                                     android:id="@+id/addToFavButton"
                                     android:layout_width="@dimen/_18sdp"
                                     android:layout_height="@dimen/_18sdp"
+
                                     android:layout_gravity="center"
                                     android:layout_margin="@dimen/_6sdp"
                                     android:background="@drawable/ic_heart" />
@@ -141,12 +162,12 @@
                     android:id="@+id/resturantNameTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/ar_font_regular"
-
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/_10sdp"
 
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:layout_marginRight="@dimen/_15sdp"
+
+                    android:fontFamily="@font/ar_font_regular"
                     android:gravity="center_vertical"
 
                     android:shadowRadius="5"
@@ -191,11 +212,11 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:background="@drawable/delivery_info"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/_20sdp">
+                android:paddingTop="@dimen/_20sdp"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:id="@+id/deliverLayout"
@@ -258,9 +279,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                             android:singleLine="true"
-                            android:text="@string/min_notice"
                             android:fontFamily="@font/ar_font_regular"
+                            android:singleLine="true"
+                            android:text="@string/min_notice"
 
                             android:textColor="@android:color/black"
                             android:textSize="@dimen/_8sdp"
@@ -274,7 +295,7 @@
                             android:layout_gravity="center_horizontal"
                             android:fontFamily="@font/ar_font_regular"
 
-                             android:textColor="@color/bottom_selected_color"
+                            android:textColor="@color/bottom_selected_color"
                             android:textSize="@dimen/_10sdp"
                             android:textStyle="bold" />
                     </LinearLayout>
@@ -296,8 +317,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal"
-                             android:singleLine="true"
                             android:fontFamily="@font/ar_font_regular"
+                            android:singleLine="true"
 
                             android:text="@string/min_order"
                             android:textColor="@android:color/black"
@@ -696,8 +717,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewMenu"
                 android:layout_width="match_parent"
-                android:layout_marginTop="20dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:padding="10dp" />
 
         </LinearLayout>
