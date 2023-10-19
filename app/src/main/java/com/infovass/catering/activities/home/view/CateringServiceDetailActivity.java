@@ -27,6 +27,7 @@ import com.infovass.catering.DeepLinking.DynamicLinkHelper;
 import com.infovass.catering.R;
 import com.infovass.catering.Utils.Helper;
 import com.infovass.catering.activities.DataModel.RD_Image;
+import com.infovass.catering.activities.Location.view.LocationActivity;
 import com.infovass.catering.activities.adapers.AddMainOnFoodItemAdapters;
 import com.infovass.catering.activities.adapers.CateringSDSliderAdapter;
 import com.infovass.catering.activities.adapers.ItemsAdapters;
@@ -139,6 +140,8 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
     String tittle = "", subtittle = "", img  = "", type = "", price = "";
 
+    String deep_linking_back="false";
+
     @Override
     protected Context getActivityContext() {
         return this;
@@ -164,6 +167,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
         Intent mIntent = getIntent();
         status = mIntent.getStringExtra("status");
         min_time = mIntent.getStringExtra("min_time");
+        deep_linking_back = mIntent.getStringExtra("deep_linking_back");
 
 
         if (status.equalsIgnoreCase("1")) {
@@ -502,7 +506,14 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
             case R.id.backButton:
                 try {
-                    finish();
+                    if(deep_linking_back.equalsIgnoreCase("true")){
+                        Intent intent = new Intent(CateringServiceDetailActivity.this, LocationActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                        finish();
+                    }else{
+                        finish();
+                    }
                 } catch (Exception g) {
                 }
                 break;
@@ -709,9 +720,15 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
     @Override
     public void onBackPressed() {
-        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-
-        super.onBackPressed();
+        if(deep_linking_back.equalsIgnoreCase("true")){
+            Intent intent = new Intent(CateringServiceDetailActivity.this, LocationActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+            finish();
+        }else{
+            finish();
+            super.onBackPressed();
+        }
     }
 
     private void setImageSlider(ArrayList<RD_Image> rd_imageArrayList) {

@@ -20,6 +20,7 @@ import com.infovass.catering.DeepLinking.DynamicLinkHelper;
 import com.infovass.catering.R;
 import com.infovass.catering.Utils.Helper;
 import com.infovass.catering.activities.DataModel.RD_Image;
+import com.infovass.catering.activities.Location.view.LocationActivity;
 import com.infovass.catering.activities.adapers.CateringSDSliderAdapter;
 import com.infovass.catering.activities.cart.view.CartActivity;
 import com.infovass.catering.activities.base.BaseActivity;
@@ -100,7 +101,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
     private DynamicLinkHelper dynamicLinkHelper;
     Activity activity;
     String tittle = "", subtittle = "", img  = "", id = "", price = "";
-
+String deep_linking_back="false";
 
     @Override
     protected Context getActivityContext() {
@@ -134,6 +135,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
         Intent mIntent = getIntent();
         status = mIntent.getStringExtra("status");
         min_time = mIntent.getStringExtra("min_time");
+        deep_linking_back = mIntent.getStringExtra("deep_linking_back");
 
 
         if (status.equalsIgnoreCase("1")) {
@@ -290,7 +292,14 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
 
             case R.id.backButton:
                 try {
-                    finish();
+                    if(deep_linking_back.equalsIgnoreCase("true")){
+                        Intent intent = new Intent(ProductDetailActivity.this, LocationActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                        finish();
+                    }else{
+                        finish();
+                    }
                 } catch (Exception g) {
                 }
                 break;
@@ -436,9 +445,15 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
 
     @Override
     public void onBackPressed() {
-        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-
-        super.onBackPressed();
+        if(deep_linking_back.equalsIgnoreCase("true")){
+            Intent intent = new Intent(ProductDetailActivity.this, LocationActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+            finish();
+        }else{
+            finish();
+            super.onBackPressed();
+        }
     }
 
     private void setImageSlider(ArrayList<RD_Image> rd_imageArrayList) {

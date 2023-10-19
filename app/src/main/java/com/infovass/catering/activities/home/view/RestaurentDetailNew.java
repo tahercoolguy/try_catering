@@ -39,6 +39,8 @@ import com.infovass.catering.MyFormat.Utils.ConnectionDetector;
 import com.infovass.catering.R;
 import com.infovass.catering.Utils.Helper;
 import com.infovass.catering.activities.DataModel.RD_Image;
+import com.infovass.catering.activities.Location.view.LocationActivity;
+import com.infovass.catering.activities.SplashActivity;
 import com.infovass.catering.activities.adapers.CateringSDSliderAdapter;
 import com.infovass.catering.activities.adapers.DetailAdapter;
 import com.infovass.catering.activities.adapers.DetailNewAdapter;
@@ -148,6 +150,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     String modeType = "";
     private DynamicLinkHelper dynamicLinkHelper;
     Activity activity;
+
+    String deep_linking_back="false";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -163,6 +167,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
         Intent mIntent = getIntent();
         restaurententID = mIntent.getStringExtra("restaurententID");
         restaurant_Status = mIntent.getStringExtra("restaurant_Status");
+        deep_linking_back = mIntent.getStringExtra("deep_linking_back");
         main_content.setVisibility(View.GONE);
         try {
             productDetailAPI();
@@ -191,7 +196,14 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                 break;
             case R.id.backButton:
                 try {
-                    finish();
+                    if(deep_linking_back.equalsIgnoreCase("true")){
+                        Intent intent = new Intent(RestaurentDetailNew.this, LocationActivity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                        finish();
+                    }else{
+                        finish();
+                    }
                 } catch (Exception g) {
                 }
                 break;
@@ -503,7 +515,14 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                             backButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    finish();
+                                    if(deep_linking_back.equalsIgnoreCase("true")){
+                                        Intent intent = new Intent(RestaurentDetailNew.this, LocationActivity.class);
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+                                        finish();
+                                    }else{
+                                       finish();
+                                    }
                                 }
                             });
                             dialog.show();
@@ -684,8 +703,18 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
     @Override
     public void onBackPressed() {
-        overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-        super.onBackPressed();
+
+        if(deep_linking_back.equalsIgnoreCase("true")){
+            Intent intent = new Intent(RestaurentDetailNew.this, LocationActivity.class);
+            startActivity(intent);
+            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+            finish();
+        }else{
+            finish();
+            super.onBackPressed();
+        }
+
+
     }
 
     private void setImageSlider(ArrayList<RD_Image> rd_imageArrayList) {

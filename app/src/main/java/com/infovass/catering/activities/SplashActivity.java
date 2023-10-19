@@ -104,19 +104,21 @@ public class SplashActivity extends AppCompatActivity {
         getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
     }
 
-    public void handleDynamicLinkData(String id, String type,String restaurant_Status,String min_time) {
+    public void handleDynamicLinkData(String id, String type, String restaurant_Status, String min_time) {
         if (type.equalsIgnoreCase("menu")) {
             Intent intent = new Intent(SplashActivity.this, RestaurentDetailNew.class);
             intent.putExtra("restaurententID", id);
             intent.putExtra("restaurant_Status", restaurant_Status);
+            intent.putExtra("deep_linking_back", "true");
             startActivity(intent);
             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
             finish();
         } else if (type.equalsIgnoreCase("catering_detail")) {
             Intent intent = new Intent(SplashActivity.this, CateringServiceDetailActivity.class);
-            intent.putExtra("status", restaurant_Status)
-                    .putExtra("min_time", min_time);
+            intent.putExtra("status", restaurant_Status);
+            intent.putExtra("min_time", min_time);
+            intent.putExtra("deep_linking_back", "true");
             startActivity(intent);
             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
@@ -126,6 +128,7 @@ public class SplashActivity extends AppCompatActivity {
             Intent intent = new Intent(SplashActivity.this, ProductDetailActivity.class);
             intent.putExtra("status", restaurant_Status);
             intent.putExtra("min_time", min_time);
+            intent.putExtra("deep_linking_back", "true");
             startActivity(intent);
             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
