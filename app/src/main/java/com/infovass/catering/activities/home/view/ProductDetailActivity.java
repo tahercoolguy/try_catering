@@ -99,7 +99,7 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
     String status, min_time;
     private DynamicLinkHelper dynamicLinkHelper;
     Activity activity;
-    String tittle = "", subtittle = "", img  = "", type = "", price = "";
+    String tittle = "", subtittle = "", img  = "", id = "", price = "";
 
 
     @Override
@@ -305,11 +305,13 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
         try {
             if (productDetailResponse.getStatus()) {
 
+                id= String.valueOf(productDetailResponse.getData().getId());
                 max_time_arabic = productDetailResponse.getData().getArabicMaxTime();
 
                 try {
 //                    Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).into(img_productImage);
                     setImageSlider(productDetailResponse.getData().getImages());
+                    img=productDetailResponse.getData().getImages().get(0).getItem_logo_path();
 //                    Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(img_productImage);
                 } catch (Exception ex) {
                 }
@@ -329,6 +331,8 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
                 if (SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
                     mealNameTextView.setText("" + productDetailResponse.getData().getArabicItemName());
                     mealTagTextView.setText(Html.fromHtml("" + productDetailResponse.getData().getArabicItemLongDescription()));
+                    tittle=productDetailResponse.getData().getArabicItemName();
+                    subtittle= String.valueOf(productDetailResponse.getData().getArabicFoodDetails());
                     priceTextView.setText("" + productDetailResponse.getData().getItemCostPerServe() + " KWD");
                     tv_forPersions.setText( getString(R.string._for_)+" " + productDetailResponse.getData().getItemServingCapacity()+" "+getString(R.string.persons));
                     tv_minNots.setText("" + productDetailResponse.getData().getCaterer().getTimeShow());
@@ -336,6 +340,8 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
                 }
 
                 if (SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+                    tittle=productDetailResponse.getData().getItemName();
+                    subtittle= String.valueOf(productDetailResponse.getData().getFoodDetails());
                     mealNameTextView.setText("" + productDetailResponse.getData().getItemName());
                     mealTagTextView.setText(Html.fromHtml("" + productDetailResponse.getData().getItemLongDescription()));
                     priceTextView.setText("" + productDetailResponse.getData().getItemCostPerServe() + " KWD");
@@ -453,7 +459,12 @@ public class ProductDetailActivity extends BaseActivity implements ProductDetail
 
     @OnClick(R.id.shareImageView)
     public void onclickshareImageView(){
-        dynamicLinkHelper.createDynamicLinkForFirebase(tittle,img, "","product_detail",subtittle,"","");
+        try {
+            dynamicLinkHelper.createDynamicLinkForFirebase(tittle,img, id,"product_detail",subtittle,status,min_time);
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

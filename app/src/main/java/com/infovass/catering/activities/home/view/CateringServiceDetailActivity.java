@@ -518,11 +518,13 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
         try {
             if (productDetailResponse.getStatus()) {
 
+                id=productDetailResponse.getData().getId();
                 max_time_arabic = productDetailResponse.getData().getArabicMaxTime();
                 try {
 //                    Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(img_productImage);
 //                    Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).into(img_productImage);
                     setImageSlider(productDetailResponse.getData().getImages());
+                    img=productDetailResponse.getData().getImages().get(0).getItem_logo_path();
                 } catch (Exception ex) {
                 }
 
@@ -572,6 +574,8 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
                 if (SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
                     Log.i("LLLLLL", "OPOPOP");
+                    tittle=productDetailResponse.getData().getArabicItemName();
+                    subtittle= String.valueOf(productDetailResponse.getData().getArabicItemLongDescription());
                     tv_total.setText(productDetailResponse.getData().getItemCostPerServe() + " KWD");
                     totalAmount = Float.valueOf((String.valueOf(productDetailResponse.getData().getArabicItemCostPerServe())));
                     String SetupTimeInMinute = "" + productDetailResponse.getData().getCaterer().getSetupTimeInMinute();
@@ -597,6 +601,9 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                 }
 
                 if (SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
+                    tittle=productDetailResponse.getData().getItemName();
+                    subtittle= String.valueOf(productDetailResponse.getData().getItemLongDescription());
+
                     tv_total.setText(productDetailResponse.getData().getItemCostPerServe() + " KWD");
                     totalAmount = Float.valueOf((String.valueOf(productDetailResponse.getData().getItemCostPerServe())));
                     String SetupTimeInMinute = "" + productDetailResponse.getData().getCaterer().getSetupTimeInMinute();
@@ -607,12 +614,12 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                         tv_setuUpTime.setText("---");
                     }
 
-//                    String recuirement = "" + productDetailResponse.getData().getCaterer().getRequirements();
-//                    if (recuirement != null) {
-//                        tv_requirements.setText("" + productDetailResponse.getData().getRequirements());
-//                    } else {
-//                        tv_requirements.setText("---");
-//                    }
+                    String recuirement = "" + productDetailResponse.getData().getCaterer().getRequirements();
+                    if (recuirement != null) {
+                        tv_requirements.setText("" + productDetailResponse.getData().getRequirements());
+                    } else {
+                        tv_requirements.setText("---");
+                    }
 
                     tv_forPersons.setText(getString(R.string._for_) + " " + productDetailResponse.getData().getItemServingCapacity() + " " + getString(R.string.persons));
                     mealNameTextView.setText("" + productDetailResponse.getData().getItemName());
@@ -726,7 +733,12 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
     @OnClick(R.id.shareImageView)
     public void onclickshareImageView(){
-        dynamicLinkHelper.createDynamicLinkForFirebase(tittle,img, "","catering_detail",subtittle,"","");
+        try {
+            dynamicLinkHelper.createDynamicLinkForFirebase(tittle,img, String.valueOf(id),"catering_detail",subtittle,status,min_time);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }

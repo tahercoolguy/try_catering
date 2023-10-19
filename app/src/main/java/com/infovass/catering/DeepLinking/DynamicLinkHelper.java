@@ -11,7 +11,10 @@ import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.infovass.catering.R;
 import com.infovass.catering.activities.Location.view.LocationActivity;
+import com.infovass.catering.activities.MainActivity;
 import com.infovass.catering.activities.SplashActivity;
+import com.infovass.catering.activities.network.Constants;
+import com.infovass.catering.activities.network.SharedPreferencesUtils;
 
 public class DynamicLinkHelper {
 
@@ -67,11 +70,22 @@ public class DynamicLinkHelper {
                             Log.e("DeepLinkHandler", "Received dynamic link with id: " + id);
                         }
                     }else{
-                        Intent intent = new Intent(context, LocationActivity.class);
-                        context.startActivity(intent);
-                        activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
-                        activity.finish();
+                        String selected_time= SharedPreferencesUtils.getInstance(context).getValue(Constants.KEY_TIME, "");
+                        if(selected_time.equalsIgnoreCase("")){
+                            Intent intent = new Intent(context, LocationActivity.class);
+                            context.startActivity(intent);
+                            activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+                            activity.finish();
+                        }else{
+                            Intent intent = new Intent(context, MainActivity.class);
+                            context.startActivity(intent);
+                            activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+
+                            activity.finish();
+                        }
+
                     }
                 })
                 .addOnFailureListener(e -> {

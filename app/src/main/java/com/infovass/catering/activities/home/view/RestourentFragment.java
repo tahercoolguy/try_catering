@@ -768,7 +768,7 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 @Override
                 public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RD_caterers_TopRankeCaterers> restourentLIst) {
                     SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
-                    int restaurententID = Integer.parseInt(restourentLIst.get(position).getId());
+                    String restaurententID = String.valueOf(Integer.parseInt(restourentLIst.get(position).getId()));
                     String restaurant_Status = String.valueOf(Restaurant_Status);
                     Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
                             .putExtra("restaurant_Status", restaurant_Status);
@@ -807,10 +807,11 @@ public class RestourentFragment extends Fragment implements RestourentView {
                 @Override
                 public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RD_catererData> restourentLIst) {
                     SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
-                    int restaurententID = Integer.parseInt(restourentLIst.get(position).getId());
+                    String restaurententID = String.valueOf(Integer.parseInt(restourentLIst.get(position).getId()));
                     String restaurant_Status = String.valueOf(Restaurant_Status);
-                    Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
-                            .putExtra("restaurant_Status", restaurant_Status);
+                    Intent intent = new Intent(getContext(), RestaurentDetailNew.class);
+                    intent.putExtra("restaurententID", restaurententID);
+                    intent.putExtra("restaurant_Status", restaurant_Status);
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                 }
@@ -875,10 +876,11 @@ public class RestourentFragment extends Fragment implements RestourentView {
                                 @Override
                                 public void onItemClick(int position, int selectedposition, int Restaurant_Status, List<RC_Data> restourentLIst) {
                                     SharedPreferencesUtils.getInstance(getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + restourentLIst.get(position).getId());
-                                    int restaurententID = Integer.parseInt(restourentLIst.get(position).getId());
+                                    String restaurententID = String.valueOf(Integer.parseInt(restourentLIst.get(position).getId()));
                                     String restaurant_Status = String.valueOf(Restaurant_Status);
-                                    Intent intent = new Intent(getContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
-                                            .putExtra("restaurant_Status", restaurant_Status);
+                                    Intent intent = new Intent(getContext(), RestaurentDetailNew.class);
+                                    intent.putExtra("restaurententID", restaurententID);
+                                    intent.putExtra("restaurant_Status", restaurant_Status);
                                     startActivity(intent);
                                     activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                                 }

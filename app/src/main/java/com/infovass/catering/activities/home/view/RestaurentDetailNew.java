@@ -140,7 +140,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     DetailNewAdapter detailAdapter;
 
     MainCategoriesNewAdapter menusAdapter;
-    int restaurententID;
+    String restaurententID;
     String tittle = "", subtittle = "", img = "", id = "", type = "", price = "";
 
 
@@ -161,7 +161,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
         dynamicLinkHelper = new DynamicLinkHelper(this,activity);
 
         Intent mIntent = getIntent();
-        restaurententID = mIntent.getIntExtra("restaurententID", 0);
+        restaurententID = mIntent.getStringExtra("restaurententID");
         restaurant_Status = mIntent.getStringExtra("restaurant_Status");
         main_content.setVisibility(View.GONE);
         try {
@@ -705,7 +705,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
     @OnClick(R.id.shareImageView)
     public void onclickshareImageView(){
-        dynamicLinkHelper.createDynamicLinkForFirebase(tittle,img, String.valueOf(restaurententID),"menu",subtittle,"","");
+        dynamicLinkHelper.createDynamicLinkForFirebase(tittle,img, String.valueOf(restaurententID),"menu",subtittle,restaurant_Status,min_time);
     }
 
 }
