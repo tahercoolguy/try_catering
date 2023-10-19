@@ -136,7 +136,9 @@ String deep_linking_back="false";
         status = mIntent.getStringExtra("status");
         min_time = mIntent.getStringExtra("min_time");
         deep_linking_back = mIntent.getStringExtra("deep_linking_back");
-
+        if(deep_linking_back==null){
+            deep_linking_back="false";
+        }
 
         if (status.equalsIgnoreCase("1")) {
             not_availableRL.setVisibility(View.VISIBLE);

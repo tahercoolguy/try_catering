@@ -169,6 +169,9 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
         min_time = mIntent.getStringExtra("min_time");
         deep_linking_back = mIntent.getStringExtra("deep_linking_back");
 
+        if(deep_linking_back==null){
+            deep_linking_back="false";
+        }
 
         if (status.equalsIgnoreCase("1")) {
             not_availableRL.setVisibility(View.VISIBLE);
@@ -720,6 +723,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
     @Override
     public void onBackPressed() {
+
         if(deep_linking_back.equalsIgnoreCase("true")){
             Intent intent = new Intent(CateringServiceDetailActivity.this, LocationActivity.class);
             startActivity(intent);

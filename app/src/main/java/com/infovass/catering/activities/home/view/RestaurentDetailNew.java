@@ -168,6 +168,10 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
         restaurententID = mIntent.getStringExtra("restaurententID");
         restaurant_Status = mIntent.getStringExtra("restaurant_Status");
         deep_linking_back = mIntent.getStringExtra("deep_linking_back");
+
+        if(deep_linking_back==null){
+            deep_linking_back="false";
+        }
         main_content.setVisibility(View.GONE);
         try {
             productDetailAPI();

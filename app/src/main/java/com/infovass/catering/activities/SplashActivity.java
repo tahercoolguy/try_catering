@@ -110,6 +110,9 @@ public class SplashActivity extends AppCompatActivity {
             intent.putExtra("restaurententID", id);
             intent.putExtra("restaurant_Status", restaurant_Status);
             intent.putExtra("deep_linking_back", "true");
+            // Add flags to clear the entire backstack and start a new task
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
             startActivity(intent);
             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
@@ -119,6 +122,9 @@ public class SplashActivity extends AppCompatActivity {
             intent.putExtra("status", restaurant_Status);
             intent.putExtra("min_time", min_time);
             intent.putExtra("deep_linking_back", "true");
+            // Add flags to clear the entire backstack and start a new task
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
             startActivity(intent);
             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
@@ -129,6 +135,9 @@ public class SplashActivity extends AppCompatActivity {
             intent.putExtra("status", restaurant_Status);
             intent.putExtra("min_time", min_time);
             intent.putExtra("deep_linking_back", "true");
+            // Add flags to clear the entire backstack and start a new task
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
             startActivity(intent);
             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
 
