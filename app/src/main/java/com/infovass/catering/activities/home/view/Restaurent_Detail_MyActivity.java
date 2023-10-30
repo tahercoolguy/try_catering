@@ -20,8 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.infovass.catering.MyFormat.Controller.AppController;
-import com.infovass.catering.MyFormat.MyDM.Image;
-import com.infovass.catering.MyFormat.MyDM.Image_;
 import com.infovass.catering.MyFormat.MyDM.Item;
 import com.infovass.catering.MyFormat.MyDM.Mode;
 import com.infovass.catering.MyFormat.MyDM.Root;
@@ -31,9 +29,6 @@ import com.infovass.catering.activities.adapers.DetailNewAdapter;
 import com.infovass.catering.activities.adapers.MainCategoriesNewAdapter;
 import com.infovass.catering.activities.dialog.BottomSheetInfoFragment;
 import com.infovass.catering.activities.home.adapter.RestourentDetailsIBN;
-import com.infovass.catering.activities.home.adapter.RestourentDetailsImageBanner;
-import com.infovass.catering.activities.home.model.RestourentDetailResponse;
-import com.infovass.catering.activities.home.model.RestourentModeResponse;
 import com.infovass.catering.activities.home.presenter.RestourentDetailPresenter;
 import com.infovass.catering.activities.login.view.LoginActivity;
 import com.infovass.catering.activities.network.Constants;
@@ -44,7 +39,6 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -210,7 +204,7 @@ public class Restaurent_Detail_MyActivity extends AppCompatActivity {
             }
 //            FooResponse response = foo.postRawJson(in);
 
-
+int modefirstItem=1;
 
             appController.paServices.ProductDetailAPI(id,in, new Callback<Root>() {
                 @Override
@@ -221,7 +215,7 @@ public class Restaurent_Detail_MyActivity extends AppCompatActivity {
 
                         modeArrayList = root.getData().getModes();
 
-                        detailAdapter = new DetailNewAdapter(modeArrayList, getApplicationContext());
+                        detailAdapter = new DetailNewAdapter(modeArrayList, getApplicationContext(), modefirstItem);
                         LinearLayoutManager HorizontalLayout = new LinearLayoutManager(
                                 getApplicationContext(),
                                 LinearLayoutManager.HORIZONTAL,

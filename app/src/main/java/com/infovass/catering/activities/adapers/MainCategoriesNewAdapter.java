@@ -28,7 +28,7 @@ public class MainCategoriesNewAdapter extends RecyclerView.Adapter<MainCategorie
     public Context context;
     public static ArrayList<Item> datalist;
     ArrayList<Item> datalist_filter;
-    Boolean f=false;
+    Boolean f=true;
 
     public interface OnItemClickListener {
         void onItemClick(int postion, int vertPos, Integer id);

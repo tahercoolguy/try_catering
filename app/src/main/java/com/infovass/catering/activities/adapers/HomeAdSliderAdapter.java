@@ -1,5 +1,7 @@
 package com.infovass.catering.activities.adapers;
 
+import static java.security.AccessController.getContext;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -83,7 +85,8 @@ public class HomeAdSliderAdapter extends SliderViewAdapter<HomeAdSliderAdapter.S
 
                     try {
                         SharedPreferencesUtils.getInstance(activity.getApplicationContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + caterers_bannerdata.get(position).getCaterer().getId());
-                        int restaurententID = Integer.parseInt(caterers_bannerdata.get(position).getCaterer().getId());
+                         SharedPreferencesUtils.getInstance(v.getContext()).setValue(Constants.KEY_RESTOURENT_ID, "" + caterers_bannerdata.get(position).getId());
+                        String restaurententID = String.valueOf(Integer.parseInt(caterers_bannerdata.get(position).getId()));
                         String restaurant_Status = caterers_bannerdata.get(position).getCaterer().getStatus();
                         Intent intent = new Intent(activity.getApplicationContext(), RestaurentDetailNew.class).putExtra("restaurententID", restaurententID)
                                 .putExtra("restaurant_Status", restaurant_Status);

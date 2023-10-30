@@ -711,15 +711,14 @@
                 android:id="@+id/detail_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/_10sdp"
-                android:visibility="gone" />
+                android:padding="13dp"
+                 android:visibility="visible" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerViewMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:padding="10dp" />
+                 android:padding="10dp" />
 
         </LinearLayout>
 

@@ -284,12 +284,23 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
             MultipartTypedOutput multipartTypedOutput = new MultipartTypedOutput();
             String id = String.valueOf(restaurententID);
             JSONObject jsonObj = new JSONObject();
-            try {
-                jsonObj.put("mode_type", modefirstItem);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
 
+            if(modefirstItem==1) {
+
+
+                try {
+                    jsonObj.put("mode_type", modefirstItem);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }else{
+
+                try {
+                    jsonObj.put("mode_type", modefirstItem);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
             String po = jsonObj.toString();
             //   String Checker = gson.toJson(jsonObject);
             TypedInput in = null;
@@ -385,35 +396,35 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
 
                             modeArrayList = root.getData().getModes();
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
-                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
+//                            modeArrayList.add(new Mode("4", "q", "q", ""));
 
-                            detailAdapter = new DetailNewAdapter(modeArrayList, getApplicationContext());
+                            detailAdapter = new DetailNewAdapter(modeArrayList, getApplicationContext(),modefirstItem);
                             LinearLayoutManager HorizontalLayout = new LinearLayoutManager(
                                     getApplicationContext(),
                                     LinearLayoutManager.HORIZONTAL,
@@ -439,8 +450,12 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                                         modeType = "Catering";
                                     }
                                     detailAdapter.notifyDataSetChanged();
+                                    menusAdapter.notifyDataSetChanged();
                                     try {
-                                        restourentDetailPresenter.getRestourentDetailApi(SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, ""), "" + modeArrayList.get(position).getId());
+                                        restaurententID= SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, "");
+                                        modefirstItem=Integer.valueOf(modeArrayList.get(position).getId());
+                                        productDetailAPI();
+//                                        restourentDetailPresenter.getRestourentDetailApi(SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, ""), "" + modeArrayList.get(position).getId());
                                     } catch (Exception e) {
                                         e.printStackTrace();
                                     }
@@ -472,7 +487,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                                     try {
 //                                    Log.i("Yhan", "===" + items.get(verPos));
                                         SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.ITEM_ID, "" + id);
-                                        SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.MODE_ID, "" + modeArrayList.get(position).getId());
+                                        SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.MODE_ID, "" + modefirstItem);
                                         if (modeType.equalsIgnoreCase("Delivery")) {
                                             Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
                                                     .putExtra("status", restaurant_Status)

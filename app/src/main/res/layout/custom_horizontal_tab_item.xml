@@ -3,19 +3,21 @@
     android:layout_width="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
+    android:layout_margin="2dp"
     app:cardCornerRadius="@dimen/_40sdp"
-    android:layout_marginRight="@dimen/_10sdp"
+     android:layout_marginRight="@dimen/_10sdp"
     android:layout_height="wrap_content">
 <LinearLayout
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:layout_height="45dp"
     android:orientation="horizontal"
-    android:id="@+id/detail_item_linearLayout"
+     android:id="@+id/detail_item_linearLayout"
     android:background="@drawable/slide_background">
     <com.github.siyamed.shapeimageview.CircularImageView
         android:id="@+id/img_logo"
         android:layout_width="@dimen/_20sdp"
         android:layout_height="@dimen/_20sdp"
+        android:layout_gravity="center_vertical"
         android:layout_margin="@dimen/_4sdp"
         />
     <androidx.appcompat.widget.AppCompatTextView
