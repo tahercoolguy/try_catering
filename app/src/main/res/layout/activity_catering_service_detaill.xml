@@ -8,6 +8,7 @@
     android:background="@color/background_color"
     android:orientation="vertical">
 
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +37,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_alignParentLeft="true"
                         android:layout_alignParentTop="true"
-                        android:scaleType="centerCrop"
+                        android:scaleType="fitXY"
                         android:src="@drawable/myoffer_placeholder" />
 
                     <androidx.viewpager.widget.ViewPager
@@ -144,7 +145,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_15sdp"
-                        android:fontFamily="@font/ar_font_regular"
+                        android:fontFamily="@font/en"
                         android:gravity="center_vertical"
                         android:text="Taal Resturant"
                         android:textColor="@color/colorWhite"
@@ -158,7 +159,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_20sdp"
-                        android:fontFamily="@font/ar_font_regular"
+                        android:fontFamily="@font/en"
                         android:gravity="center_vertical"
                         android:text="Savour the flavoures all weekend long with Taal"
                         android:textColor="@color/colorWhite"
@@ -189,22 +190,22 @@
 
                     <LinearLayout
                         android:id="@+id/deliverLayout"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="10dp"
                         android:layout_marginTop="@dimen/_2sdp"
                         android:layout_marginBottom="@dimen/_5sdp"
                         android:orientation="horizontal">
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <TextView
                             android:id="@+id/menuTextView"
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
                             android:layout_marginRight="20dp"
                             android:layout_weight="1"
-                            android:fontFamily="@font/ar_font_regular"
-                            android:gravity="right"
+                            android:fontFamily="@font/en"
+                            android:gravity="left|center_vertical"
                             android:maxLines="2"
                             android:text="@string/catering_service"
                             android:textAllCaps="true"
@@ -213,10 +214,10 @@
                             android:textStyle="bold" />
 
                         <ImageView
+
                             android:layout_width="@dimen/_15sdp"
                             android:layout_height="@dimen/_15sdp"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="@dimen/_5sdp"
                             android:layout_marginRight="20dp"
                             android:foregroundGravity="center"
                             android:src="@drawable/ic_info"
@@ -227,15 +228,14 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/cateringLL"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginBottom="@dimen/_10sdp"
-                        android:orientation="horizontal"
-                        android:weightSum="2">
+                        android:orientation="horizontal">
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/_20sdp"
                             android:layout_weight="1"
                             android:background="@drawable/delivery_info_white_button"
                             android:orientation="vertical"
@@ -248,7 +248,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/ar_font_regular"
+                                android:fontFamily="@font/en"
                                 android:singleLine="true"
                                 android:text="@string/set_up_time"
                                 android:textColor="@android:color/black"
@@ -261,7 +261,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/ar_font_regular"
+                                android:fontFamily="@font/en"
                                 android:singleLine="true"
                                 android:textColor="@color/bottom_selected_color"
                                 android:textSize="@dimen/_10sdp"
@@ -286,7 +286,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/ar_font_regular"
+                                android:fontFamily="@font/en"
                                 android:singleLine="true"
                                 android:text="@string/requirements"
                                 android:textColor="@android:color/black"
@@ -295,19 +295,137 @@
                                 />
 
                             <androidx.appcompat.widget.AppCompatTextView
-
                                 android:id="@+id/tv_requirements"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:ellipsize="marquee"
-                                android:fontFamily="@font/ar_font_regular"
+                                android:fontFamily="@font/en"
                                 android:singleLine="true"
                                 android:textColor="@color/bottom_selected_color"
                                 android:textSize="@dimen/_10sdp"
                                 android:textStyle="bold" />
                         </LinearLayout>
 
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/deliveryLL"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:orientation="horizontal"
+                        android:weightSum="3">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+
+                            android:layout_weight="1"
+                            android:background="@drawable/delivery_info_white_button"
+                            android:orientation="vertical"
+                            android:paddingStart="@dimen/_12sdp"
+                            android:paddingTop="@dimen/_3sdp"
+                            android:paddingEnd="@dimen/_12sdp"
+                            android:paddingBottom="@dimen/_3sdp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:singleLine="true"
+                                android:fontFamily="@font/en"
+                                android:text="@string/min_notice"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/_8sdp"
+                                />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_minNots"
+                                android:layout_width="wrap_content"
+                                android:singleLine="true"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:ellipsize="marquee"
+                                android:fontFamily="@font/en"
+                                android:textColor="@color/bottom_selected_color"
+                                android:textSize="@dimen/_10sdp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/_10sdp"
+
+                            android:layout_marginEnd="@dimen/_10sdp"
+                            android:layout_weight="1"
+                            android:background="@drawable/delivery_info_white_button"
+                            android:orientation="vertical"
+                            android:paddingStart="@dimen/_12sdp"
+                            android:paddingTop="@dimen/_3sdp"
+                            android:paddingEnd="@dimen/_12sdp"
+                            android:paddingBottom="@dimen/_3sdp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:singleLine="true"
+                                android:fontFamily="@font/en"
+                                android:text="@string/min_order"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/_8sdp"
+                                />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_minOrder"
+                                android:singleLine="true"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/en"
+                                android:ellipsize="marquee"
+                                android:textColor="@color/bottom_selected_color"
+                                android:textSize="@dimen/_10sdp"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/deliveryChargeLayout"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@drawable/delivery_info_white_button"
+                            android:orientation="vertical"
+                            android:paddingStart="@dimen/_12sdp"
+                            android:paddingTop="@dimen/_3sdp"
+                            android:paddingEnd="@dimen/_12sdp"
+                            android:paddingBottom="@dimen/_3sdp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal"
+                                android:singleLine="true"
+                                android:fontFamily="@font/en"
+                                android:text="@string/delivery_charge"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/_8sdp"
+
+                                />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_deleveryCharges"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="marquee"
+                                android:layout_gravity="center_horizontal"
+                                android:textColor="@color/bottom_selected_color"
+                                android:textSize="@dimen/_10sdp"
+                                android:singleLine="true"
+                                android:textStyle="bold" />
+                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -358,7 +476,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:fontFamily="@font/ar_font_regular"
+                    android:fontFamily="@font/en"
                     android:textSize="16dp" />
 
                 <LinearLayout
@@ -410,7 +528,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:fontFamily="@font/ar_font_regular"
+                        android:fontFamily="@font/en"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
@@ -430,7 +548,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:fontFamily="@font/ar_font_regular"
+                        android:fontFamily="@font/en"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
@@ -439,7 +557,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
                         android:layout_weight="1"
-                        android:gravity="right"
                         android:text="@string/note"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_14sdp"
@@ -451,7 +568,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:fontFamily="@font/ar_font_regular"
+                        android:fontFamily="@font/en"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_12sdp" />
 
@@ -467,7 +584,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_5sdp"
                             android:layout_weight="1"
-                            android:fontFamily="@font/ar_font_regular"
+                            android:fontFamily="@font/en"
                             android:maxLines="2"
                             android:text="@string/service_requests"
                             android:textColor="@color/black"
@@ -486,7 +603,7 @@
                                 android:layout_alignParentLeft="true"
                                 android:layout_centerVertical="true"
                                 android:layout_toLeftOf="@id/changeFemaleService"
-                                android:fontFamily="@font/ar_font_regular"
+                                android:fontFamily="@font/en"
                                 android:gravity="center_vertical"
                                 android:text="Request Female Service"
                                 android:textColor="#ffb70913"
@@ -547,9 +664,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/ar_font_regular"
                     android:text="@string/food_requests"
-
                     android:textColor="@color/menu_name_color"
                     android:textSize="@dimen/_12sdp"
                     android:textStyle="bold" />
@@ -574,7 +689,7 @@
                     android:id="@+id/ch_femailServices"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/ar_font_regular"
+                    android:fontFamily="@font/en"
                     android:text="@string/request_female_service"
                     android:visibility="gone" />
 
@@ -585,7 +700,7 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginBottom="@dimen/_15sdp"
                     android:background="@drawable/tv_background"
-                    android:fontFamily="@font/ar_font_regular"
+                    android:fontFamily="@font/en"
                     android:gravity="top|left"
                     android:lines="10"
                     android:maxLines="10"
@@ -613,6 +728,7 @@
             android:id="@+id/rel_findFood"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
+            android:layout_marginHorizontal="10dp"
             android:layout_marginLeft="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_20sdp"
@@ -623,10 +739,10 @@
                 android:id="@+id/findFoodButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/_10sdp"
-                android:fontFamily="@font/ar_font_regular"
+                android:layout_marginHorizontal="20dp"
+                android:layout_alignParentStart="true"
+                 android:layout_centerVertical="true"
+                 android:fontFamily="@font/en"
                 android:text="@string/add_to_cart"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
@@ -636,10 +752,10 @@
                 android:id="@+id/tv_total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:fontFamily="@font/ar_font_regular"
+                android:layout_alignParentEnd="true"
+                 android:layout_centerInParent="true"
+                android:layout_marginHorizontal="20dp"
+                 android:fontFamily="@font/en"
                 android:textAllCaps="false"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp"
@@ -664,8 +780,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_centerVertical="true"
-                android:fontFamily="@font/ar_font_regular"
-                android:text="أضف إلى السلة"
+                android:fontFamily="@font/en"
+                android:text="@string/add_to_cart"
                 android:textAllCaps="false"
                 android:textColor="@color/menu_name_color"
                 android:textSize="16sp" />

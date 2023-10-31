@@ -504,15 +504,19 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                                         SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.ITEM_ID, "" + id);
                                         SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.MODE_ID, "" + modefirstItem);
                                         if (modeType.equalsIgnoreCase("Delivery")) {
-                                            Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
+                                            Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
                                                     .putExtra("status", restaurant_Status)
+                                                    .putExtra("mode_type", modeType)
+
                                                     .putExtra("min_time", min_time);
+
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                                         }
                                         if (modeType.equalsIgnoreCase("Table Booking")) {
-                                            Intent intent = new Intent(getApplicationContext(), ProductDetailActivity.class)
+                                            Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
                                                     .putExtra("status", restaurant_Status)
+                                                    .putExtra("mode_type", modeType)
                                                     .putExtra("min_time", min_time);
 
                                             startActivity(intent);
@@ -521,6 +525,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                                         if (modeType.equalsIgnoreCase("Catering")) {
                                             Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
                                                     .putExtra("status", restaurant_Status)
+                                                    .putExtra("mode_type", modeType)
+
                                                     .putExtra("min_time", min_time);
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);

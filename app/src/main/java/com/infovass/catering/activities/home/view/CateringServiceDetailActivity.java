@@ -12,6 +12,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatEditText;
@@ -138,22 +139,37 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
     @BindView(R.id.shareImageView)
     AppCompatImageView shareImageView;
 
-    String tittle = "", subtittle = "", img  = "", type = "", price = "";
+    String tittle = "", subtittle = "", img = "", type = "", price = "";
 
-    String deep_linking_back="false";
+    String deep_linking_back = "false";
+
+
+    @BindView(R.id.tv_minNots)
+    AppCompatTextView tv_minNots;
+
+    @BindView(R.id.tv_minOrder)
+    AppCompatTextView tv_minOrder;
+    @BindView(R.id.tv_deleveryCharges)
+    AppCompatTextView tv_deleveryCharges; @BindView(R.id.menuTextView)
+    TextView menuTextView;
+ @BindView(R.id.cateringLL)
+    LinearLayout cateringLL;@BindView(R.id.deliveryLL)
+    LinearLayout deliveryLL;
 
     @Override
     protected Context getActivityContext() {
         return this;
     }
 
+    String mode_type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_catering_service_detail);
+        setContentView(R.layout.activity_catering_service_detaill);
         Bundle bundle = getIntent().getExtras();
-        activity=CateringServiceDetailActivity.this;
-        dynamicLinkHelper = new DynamicLinkHelper(this,activity);
+        activity = CateringServiceDetailActivity.this;
+        dynamicLinkHelper = new DynamicLinkHelper(this, activity);
 
         try {
             getWindow().setStatusBarColor(Color.BLACK);
@@ -162,15 +178,32 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
         ButterKnife.bind(this);
 
         tv_requirements.setSelected(true);
-
-
+        tv_minNots.setSelected(true);
+        tv_minOrder.setSelected(true);
+        tv_deleveryCharges.setSelected(true);
+        cateringLL.setVisibility(View.GONE);
+        deliveryLL.setVisibility(View.GONE);
         Intent mIntent = getIntent();
         status = mIntent.getStringExtra("status");
         min_time = mIntent.getStringExtra("min_time");
+        mode_type = mIntent.getStringExtra("mode_type");
         deep_linking_back = mIntent.getStringExtra("deep_linking_back");
+        if(mode_type.equalsIgnoreCase("catering")){
+            cateringLL.setVisibility(View.VISIBLE);
+            deliveryLL.setVisibility(View.GONE);
+            menuTextView.setText(getString(R.string.catering_service));
+        } else if (mode_type.equalsIgnoreCase("delivery")) {
+            cateringLL.setVisibility(View.GONE);
+            menuTextView.setText(getString(R.string.delivery_service));
+            deliveryLL.setVisibility(View.VISIBLE);
+        } else if (mode_type.equalsIgnoreCase("Table Booking")) {
 
-        if(deep_linking_back==null){
-            deep_linking_back="false";
+        }
+
+
+
+        if (deep_linking_back == null) {
+            deep_linking_back = "false";
         }
 
         if (status.equalsIgnoreCase("1")) {
@@ -509,12 +542,12 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
             case R.id.backButton:
                 try {
-                    if(deep_linking_back.equalsIgnoreCase("true")){
+                    if (deep_linking_back.equalsIgnoreCase("true")) {
                         Intent intent = new Intent(CateringServiceDetailActivity.this, LocationActivity.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                         finish();
-                    }else{
+                    } else {
                         finish();
                     }
                 } catch (Exception g) {
@@ -532,16 +565,15 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
         try {
             if (productDetailResponse.getStatus()) {
 
-                id=productDetailResponse.getData().getId();
+                id = productDetailResponse.getData().getId();
                 max_time_arabic = productDetailResponse.getData().getArabicMaxTime();
                 try {
 //                    Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).error(R.drawable.logo_rec).placeholder(R.drawable.ic_loader).into(img_productImage);
 //                    Picasso.get().load("" + productDetailResponse.getData().getItemLogoPath()).into(img_productImage);
                     setImageSlider(productDetailResponse.getData().getImages());
-                    img=productDetailResponse.getData().getImages().get(0).getItem_logo_path();
+                    img = productDetailResponse.getData().getImages().get(0).getItem_logo_path();
                 } catch (Exception ex) {
                 }
-
 
 
                 try {
@@ -588,8 +620,8 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
                 if (SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
                     Log.i("LLLLLL", "OPOPOP");
-                    tittle=productDetailResponse.getData().getArabicItemName();
-                    subtittle= String.valueOf(productDetailResponse.getData().getArabicItemLongDescription());
+                    tittle = productDetailResponse.getData().getArabicItemName();
+                    subtittle = String.valueOf(productDetailResponse.getData().getArabicItemLongDescription());
                     tv_total.setText(productDetailResponse.getData().getItemCostPerServe() + " KWD");
                     totalAmount = Float.valueOf((String.valueOf(productDetailResponse.getData().getArabicItemCostPerServe())));
                     String SetupTimeInMinute = "" + productDetailResponse.getData().getCaterer().getSetupTimeInMinute();
@@ -613,18 +645,29 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                     tv_foodDetail.setText("" + productDetailResponse.getData().getArabicFoodDetails());
                     //  tv_note.setText(""+productDetailResponse.getData().getArabicFoodDetails());
                     tv_service.setText("" + productDetailResponse.getData().getArabicServiceAndPresentation());
+
+//                    tv_minNots.setText("" + productDetailResponse.getData().getCaterer().getTimeShow());
+                    tv_minNots.setText("" + productDetailResponse.getData().getMaxTime());
+                    tv_minOrder.setText("" + productDetailResponse.getData().getCaterer().getMinOrder() + " KWD");
+
+                    if (productDetailResponse.getData().getCaterer().getDeliveryCharge() == 0) {
+                        tv_deleveryCharges.setText("حر");
+                    } else {
+                        tv_deleveryCharges.setText("" + productDetailResponse.getData().getCaterer().getDeliveryCharge());
+                    }
+
                 }
 
                 if (SharedPreferencesUtils.getInstance(getActivityContext()).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
-                    tittle=productDetailResponse.getData().getItemName();
-                    subtittle= String.valueOf(productDetailResponse.getData().getItemLongDescription());
+                    tittle = productDetailResponse.getData().getItemName();
+                    subtittle = String.valueOf(productDetailResponse.getData().getItemLongDescription());
 
                     tv_total.setText(productDetailResponse.getData().getItemCostPerServe() + " KWD");
                     totalAmount = Float.valueOf((String.valueOf(productDetailResponse.getData().getItemCostPerServe())));
                     String SetupTimeInMinute = "" + productDetailResponse.getData().getCaterer().getSetupTimeInMinute();
                     String SetupTime = "" + productDetailResponse.getData().getCaterer().getSetupTimeInMinute();
                     if (SetupTime != null) {
-                        tv_setuUpTime.setText("" + productDetailResponse.getData().getSetupTimeInMinute() + " " + getString(R.string.min));
+                        tv_setuUpTime.setText("" + productDetailResponse.getData().getSetupTimeInMinute());
                     } else {
                         tv_setuUpTime.setText("---");
                     }
@@ -643,6 +686,19 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                     tv_foodDetail.setText("" + productDetailResponse.getData().getFoodDetails());
                     // tv_note.setText(""+productDetailResponse.getData().getArabicFoodDetails());
                     tv_service.setText("" + productDetailResponse.getData().getServiceAndPresentation());
+                    //                    tv_minNots.setText("" + productDetailResponse.getData().getCaterer().getTimeShow());
+                    tv_minNots.setText("" + productDetailResponse.getData().getMaxTime());
+                    if ("" + productDetailResponse.getData().getCaterer().getMinOrder() == null) {
+                        tv_minOrder.setText("---");
+                    } else {
+                        tv_minOrder.setText("" + productDetailResponse.getData().getCaterer().getMinOrder() + " KWD");
+                    }
+
+                    if (productDetailResponse.getData().getCaterer().getDeliveryCharge() == 0) {
+                        tv_deleveryCharges.setText("FREE");
+                    } else {
+                        tv_deleveryCharges.setText("" + productDetailResponse.getData().getCaterer().getDeliveryCharge());
+                    }
                 }
 
             }
@@ -725,12 +781,12 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
     @Override
     public void onBackPressed() {
 
-        if(deep_linking_back.equalsIgnoreCase("true")){
+        if (deep_linking_back.equalsIgnoreCase("true")) {
             Intent intent = new Intent(CateringServiceDetailActivity.this, LocationActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
             finish();
-        }else{
+        } else {
             finish();
             super.onBackPressed();
         }
@@ -754,9 +810,9 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
 
 
     @OnClick(R.id.shareImageView)
-    public void onclickshareImageView(){
+    public void onclickshareImageView() {
         try {
-            dynamicLinkHelper.createDynamicLinkForFirebase(tittle,img, String.valueOf(id),"catering_detail",subtittle,status,min_time);
+            dynamicLinkHelper.createDynamicLinkForFirebase(tittle, img, String.valueOf(id), "catering_detail", subtittle, status, min_time);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
