@@ -85,7 +85,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     private Dialog progress;
     private ConnectionDetector connectionDetector;
     RestourentDetailPresenter restourentDetailPresenter;
-    String restaurant_Status="0";
+    String restaurant_Status = "0";
     @BindView(R.id.detail_recyclerView)
     RecyclerView detail_recyclerView;
 
@@ -136,7 +136,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     @BindView(R.id.main_content)
     LinearLayout main_content;
     @BindView(R.id.imageSlider)
-    SliderView imageSlider;  @BindView(R.id.shareImageView)
+    SliderView imageSlider;
+    @BindView(R.id.shareImageView)
     AppCompatImageView shareImageView;
 
     DetailNewAdapter detailAdapter;
@@ -151,7 +152,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     private DynamicLinkHelper dynamicLinkHelper;
     Activity activity;
 
-    String deep_linking_back="false";
+    String deep_linking_back = "false";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -161,16 +163,16 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 //        restaurententID = Integer.parseInt(getIntent().getStringExtra("restaurententID"));
         appController = (AppController) this.getApplicationContext();
         connectionDetector = new ConnectionDetector(getApplicationContext());
-        activity=RestaurentDetailNew.this;
-        dynamicLinkHelper = new DynamicLinkHelper(this,activity);
+        activity = RestaurentDetailNew.this;
+        dynamicLinkHelper = new DynamicLinkHelper(this, activity);
 
         Intent mIntent = getIntent();
         restaurententID = mIntent.getStringExtra("restaurententID");
         restaurant_Status = mIntent.getStringExtra("restaurant_Status");
         deep_linking_back = mIntent.getStringExtra("deep_linking_back");
 
-        if(deep_linking_back==null){
-            deep_linking_back="false";
+        if (deep_linking_back == null) {
+            deep_linking_back = "false";
         }
         main_content.setVisibility(View.GONE);
         try {
@@ -200,12 +202,12 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                 break;
             case R.id.backButton:
                 try {
-                    if(deep_linking_back.equalsIgnoreCase("true")){
+                    if (deep_linking_back.equalsIgnoreCase("true")) {
                         Intent intent = new Intent(RestaurentDetailNew.this, LocationActivity.class);
                         startActivity(intent);
                         overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                         finish();
-                    }else{
+                    } else {
                         finish();
                     }
                 } catch (Exception g) {
@@ -285,7 +287,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
             String id = String.valueOf(restaurententID);
             JSONObject jsonObj = new JSONObject();
 
-            if(modefirstItem==1) {
+            if (modefirstItem == 1) {
 
 
                 try {
@@ -293,7 +295,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-            }else{
+            } else {
 
                 try {
                     jsonObj.put("mode_type", modefirstItem);
@@ -322,7 +324,20 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                             ////////////////////////////////////////////////////////////////////////////
                             modes.clear();
                             modeArrayList.clear();
-                            modeType = root.getData().getModes().get(0).getName();
+//                            modeType = root.getData().getModes().get(0).getName();
+
+
+                            for (Mode modes : root.getData().getModes()
+                            ) {
+                                if (modes.getId().equalsIgnoreCase(String.valueOf(modefirstItem))) {
+//                                    if (SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
+//                                        modeType = modes.getArabic_title();
+//                                    } else {
+                                        modeType = modes.getName();
+//                                    }
+                                }
+                            }
+
                             if (modeType.equalsIgnoreCase("Delivery")) {
                                 // lnr_deleveryServices.setVisibility(View.VISIBLE);
                                 //  lnr_cateringServices.setVisibility(View.GONE);
@@ -359,9 +374,9 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
                             if (SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.Language, "").equalsIgnoreCase("ar")) {
                                 resturantNameTextView.setText(root.getData().getArabic_name());
-                                tittle=root.getData().getArabic_name();
+                                tittle = root.getData().getArabic_name();
                                 resturantdetail.setText(root.getData().getArabic_detail());
-                                subtittle=root.getData().getArabic_detail();
+                                subtittle = root.getData().getArabic_detail();
                                 tv_minNots.setText(root.getData().getTime_show());
                                 tv_minOrder.setText(root.getData().getMin_order());
                                 tv_setuUpTime.setText(root.getData().getSetup_time_in_minute() + " Mins");
@@ -371,8 +386,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
                             if (SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.Language, "").equalsIgnoreCase("en")) {
                                 resturantNameTextView.setText(root.getData().getName());
-                                tittle=root.getData().getName();
-                                subtittle=root.getData().getDetail();
+                                tittle = root.getData().getName();
+                                subtittle = root.getData().getDetail();
 
                                 resturantdetail.setText(root.getData().getDetail());
                                 tv_minNots.setText(root.getData().getTime_show());
@@ -424,7 +439,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 //                            modeArrayList.add(new Mode("4", "q", "q", ""));
 //                            modeArrayList.add(new Mode("4", "q", "q", ""));
 
-                            detailAdapter = new DetailNewAdapter(modeArrayList, getApplicationContext(),modefirstItem);
+                            detailAdapter = new DetailNewAdapter(modeArrayList, getApplicationContext(), modefirstItem);
                             LinearLayoutManager HorizontalLayout = new LinearLayoutManager(
                                     getApplicationContext(),
                                     LinearLayoutManager.HORIZONTAL,
@@ -452,8 +467,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                                     detailAdapter.notifyDataSetChanged();
                                     menusAdapter.notifyDataSetChanged();
                                     try {
-                                        restaurententID= SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, "");
-                                        modefirstItem=Integer.valueOf(modeArrayList.get(position).getId());
+                                        restaurententID = SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, "");
+                                        modefirstItem = Integer.valueOf(modeArrayList.get(position).getId());
                                         productDetailAPI();
 //                                        restourentDetailPresenter.getRestourentDetailApi(SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.TOKEN, ""), SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).getValue(Constants.KEY_RESTOURENT_ID, ""), "" + modeArrayList.get(position).getId());
                                     } catch (Exception e) {
@@ -474,7 +489,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                             setImageSlider(root.getData().getImages());
 
 
-                            img= String.valueOf(root.getData().getCover_images().get(0).getCover_image_path());
+                            img = String.valueOf(root.getData().getCover_images().get(0).getCover_image_path());
                             ///////////////////////////////////////////////////////////////////////////////////////////////////
 
                             itemArrayList = root.getData().getItem();
@@ -534,13 +549,13 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                             backButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    if(deep_linking_back.equalsIgnoreCase("true")){
+                                    if (deep_linking_back.equalsIgnoreCase("true")) {
                                         Intent intent = new Intent(RestaurentDetailNew.this, LocationActivity.class);
                                         startActivity(intent);
                                         overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
                                         finish();
-                                    }else{
-                                       finish();
+                                    } else {
+                                        finish();
                                     }
                                 }
                             });
@@ -723,12 +738,12 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     @Override
     public void onBackPressed() {
 
-        if(deep_linking_back.equalsIgnoreCase("true")){
+        if (deep_linking_back.equalsIgnoreCase("true")) {
             Intent intent = new Intent(RestaurentDetailNew.this, LocationActivity.class);
             startActivity(intent);
             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
             finish();
-        }else{
+        } else {
             finish();
             super.onBackPressed();
         }
@@ -752,8 +767,8 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     }
 
     @OnClick(R.id.shareImageView)
-    public void onclickshareImageView(){
-        dynamicLinkHelper.createDynamicLinkForFirebase(tittle,img, String.valueOf(restaurententID),"menu",subtittle,restaurant_Status,min_time);
+    public void onclickshareImageView() {
+        dynamicLinkHelper.createDynamicLinkForFirebase(tittle, img, String.valueOf(restaurententID), "menu", subtittle, restaurant_Status, min_time);
     }
 
 }

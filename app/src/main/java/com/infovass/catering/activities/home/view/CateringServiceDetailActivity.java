@@ -594,7 +594,8 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
                     totalAmount = Float.valueOf((String.valueOf(productDetailResponse.getData().getArabicItemCostPerServe())));
                     String SetupTimeInMinute = "" + productDetailResponse.getData().getCaterer().getSetupTimeInMinute();
                     if (SetupTimeInMinute != null) {
-                        tv_setuUpTime.setText("" + productDetailResponse.getData().getArabicSetupTimeInMinute() + " " + getString(R.string.min));
+//                        tv_setuUpTime.setText("" + productDetailResponse.getData().getArabicSetupTimeInMinute() + " " + getString(R.string.min));
+                        tv_setuUpTime.setText("" + productDetailResponse.getData().getArabicSetupTimeInMinute());
                     } else {
                         tv_setuUpTime.setText("---");
                     }

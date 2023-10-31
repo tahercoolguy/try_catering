@@ -707,7 +707,7 @@
                 android:fontFamily="@font/en"
                 android:gravity="top|left"
                 android:padding="@dimen/_5sdp"
-                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_marginBottom="100dp"
                 android:lines="10"/>
 
 

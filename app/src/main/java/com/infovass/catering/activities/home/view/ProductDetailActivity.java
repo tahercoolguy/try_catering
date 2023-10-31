@@ -346,7 +346,8 @@ String deep_linking_back="false";
                     subtittle= String.valueOf(productDetailResponse.getData().getArabicFoodDetails());
                     priceTextView.setText("" + productDetailResponse.getData().getItemCostPerServe() + " KWD");
                     tv_forPersions.setText( getString(R.string._for_)+" " + productDetailResponse.getData().getItemServingCapacity()+" "+getString(R.string.persons));
-                    tv_minNots.setText("" + productDetailResponse.getData().getCaterer().getTimeShow());
+//                    tv_minNots.setText("" + productDetailResponse.getData().getCaterer().getTimeShow());
+                    tv_minNots.setText("" + productDetailResponse.getData().getMaxTime());
                     tv_minOrder.setText("" + productDetailResponse.getData().getCaterer().getMinOrder() + " KWD");
                 }
 
@@ -357,7 +358,8 @@ String deep_linking_back="false";
                     mealTagTextView.setText(Html.fromHtml("" + productDetailResponse.getData().getItemLongDescription()));
                     priceTextView.setText("" + productDetailResponse.getData().getItemCostPerServe() + " KWD");
                     tv_forPersions.setText("For " + productDetailResponse.getData().getItemServingCapacity() + " Persons");
-                    tv_minNots.setText("" + productDetailResponse.getData().getCaterer().getTimeShow());
+//                    tv_minNots.setText("" + productDetailResponse.getData().getCaterer().getTimeShow());
+                    tv_minNots.setText("" + productDetailResponse.getData().getMaxTime());
                     if ("" + productDetailResponse.getData().getCaterer().getMinOrder() == null) {
                         tv_minOrder.setText("---");
                     } else {
