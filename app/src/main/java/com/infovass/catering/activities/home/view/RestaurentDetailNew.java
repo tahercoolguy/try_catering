@@ -774,7 +774,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
     @OnClick(R.id.shareImageView)
     public void onclickshareImageView() {
-        dynamicLinkHelper.createDynamicLinkForFirebase(tittle, img, String.valueOf(restaurententID), "menu", subtittle, restaurant_Status, min_time);
+        dynamicLinkHelper.createDynamicLinkForFirebase(tittle, img, String.valueOf(restaurententID), "menu", subtittle, restaurant_Status, min_time,"dsds");
     }
 
 }

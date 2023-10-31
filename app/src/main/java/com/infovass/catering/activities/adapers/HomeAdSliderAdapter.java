@@ -72,6 +72,7 @@ public class HomeAdSliderAdapter extends SliderViewAdapter<HomeAdSliderAdapter.S
                     }
                     Intent intent = new Intent(activity.getApplicationContext(), ProductDetailActivity.class)
                             .putExtra("status", caterers_bannerdata.get(position).getCaterer_item().getStatus())
+                            .putExtra("mode_type","1")
                             .putExtra("min_time", number);
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);

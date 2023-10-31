@@ -727,8 +727,9 @@ public class RestourentFragment extends Fragment implements RestourentView {
 //                    } else {
                     String min_time = "0";
                     min_time = restourentLIst.get(position).getCaterer().getMinimum_time();
-                    Intent intent = new Intent(activity.getApplicationContext(), ProductDetailActivity.class)
+                    Intent intent = new Intent(activity.getApplicationContext(), CateringServiceDetailActivity.class)
                             .putExtra("status", restourentLIst.get(position).getStatus())
+                            .putExtra("mode_type",restourentLIst.get(position).getCaterer().getModes().get(0).getId())
                             .putExtra("min_time", min_time);
                     activity.startActivity(intent);
 

@@ -63,9 +63,10 @@ public class DynamicLinkHelper {
                         String type = deepLink.getQueryParameter("type");
                         String restaurant_Status = deepLink.getQueryParameter("restaurant_Status");
                         String min_time = deepLink.getQueryParameter("min_time");
+                        String mode_type = deepLink.getQueryParameter("mode_type");
                         if (id != null && type != null) {
                             // Pass the extracted parameters to the activity
-                            ((SplashActivity) context).handleDynamicLinkData(id, type, restaurant_Status, min_time);
+                            ((SplashActivity) context).handleDynamicLinkData(id, type, restaurant_Status, min_time,mode_type);
 
                             Log.e("DeepLinkHandler", "Received dynamic link with id: " + id);
                         }
@@ -94,8 +95,8 @@ public class DynamicLinkHelper {
     }
 
 
-    public void createDynamicLinkForFirebase(String title, String img, String id, String type, String subtittle, String restaurant_Status, String min_time) {
-        Uri deepLinkUri = Uri.parse("https://www.try-catering.com/deeplink?id=" + id + "&type=" + type + "&restaurant_Status=" + restaurant_Status + "&min_time=" + min_time);
+    public void createDynamicLinkForFirebase(String title, String img, String id, String type, String subtittle, String restaurant_Status, String min_time,String mode_type) {
+        Uri deepLinkUri = Uri.parse("https://www.try-catering.com/deeplink?id=" + id + "&type=" + type + "&restaurant_Status=" + restaurant_Status + "&min_time=" + min_time + "&mode_type=" + mode_type);
 
         DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
                 .setLink(deepLinkUri)

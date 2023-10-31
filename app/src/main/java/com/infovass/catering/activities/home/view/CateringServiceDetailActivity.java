@@ -812,7 +812,7 @@ public class CateringServiceDetailActivity extends BaseActivity implements Produ
     @OnClick(R.id.shareImageView)
     public void onclickshareImageView() {
         try {
-            dynamicLinkHelper.createDynamicLinkForFirebase(tittle, img, String.valueOf(id), "catering_detail", subtittle, status, min_time);
+            dynamicLinkHelper.createDynamicLinkForFirebase(tittle, img, String.valueOf(id), "catering_detail", subtittle, status, min_time,mode_type);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

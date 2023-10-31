@@ -479,7 +479,7 @@ String deep_linking_back="false";
     @OnClick(R.id.shareImageView)
     public void onclickshareImageView(){
         try {
-            dynamicLinkHelper.createDynamicLinkForFirebase(tittle,img, id,"product_detail",subtittle,status,min_time);
+            dynamicLinkHelper.createDynamicLinkForFirebase(tittle,img, id,"product_detail",subtittle,status,min_time,"sds");
 
         } catch (Exception e) {
             throw new RuntimeException(e);

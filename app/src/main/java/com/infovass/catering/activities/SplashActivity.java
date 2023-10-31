@@ -104,12 +104,13 @@ public class SplashActivity extends AppCompatActivity {
         getResources().updateConfiguration(configuration, getResources().getDisplayMetrics());
     }
 
-    public void handleDynamicLinkData(String id, String type, String restaurant_Status, String min_time) {
+    public void handleDynamicLinkData(String id, String type, String restaurant_Status, String min_time,String mode_type) {
         if (type.equalsIgnoreCase("menu")) {
             Intent intent = new Intent(SplashActivity.this, RestaurentDetailNew.class);
             intent.putExtra("restaurententID", id);
             intent.putExtra("restaurant_Status", restaurant_Status);
             intent.putExtra("deep_linking_back", "true");
+            intent.putExtra("mode_type", mode_type);
             // Add flags to clear the entire backstack and start a new task
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -122,6 +123,7 @@ public class SplashActivity extends AppCompatActivity {
             intent.putExtra("status", restaurant_Status);
             intent.putExtra("min_time", min_time);
             intent.putExtra("deep_linking_back", "true");
+            intent.putExtra("mode_type", mode_type);
             // Add flags to clear the entire backstack and start a new task
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -131,10 +133,11 @@ public class SplashActivity extends AppCompatActivity {
             finish();
 
         } else if (type.equalsIgnoreCase("product_detail")) {
-            Intent intent = new Intent(SplashActivity.this, ProductDetailActivity.class);
+            Intent intent = new Intent(SplashActivity.this, CateringServiceDetailActivity.class);
             intent.putExtra("status", restaurant_Status);
             intent.putExtra("min_time", min_time);
             intent.putExtra("deep_linking_back", "true");
+            intent.putExtra("mode_type", mode_type);
             // Add flags to clear the entire backstack and start a new task
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
