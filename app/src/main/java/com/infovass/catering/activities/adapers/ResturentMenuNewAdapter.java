@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.infovass.catering.MyFormat.MyDM.Catering;
 import com.infovass.catering.MyFormat.MyDM.Item_;
 import com.infovass.catering.R;
 import com.infovass.catering.activities.home.model.RestourentModeResponse;
@@ -36,9 +37,9 @@ class ResturentMenuNewAdapter extends RecyclerView.Adapter<ResturentMenuNewAdapt
     int verPos = 0;
     ResturentMenuNewAdapter.OnItemClickListener onItemClickListener;
     String lastValue = "";
-    ArrayList<Item_> items = new ArrayList<>();
+    ArrayList<Catering> items = new ArrayList<>();
 
-    public ResturentMenuNewAdapter(Context context, ArrayList<Item_> items, int verPos) {
+    public ResturentMenuNewAdapter(Context context, ArrayList<Catering> items, int verPos) {
         this.context = context;
         this.items = items;
         this.verPos = verPos;
@@ -75,7 +76,7 @@ class ResturentMenuNewAdapter extends RecyclerView.Adapter<ResturentMenuNewAdapt
         }
 
         try {
-            Item_ item = items.get(position);
+            Catering item = items.get(position);
             if (item != null && item.getImages() != null && item.getImages().size()!=0) {
                 Picasso.get().load(item.getImages().get(0).getItem_logo_path()).error(R.drawable.gradient).placeholder(R.drawable.gradient).into(holder.menu_image);
             } else {
