@@ -32,7 +32,6 @@ import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
 import com.infovass.catering.DeepLinking.DynamicLinkHelper;
 import com.infovass.catering.MyFormat.Controller.AppController;
-import com.infovass.catering.MyFormat.MyDM.Catering;
 import com.infovass.catering.MyFormat.MyDM.Item;
 import com.infovass.catering.MyFormat.MyDM.Mode;
 import com.infovass.catering.MyFormat.MyDM.Root;

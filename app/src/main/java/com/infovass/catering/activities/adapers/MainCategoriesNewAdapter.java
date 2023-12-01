@@ -75,7 +75,7 @@ public class MainCategoriesNewAdapter extends RecyclerView.Adapter<MainCategorie
         }
 
 //        holder.bind(i, new ActivityModal(), listener);
-        ResturentMenuNewAdapter adapter = new ResturentMenuNewAdapter(context, item.getItems().get(0).getCatering(), i);
+        ResturentMenuNewAdapter adapter = new ResturentMenuNewAdapter(context, item.getItems().getCatering(), i);
 
         adapter.setOnItemClickListener(new ResturentMenuNewAdapter.OnItemClickListener() {
             @Override

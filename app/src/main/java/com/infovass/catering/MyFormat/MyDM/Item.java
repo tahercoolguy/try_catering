@@ -6,9 +6,9 @@ import java.util.List;
 public class Item {
     public String category_name;
     public String category_name_ar;
-    public ArrayList<NewItem> items;
+    public NewItem items;
 
-    public Item(String category_name, String category_name_ar, ArrayList<NewItem> items) {
+    public Item(String category_name, String category_name_ar, NewItem items) {
         this.category_name = category_name;
         this.category_name_ar = category_name_ar;
         this.items = items;
@@ -30,11 +30,11 @@ public class Item {
         this.category_name_ar = category_name_ar;
     }
 
-    public ArrayList<NewItem> getItems() {
+    public NewItem getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<NewItem> items) {
+    public void setItems(NewItem items) {
         this.items = items;
     }
 }
