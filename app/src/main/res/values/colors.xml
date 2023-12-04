@@ -34,5 +34,7 @@
     <color name="fuchsia_pink">#BD6AA8</color>
     <color name="de_york">#6DC280</color>
     <color name="cornflower_lilac">#FFAEAE</color>
-    <color name="background_color">#F8F8F8</color>
+<!--    <color name="background_color">#F8F8F8</color>-->
+    <color name="background_color">#FFFFFF</color>
+
 </resources>

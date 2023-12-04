@@ -252,7 +252,7 @@ int modefirstItem=1;
                         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
                         itemArrayList = root.getData().getItem();
-                        menusAdapter = new MainCategoriesNewAdapter(getApplicationContext(), itemArrayList);
+                        menusAdapter = new MainCategoriesNewAdapter(getApplicationContext(), itemArrayList,modeType);
                         recyclerViewMenu.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                         recyclerViewMenu.setAdapter(menusAdapter);
                         menusAdapter.setOnItemClickListener(new MainCategoriesNewAdapter.OnItemClickListener() {

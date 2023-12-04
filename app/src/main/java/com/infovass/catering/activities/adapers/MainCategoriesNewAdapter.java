@@ -28,6 +28,7 @@ public class MainCategoriesNewAdapter extends RecyclerView.Adapter<MainCategorie
     public Context context;
     public static ArrayList<Item> datalist;
     ArrayList<Item> datalist_filter;
+    String mode;
     Boolean f=true;
 
     public interface OnItemClickListener {
@@ -41,10 +42,11 @@ public class MainCategoriesNewAdapter extends RecyclerView.Adapter<MainCategorie
 
     public OnItemClickListener listener;
 
-    public MainCategoriesNewAdapter(Context context, ArrayList<Item> arrayList) {
+    public MainCategoriesNewAdapter(Context context, ArrayList<Item> arrayList,String mode) {
         this.context = context;
         datalist = arrayList;
         datalist_filter = arrayList;
+        this.mode= mode;
 
     }
 
@@ -75,7 +77,12 @@ public class MainCategoriesNewAdapter extends RecyclerView.Adapter<MainCategorie
         }
 
 //        holder.bind(i, new ActivityModal(), listener);
-        ResturentMenuNewAdapter adapter = new ResturentMenuNewAdapter(context, item.getItems().getCatering(), i);
+        ResturentMenuNewAdapter adapter;
+        if(mode.equalsIgnoreCase("Catering"))
+         adapter = new ResturentMenuNewAdapter(context, item.getItems().getCatering(), i);
+        else
+            adapter = new ResturentMenuNewAdapter(context, item.getItems().getGathering(), i);
+
 
         adapter.setOnItemClickListener(new ResturentMenuNewAdapter.OnItemClickListener() {
             @Override
