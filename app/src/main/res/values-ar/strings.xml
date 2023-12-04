@@ -437,5 +437,6 @@
     <string name="persons">الأشخاص</string>
     <string name="_for_">ل</string>
     <string name="min">دقيقة</string>
+    <string name="please_wait">انتظر من فضلك</string>
     <string name="you_can_choose_only">يمكنك الاختيار فقط</string>
 </resources>

@@ -1,6 +1,7 @@
 package com.infovass.catering.activities.home.view;
 
-import androidx.annotation.NonNull;
+import static com.infovass.catering.activities.utill.ProgressHUD.dialog;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -10,26 +11,20 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.dynamiclinks.DynamicLink;
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
-import com.google.firebase.dynamiclinks.ShortDynamicLink;
 import com.infovass.catering.DeepLinking.DynamicLinkHelper;
 import com.infovass.catering.MyFormat.Controller.AppController;
 import com.infovass.catering.MyFormat.MyDM.Item;
@@ -37,17 +32,13 @@ import com.infovass.catering.MyFormat.MyDM.Mode;
 import com.infovass.catering.MyFormat.MyDM.Root;
 import com.infovass.catering.MyFormat.Utils.ConnectionDetector;
 import com.infovass.catering.R;
-import com.infovass.catering.Utils.Helper;
 import com.infovass.catering.activities.DataModel.RD_Image;
 import com.infovass.catering.activities.Location.view.LocationActivity;
-import com.infovass.catering.activities.SplashActivity;
 import com.infovass.catering.activities.adapers.CateringSDSliderAdapter;
-import com.infovass.catering.activities.adapers.DetailAdapter;
 import com.infovass.catering.activities.adapers.DetailNewAdapter;
 import com.infovass.catering.activities.adapers.MainCategoriesNewAdapter;
 import com.infovass.catering.activities.dialog.BottomSheetInfoFragment;
 import com.infovass.catering.activities.home.adapter.RestourentDetailsIBN;
-import com.infovass.catering.activities.home.adapter.RestourentDetailsImageBanner;
 import com.infovass.catering.activities.home.model.AddtoFebRestourentResponse;
 import com.infovass.catering.activities.home.model.RestourentAddToFevResponse;
 import com.infovass.catering.activities.home.model.RestourentDetailResponse;
@@ -77,12 +68,12 @@ import retrofit.client.Response;
 import retrofit.mime.MultipartTypedOutput;
 import retrofit.mime.TypedByteArray;
 import retrofit.mime.TypedInput;
-import retrofit.mime.TypedString;
 
 public class RestaurentDetailNew extends AppCompatActivity implements RestourentDetailView {
     boolean addToFev = false;
     private AppController appController;
     private Dialog progress;
+
     private ConnectionDetector connectionDetector;
     RestourentDetailPresenter restourentDetailPresenter;
     String restaurant_Status = "0";
@@ -141,11 +132,12 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
     AppCompatImageView shareImageView;
 
     DetailNewAdapter detailAdapter;
+//    private ProgressHUD progressHUD;
 
     MainCategoriesNewAdapter menusAdapter;
     String restaurententID;
     String tittle = "", subtittle = "", img = "", id = "", type = "", price = "";
-
+    ProgressDialog newdialog;
 
     RestourentDetailsIBN mViewPagerAdapter;
     String modeType = "";
@@ -159,6 +151,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurent_detail_new);
         ButterKnife.bind(this);
+
         restourentDetailPresenter = new RestourentDetailImpl(this);
 //        restaurententID = Integer.parseInt(getIntent().getStringExtra("restaurententID"));
         appController = (AppController) this.getApplicationContext();
@@ -298,12 +291,14 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
             } else {
 
                 try {
+
                     jsonObj.put("mode_type", modefirstItem);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
             String po = jsonObj.toString();
+
             //   String Checker = gson.toJson(jsonObject);
             TypedInput in = null;
             try {
@@ -311,10 +306,13 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-
+//            progressHUD = ProgressHUD.create(this, getString(R.string.loading), false, null, null);
+//            ProgressDialog dialog = ProgressDialog.show(RestaurentDetailNew.this, "Loading", "Please wait...", true);
+           newdialog = ProgressDialog.show(RestaurentDetailNew.this, "Loading", "Please wait...", true,true);
             appController.paServices.ProductDetailAPI(id, in, new Callback<Root>() {
                 @Override
                 public void success(Root root, Response response) {
+
                     if (root.getStatus().equalsIgnoreCase("true")) {
 
                         if (!root.getData().getItem().isEmpty() && !root.getData().getModes().isEmpty()) {
@@ -496,6 +494,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
                             menusAdapter = new MainCategoriesNewAdapter(getApplicationContext(), itemArrayList,modeType);
                             recyclerViewMenu.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
                             recyclerViewMenu.setAdapter(menusAdapter);
+                            newdialog .dismiss();
                             menusAdapter.setOnItemClickListener(new MainCategoriesNewAdapter.OnItemClickListener() {
                                 @Override
                                 public void onItemClick(int position, int verPos, Integer id) {
@@ -503,7 +502,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 //                                    Log.i("Yhan", "===" + items.get(verPos));
                                         SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.ITEM_ID, "" + id);
                                         SharedPreferencesUtils.getInstance(RestaurentDetailNew.this).setValue(Constants.MODE_ID, "" + modefirstItem);
-                                        if (modeType.equalsIgnoreCase("Delivery")) {
+//                                        if (modeType.equalsIgnoreCase("Delivery")) {
                                             Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
                                                     .putExtra("status", restaurant_Status)
                                                     .putExtra("mode_type", modeType)
@@ -512,25 +511,25 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
                                             startActivity(intent);
                                             overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-                                        }
-                                        if (modeType.equalsIgnoreCase("Table Booking")) {
-                                            Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
-                                                    .putExtra("status", restaurant_Status)
-                                                    .putExtra("mode_type", modeType)
-                                                    .putExtra("min_time", min_time);
-
-                                            startActivity(intent);
-                                            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-                                        }
-                                        if (modeType.equalsIgnoreCase("Catering")) {
-                                            Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
-                                                    .putExtra("status", restaurant_Status)
-                                                    .putExtra("mode_type", modeType)
-
-                                                    .putExtra("min_time", min_time);
-                                            startActivity(intent);
-                                            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
-                                        }
+//                                        }
+//                                        if (modeType.equalsIgnoreCase("Table Booking")) {
+//                                            Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
+//                                                    .putExtra("status", restaurant_Status)
+//                                                    .putExtra("mode_type", modeType)
+//                                                    .putExtra("min_time", min_time);
+//
+//                                            startActivity(intent);
+//                                            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+//                                        }
+//                                        if (modeType.equalsIgnoreCase("Catering")) {
+//                                            Intent intent = new Intent(getApplicationContext(), CateringServiceDetailActivity.class)
+//                                                    .putExtra("status", restaurant_Status)
+//                                                    .putExtra("mode_type", modeType)
+//
+//                                                    .putExtra("min_time", min_time);
+//                                            startActivity(intent);
+//                                            overridePendingTransition(R.anim.left_slide_in, R.anim.right_slide_out);
+//                                        }
 
                                     } catch (Exception j) {
                                         j.printStackTrace();
@@ -576,6 +575,7 @@ public class RestaurentDetailNew extends AppCompatActivity implements Restourent
 
                 @Override
                 public void failure(RetrofitError error) {
+                    progress.dismiss();
                     error.printStackTrace();
                     Log.e("String", error.toString());
                 }
